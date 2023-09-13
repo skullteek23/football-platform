@@ -3,7 +3,19 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  firebase: {
+    apiKey: 'AIzaSyAiPctyxsb1rWPqI-VqwhXmha1_1GwO4t4',
+    authDomain: 'football-platform-dev.firebaseapp.com',
+    databaseURL:
+      'https://football-platform-dev-default-rtdb.asia-southeast1.firebasedatabase.app',
+    projectId: 'football-platform-dev',
+    storageBucket: 'football-platform-dev.appspot.com',
+    messagingSenderId: '386420685008',
+    appId: '1:386420685008:web:f8105a75d5859ab49386d5',
+    measurementId: 'G-1MWHKJ3Z2X',
+  },
+  production: false,
 };
 
 /*

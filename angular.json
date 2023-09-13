@@ -125,6 +125,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "football-platform:build:production",
+            "firebaseProject": "football-platform-dev",
+            "firebaseHostingSite": "football-platform-dev"
+          }
         }
       }
     }

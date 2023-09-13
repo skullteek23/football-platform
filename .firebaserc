@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "football-platform-dev": {
+      "hosting": {
+        "football-platform": [
+          "football-platform-dev"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "football-platform-dev"
+  }
+}
