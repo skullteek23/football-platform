@@ -8,8 +8,4 @@ import { environment } from 'src/environments/environment';
 })
 export class AppComponent {
   title = 'football-platform';
-
-  constructor() {
-    this.title = environment.production ? 'This is production' : 'This is dev';
-  }
 }
