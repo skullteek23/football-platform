@@ -1,14 +1,8 @@
 {
-  "targets": {
-    "football-platform-dev": {
-      "hosting": {
-        "football-platform": [
-          "football-platform-dev"
-        ]
-      }
-    }
-  },
   "projects": {
-    "default": "football-platform-dev"
-  }
+    "default": "football-platform-dev",
+    "production": "futball-platform-prod"
+  },
+  "targets": {},
+  "etags": {}
 }
