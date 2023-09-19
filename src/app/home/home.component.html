@@ -1,4 +1,8 @@
-<section class="main-container">
+<div class="placeholder-shimmer" *ngIf="!isPageInitialized">
+  <div class="shine header"></div>
+  <div class="shine content"></div>
+</div>
+<section class="main-container" *ngIf="isPageInitialized">
   <div class="header-content-container">
     <div class="salutation-strip">
       <span class="page-sub-label" *ngIf="name">

@@ -38,6 +38,18 @@ export class SessionStorageService {
   }
 
   /**
+   * Remove item from local storage
+   * @param key
+   * @returns
+   */
+  remove(key: string) {
+    if (!key) {
+      return;
+    }
+    sessionStorage.removeItem(key);
+  }
+
+  /**
    * Remove all items from local storage
    */
   clear() {

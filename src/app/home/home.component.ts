@@ -27,6 +27,7 @@ export class HomeComponent implements OnInit {
   name: string = HomeConstants.salutation;
   data = new IconSelectionData();
   buttonDetails = new ButtonConfig();
+  isPageInitialized = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -40,21 +41,20 @@ export class HomeComponent implements OnInit {
    * Returns whether user is logged in or not.
    */
   checkUserLogin() {
-    this.authService._user().subscribe({
-      next: (response) => {
-        if (response?.displayName) {
-          this.name = response?.displayName;
-        }
-        this.isUserLogged = response ? true : false;
-        this.data.items = JSON.parse(JSON.stringify(ACTIONS_MENU_NEW_USER));
-        if (response) {
-          this.data.extraItems = JSON.parse(
-            JSON.stringify(ACTIONS_MENU_EXISTING_USER)
-          );
-        } else {
-          this.data.extraItems = [];
-        }
-      },
+    this.authService._user().subscribe((response) => {
+      if (response?.displayName) {
+        this.name = response?.displayName;
+      }
+      this.isUserLogged = response ? true : false;
+      this.data.items = JSON.parse(JSON.stringify(ACTIONS_MENU_NEW_USER));
+      if (response) {
+        this.data.extraItems = JSON.parse(
+          JSON.stringify(ACTIONS_MENU_EXISTING_USER)
+        );
+      } else {
+        this.data.extraItems = [];
+      }
+      this.isPageInitialized = true;
     });
   }
 

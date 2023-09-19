@@ -1,6 +1,19 @@
 @import "mixins";
 @import "variables";
 
+.placeholder-shimmer {
+  height: 100%;
+  width: auto;
+  @include mainPageContainer;
+  .header {
+    min-height: 110px;
+    width: 100%;
+  }
+  .content {
+    min-height: 400px;
+  }
+}
+
 .main-container {
   @include mainPageContainer;
   .header-content-container {

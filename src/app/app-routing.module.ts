@@ -6,6 +6,7 @@ import { SignupBottomSheetComponent } from './authentication/signup-bottom-sheet
 import { SignupBottomSheetModule } from './authentication/signup-bottom-sheet/signup-bottom-sheet.module';
 import { ConfirmFormClosureGuard } from './guards/confirm-form-closure.guard';
 import { redirectUnauthorizedTo } from '@angular/fire/auth-guard';
+import { RedirectLoggedUserGuard } from './authentication/guards/redirect-logged-user.guard';
 const redirectUnauthorizedGuard = () => redirectUnauthorizedTo(['/']);
 
 const routes: Routes = [
@@ -21,12 +22,14 @@ const routes: Routes = [
     component: LoginBottomSheetComponent,
     canDeactivate: [ConfirmFormClosureGuard],
     outlet: 'open',
+    canActivate: [RedirectLoggedUserGuard],
   },
   {
     path: 'signup',
     component: SignupBottomSheetComponent,
     canDeactivate: [ConfirmFormClosureGuard],
     outlet: 'open',
+    canActivate: [RedirectLoggedUserGuard],
   },
   {
     path: 'register',

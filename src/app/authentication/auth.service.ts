@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { BottomSheetService } from '../services/bottom-sheet.service';
 import { LoginBottomSheetComponent } from '@app/authentication/login-bottom-sheet/login-bottom-sheet.component';
 import { Router } from '@angular/router';
 import { SignupBottomSheetComponent } from './signup-bottom-sheet/signup-bottom-sheet.component';
-import { HomeConstants } from '@app/home/constants/home.constants';
 import {
   Auth,
   RecaptchaVerifier,
@@ -41,7 +40,7 @@ export class AuthService {
 
   // User related variables
   private user: IUser = null;
-  private user$$ = new BehaviorSubject<IUser>(null);
+  private user$$ = new Subject<IUser>();
 
   /**
    * Constructor method
@@ -65,6 +64,8 @@ export class AuthService {
             LocalStorageProperties.USER_UID,
             this.user?.uid
           );
+        } else {
+          this.localStorageService.remove(LocalStorageProperties.USER_UID);
         }
       },
       (error) => {
@@ -86,7 +87,7 @@ export class AuthService {
    */
   isUserLogin(): boolean {
     const uid = this.localStorageService.get(LocalStorageProperties.USER_UID);
-    return uid ? true : false;
+    return uid?.trim() ? true : false;
   }
 
   /**
