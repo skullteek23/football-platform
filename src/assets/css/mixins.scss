@@ -1,0 +1,64 @@
+@import "variables";
+
+@mixin flexSpaceBetween($gap: 16px, $sameAxis: center) {
+  display: flex;
+  flex-direction: row;
+  align-items: $sameAxis;
+  justify-content: space-between;
+  gap: $gap;
+}
+
+@mixin flexSpaceEvenly($gap: 16px, $sameAxis: center) {
+  display: flex;
+  flex-direction: row;
+  align-items: $sameAxis;
+  justify-content: space-evenly;
+  gap: $gap;
+}
+
+@mixin flexCenter($direction, $gap: 16px) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: center;
+  justify-content: center;
+  gap: $gap;
+}
+
+@mixin flexStartCol($gap: 16px, $alignment: stretch) {
+  display: flex;
+  flex-direction: column;
+  align-items: $alignment;
+  justify-content: flex-start;
+  gap: $gap;
+}
+
+@mixin flexStartRow($gap: 16px) {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: $gap;
+}
+
+@mixin mainPageContainer($gap: 20px) {
+  padding: 12px 12px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+}
+
+@mixin extra-small-screen {
+  @media only screen and (max-width: 305px) {
+    @content;
+  }
+}
+
+@mixin primary-gradient-background {
+  background-image: $primary-gradient;
+  color: $white;
+}
+
+@mixin commonBtnUI {
+  font-size: $font-size-m;
+  @include primary-gradient-background();
+}

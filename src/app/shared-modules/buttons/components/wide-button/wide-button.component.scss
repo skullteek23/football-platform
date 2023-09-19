@@ -1,0 +1,17 @@
+@import "mixins";
+
+.custom-wide-button {
+  @include flexSpaceBetween(0px);
+  height: 50px;
+  width: 100%;
+  font-size: $font-size-m;
+  border-radius: $border-radius-primary !important;
+  @include primary-gradient-background;
+  .start-content {
+    @include flexStartRow(8px);
+  }
+  .mat-button-wrapper {
+    @include flexSpaceBetween(0px);
+    width: 100%;
+  }
+}

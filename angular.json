@@ -52,7 +52,10 @@
             "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.svg", "src/assets"],
             "styles": ["src/styles.scss"],
-            "scripts": []
+            "scripts": [],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/assets/css"]
+            }
           },
           "configurations": {
             "development": {

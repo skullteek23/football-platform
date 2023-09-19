@@ -1,0 +1,62 @@
+<div class="sheet-content-container">
+  <button mat-icon-button (click)="canDeactivate()" class="floating-button">
+    <mat-icon fontSet="material-icons-round">close</mat-icon>
+  </button>
+  <div class="heading">
+    <app-logo></app-logo>
+    <div><strong class="semi-strong">Discover, Book, and Play!</strong></div>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="content-form">
+    <div class="page-sub-label">Login to continue:</div>
+    <form [formGroup]="formGroup">
+      <mat-form-field color="primary">
+        <mat-label>Phone Number</mat-label>
+        <input
+          matInput
+          type="tel"
+          name="phone-number"
+          id="contact-number"
+          formControlName="phoneNumber"
+        />
+        <mat-hint [@fadeInOut]="otpSent" class="custom-hints" *ngIf="otpSent">
+          {{ messages.hints.otpSent }}
+        </mat-hint>
+      </mat-form-field>
+      <ng-container *ngIf="otpSent">
+        <mat-form-field color="primary">
+          <mat-label>Enter OTP</mat-label>
+          <input
+            matInput
+            type="tel"
+            autocomplete="one-time-code"
+            name="otp"
+            id="otp"
+            formControlName="otp"
+          />
+        </mat-form-field>
+        <div class="footer-text">
+          <app-next-action-button
+            [disabled]="isDisableFinalBtn(formGroup)"
+            (clickEv)="login(formGroup, confirmationResult)"
+            [displayDetails]="continueBtnDetails"
+          ></app-next-action-button>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="!otpSent">
+        <app-next-action-button
+          [disabled]="isDisableSendOtpBtn(formGroup)"
+          (clickEv)="requestLoginOtp()"
+          [displayDetails]="requestOtpBtnDetails"
+        ></app-next-action-button>
+      </ng-container>
+    </form>
+    <div class="footer-text" *ngIf="!otpSent">
+      <span class="or-text">OR</span>
+      <span class="login-segway">
+        <a (click)="openSignup()" class="links">Create</a>
+        a New Account
+      </span>
+    </div>
+  </div>
+</div>

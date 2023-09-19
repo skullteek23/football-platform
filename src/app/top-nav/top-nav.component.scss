@@ -1,0 +1,16 @@
+@import "mixins.scss";
+@import "_variables";
+
+.toolbar {
+  padding: 16px;
+  background-color: $white;
+  @include flexSpaceBetween;
+  .side-buttons {
+    @include flexCenter(row, 8px);
+
+    .whatsapp-icon {
+      max-height: 32px;
+      max-width: 32px;
+    }
+  }
+}

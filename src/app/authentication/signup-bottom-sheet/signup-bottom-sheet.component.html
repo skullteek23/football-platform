@@ -1,0 +1,80 @@
+<div class="sheet-content-container">
+  <button mat-icon-button (click)="canDeactivate()" class="floating-button">
+    <mat-icon fontSet="material-icons-round">close</mat-icon>
+  </button>
+  <div class="heading">
+    <app-logo></app-logo>
+    <div><strong class="semi-strong">Discover, Book, and Play!</strong></div>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="content-form">
+    <div class="page-sub-label">Create an Account:</div>
+    <form [formGroup]="formGroup">
+      <mat-form-field color="primary">
+        <mat-label>Name</mat-label>
+        <input
+          matInput
+          type="text"
+          name="name"
+          id="name"
+          formControlName="name"
+        />
+      </mat-form-field>
+      <mat-form-field color="primary">
+        <mat-label>Phone Number</mat-label>
+        <input
+          matInput
+          type="tel"
+          name="phone-number"
+          id="contact-number"
+          formControlName="phoneNumber"
+        />
+        <mat-hint [@fadeInOut]="otpSent" class="custom-hints" *ngIf="otpSent">
+          {{ messages.hints.otpSent }}
+        </mat-hint>
+      </mat-form-field>
+      <ng-container *ngIf="otpSent">
+        <mat-form-field color="primary">
+          <mat-label>Enter OTP</mat-label>
+          <input
+            matInput
+            type="tel"
+            name="otp"
+            id="otp"
+            autocomplete="one-time-code"
+            formControlName="otp"
+          />
+        </mat-form-field>
+        <app-next-action-button
+          [disabled]="isDisableFinalBtn(formGroup)"
+          (clickEv)="signup(formGroup, confirmationResult)"
+          [displayDetails]="continueBtnDetails"
+        ></app-next-action-button>
+      </ng-container>
+      <ng-container *ngIf="!otpSent">
+        <app-next-action-button
+          [disabled]="isDisableSendOtpBtn(formGroup)"
+          (clickEv)="requestSignupOtp()"
+          [displayDetails]="requestOtpBtnDetails"
+        ></app-next-action-button>
+      </ng-container>
+    </form>
+    <div class="footer-text" *ngIf="!otpSent; else terms">
+      <span class="or-text">OR</span>
+      <span class="login-segway">
+        <a (click)="openLogin()" class="links">Login</a>
+        to Existing Account
+      </span>
+    </div>
+    <ng-template #terms>
+      <div class="footer-text">
+        <span class="terms-segway">
+          <span> By continuing, you agree to </span>
+          <a (click)="canDeactivate('/terms')" class="links"
+            >Ballzo's Terms & Conditions and Privacy Policy.</a
+          >
+        </span>
+      </div>
+    </ng-template>
+  </div>
+</div>

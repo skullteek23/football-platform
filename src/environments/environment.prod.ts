@@ -10,5 +10,9 @@ export const environment = {
     authDomain: 'futball-platform-prod.firebaseapp.com',
     messagingSenderId: '539449615245',
   },
+  urls: {
+    admin: 'https://admin.ballzo.in',
+    whatsAppGroup: 'https://chat.whatsapp.com/K0EJ1dZfG0d6n4PDhHdmRc',
+  },
   production: true,
 };

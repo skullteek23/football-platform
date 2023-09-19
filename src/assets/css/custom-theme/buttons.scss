@@ -1,0 +1,41 @@
+@import "variables";
+@import "mixins";
+
+.mat-icon-button i,
+.mat-icon-button .mat-icon {
+  line-height: 22px !important;
+}
+.custom-short-button {
+  @include flexCenter(row, 4px);
+  @include commonBtnUI;
+  height: 54px;
+  max-width: 200px;
+  width: 200px;
+  border-radius: $border-radius-secondary !important;
+  .mat-button-wrapper {
+    @include flexCenter(row, 4px);
+  }
+}
+.custom-wide-button {
+  @include flexSpaceBetween(0px);
+  @include commonBtnUI;
+  height: 50px;
+  width: 100%;
+  border-radius: $border-radius-primary !important;
+  .start-content {
+    @include flexStartRow(8px);
+  }
+  .mat-button-wrapper {
+    @include flexSpaceBetween(0px);
+    width: 100%;
+  }
+}
+
+.custom-button:disabled {
+  background: $grey-3;
+  cursor: not-allowed;
+  pointer-events: none;
+  .mat-button-wrapper {
+    color: white;
+  }
+}

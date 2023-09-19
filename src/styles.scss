@@ -1,5 +1,93 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use "@angular/material" as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@import "~@angular/material/theming";
+@import "variables";
+$custom-typography: mat-typography-config(
+  $font-family: '"Open Sans", sans-serif;',
+);
+@include mat.core($custom-typography);
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$football-platform-primary: mat.define-palette(
+  (
+    50: $primary-color,
+    100: $primary-color,
+    200: $primary-color,
+    300: $primary-color,
+    400: $primary-color,
+    500: $primary-color,
+    600: $primary-color,
+    700: $primary-color,
+    800: $primary-color,
+    900: $primary-color,
+    A100: $primary-color,
+    A200: $primary-color,
+    A400: $primary-color,
+    A700: $primary-color,
+    contrast: (
+      50: $primary-color,
+      100: $primary-color,
+      200: $primary-color,
+      300: $primary-color,
+      400: $primary-color,
+      500: $primary-color,
+      600: $primary-color,
+      700: $primary-color,
+      800: $primary-color,
+      900: $primary-color,
+      A100: $primary-color,
+      A200: $primary-color,
+      A400: $primary-color,
+      A700: $primary-color,
+    ),
+  ),
+  A200,
+  A100,
+  A400
+);
+$football-platform-accent: mat.define-palette(
+  mat.$pink-palette,
+  A200,
+  A100,
+  A400
+);
+
+// The warn palette is optional (defaults to red).
+// $football-platform-warn: mat.define-palette(mat.$red-palette);
+
+// // Create the theme object. A theme consists of configurations for individual
+// // theming systems such as "color" or "typography".
+$football-platform-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $football-platform-primary,
+      accent: $football-platform-accent,
+    ),
+  )
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($football-platform-theme);
+
 /* You can add global styles to this file, and also import other style files */
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
+@import "custom-theme/mat-chip.scss";
+@import "custom-theme/buttons.scss";
+@import "custom-theme/bottom-sheet.scss";
+@import "custom-theme/form-field.scss";
+@import "custom-theme/snackbar.scss";
+
+@import "material";
 
 /* default settings */
 html,
@@ -8,5 +96,32 @@ body {
   height: 100%;
   font-size: 16px;
   margin: 0;
-  font-family: "Open Sans", sans-serif;
+  font-family: $font-family;
+}
+
+a {
+  text-decoration: none;
+  color: $black;
+}
+
+a:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  color: $primary-color;
+}
+
+a.links {
+  color: $primary-color;
+}
+
+.page-sub-label {
+  font-size: $font-size-m;
+  font-weight: 300;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 85%;
+}
+.semi-strong {
+  font-weight: 500;
 }

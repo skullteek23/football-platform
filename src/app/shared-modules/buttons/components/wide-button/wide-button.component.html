@@ -1,0 +1,19 @@
+<button
+  class="custom-wide-button custom-button"
+  mat-raised-button
+  (click)="onClickButton()"
+  *ngIf="displayDetails"
+  [type]="displayDetails.type"
+>
+  <span class="start-content">
+    <mat-icon fontSet="material-icons-round">{{
+      displayDetails.icon
+    }}</mat-icon>
+    <span class="label">
+      {{ displayDetails.label }}
+    </span>
+  </span>
+  <mat-icon fontSet="material-icons-round">{{
+    displayDetails.secondaryIcon
+  }}</mat-icon>
+</button>

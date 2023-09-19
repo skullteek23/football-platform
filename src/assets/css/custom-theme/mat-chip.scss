@@ -1,0 +1,7 @@
+@import "../mixins.scss";
+
+mat-chip-list {
+  .mat-chip-list-wrapper {
+    @include flexCenter(row);
+  }
+}

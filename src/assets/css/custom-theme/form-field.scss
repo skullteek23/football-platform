@@ -1,0 +1,9 @@
+.mat-hint.custom-hints {
+  color: $primary-color;
+}
+.mat-form-field-appearance-outline .mat-form-field-prefix {
+  top: 0px !important;
+  .country-code {
+    margin-right: 4px;
+  }
+}

@@ -1,0 +1,52 @@
+<div
+  class="selection-menu mat-elevation-z8"
+  [ngClass]="{
+    'additional-height': isExpanded,
+    'normal-height': !isExpanded,
+    'primary-bg': data?.extraItems?.length
+  }"
+>
+  <div class="icon-content">
+    <div
+      class="route-icons"
+      [@fadeInOut]="!isExpanded"
+      [ngClass]="{
+        'no-expand-view': !data?.extraItems?.length,
+        'expandable-view': data?.extraItems?.length
+      }"
+    >
+      <div class="menu-item-container" *ngFor="let item of data?.items">
+        <button
+          mat-icon-button
+          (click)="selection(item)"
+          class="icon-button"
+          [ngClass]="{ 'icon-button-large': data?.extraItems?.length === 0 }"
+        >
+          <mat-icon fontSet="material-icons-round">{{ item.icon }}</mat-icon>
+        </button>
+        <span class="label" [innerHtml]="item.label"> </span>
+      </div>
+    </div>
+    <div
+      class="route-icons expandable-view"
+      [@fadeInOut]="isExpanded"
+      *ngIf="isExpanded && data?.extraItems?.length"
+    >
+      <div class="menu-item-container" *ngFor="let item of data?.extraItems">
+        <button mat-icon-button (click)="selection(item)" class="icon-button">
+          <mat-icon fontSet="material-icons-round">{{ item.icon }}</mat-icon>
+        </button>
+        <span class="label" [innerHtml]="item.label"> </span>
+      </div>
+    </div>
+  </div>
+  <ng-container *ngIf="data?.extraItems?.length">
+    <button class="expand-arrow" mat-icon-button (click)="toggleMenu()">
+      <mat-icon
+        fontSet="material-icons-round"
+        [@iconState]="isExpanded ? 'expanded' : 'collapsed'"
+        >expand_more</mat-icon
+      >
+    </button>
+  </ng-container>
+</div>
