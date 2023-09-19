@@ -5,16 +5,16 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "npm run build-dev && npm run build-prod",
-    "build-dev": "ng build --configuration development",
-    "build-prod": "ng build --configuration production",
     "deploy-dev": "npm run build-dev && npm run deploy-hosting-dev",
-    "deploy-hosting-dev": "firebase use football-platform-dev && firebase deploy --only hosting -P football-platform-dev",
     "deploy-prod": "npm run build-prod && npm run deploy-hosting-prod",
-    "deploy-hosting-prod": "npm run build-prod && firebase use futball-platform-prod && firebase deploy --only hosting -P futball-platform-prod",
     "deploy-functions": "npx eslint --fix 'functions/src' && firebase deploy --only functions",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "build-prod": "ng build --configuration production",
+    "build-dev": "ng build --configuration development",
+    "deploy-hosting-prod": "npm run build-prod && firebase use futball-platform-prod && firebase deploy --only hosting -P futball-platform-prod",
+    "deploy-hosting-dev": "firebase use football-platform-dev && firebase deploy --only hosting -P football-platform-dev"
   },
   "private": true,
   "dependencies": {
