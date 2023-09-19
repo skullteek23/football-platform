@@ -1,6 +1,12 @@
 <div class="placeholder-shimmer" *ngIf="!isPageInitialized">
-  <div class="shine header"></div>
-  <div class="shine content"></div>
+  <div class="header-placeholder">
+    <div class="shine strip"></div>
+    <div class="shine header"></div>
+  </div>
+  <div class="content-placeholder">
+    <div class="shine heading"></div>
+    <div class="shine content"></div>
+  </div>
 </div>
 <section class="main-container" *ngIf="isPageInitialized">
   <div class="header-content-container">
