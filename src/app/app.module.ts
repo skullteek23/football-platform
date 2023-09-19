@@ -22,18 +22,7 @@ import { LogoModule } from './shared-modules/logo/logo.module';
 import { HomeModule } from './home/home.module';
 import { LoginBottomSheetModule } from './authentication/login-bottom-sheet/login-bottom-sheet.module';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
-
-export const firebase = {
-  projectId: 'football-platform-dev',
-  appId: '1:386420685008:web:f8105a75d5859ab49386d5',
-  databaseURL:
-    'https://football-platform-dev-default-rtdb.asia-southeast1.firebasedatabase.app',
-  storageBucket: 'football-platform-dev.appspot.com',
-  locationId: 'asia-south1',
-  apiKey: 'AIzaSyAiPctyxsb1rWPqI-VqwhXmha1_1GwO4t4',
-  authDomain: 'football-platform-dev.firebaseapp.com',
-  messagingSenderId: '386420685008',
-};
+import { LoaderModule } from './shared-modules/loader/loader.module';
 
 @NgModule({
   declarations: [AppComponent, TopNavComponent],
@@ -45,8 +34,8 @@ export const firebase = {
     LogoModule,
     HomeModule,
     LoginBottomSheetModule,
-
-    provideFirebaseApp(() => initializeApp(firebase)),
+    LoaderModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
     provideFirestore(() => getFirestore()),

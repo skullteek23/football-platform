@@ -15,6 +15,7 @@ export class AuthBaseComponent implements CanComponentDeactivate {
   requestOtpBtnDetails = new ButtonConfig();
   continueBtnDetails = new ButtonConfig();
   otpSent = false;
+  isLoaderShown = false;
 
   constructor(
     protected authService: AuthService,
@@ -23,6 +24,9 @@ export class AuthBaseComponent implements CanComponentDeactivate {
     protected router: Router
   ) {
     this.requestOtpBtnDetails.label = 'Send OTP';
+    if (this.authService.isUserLogin()) {
+      this.closeSheet('/');
+    }
   }
 
   /**
@@ -88,12 +92,15 @@ export class AuthBaseComponent implements CanComponentDeactivate {
       console.log('Invalid otp input! Pls try again.');
       return;
     } else {
+      this.showLoader();
       result
         ?.confirm(this.getControlValue(formGroup, 'otp'))
         .then((user) => {
+          this.hideLoader();
           this.closeSheet('/');
         })
         .catch((error) => {
+          this.hideLoader();
           this.snackbarService.displayCustomMsg(this.messages.error.invalidOtp);
         });
     }
@@ -110,9 +117,11 @@ export class AuthBaseComponent implements CanComponentDeactivate {
       console.log('Invalid otp input! Pls try again.');
       return;
     } else {
+      this.showLoader();
       result
         ?.confirm(this.getControlValue(formGroup, 'otp'))
         .then((user) => {
+          this.hideLoader();
           const displayName = this.getControlValue(formGroup, 'name');
           if (displayName) {
             this.authService.updateUserProfile({ displayName });
@@ -120,6 +129,7 @@ export class AuthBaseComponent implements CanComponentDeactivate {
           this.closeSheet('/');
         })
         .catch((error) => {
+          this.hideLoader();
           this.snackbarService.displayCustomMsg(this.messages.error.invalidOtp);
         });
     }
@@ -171,5 +181,19 @@ export class AuthBaseComponent implements CanComponentDeactivate {
    */
   isDisableFinalBtn(formGroup: FormGroup): boolean {
     return formGroup?.invalid || !formGroup?.dirty;
+  }
+
+  /**
+   * Shows loader
+   */
+  showLoader() {
+    this.isLoaderShown = true;
+  }
+
+  /**
+   * Hides loader
+   */
+  hideLoader() {
+    this.isLoaderShown = false;
   }
 }

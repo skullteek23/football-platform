@@ -4,11 +4,16 @@ import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { Router } from '@angular/router';
 import { AnimationService } from '@app/services/animation.service';
 import { AuthBaseComponent } from '../auth-base.component';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthConstants, FormValidations } from '../constants/auth.constant';
+import { FormControl, FormGroup } from '@angular/forms';
+import { AuthConstants } from '../constants/auth.constant';
 import { IConfirmationResult } from '@app/models/common.model';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { getAuthErrorMsg } from '@app/utils/auth-error-handling-utility';
+import {
+  FULL_NAME_VALIDATORS,
+  MOBILE_VALIDATORS,
+  OTP_VALIDATORS,
+} from '@app/utils/form-validators-utility';
 
 @Component({
   selector: 'app-signup-bottom-sheet',
@@ -24,20 +29,9 @@ export class SignupBottomSheetComponent
   confirmationResult: IConfirmationResult = null;
 
   formGroup = new FormGroup({
-    name: new FormControl(null, [
-      Validators.required,
-      Validators.minLength(FormValidations.displayName),
-    ]),
-    phoneNumber: new FormControl(null, [
-      Validators.required,
-      Validators.maxLength(FormValidations.phone),
-      Validators.minLength(FormValidations.phone),
-    ]),
-    otp: new FormControl(null, [
-      Validators.required,
-      Validators.maxLength(FormValidations.otp),
-      Validators.minLength(FormValidations.otp),
-    ]),
+    name: new FormControl(null, FULL_NAME_VALIDATORS),
+    phoneNumber: new FormControl(null, MOBILE_VALIDATORS),
+    otp: new FormControl(null, OTP_VALIDATORS),
   });
 
   constructor(
@@ -51,6 +45,7 @@ export class SignupBottomSheetComponent
 
   ngOnDestroy(): void {
     this.otpSent = false;
+    this.phoneNumber?.enable();
   }
 
   ngAfterViewInit(): void {
@@ -61,6 +56,10 @@ export class SignupBottomSheetComponent
    * Requests otp from backend
    */
   requestSignupOtp() {
+    if (this.isDisableSendOtpBtn(this.formGroup)) {
+      return;
+    }
+    this.showLoader();
     const number =
       AuthConstants.INDIAN_DIAL_CODE +
       this.getControlValue(this.formGroup, 'phoneNumber');
@@ -70,23 +69,30 @@ export class SignupBottomSheetComponent
       .checkUserExists(number)
       .then((result) => {
         if (result?.data) {
+          this.hideLoader();
           alert(this.messages.error.userAlreadyExists);
           this.authService.openLogin();
         } else {
           this.requestOtp(this.formGroup)
             .then((confirmationResult) => {
+              this.hideLoader();
               this.confirmationResult = confirmationResult;
               this.otpSent = true;
+              this.phoneNumber?.disable();
               this.continueBtnDetails.label = 'Continue';
             })
             .catch((error) => {
+              this.hideLoader();
               this.confirmationResult = null;
               this.otpSent = false;
+              this.phoneNumber?.enable();
               this.snackbarService.displayError(getAuthErrorMsg(error));
             });
         }
       })
       .catch((error) => {
+        this.hideLoader();
+        this.phoneNumber?.enable();
         if (error?.message) {
           this.snackbarService.displayError(error?.message);
         }
@@ -105,5 +111,34 @@ export class SignupBottomSheetComponent
       !formGroup?.get('name')?.dirty ||
       !formGroup?.get('phoneNumber')?.dirty
     );
+  }
+
+  /**
+   * Triggered when user wants to change the phone number after otp is sent
+   */
+  editNumber() {
+    this.otpSent = false;
+    this.phoneNumber?.enable();
+  }
+
+  /**
+   * Returns the form control phoneNumber
+   */
+  get phoneNumber() {
+    return this.formGroup?.get('phoneNumber');
+  }
+
+  /**
+   * Returns the form control otp
+   */
+  get otp() {
+    return this.formGroup?.get('otp');
+  }
+
+  /**
+   * Returns the form control name
+   */
+  get name() {
+    return this.formGroup?.get('name');
   }
 }

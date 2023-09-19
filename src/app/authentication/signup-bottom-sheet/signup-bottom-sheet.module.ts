@@ -9,6 +9,8 @@ import { ButtonsModule } from '@app/shared-modules/buttons/buttons.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormFieldErrorsModule } from '@app/shared-modules/form-field-errors/form-field-errors.module';
+import { LoaderModule } from '@app/shared-modules/loader/loader.module';
 
 @NgModule({
   declarations: [SignupBottomSheetComponent],
@@ -22,6 +24,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatButtonModule,
     MatIconModule,
     ReactiveFormsModule,
+    FormFieldErrorsModule,
+    LoaderModule,
   ],
   exports: [SignupBottomSheetComponent],
 })

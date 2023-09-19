@@ -4,7 +4,10 @@ export class AuthConstants {
   static readonly INDIAN_DIAL_CODE = '+91';
 }
 export class FormValidations {
-  static readonly displayName = 3;
+  static readonly displayName = {
+    min: 3,
+    max: 50,
+  };
   static readonly phone = 10;
   static readonly otp = 6;
 }

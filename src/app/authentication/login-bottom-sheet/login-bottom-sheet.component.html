@@ -22,6 +22,12 @@
         <mat-hint [@fadeInOut]="otpSent" class="custom-hints" *ngIf="otpSent">
           {{ messages.hints.otpSent }}
         </mat-hint>
+        <mat-error *ngIf="phoneNumber?.errors">
+          <app-form-field-errors
+            [control]="phoneNumber"
+            inputName="phone number"
+          ></app-form-field-errors>
+        </mat-error>
       </mat-form-field>
       <ng-container *ngIf="otpSent">
         <mat-form-field color="primary">
@@ -34,13 +40,22 @@
             id="otp"
             formControlName="otp"
           />
+          <mat-error *ngIf="otp?.errors">
+            <app-form-field-errors
+              [control]="otp"
+              inputName="OTP"
+            ></app-form-field-errors>
+          </mat-error>
         </mat-form-field>
-        <div class="footer-text">
+        <div class="actions footer-text">
           <app-next-action-button
             [disabled]="isDisableFinalBtn(formGroup)"
             (clickEv)="login(formGroup, confirmationResult)"
             [displayDetails]="continueBtnDetails"
           ></app-next-action-button>
+          <button mat-icon-button (click)="editNumber()">
+            <mat-icon fontSet="material-icons-round">edit</mat-icon>
+          </button>
         </div>
       </ng-container>
       <ng-container *ngIf="!otpSent">
@@ -60,3 +75,4 @@
     </div>
   </div>
 </div>
+<app-loader *ngIf="isLoaderShown"></app-loader>

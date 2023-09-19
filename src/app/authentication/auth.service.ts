@@ -17,7 +17,10 @@ import {
   IUser,
   IUserProperties,
 } from '@app/models/common.model';
-import { GlobalConstants } from '@app/constant/app-constants';
+import {
+  GlobalConstants,
+  LocalStorageProperties,
+} from '@app/constant/app-constants';
 import { AuthConstants } from './constants/auth.constant';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { AuthMessages } from '@app/constant/app-messages';
@@ -57,6 +60,12 @@ export class AuthService {
       (user) => {
         this.user$$.next(user);
         this.user = user?.uid ? user : null;
+        if (this.user?.uid) {
+          this.localStorageService.set(
+            LocalStorageProperties.USER_UID,
+            this.user?.uid
+          );
+        }
       },
       (error) => {
         this.snackbarService.displayError(getAuthErrorMsg(error));
@@ -76,7 +85,8 @@ export class AuthService {
    * @returns
    */
   isUserLogin(): boolean {
-    return this.user ? true : false;
+    const uid = this.localStorageService.get(LocalStorageProperties.USER_UID);
+    return uid ? true : false;
   }
 
   /**
@@ -190,14 +200,6 @@ export class AuthService {
       return updateProfile(this.user, updates);
     }
     return Promise.reject(null);
-  }
-
-  /**
-   * Returns the display name of the currently logged user
-   * @returns {string}
-   */
-  getDisplayName(): string {
-    return this.user?.displayName || HomeConstants.salutation;
   }
 
   /**

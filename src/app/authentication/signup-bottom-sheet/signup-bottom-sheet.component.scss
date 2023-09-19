@@ -13,8 +13,11 @@
     width: 100%;
     @include flexStartCol(16px);
     form {
-      @include flexStartCol(0px);
+      @include flexStartCol(16px);
       text-align: center;
+      .actions {
+        @include flexCenter(row, 16px);
+      }
     }
     .footer-text {
       width: 100%;

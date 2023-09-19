@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
 
   isUserLogged = false;
   userBookings: any[] = [];
-  name: string = '';
+  name: string = HomeConstants.salutation;
   data = new IconSelectionData();
   buttonDetails = new ButtonConfig();
 
@@ -32,7 +32,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkUserLogin();
-    this.name = this.authService.getDisplayName();
     this.buttonDetails.icon = 'sports_soccer';
     this.buttonDetails.label = GlobalConstants.GET_STARTED;
   }
@@ -43,6 +42,9 @@ export class HomeComponent implements OnInit {
   checkUserLogin() {
     this.authService._user().subscribe({
       next: (response) => {
+        if (response?.displayName) {
+          this.name = response?.displayName;
+        }
         this.isUserLogged = response ? true : false;
         this.data.items = JSON.parse(JSON.stringify(ACTIONS_MENU_NEW_USER));
         if (response) {
@@ -61,7 +63,6 @@ export class HomeComponent implements OnInit {
    * @param selection
    */
   onSelectOption(selection: IconSelectionDataItem) {
-    console.log(selection);
     if (selection?.externalLink) {
       window.open(selection.externalLink.trim(), '_blank');
     } else {

@@ -9,6 +9,10 @@ import { AuthConstants, FormValidations } from '../constants/auth.constant';
 import { IConfirmationResult } from '@app/models/common.model';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { getAuthErrorMsg } from '@app/utils/auth-error-handling-utility';
+import {
+  MOBILE_VALIDATORS,
+  OTP_VALIDATORS,
+} from '@app/utils/form-validators-utility';
 
 @Component({
   selector: 'app-login-bottom-sheet',
@@ -24,16 +28,8 @@ export class LoginBottomSheetComponent
   confirmationResult: IConfirmationResult = null;
 
   formGroup = new FormGroup({
-    phoneNumber: new FormControl(null, [
-      Validators.required,
-      Validators.maxLength(FormValidations.phone),
-      Validators.minLength(FormValidations.phone),
-    ]),
-    otp: new FormControl(null, [
-      Validators.required,
-      Validators.maxLength(FormValidations.otp),
-      Validators.minLength(FormValidations.otp),
-    ]),
+    phoneNumber: new FormControl(null, MOBILE_VALIDATORS),
+    otp: new FormControl(null, OTP_VALIDATORS),
   });
 
   constructor(
@@ -47,6 +43,7 @@ export class LoginBottomSheetComponent
 
   ngOnDestroy(): void {
     this.otpSent = false;
+    this.phoneNumber?.enable();
   }
 
   ngAfterViewInit(): void {
@@ -57,6 +54,10 @@ export class LoginBottomSheetComponent
    * Requests otp from backend
    */
   requestLoginOtp() {
+    if (this.isDisableSendOtpBtn(this.formGroup)) {
+      return;
+    }
+    this.showLoader();
     const number =
       AuthConstants.INDIAN_DIAL_CODE +
       this.getControlValue(this.formGroup, 'phoneNumber');
@@ -66,24 +67,30 @@ export class LoginBottomSheetComponent
       .checkUserExists(number)
       .then((result) => {
         if (!result?.data) {
+          this.hideLoader();
           alert(this.messages.error.userNotExist);
           this.authService.openSignup();
         } else {
           this.requestOtp(this.formGroup)
             .then((confirmationResult) => {
+              this.hideLoader();
               this.confirmationResult = confirmationResult;
               this.otpSent = true;
+              this.phoneNumber?.disable();
               this.continueBtnDetails.label = 'Continue';
             })
             .catch((error) => {
-              console.log(error);
+              this.hideLoader();
               this.confirmationResult = null;
               this.otpSent = false;
+              this.phoneNumber?.enable();
               this.snackbarService.displayError(getAuthErrorMsg(error));
             });
         }
       })
       .catch((error) => {
+        this.hideLoader();
+        this.phoneNumber?.enable();
         if (error?.message) {
           this.snackbarService.displayError(error?.message);
         }
@@ -100,5 +107,27 @@ export class LoginBottomSheetComponent
       formGroup?.get('phoneNumber')?.invalid ||
       !formGroup?.get('phoneNumber')?.dirty
     );
+  }
+
+  /**
+   * Triggered when user wants to change the phone number after otp is sent
+   */
+  editNumber() {
+    this.otpSent = false;
+    this.phoneNumber?.enable();
+  }
+
+  /**
+   * Returns the form control phoneNumber
+   */
+  get phoneNumber() {
+    return this.formGroup.get('phoneNumber');
+  }
+
+  /**
+   * Returns the form control otp
+   */
+  get otp() {
+    return this.formGroup.get('otp');
   }
 }

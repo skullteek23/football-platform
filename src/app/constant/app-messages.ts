@@ -34,3 +34,12 @@ export const CommonMessages = {
     noInternet: 'Please check your internet connection',
   },
 };
+
+export const CommonFormFieldMessages = {
+  error: {
+    required: 'This field is required',
+    maxlength: 'Maximum length exceeded',
+    minlength: 'Minimum length required',
+    pattern: 'Invalid ',
+  },
+};

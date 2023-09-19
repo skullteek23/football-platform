@@ -11,7 +11,7 @@
     <div class="page-sub-label">Create an Account:</div>
     <form [formGroup]="formGroup">
       <mat-form-field color="primary">
-        <mat-label>Name</mat-label>
+        <mat-label>Full Name</mat-label>
         <input
           matInput
           type="text"
@@ -19,6 +19,9 @@
           id="name"
           formControlName="name"
         />
+        <mat-error *ngIf="name?.errors">
+          <app-form-field-errors [control]="name"></app-form-field-errors>
+        </mat-error>
       </mat-form-field>
       <mat-form-field color="primary">
         <mat-label>Phone Number</mat-label>
@@ -32,6 +35,12 @@
         <mat-hint [@fadeInOut]="otpSent" class="custom-hints" *ngIf="otpSent">
           {{ messages.hints.otpSent }}
         </mat-hint>
+        <mat-error *ngIf="phoneNumber?.errors">
+          <app-form-field-errors
+            [control]="phoneNumber"
+            inputName="phone number"
+          ></app-form-field-errors>
+        </mat-error>
       </mat-form-field>
       <ng-container *ngIf="otpSent">
         <mat-form-field color="primary">
@@ -39,17 +48,29 @@
           <input
             matInput
             type="tel"
+            autocomplete="one-time-code"
             name="otp"
             id="otp"
-            autocomplete="one-time-code"
             formControlName="otp"
           />
+
+          <mat-error *ngIf="otp?.errors">
+            <app-form-field-errors
+              [control]="otp"
+              inputName="OTP"
+            ></app-form-field-errors>
+          </mat-error>
         </mat-form-field>
-        <app-next-action-button
-          [disabled]="isDisableFinalBtn(formGroup)"
-          (clickEv)="signup(formGroup, confirmationResult)"
-          [displayDetails]="continueBtnDetails"
-        ></app-next-action-button>
+        <div class="actions">
+          <app-next-action-button
+            [disabled]="isDisableFinalBtn(formGroup)"
+            (clickEv)="signup(formGroup, confirmationResult)"
+            [displayDetails]="continueBtnDetails"
+          ></app-next-action-button>
+          <button mat-icon-button (click)="editNumber()">
+            <mat-icon fontSet="material-icons-round">edit</mat-icon>
+          </button>
+        </div>
       </ng-container>
       <ng-container *ngIf="!otpSent">
         <app-next-action-button
@@ -78,3 +99,4 @@
     </ng-template>
   </div>
 </div>
+<app-loader *ngIf="isLoaderShown"></app-loader>

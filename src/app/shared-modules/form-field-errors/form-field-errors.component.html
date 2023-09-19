@@ -1,0 +1,12 @@
+<div *ngIf="control?.hasError('required')">
+  {{ messages.error.required }}
+</div>
+<div *ngIf="control?.hasError('maxlength')">
+  {{ messages.error.maxlength }}
+</div>
+<div *ngIf="control?.hasError('minlength')">
+  {{ messages.error.minlength }}
+</div>
+<div *ngIf="control?.hasError('pattern')">
+  {{ messages.error.pattern + inputName }}
+</div>

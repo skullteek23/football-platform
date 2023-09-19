@@ -9,6 +9,8 @@ import { MatInputModule } from '@angular/material/input';
 import { ButtonsModule } from '@app/shared-modules/buttons/buttons.module';
 import { LogoModule } from '@app/shared-modules/logo/logo.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormFieldErrorsModule } from '@app/shared-modules/form-field-errors/form-field-errors.module';
+import { LoaderModule } from '@app/shared-modules/loader/loader.module';
 
 @NgModule({
   declarations: [LoginBottomSheetComponent],
@@ -22,6 +24,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatButtonModule,
     MatIconModule,
     ReactiveFormsModule,
+    FormFieldErrorsModule,
+    LoaderModule,
   ],
   exports: [LoginBottomSheetComponent],
 })
