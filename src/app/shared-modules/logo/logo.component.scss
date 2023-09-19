@@ -5,9 +5,11 @@
     min-width: 100px;
     max-width: 100px;
     max-height: 100%;
+    overflow: hidden;
     img {
       height: 100%;
       width: auto;
+      max-width: 100px;
     }
   }
 }
