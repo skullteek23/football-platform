@@ -10,6 +10,7 @@ const routes: Routes = [
     path: '',
     component: OnboardingComponent,
     children: [
+      { path: '', redirectTo: 'select-position', pathMatch: 'full' },
       { path: 'select-position', component: PositionSelectionComponent },
       { path: 'select-ground', component: GroundSelectionComponent },
       { path: 'payment', component: PaymentComponent },

@@ -1,0 +1,56 @@
+@import "mixins";
+@import "variables";
+
+.placeholder-shimmer {
+  height: auto;
+  width: auto;
+  @include mainPageContainer;
+  .header-placeholder {
+    @include flexStartCol(4px);
+    width: 100%;
+    .strip {
+      min-height: 40px;
+    }
+    .header {
+      min-height: 114px;
+    }
+  }
+  .content-placeholder {
+    @include flexStartCol(4px);
+    width: 100%;
+    .heading {
+      min-height: 40px;
+    }
+    .content {
+      min-height: 150px;
+    }
+  }
+}
+
+.main-container {
+  @include mainPageContainer;
+  .header-content-container {
+    @include flexStartCol(4px);
+    .salutation-strip {
+      @include flexSpaceBetween;
+      a {
+        @include flexCenter(row);
+      }
+    }
+  }
+  .content-container {
+    @include flexCenter(column, 4px);
+    .heading {
+      width: 100%;
+      font-size: $font-size-primary;
+      @include flexSpaceBetween(0px);
+    }
+    .content {
+      width: 100%;
+      height: auto;
+      .onboarding-content {
+        @include flexStartCol(8px);
+      }
+    }
+  }
+}

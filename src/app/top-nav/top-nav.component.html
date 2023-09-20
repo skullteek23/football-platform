@@ -11,7 +11,7 @@
       </button>
       <mat-chip-list *ngIf="isUserLogged">
         <mat-chip>
-          <span routerLink="/user/wallet">
+          <span routerLink="/main/user/wallet">
             {{ userBalance | currency : "INR" }}
           </span>
           <mat-icon fontSet="material-icons-round"

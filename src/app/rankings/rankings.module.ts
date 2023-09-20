@@ -1,15 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RankingsComponent } from './rankings.component';
-
-
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [
-    RankingsComponent
-  ],
+  declarations: [RankingsComponent],
   imports: [
-    CommonModule
-  ]
+    CommonModule,
+    RouterModule.forChild([{ path: '', component: RankingsComponent }]),
+  ],
 })
-export class RankingsModule { }
+export class RankingsModule {}

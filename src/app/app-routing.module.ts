@@ -6,12 +6,17 @@ import { SignupBottomSheetModule } from './authentication/signup-bottom-sheet/si
 import { ConfirmFormClosureGuard } from './guards/confirm-form-closure.guard';
 import { redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { RedirectLoggedUserGuard } from './authentication/guards/redirect-logged-user.guard';
+import { HomeComponent } from './home/home.component';
 const redirectUnauthorizedGuard = () => redirectUnauthorizedTo(['/login']);
 
 const routes: Routes = [
   {
-    ...redirectUnauthorizedGuard,
     path: '',
+    component: HomeComponent,
+  },
+  {
+    ...redirectUnauthorizedGuard,
+    path: 'main',
     loadChildren: () =>
       import('./main-shell/main-shell.module').then((m) => m.MainShellModule),
   },
@@ -41,7 +46,10 @@ const routes: Routes = [
   },
   {
     path: 'privacy-policy',
-    redirectTo: 'terms',
+    loadChildren: () =>
+      import('./privacy-policy/privacy-policy.module').then(
+        (m) => m.PrivacyPolicyModule
+      ),
   },
   {
     path: 'error',

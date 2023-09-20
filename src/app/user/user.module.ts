@@ -9,6 +9,12 @@ const routes: Routes = [
     path: '',
     component: UserComponent,
     children: [
+      { path: '', redirectTo: 'account', pathMatch: 'full' },
+      {
+        path: 'wallet',
+        loadChildren: () =>
+          import('@app/wallet/wallet.module').then((m) => m.WalletModule),
+      },
       {
         path: 'account',
         loadChildren: () =>

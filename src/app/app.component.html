@@ -1,5 +1,7 @@
 <app-top-nav></app-top-nav>
-<router-outlet [@fadeInOut]></router-outlet>
+<router-outlet></router-outlet>
+
+<!-- To render the recaptcha for captcha verifier for firebase phone authentication -->
 <div class="hidden-part">
   <div [id]="loginCaptcha"></div>
   <div [id]="signupCaptcha"></div>

@@ -23,6 +23,7 @@ import { LoginBottomSheetModule } from './authentication/login-bottom-sheet/logi
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { LoaderModule } from './shared-modules/loader/loader.module';
 import { ErrorInterceptor } from './utils/error.interceptor';
+import { HomeModule } from './home/home.module';
 
 @NgModule({
   declarations: [AppComponent, TopNavComponent],
@@ -34,6 +35,7 @@ import { ErrorInterceptor } from './utils/error.interceptor';
     LogoModule,
     LoginBottomSheetModule,
     LoaderModule,
+    HomeModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),

@@ -125,7 +125,7 @@ export class AuthBaseComponent implements CanComponentDeactivate {
             this.authService.updateUserProfile({ displayName });
           }
           this.closeSheet('/');
-          this.router.navigate(['/onboarding']);
+          this.router.navigate(['/main/onboarding']);
         })
         .catch(this.handleSignInError.bind(this));
     }

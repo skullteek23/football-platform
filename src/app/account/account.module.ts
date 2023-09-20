@@ -3,21 +3,21 @@ import { CommonModule } from '@angular/common';
 import { AccountComponent } from './account.component';
 import { ViewDetailsComponent } from './components/view-details/view-details.component';
 import { EditDetailsComponent } from './components/edit-details/edit-details.component';
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
     path: '',
     component: AccountComponent,
     children: [
-      { path: 'view', component: ViewDetailsComponent },
-      { path: 'edit', component: EditDetailsComponent },
+      { path: '', component: ViewDetailsComponent, pathMatch: 'full' },
+      { path: 'edit', pathMatch: 'full', component: EditDetailsComponent },
     ],
   },
 ];
 
 @NgModule({
   declarations: [AccountComponent, ViewDetailsComponent, EditDetailsComponent],
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule.forChild(routes)],
 })
 export class AccountModule {}
