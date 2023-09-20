@@ -33,7 +33,7 @@
       [@fadeInOut]="isExpanded"
       *ngIf="isExpanded && data?.extraItems?.length"
     >
-      <div class="menu-item-container" *ngFor="let item of data?.extraItems">
+      <div class="menu-item-wrapper" *ngFor="let item of data?.extraItems">
         <button mat-icon-button (click)="selection(item)" class="icon-button">
           <mat-icon fontSet="material-icons-round">{{ item.icon }}</mat-icon>
         </button>

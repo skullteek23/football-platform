@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject, of } from 'rxjs';
+import { Observable, Subject, catchError, of } from 'rxjs';
 import { BottomSheetService } from '../services/bottom-sheet.service';
 import { LoginBottomSheetComponent } from '@app/authentication/login-bottom-sheet/login-bottom-sheet.component';
 import { Router } from '@angular/router';
@@ -29,7 +29,6 @@ import { SessionStorageService } from '@app/services/session-storage.service';
 import { CoreApiService } from '@app/services/core-api.service';
 import { HttpsCallableResult } from 'firebase/functions';
 import { cloudFunctionNames } from '@app/constant/api-constants';
-import { getAuthErrorMsg } from '@app/utils/auth-error-handling-utility';
 
 @Injectable({
   providedIn: 'root',
@@ -55,23 +54,21 @@ export class AuthService {
     private coreApiService: CoreApiService
   ) {
     // Subscribe to auth object from backend.
-    this.auth.onAuthStateChanged(
-      (user) => {
-        this.user$$.next(user);
-        this.user = user?.uid ? user : null;
-        if (this.user?.uid) {
-          this.localStorageService.set(
-            LocalStorageProperties.USER_UID,
-            this.user?.uid
-          );
-        } else {
-          this.localStorageService.remove(LocalStorageProperties.USER_UID);
-        }
-      },
-      (error) => {
-        this.snackbarService.displayError(getAuthErrorMsg(error));
+    this.auth.onAuthStateChanged((user) => {
+      if (user?.uid) {
+        // Logged in state
+        this.localStorageService.set(
+          LocalStorageProperties.USER_UID,
+          user?.uid
+        );
+        this.user = user;
+      } else {
+        // Logged out state
+        this.localStorageService.remove(LocalStorageProperties.USER_UID);
+        this.user = null;
       }
-    );
+      this.user$$.next(this.user);
+    });
   }
 
   /**
@@ -79,7 +76,11 @@ export class AuthService {
    */
   _user(): Observable<IUser> {
     if (this.auth) {
-      return authState(this.auth);
+      return authState(this.auth).pipe(
+        catchError((error) => {
+          return of(null);
+        })
+      );
     } else if (this.isUserLogin()) {
       return of(this.user);
     } else {

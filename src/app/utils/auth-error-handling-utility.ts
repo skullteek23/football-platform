@@ -1,9 +1,8 @@
 import { AuthMessages, CommonMessages } from '@app/constant/app-messages';
+import { IAuthError } from '@app/models/common.model';
 
-export function getAuthErrorMsg(error: any): string {
-  if (error.message) {
-    return error.message;
-  } else if (error?.code || error.code === 0) {
+export function getAuthErrorMsg(error: IAuthError): string {
+  if (error?.code) {
     switch (error.code) {
       case 'auth/email-already-in-use':
         return AuthMessages.error.emailAlreadyExists;
@@ -34,6 +33,8 @@ export function getAuthErrorMsg(error: any): string {
       default:
         return CommonMessages.error.genericError;
     }
+  } else if (error?.message) {
+    return error.message;
   } else {
     return CommonMessages.error.genericError;
   }

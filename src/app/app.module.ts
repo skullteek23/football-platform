@@ -19,10 +19,10 @@ import { provideStorage, getStorage } from '@angular/fire/storage';
 import { MaterialModule } from './material.module';
 import { TopNavComponent } from './top-nav/top-nav.component';
 import { LogoModule } from './shared-modules/logo/logo.module';
-import { HomeModule } from './home/home.module';
 import { LoginBottomSheetModule } from './authentication/login-bottom-sheet/login-bottom-sheet.module';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { LoaderModule } from './shared-modules/loader/loader.module';
+import { ErrorInterceptor } from './utils/error.interceptor';
 
 @NgModule({
   declarations: [AppComponent, TopNavComponent],
@@ -32,7 +32,6 @@ import { LoaderModule } from './shared-modules/loader/loader.module';
     BrowserAnimationsModule,
     MaterialModule,
     LogoModule,
-    HomeModule,
     LoginBottomSheetModule,
     LoaderModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
@@ -52,6 +51,7 @@ import { LoaderModule } from './shared-modules/loader/loader.module';
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
       useValue: { appearance: 'outline' },
     },
+    ErrorInterceptor,
   ],
   bootstrap: [AppComponent],
 })

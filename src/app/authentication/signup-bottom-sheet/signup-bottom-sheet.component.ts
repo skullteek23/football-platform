@@ -1,12 +1,11 @@
 import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { AuthService } from '../auth.service';
-import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { Router } from '@angular/router';
 import { AnimationService } from '@app/services/animation.service';
 import { AuthBaseComponent } from '../auth-base.component';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AuthConstants } from '../constants/auth.constant';
-import { IConfirmationResult } from '@app/models/common.model';
+import { IAuthError, IConfirmationResult } from '@app/models/common.model';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { getAuthErrorMsg } from '@app/utils/auth-error-handling-utility';
 import {
@@ -82,21 +81,19 @@ export class SignupBottomSheetComponent
               this.phoneNumber?.disable();
               this.continueBtnDetails.label = 'Continue';
             })
-            .catch((error) => {
+            .catch((error: IAuthError) => {
+              this.snackbarService.displayError(getAuthErrorMsg(error));
               this.hideLoader();
               this.confirmationResult = null;
               this.otpSent = false;
               this.phoneNumber?.enable();
-              this.snackbarService.displayError(getAuthErrorMsg(error));
             });
         }
       })
-      .catch((error) => {
+      .catch((error: IAuthError) => {
+        this.snackbarService.displayError(getAuthErrorMsg(error));
         this.hideLoader();
         this.phoneNumber?.enable();
-        if (error?.message) {
-          this.snackbarService.displayError(error?.message);
-        }
       });
   }
 

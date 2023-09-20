@@ -1,7 +1,7 @@
 import { IconSelectionDataItem } from '@app/shared-modules/icon-selection-menu/models/icon-selection.model';
 import { environment } from 'src/environments/environment';
 
-export class HomeConstants {
+export class MainShellConstants {
   static readonly salutation = 'Footballer';
 }
 

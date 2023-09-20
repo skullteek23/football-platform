@@ -1,21 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
 import { LoginBottomSheetComponent } from './authentication/login-bottom-sheet/login-bottom-sheet.component';
 import { SignupBottomSheetComponent } from './authentication/signup-bottom-sheet/signup-bottom-sheet.component';
 import { SignupBottomSheetModule } from './authentication/signup-bottom-sheet/signup-bottom-sheet.module';
 import { ConfirmFormClosureGuard } from './guards/confirm-form-closure.guard';
 import { redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { RedirectLoggedUserGuard } from './authentication/guards/redirect-logged-user.guard';
-const redirectUnauthorizedGuard = () => redirectUnauthorizedTo(['/']);
+const redirectUnauthorizedGuard = () => redirectUnauthorizedTo(['/login']);
 
 const routes: Routes = [
   {
     ...redirectUnauthorizedGuard,
     path: '',
-    component: HomeComponent,
-    pathMatch: 'full',
-    data: { animation: 'fadeInOut' },
+    loadChildren: () =>
+      import('./main-shell/main-shell.module').then((m) => m.MainShellModule),
   },
   {
     path: 'login',

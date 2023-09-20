@@ -1,12 +1,11 @@
 import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { AuthBaseComponent } from '../auth-base.component';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
+import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AnimationService } from '@app/services/animation.service';
 import { AuthService } from '../auth.service';
-import { AuthConstants, FormValidations } from '../constants/auth.constant';
-import { IConfirmationResult } from '@app/models/common.model';
+import { AuthConstants } from '../constants/auth.constant';
+import { IAuthError, IConfirmationResult } from '@app/models/common.model';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { getAuthErrorMsg } from '@app/utils/auth-error-handling-utility';
 import {
@@ -80,22 +79,22 @@ export class LoginBottomSheetComponent
               this.phoneNumber?.disable();
               this.continueBtnDetails.label = 'Continue';
             })
-            .catch((error) => {
-              this.hideLoader();
-              this.confirmationResult = null;
-              this.otpSent = false;
-              this.phoneNumber?.enable();
-              this.snackbarService.displayError(getAuthErrorMsg(error));
-            });
+            .catch(this.handleRequestOtpError.bind(this));
         }
       })
-      .catch((error) => {
-        this.hideLoader();
-        this.phoneNumber?.enable();
-        if (error?.message) {
-          this.snackbarService.displayError(error?.message);
-        }
-      });
+      .catch(this.handleRequestOtpError.bind(this));
+  }
+
+  /**
+   * Handles the error while requesting otp
+   * @param error
+   */
+  handleRequestOtpError(error: IAuthError) {
+    this.snackbarService.displayError(getAuthErrorMsg(error));
+    this.confirmationResult = null;
+    this.otpSent = false;
+    this.phoneNumber?.enable();
+    this.hideLoader();
   }
 
   /**

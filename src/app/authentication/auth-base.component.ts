@@ -5,10 +5,11 @@ import { AuthService } from './auth.service';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { CanComponentDeactivate } from '@app/guards/confirm-form-closure.guard';
 import { FormGroup } from '@angular/forms';
-import { IConfirmationResult } from '@app/models/common.model';
+import { IAuthError, IConfirmationResult } from '@app/models/common.model';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { AuthConstants } from './constants/auth.constant';
 import { BottomSheetService } from '@app/services/bottom-sheet.service';
+import { getAuthErrorMsg } from '@app/utils/auth-error-handling-utility';
 
 export class AuthBaseComponent implements CanComponentDeactivate {
   readonly messages = AuthMessages;
@@ -25,6 +26,7 @@ export class AuthBaseComponent implements CanComponentDeactivate {
     protected router: Router
   ) {
     this.requestOtpBtnDetails.label = 'Send OTP';
+    this.continueBtnDetails.type = 'submit';
     if (this.authService.isUserLogin()) {
       this.closeSheet('/');
     }
@@ -98,10 +100,7 @@ export class AuthBaseComponent implements CanComponentDeactivate {
           this.hideLoader();
           this.closeSheet('/');
         })
-        .catch((error) => {
-          this.hideLoader();
-          this.snackbarService.displayCustomMsg(this.messages.error.invalidOtp);
-        });
+        .catch(this.handleSignInError.bind(this));
     }
   }
 
@@ -126,12 +125,19 @@ export class AuthBaseComponent implements CanComponentDeactivate {
             this.authService.updateUserProfile({ displayName });
           }
           this.closeSheet('/');
+          this.router.navigate(['/onboarding']);
         })
-        .catch((error) => {
-          this.hideLoader();
-          this.snackbarService.displayCustomMsg(this.messages.error.invalidOtp);
-        });
+        .catch(this.handleSignInError.bind(this));
     }
+  }
+
+  /**
+   * Handle sign in error and display error message
+   * @param error
+   */
+  handleSignInError(error: IAuthError) {
+    this.snackbarService.displayCustomMsg(getAuthErrorMsg(error));
+    this.hideLoader();
   }
 
   /**

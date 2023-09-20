@@ -18,14 +18,14 @@ export const AuthMessages = {
     userNotExist: 'User does not exists. Please create an account.',
     userAlreadyExists:
       'Phone number is already in use. Please login to continue.',
-    tooManyRequests: 'Too many requests! Please try again after sometime',
-    incorrectPassword: 'Incorrect password! Please try again',
-    weakPassword: 'Password too weak! Please try another one',
-    incorrectEmail: 'Incorrect email! Please try again',
-    emailAlreadyExists: 'Email already registered! Please try another one',
-    sessionExpired: 'Session Expired! Please login again',
-    accountDisabled: 'Account disabled! Please contact admin',
-    captchaFailed: 'Captcha failed! Please try again',
+    tooManyRequests: 'Too many requests! Please try again later.',
+    incorrectPassword: 'Incorrect password! Please try again.',
+    weakPassword: 'Password too weak! Please try another one.',
+    incorrectEmail: 'Incorrect email! Please try again.',
+    emailAlreadyExists: 'Email already registered! Please try another one.',
+    sessionExpired: 'Session Expired! Please login again.',
+    accountDisabled: 'Account disabled! Please contact admin.',
+    captchaFailed: 'Captcha failed! Please try again.',
   },
 };
 
