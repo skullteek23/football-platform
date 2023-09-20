@@ -16,7 +16,8 @@ export const AuthMessages = {
     signOutError: 'Error! Unable to logout.',
     alreadySignOut: 'You are already signed out.',
     userNotExist: 'User does not exists. Please create an account.',
-    userAlreadyExists: 'User already exists. Please login to continue.',
+    userAlreadyExists:
+      'Phone number is already in use. Please login to continue.',
     tooManyRequests: 'Too many requests! Please try again after sometime',
     incorrectPassword: 'Incorrect password! Please try again',
     weakPassword: 'Password too weak! Please try another one',

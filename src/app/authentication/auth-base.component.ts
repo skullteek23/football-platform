@@ -8,6 +8,7 @@ import { FormGroup } from '@angular/forms';
 import { IConfirmationResult } from '@app/models/common.model';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { AuthConstants } from './constants/auth.constant';
+import { BottomSheetService } from '@app/services/bottom-sheet.service';
 
 export class AuthBaseComponent implements CanComponentDeactivate {
   readonly messages = AuthMessages;
@@ -20,7 +21,7 @@ export class AuthBaseComponent implements CanComponentDeactivate {
   constructor(
     protected authService: AuthService,
     protected snackbarService: SnackbarService,
-    private _bottomSheetRef: MatBottomSheetRef<any>,
+    private bottomSheetService: BottomSheetService,
     protected router: Router
   ) {
     this.requestOtpBtnDetails.label = 'Send OTP';
@@ -34,10 +35,8 @@ export class AuthBaseComponent implements CanComponentDeactivate {
    * @param nextPath
    */
   closeSheet(nextPath = '..') {
-    if (this._bottomSheetRef?.dismiss) {
-      this.router.navigate([nextPath]);
-      this._bottomSheetRef.dismiss();
-    }
+    this.router.navigate([nextPath]);
+    this.bottomSheetService.closeSheet();
   }
 
   /**

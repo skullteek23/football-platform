@@ -115,12 +115,13 @@ a.links {
 }
 
 .page-sub-label {
-  font-size: $font-size-m;
-  font-weight: 300;
+  font-size: $font-size-primary;
+  font-weight: $sub-heading-weight;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   max-width: 85%;
+  color: $black;
 }
 .semi-strong {
   font-weight: 500;

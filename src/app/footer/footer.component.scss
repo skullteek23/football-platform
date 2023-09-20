@@ -10,6 +10,7 @@ footer {
     .sub-heading {
       font-size: $font-size-primary;
       width: 100%;
+      font-weight: $sub-heading-weight;
       text-align: center;
     }
     .icons-list {
@@ -29,11 +30,11 @@ footer {
     @include flexStartCol(8px);
 
     p {
-      font-size: $font-size-s;
+      font-size: $font-size-m;
       font-weight: 300;
     }
     p.terms {
-      font-size: $font-size-xs;
+      font-size: $font-size-s;
     }
   }
 }

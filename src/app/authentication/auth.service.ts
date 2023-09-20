@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, of } from 'rxjs';
 import { BottomSheetService } from '../services/bottom-sheet.service';
 import { LoginBottomSheetComponent } from '@app/authentication/login-bottom-sheet/login-bottom-sheet.component';
 import { Router } from '@angular/router';
@@ -7,6 +7,7 @@ import { SignupBottomSheetComponent } from './signup-bottom-sheet/signup-bottom-
 import {
   Auth,
   RecaptchaVerifier,
+  authState,
   signInWithPhoneNumber,
   signOut,
   updateProfile,
@@ -30,7 +31,6 @@ import { HttpsCallableResult } from 'firebase/functions';
 import { cloudFunctionNames } from '@app/constant/api-constants';
 import { getAuthErrorMsg } from '@app/utils/auth-error-handling-utility';
 
-var grecaptcha: any;
 @Injectable({
   providedIn: 'root',
 })
@@ -78,7 +78,13 @@ export class AuthService {
    * Returns user observable
    */
   _user(): Observable<IUser> {
-    return this.user$$.asObservable();
+    if (this.auth) {
+      return authState(this.auth);
+    } else if (this.isUserLogin()) {
+      return of(this.user);
+    } else {
+      return of(null);
+    }
   }
 
   /**

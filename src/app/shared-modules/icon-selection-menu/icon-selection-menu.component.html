@@ -16,7 +16,7 @@
         'expandable-view': data?.extraItems?.length
       }"
     >
-      <div class="menu-item-container" *ngFor="let item of data?.items">
+      <div class="menu-item-wrapper" *ngFor="let item of data?.items">
         <button
           mat-icon-button
           (click)="selection(item)"

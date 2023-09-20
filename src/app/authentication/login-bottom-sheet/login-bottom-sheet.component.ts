@@ -13,6 +13,7 @@ import {
   MOBILE_VALIDATORS,
   OTP_VALIDATORS,
 } from '@app/utils/form-validators-utility';
+import { BottomSheetService } from '@app/services/bottom-sheet.service';
 
 @Component({
   selector: 'app-login-bottom-sheet',
@@ -34,11 +35,11 @@ export class LoginBottomSheetComponent
 
   constructor(
     authService: AuthService,
-    _bottomSheetRef: MatBottomSheetRef<LoginBottomSheetComponent>,
-    router: Router,
-    snackbarService: SnackbarService
+    snackbarService: SnackbarService,
+    bottomSheetService: BottomSheetService,
+    router: Router
   ) {
-    super(authService, snackbarService, _bottomSheetRef, router);
+    super(authService, snackbarService, bottomSheetService, router);
   }
 
   ngOnDestroy(): void {

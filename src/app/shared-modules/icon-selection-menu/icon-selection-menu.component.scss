@@ -4,7 +4,6 @@
 .selection-menu {
   @include flexSpaceBetween(0px);
   padding: 16px 8px;
-  border: 1px solid $primary-color;
   border-radius: $border-radius-primary;
   overflow: hidden;
   transition: height 0.25s ease-out;
@@ -17,11 +16,12 @@
       @include extra-small-screen {
         flex-wrap: wrap;
       }
-      .menu-item-container:last-child {
+      .menu-item-wrapper:last-child {
         margin-right: 8px;
       }
-      .menu-item-container {
+      .menu-item-wrapper {
         @include flexStartCol(4px, center);
+        width: 54px;
         .icon-button {
           @include flexCenter(row);
           border: 1px solid $primary-color;
