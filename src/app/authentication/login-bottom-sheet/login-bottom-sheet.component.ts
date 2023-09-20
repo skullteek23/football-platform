@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, OnDestroy } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnDestroy,
+  ViewChild,
+} from '@angular/core';
 import { AuthBaseComponent } from '../auth-base.component';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -13,6 +19,8 @@ import {
   OTP_VALIDATORS,
 } from '@app/utils/form-validators-utility';
 import { BottomSheetService } from '@app/services/bottom-sheet.service';
+import { MatInput } from '@angular/material/input';
+import { ShowConfirmationService } from '@app/services/show-confirmation.service';
 
 @Component({
   selector: 'app-login-bottom-sheet',
@@ -32,13 +40,23 @@ export class LoginBottomSheetComponent
     otp: new FormControl(null, OTP_VALIDATORS),
   });
 
+  @ViewChild('firstInputRef', { static: false })
+  firstInputRef!: ElementRef<MatInput>;
+
   constructor(
     authService: AuthService,
     snackbarService: SnackbarService,
     bottomSheetService: BottomSheetService,
-    router: Router
+    router: Router,
+    showConfirmationService: ShowConfirmationService
   ) {
-    super(authService, snackbarService, bottomSheetService, router);
+    super(
+      authService,
+      snackbarService,
+      bottomSheetService,
+      router,
+      showConfirmationService
+    );
   }
 
   ngOnDestroy(): void {
@@ -47,6 +65,9 @@ export class LoginBottomSheetComponent
   }
 
   ngAfterViewInit(): void {
+    if (this.firstInputRef?.nativeElement) {
+      this.firstInputRef.nativeElement.focus();
+    }
     this.initCaptcha(AuthConstants.LOGIN_CAPTCHA_PLACEHOLDER);
   }
 

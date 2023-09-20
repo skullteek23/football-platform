@@ -10,6 +10,7 @@ import { SnackbarService } from '@app/services/snackbar.service';
 import { AuthConstants } from './constants/auth.constant';
 import { BottomSheetService } from '@app/services/bottom-sheet.service';
 import { getAuthErrorMsg } from '@app/utils/auth-error-handling-utility';
+import { ShowConfirmationService } from '@app/services/show-confirmation.service';
 
 export class AuthBaseComponent implements CanComponentDeactivate {
   readonly messages = AuthMessages;
@@ -23,7 +24,8 @@ export class AuthBaseComponent implements CanComponentDeactivate {
     protected authService: AuthService,
     protected snackbarService: SnackbarService,
     private bottomSheetService: BottomSheetService,
-    protected router: Router
+    protected router: Router,
+    private showConfirmationService: ShowConfirmationService
   ) {
     this.requestOtpBtnDetails.label = 'Send OTP';
     this.continueBtnDetails.type = 'submit';
@@ -97,6 +99,7 @@ export class AuthBaseComponent implements CanComponentDeactivate {
       result
         ?.confirm(this.getControlValue(formGroup, 'otp'))
         .then((user) => {
+          window.scrollTo(0, 0);
           this.closeSheet('/');
           this.hideLoader();
         })
@@ -119,6 +122,7 @@ export class AuthBaseComponent implements CanComponentDeactivate {
       result
         ?.confirm(this.getControlValue(formGroup, 'otp'))
         .then((user) => {
+          window.scrollTo(0, 0);
           const displayName = this.getControlValue(formGroup, 'name');
           if (displayName) {
             this.authService.updateUserProfile({ displayName });
@@ -147,7 +151,9 @@ export class AuthBaseComponent implements CanComponentDeactivate {
    */
   canDeactivate(nextPath: string = '..'): boolean | Promise<boolean> {
     if (this.otpSent) {
-      const result = confirm(this.messages.hints.leaveConfirm);
+      const result = this.showConfirmationService.openNativeConfirm(
+        this.messages.hints.leaveConfirm
+      );
       if (result) {
         this.closeSheet(nextPath);
       }

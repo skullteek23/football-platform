@@ -10,7 +10,7 @@
   <div class="icon-content">
     <div
       class="route-icons"
-      [@fadeInOut]="!isExpanded"
+      [@fadeOutIn]="isExpanded"
       [ngClass]="{
         'no-expand-view': !data?.extraItems?.length,
         'expandable-view': data?.extraItems?.length

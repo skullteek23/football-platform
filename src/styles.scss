@@ -92,7 +92,7 @@ $football-platform-theme: mat.define-light-theme(
 /* default settings */
 html,
 body {
-  scroll-behavior: smooth;
+  scroll-behavior: smooth !important;
   height: 100%;
   font-size: 16px;
   margin: 0;

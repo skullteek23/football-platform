@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '@app/authentication/auth.service';
+import { ShowConfirmationService } from '@app/services/show-confirmation.service';
 import {
   ButtonConfig,
   ButtonTheme,
@@ -15,7 +17,11 @@ export class ViewDetailsComponent implements OnInit {
 
   logoutBtn: ButtonConfig;
 
-  constructor(private authService: AuthService) {
+  constructor(
+    private authService: AuthService,
+    private _dialog: MatDialog,
+    private showConfirmationService: ShowConfirmationService
+  ) {
     this.logoutBtn = new ButtonConfig();
     this.logoutBtn.label = 'Logout';
     this.logoutBtn.icon = 'logout';
@@ -24,6 +30,11 @@ export class ViewDetailsComponent implements OnInit {
   ngOnInit(): void {}
 
   logout(): void {
-    this.authService.logout();
+    const result = this.showConfirmationService.openNativeConfirm(
+      'Are you sure you want to logout?'
+    );
+    if (result) {
+      this.authService.logout();
+    }
   }
 }

@@ -18,6 +18,7 @@
           name="name"
           id="name"
           formControlName="name"
+          #firstInputRef
         />
         <mat-error *ngIf="name?.errors">
           <app-form-field-errors [control]="name"></app-form-field-errors>

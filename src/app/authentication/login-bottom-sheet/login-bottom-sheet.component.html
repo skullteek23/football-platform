@@ -18,6 +18,7 @@
           name="phone-number"
           id="contact-number"
           formControlName="phoneNumber"
+          #firstInputRef
         />
         <mat-hint [@fadeInOut]="otpSent" class="custom-hints" *ngIf="otpSent">
           {{ messages.hints.otpSent }}

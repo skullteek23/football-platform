@@ -12,6 +12,7 @@ import {
   animations: [
     AnimationService.expandCollapseAnimationTrigger,
     AnimationService.fadeInOutAnimation,
+    AnimationService.fadeOutInAnimation,
   ],
 })
 export class IconSelectionMenuComponent implements OnInit {

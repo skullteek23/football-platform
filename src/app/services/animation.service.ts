@@ -28,6 +28,17 @@ export class AnimationService {
   ]);
 
   /**
+   * For fade in/out transition when element enters or leaves
+   */
+  static fadeOutInAnimation = trigger('fadeOutIn', [
+    transition(':leave', [animate('500ms', style({ opacity: 0 }))]),
+    transition(':enter', [
+      style({ opacity: 0.5 }),
+      animate('300ms', style({ opacity: 1 })),
+    ]),
+  ]);
+
+  /**
    * For slide-in animation when element enters
    */
   static slideInAnimation = trigger('slideIn', [
