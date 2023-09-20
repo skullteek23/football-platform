@@ -58,6 +58,12 @@
   color: $white;
 }
 
+@mixin secondary-border-background {
+  background: $white;
+  border: 1px solid $primary-color;
+  color: $black;
+}
+
 @mixin commonBtnUI {
   font-size: $font-size-m;
   @include primary-gradient-background();

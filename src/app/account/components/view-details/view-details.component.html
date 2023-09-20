@@ -1,1 +1,7 @@
-<p>view-details works!</p>
+<div class="details-container">
+  <app-wide-button
+    [theme]="ButtonTheme.secondary"
+    [displayDetails]="logoutBtn"
+    (clickEv)="logout()"
+  ></app-wide-button>
+</div>

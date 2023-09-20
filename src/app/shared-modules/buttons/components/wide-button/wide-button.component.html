@@ -1,5 +1,9 @@
 <button
   class="custom-wide-button custom-button"
+  [ngClass]="{
+    'primary-button-custom': theme === ButtonTheme.primary,
+    'secondary-button-custom': theme === ButtonTheme.secondary
+  }"
   mat-raised-button
   (click)="onClickButton()"
   *ngIf="displayDetails"

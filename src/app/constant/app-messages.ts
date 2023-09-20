@@ -5,6 +5,9 @@ export const HomeMessages = {
   title: {},
 };
 export const AuthMessages = {
+  success: {
+    logout: 'Logged out successfully!',
+  },
   hints: {
     otpSent: 'OTP sent successfully!',
     leaveConfirm: 'Are you sure you want to leave?',

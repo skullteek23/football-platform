@@ -6,7 +6,6 @@
   width: 100%;
   font-size: $font-size-m;
   border-radius: $border-radius-primary !important;
-  @include primary-gradient-background;
   .start-content {
     @include flexStartRow(8px);
   }
@@ -14,4 +13,12 @@
     @include flexSpaceBetween(0px);
     width: 100%;
   }
+}
+
+.primary-button-custom {
+  @include primary-gradient-background;
+}
+
+.secondary-button-custom {
+  @include secondary-border-background;
 }

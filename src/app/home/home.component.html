@@ -14,7 +14,11 @@
       <span class="page-sub-label" *ngIf="name">
         Hi, {{ name | titlecase }}!
       </span>
-      <button mat-icon-button routerLink="/main/user/account">
+      <button
+        mat-icon-button
+        routerLink="/main/user/account"
+        *ngIf="isUserLogged"
+      >
         <mat-icon fontSet="material-icons-round">account_circle</mat-icon>
       </button>
     </div>
@@ -25,9 +29,9 @@
   </div>
 
   <div class="content-container">
-    <div class="heading">
+    <div class="salutation-strip">
       <div class="page-sub-label">Your booked matches:</div>
-      <button mat-icon-button (click)="refreshContent()">
+      <button mat-icon-button (click)="refreshContent()" *ngIf="isUserLogged">
         <mat-icon fontSet="material-icons-round">refresh</mat-icon>
       </button>
     </div>

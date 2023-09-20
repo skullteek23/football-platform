@@ -39,3 +39,12 @@
     color: white;
   }
 }
+
+.details-container {
+  app-wide-button {
+    .custom-button {
+      border-color: $logout;
+      color: $logout;
+    }
+  }
+}

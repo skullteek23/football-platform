@@ -4,3 +4,8 @@ export class ButtonConfig {
   label: string = '';
   type: string = 'button';
 }
+
+export enum ButtonTheme {
+  primary = 'primary',
+  secondary = 'secondary',
+}

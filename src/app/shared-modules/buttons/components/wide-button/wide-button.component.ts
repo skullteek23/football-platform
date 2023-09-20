@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ButtonConfig } from '../../models/button.model';
+import { ButtonConfig, ButtonTheme } from '../../models/button.model';
 
 @Component({
   selector: 'app-wide-button',
@@ -7,7 +7,10 @@ import { ButtonConfig } from '../../models/button.model';
   styleUrls: ['./wide-button.component.scss'],
 })
 export class WideButtonComponent implements OnInit {
+  readonly ButtonTheme = ButtonTheme;
+
   @Input() displayDetails = new ButtonConfig();
+  @Input() theme: ButtonTheme = ButtonTheme.primary;
   @Output() clickEv = new EventEmitter<void>();
 
   constructor() {}

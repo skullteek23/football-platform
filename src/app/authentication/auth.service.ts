@@ -170,6 +170,7 @@ export class AuthService {
       signOut(this.auth)
         .then(() => {
           this.postLogoutActivity();
+          this.snackbarService.displayCustomMsg(AuthMessages.success.logout);
         })
         .catch((error) => {
           if (error?.message) {

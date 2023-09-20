@@ -4,6 +4,7 @@ import { AccountComponent } from './account.component';
 import { ViewDetailsComponent } from './components/view-details/view-details.component';
 import { EditDetailsComponent } from './components/edit-details/edit-details.component';
 import { RouterModule, Routes } from '@angular/router';
+import { ButtonsModule } from '@app/shared-modules/buttons/buttons.module';
 
 const routes: Routes = [
   {
@@ -18,6 +19,6 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [AccountComponent, ViewDetailsComponent, EditDetailsComponent],
-  imports: [CommonModule, RouterModule.forChild(routes)],
+  imports: [CommonModule, ButtonsModule, RouterModule.forChild(routes)],
 })
 export class AccountModule {}

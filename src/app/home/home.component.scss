@@ -31,20 +31,17 @@
   @include mainPageContainer;
   .header-content-container {
     @include flexStartCol(4px);
-    .salutation-strip {
-      @include flexSpaceBetween;
-      a {
-        @include flexCenter(row);
-      }
+  }
+  .salutation-strip {
+    width: 100%;
+    height: 40px;
+    @include flexSpaceBetween(0px);
+    a {
+      @include flexCenter(row);
     }
   }
   .content-container {
     @include flexCenter(column, 4px);
-    .heading {
-      width: 100%;
-      font-size: $font-size-primary;
-      @include flexSpaceBetween(0px);
-    }
     .content {
       width: 100%;
       height: auto;

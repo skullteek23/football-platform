@@ -97,8 +97,8 @@ export class AuthBaseComponent implements CanComponentDeactivate {
       result
         ?.confirm(this.getControlValue(formGroup, 'otp'))
         .then((user) => {
-          this.hideLoader();
           this.closeSheet('/');
+          this.hideLoader();
         })
         .catch(this.handleSignInError.bind(this));
     }
@@ -119,12 +119,12 @@ export class AuthBaseComponent implements CanComponentDeactivate {
       result
         ?.confirm(this.getControlValue(formGroup, 'otp'))
         .then((user) => {
-          this.hideLoader();
           const displayName = this.getControlValue(formGroup, 'name');
           if (displayName) {
             this.authService.updateUserProfile({ displayName });
           }
           this.closeSheet('/');
+          this.hideLoader();
           this.router.navigate(['/main/onboarding']);
         })
         .catch(this.handleSignInError.bind(this));
