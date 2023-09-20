@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@app/authentication/auth.service';
 import { GlobalConstants } from '@app/constant/app-constants';
@@ -20,7 +20,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   readonly messages = HomeMessages;
 
   isUserLogged = false;
@@ -41,6 +41,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+  }
+
+  ngAfterViewInit(): void {
+    window.scrollTo(0, 0);
   }
 
   /**

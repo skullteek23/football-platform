@@ -19,6 +19,7 @@
           id="contact-number"
           formControlName="phoneNumber"
           #firstInputRef
+          placeholder="Enter Your 10-digit Mobile Number"
         />
         <mat-hint [@fadeInOut]="otpSent" class="custom-hints" *ngIf="otpSent">
           {{ messages.hints.otpSent }}
@@ -40,6 +41,7 @@
             name="otp"
             id="otp"
             formControlName="otp"
+            placeholder="Enter 6-digit OTP"
           />
           <mat-error *ngIf="otp?.errors">
             <app-form-field-errors
