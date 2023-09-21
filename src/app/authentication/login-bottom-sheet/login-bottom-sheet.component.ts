@@ -21,6 +21,7 @@ import {
 import { BottomSheetService } from '@app/services/bottom-sheet.service';
 import { MatInput } from '@angular/material/input';
 import { ShowConfirmationService } from '@app/services/show-confirmation.service';
+import { SessionStorageService } from '@app/services/session-storage.service';
 
 @Component({
   selector: 'app-login-bottom-sheet',
@@ -48,14 +49,16 @@ export class LoginBottomSheetComponent
     snackbarService: SnackbarService,
     bottomSheetService: BottomSheetService,
     router: Router,
-    showConfirmationService: ShowConfirmationService
+    showConfirmationService: ShowConfirmationService,
+    sessionStorageService: SessionStorageService
   ) {
     super(
       authService,
       snackbarService,
       bottomSheetService,
       router,
-      showConfirmationService
+      showConfirmationService,
+      sessionStorageService
     );
   }
 

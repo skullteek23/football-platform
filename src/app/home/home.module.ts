@@ -7,6 +7,7 @@ import { MaterialModule } from '@app/material.module';
 import { ButtonsModule } from '@app/shared-modules/buttons/buttons.module';
 import { IconSelectionMenuModule } from '@app/shared-modules/icon-selection-menu/icon-selection-menu.module';
 import { PlaceholderModule } from '@app/shared-modules/placeholder/placeholder.module';
+import { LoaderModule } from '@app/shared-modules/loader/loader.module';
 
 @NgModule({
   declarations: [HomeComponent],
@@ -18,6 +19,7 @@ import { PlaceholderModule } from '@app/shared-modules/placeholder/placeholder.m
     IconSelectionMenuModule,
     ButtonsModule,
     PlaceholderModule,
+    LoaderModule,
   ],
   exports: [HomeComponent],
 })

@@ -26,7 +26,7 @@ export class CheckOnboardingStatusGuard
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    return true;
+    return this.authService.isUserOnboardingComplete();
   }
   canActivateChild(
     childRoute: ActivatedRouteSnapshot,

@@ -22,7 +22,6 @@ import { LogoModule } from './shared-modules/logo/logo.module';
 import { LoginBottomSheetModule } from './authentication/login-bottom-sheet/login-bottom-sheet.module';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { LoaderModule } from './shared-modules/loader/loader.module';
-import { ErrorInterceptor } from './utils/error.interceptor';
 import { HomeModule } from './home/home.module';
 
 @NgModule({
@@ -53,7 +52,6 @@ import { HomeModule } from './home/home.module';
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
       useValue: { appearance: 'outline' },
     },
-    ErrorInterceptor,
   ],
   bootstrap: [AppComponent],
 })

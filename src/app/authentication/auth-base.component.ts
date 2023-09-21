@@ -11,6 +11,9 @@ import { AuthConstants } from './constants/auth.constant';
 import { BottomSheetService } from '@app/services/bottom-sheet.service';
 import { getAuthErrorMsg } from '@app/utils/auth-error-handling-utility';
 import { ShowConfirmationService } from '@app/services/show-confirmation.service';
+import { LocalStorageService } from '@app/services/local-storage.service';
+import { SessionStorageService } from '@app/services/session-storage.service';
+import { SessionStorageProperties } from '@app/constant/app-constants';
 
 export class AuthBaseComponent implements CanComponentDeactivate {
   readonly messages = AuthMessages;
@@ -25,7 +28,8 @@ export class AuthBaseComponent implements CanComponentDeactivate {
     protected snackbarService: SnackbarService,
     private bottomSheetService: BottomSheetService,
     protected router: Router,
-    private showConfirmationService: ShowConfirmationService
+    private showConfirmationService: ShowConfirmationService,
+    private sessionStorageService: SessionStorageService
   ) {
     this.requestOtpBtnDetails.label = 'Send OTP';
     this.continueBtnDetails.type = 'submit';
@@ -39,7 +43,10 @@ export class AuthBaseComponent implements CanComponentDeactivate {
    * @param nextPath
    */
   closeSheet(nextPath = '..') {
-    this.router.navigate([nextPath]);
+    // To remove named outlet from the url, workaround
+    this.router.navigate([{ outlets: { open: null } }]).then(() => {
+      this.router.navigate([nextPath]);
+    });
     this.bottomSheetService.closeSheet();
   }
 
@@ -100,7 +107,17 @@ export class AuthBaseComponent implements CanComponentDeactivate {
         ?.confirm(this.getControlValue(formGroup, 'otp'))
         .then((user) => {
           window.scrollTo(0, 0);
-          this.closeSheet('/');
+          const redirectUrl = this.sessionStorageService.get(
+            SessionStorageProperties.REDIRECT_URL
+          );
+          if (redirectUrl) {
+            this.sessionStorageService.remove(
+              SessionStorageProperties.REDIRECT_URL
+            );
+            this.closeSheet(redirectUrl);
+          } else {
+            this.closeSheet('/main/book-match');
+          }
           this.hideLoader();
         })
         .catch(this.handleSignInError.bind(this));
@@ -127,9 +144,8 @@ export class AuthBaseComponent implements CanComponentDeactivate {
           if (displayName) {
             this.authService.updateUserProfile({ displayName });
           }
-          this.closeSheet('/');
+          this.closeSheet('/main/onboarding');
           this.hideLoader();
-          this.router.navigate(['/main/onboarding']);
         })
         .catch(this.handleSignInError.bind(this));
     }

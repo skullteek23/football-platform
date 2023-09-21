@@ -30,7 +30,7 @@ export class AppComponent {
         );
         if (sheetOpen && window.location.pathname.includes('login')) {
           this.authService.openLogin();
-        } else if (sheetOpen && window.location.pathname.includes('signup')) {
+        } else if (window.location.pathname.includes('signup')) {
           this.authService.openSignup();
         }
       }

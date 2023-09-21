@@ -4,9 +4,10 @@ import { LoginBottomSheetComponent } from './authentication/login-bottom-sheet/l
 import { SignupBottomSheetComponent } from './authentication/signup-bottom-sheet/signup-bottom-sheet.component';
 import { SignupBottomSheetModule } from './authentication/signup-bottom-sheet/signup-bottom-sheet.module';
 import { ConfirmFormClosureGuard } from './guards/confirm-form-closure.guard';
-import { redirectUnauthorizedTo } from '@angular/fire/auth-guard';
+import { AuthGuard, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { RedirectLoggedUserGuard } from './authentication/guards/redirect-logged-user.guard';
 import { HomeComponent } from './home/home.component';
+import { UnauthorizedAccessGuard } from './authentication/guards/unauthorized-access.guard';
 const redirectUnauthorizedGuard = () => redirectUnauthorizedTo(['/login']);
 
 const routes: Routes = [
@@ -15,8 +16,9 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    ...redirectUnauthorizedGuard,
     path: 'main',
+    canActivate: [UnauthorizedAccessGuard],
+    canActivateChild: [UnauthorizedAccessGuard],
     loadChildren: () =>
       import('./main-shell/main-shell.module').then((m) => m.MainShellModule),
   },

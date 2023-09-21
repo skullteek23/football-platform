@@ -16,7 +16,7 @@
       </span>
       <button
         mat-icon-button
-        routerLink="/main/user/account"
+        (click)="navigateTo('/main/user/account')"
         *ngIf="isUserLogged"
       >
         <mat-icon fontSet="material-icons-round">account_circle</mat-icon>
@@ -52,3 +52,5 @@
 </section>
 
 <app-footer></app-footer>
+
+<app-loader *ngIf="isLoaderShown"></app-loader>

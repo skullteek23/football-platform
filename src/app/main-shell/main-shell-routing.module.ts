@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainShellComponent } from './main-shell.component';
+import { CheckOnboardingStatusGuard } from '@app/guards/check-onboarding-status.guard';
+import { RouteResolver } from '@app/utils/route.resolver';
 
 const routes: Routes = [
   {
@@ -8,7 +10,14 @@ const routes: Routes = [
     component: MainShellComponent,
     children: [
       {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'onboarding',
+      },
+      {
         path: 'onboarding',
+        canActivate: [CheckOnboardingStatusGuard],
+        canActivateChild: [CheckOnboardingStatusGuard],
         loadChildren: () =>
           import('@app/onboarding/onboarding.module').then(
             (m) => m.OnboardingModule

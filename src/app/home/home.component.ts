@@ -30,6 +30,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   buttonDetails = new ButtonConfig();
   isPageInitialized = false;
   subscriptions = new Subscription();
+  isLoaderShown = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -80,8 +81,19 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     if (selection?.externalLink) {
       window.open(selection.externalLink.trim(), '_blank');
     } else {
-      this.router.navigate([selection.route]);
+      this.navigateTo(selection.route);
     }
+  }
+
+  /**
+   * Function to navigate to a route for showing loader during navigation
+   * @param route
+   */
+  navigateTo(route: string) {
+    this.isPageInitialized = false;
+    this.router.navigate([route]).then(() => {
+      this.isPageInitialized = true;
+    });
   }
 
   /**

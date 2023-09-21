@@ -9,6 +9,10 @@ export class LocalStorageProperties {
   static readonly USER_UID = 'uid';
 }
 
+export class SessionStorageProperties {
+  static readonly REDIRECT_URL = 'redirectUrl';
+}
+
 export class SnackbarConstants {
   static readonly AUTO_HIDE = 5000; // time in milliseconds
   static readonly HORIZONTAL_POSITION = 'center'; // time in milliseconds

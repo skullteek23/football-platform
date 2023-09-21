@@ -220,4 +220,31 @@ export class AuthService {
       phoneNumber,
     });
   }
+
+  /**
+   * Checks whether user has completed onboarding or not
+   * @returns
+   */
+  async isUserOnboardingComplete(): Promise<boolean> {
+    const role = await this.checkCustomRole();
+    if (role) {
+      this.router.navigate(['/main/book-match']);
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  /**
+   * Checks whether user has a custom role set or not
+   */
+  async checkCustomRole(): Promise<boolean> {
+    const role = (
+      await this.auth?.currentUser?.getIdTokenResult(true)
+    )?.claims?.hasOwnProperty('role');
+    if (role) {
+      return true;
+    }
+    return false;
+  }
 }
