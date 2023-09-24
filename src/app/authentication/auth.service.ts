@@ -224,7 +224,7 @@ export class AuthService {
    * @param phoneNumber
    */
   checkUserExists(phoneNumber: string): Promise<HttpsCallableResult<any>> {
-    return this.coreApiService.callCloudFn(cloudFunctionNames.userExists, {
+    return this.coreApiService.callBackendFn(cloudFunctionNames.userExists, {
       phoneNumber,
     });
   }
