@@ -1,23 +1,16 @@
-<button
-  class="custom-wide-button custom-button"
-  [ngClass]="{
+<button class="custom-wide-button custom-button" @fadeAppearBottomTop [ngClass]="{
     'primary-button-custom': theme === ButtonTheme.primary,
     'secondary-button-custom': theme === ButtonTheme.secondary
-  }"
-  mat-raised-button
-  (click)="onClickButton()"
-  *ngIf="displayDetails"
-  [type]="displayDetails.type"
->
+  }" mat-raised-button (click)="onClickButton()" *ngIf="displayDetails" [type]="displayDetails.type">
   <span class="start-content">
     <mat-icon fontSet="material-icons-round">{{
       displayDetails.icon
-    }}</mat-icon>
+      }}</mat-icon>
     <span class="label">
       {{ displayDetails.label }}
     </span>
   </span>
   <mat-icon fontSet="material-icons-round">{{
     displayDetails.secondaryIcon
-  }}</mat-icon>
+    }}</mat-icon>
 </button>

@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject, catchError, of } from 'rxjs';
 import { BottomSheetService } from '../services/bottom-sheet.service';
 import { LoginBottomSheetComponent } from '@app/authentication/login-bottom-sheet/login-bottom-sheet.component';
-import { Router } from '@angular/router';
+import { ActivatedRouteSnapshot, Router } from '@angular/router';
 import { SignupBottomSheetComponent } from './signup-bottom-sheet/signup-bottom-sheet.component';
 import {
   Auth,
+  IdTokenResult,
   RecaptchaVerifier,
   authState,
   signInWithPhoneNumber,
@@ -20,6 +21,8 @@ import {
 import {
   GlobalConstants,
   LocalStorageProperties,
+  Position,
+  SessionStorageProperties,
 } from '@app/constant/app-constants';
 import { AuthConstants } from './constants/auth.constant';
 import { SnackbarService } from '@app/services/snackbar.service';
@@ -29,6 +32,7 @@ import { SessionStorageService } from '@app/services/session-storage.service';
 import { CoreApiService } from '@app/services/core-api.service';
 import { HttpsCallableResult } from 'firebase/functions';
 import { cloudFunctionNames } from '@app/constant/api-constants';
+import { isEnumKey } from '@app/utils/objects-utility';
 
 @Injectable({
   providedIn: 'root',
@@ -54,21 +58,25 @@ export class AuthService {
     private coreApiService: CoreApiService
   ) {
     // Subscribe to auth object from backend.
-    this.auth.onAuthStateChanged((user) => {
-      if (user?.uid) {
-        // Logged in state
-        this.localStorageService.set(
-          LocalStorageProperties.USER_UID,
-          user?.uid
-        );
-        this.user = user;
-      } else {
-        // Logged out state
-        this.localStorageService.remove(LocalStorageProperties.USER_UID);
-        this.user = null;
-      }
-      this.user$$.next(this.user);
-    });
+    try {
+      this.auth.onAuthStateChanged((user) => {
+        if (user?.uid) {
+          // Logged in state
+          this.localStorageService.set(
+            LocalStorageProperties.USER_UID,
+            user?.uid
+          );
+          this.user = user;
+        } else {
+          // Logged out state
+          this.localStorageService.remove(LocalStorageProperties.USER_UID);
+          this.user = null;
+        }
+        this.user$$.next(this.user);
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   /**
@@ -222,28 +230,50 @@ export class AuthService {
   }
 
   /**
-   * Checks whether user has completed onboarding or not
-   * @returns
+   * Checks whether user has a role set or not
    */
-  async isUserOnboardingComplete(): Promise<boolean> {
-    const role = await this.checkCustomRole();
-    if (role) {
-      this.router.navigate(['/main/book-match']);
-      return false;
-    } else {
-      return true;
+  async getRole(): Promise<Number> {
+    if (this.auth) {
+      const result = await this.auth?.currentUser?.getIdTokenResult(true);
+      if (result?.hasOwnProperty('claims') && result.claims.hasOwnProperty('role')) {
+        return Number(result.claims['role']);
+      }
+      return Promise.resolve(-1);
     }
+    return Promise.reject('Error: Auth not initialized');
   }
 
   /**
-   * Checks whether user has a custom role set or not
+ * Returns true if user is onboard
+ * @param value
+ * @returns
+ */
+  isUserOnboard(value: any): boolean {
+    return isEnumKey(value, Position);
+  }
+
+  /**
+   * Resolves the asynchronous onboarding
+   * @param route
+   * @returns
    */
-  async checkCustomRole(): Promise<boolean> {
-    const role = (
-      await this.auth?.currentUser?.getIdTokenResult(true)
-    )?.claims?.hasOwnProperty('role');
-    if (role) {
-      return true;
+  async resolveOnboarding(route: ActivatedRouteSnapshot): Promise<boolean> {
+    const role = await this.getRole();
+    const data = route?.data?.hasOwnProperty('destination') ? route.data['destination'] : null;
+    if (data && data === 'onboarding') {
+      if (this.isUserOnboard(role)) {
+        this.router.navigate(['/main', 'book-match']);
+        return false;
+      } else {
+        return true;
+      }
+    } else if (data && data === 'booking') {
+      if (this.isUserOnboard(role)) {
+        return true;
+      } else {
+        this.router.navigate(['/main', 'onboarding']);
+        return false;
+      }
     }
     return false;
   }

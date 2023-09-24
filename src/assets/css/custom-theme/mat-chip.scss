@@ -2,6 +2,77 @@
 
 mat-chip-list {
   .mat-chip-list-wrapper {
-    @include flexCenter(row);
+    @include flexCenter(row, 8px);
   }
+}
+
+.ground-info {
+  mat-chip-list {
+    .mat-chip-list-wrapper {
+      @include flexStartRow(8px);
+    }
+  }
+}
+
+.mat-tab-body {
+  mat-chip-list {
+    @include flexStartRow(0px);
+
+    .mat-chip-list-wrapper {
+      @include flexStartRow(0px);
+    }
+  }
+}
+
+.mat-chip.mat-standard-chip.mat-chip-selected.mat-primary {
+  background: $white;
+  color: $black;
+  opacity: 1;
+  font-weight: 700;
+  transition: all 0.1s ease-in;
+  box-sizing: border-box;
+  border: 1px solid $black;
+}
+
+.ground-selection-list {
+  .mat-chip.mat-standard-chip.mat-primary {
+    background-color: $white;
+    border: 0px solid $primary-color;
+    color: $grey-1;
+    font-weight: 400;
+  }
+
+  .mat-chip.mat-standard-chip.mat-chip-selected.mat-primary {
+    opacity: 1;
+    background-color: $white;
+    border: 0px solid $primary-color;
+    color: $primary-color;
+    font-weight: 700;
+  }
+}
+
+.turf-list {
+  .mat-chip-list-wrapper {
+    height: 50px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+}
+
+.slot-hrs-list {
+  .mat-chip-list-wrapper {
+    max-height: 120px;
+    flex-wrap: wrap;
+    overflow-y: auto;
+
+    .mat-chip {
+      width: 68px;
+      text-align: center;
+      @include flexCenter(row);
+    }
+  }
+}
+
+.mat-standard-chip:hover::after {
+  opacity: 0 !important;
 }

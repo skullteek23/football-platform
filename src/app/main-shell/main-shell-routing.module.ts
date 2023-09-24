@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainShellComponent } from './main-shell.component';
-import { CheckOnboardingStatusGuard } from '@app/guards/check-onboarding-status.guard';
-import { RouteResolver } from '@app/utils/route.resolver';
+import { PlayerListComponent } from '../shared-modules/player-list/player-list.component';
+import { OnboardingGuard } from '@app/guards/onboarding.guard';
 
 const routes: Routes = [
   {
@@ -15,9 +15,16 @@ const routes: Routes = [
         redirectTo: 'onboarding',
       },
       {
+        path: 'user',
+        loadChildren: () =>
+          import('@app/user/user.module').then((m) => m.UserModule),
+      },
+      {
         path: 'onboarding',
-        canActivate: [CheckOnboardingStatusGuard],
-        canActivateChild: [CheckOnboardingStatusGuard],
+        canActivate: [OnboardingGuard],
+        data: {
+          destination: 'onboarding',
+        },
         loadChildren: () =>
           import('@app/onboarding/onboarding.module').then(
             (m) => m.OnboardingModule
@@ -25,15 +32,27 @@ const routes: Routes = [
       },
       {
         path: 'book-match',
+        canActivate: [OnboardingGuard],
+        data: {
+          destination: 'booking',
+        },
         loadChildren: () =>
           import('@app/match-booking/match-booking.module').then(
             (m) => m.MatchBookingModule
           ),
       },
       {
-        path: 'user',
+        path: 'payment',
         loadChildren: () =>
-          import('@app/user/user.module').then((m) => m.UserModule),
+          import('@app/shared-modules/payment/payment.module').then((m) => m.PaymentModule),
+      },
+      {
+        path: 'players-list',
+        component: PlayerListComponent
+      },
+      {
+        path: 'players-list/:slotid',
+        component: PlayerListComponent
       },
       {
         path: 'grounds-near-me',
@@ -72,4 +91,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class MainShellRoutingModule {}
+export class MainShellRoutingModule { }

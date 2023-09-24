@@ -48,3 +48,12 @@
     }
   }
 }
+
+.mat-mini-fab.mat-primary {
+  background-image: $primary-gradient !important;
+  color: $white !important;
+}
+
+.mat-mini-fab .mat-button-wrapper {
+  line-height: 22px !important;
+}

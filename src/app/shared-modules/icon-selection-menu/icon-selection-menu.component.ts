@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AnimationService } from '@app/services/animation.service';
+import { AnimationsList } from '@app/services/animation.service';
 import {
   IconSelectionData,
   IconSelectionDataItem,
@@ -10,9 +10,9 @@ import {
   templateUrl: './icon-selection-menu.component.html',
   styleUrls: ['./icon-selection-menu.component.scss'],
   animations: [
-    AnimationService.expandCollapseAnimationTrigger,
-    AnimationService.fadeInOutAnimation,
-    AnimationService.fadeOutInAnimation,
+    AnimationsList.expandCollapseAnimationTrigger,
+    AnimationsList.fadeInOutAnimation,
+    AnimationsList.fadeOutInAnimation,
   ],
 })
 export class IconSelectionMenuComponent implements OnInit {
@@ -21,9 +21,9 @@ export class IconSelectionMenuComponent implements OnInit {
   @Input() data = new IconSelectionData();
   @Output() selectionChange = new EventEmitter<IconSelectionDataItem>();
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   selection(selectedValue: IconSelectionDataItem) {
     if (!selectedValue?.label) {

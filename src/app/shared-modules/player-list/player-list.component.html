@@ -1,0 +1,53 @@
+<div class="main-container">
+  <div class="header-content-container">
+    <span class="page-sub-label">
+      Player's List
+    </span>
+    <button mat-icon-button appBackButton>
+      <mat-icon fontSet="material-icons-round">close</mat-icon>
+    </button>
+  </div>
+  <mat-chip-list class="ground-info">
+    <mat-chip>10v10</mat-chip>
+    <mat-chip>Evening</mat-chip>
+    <mat-chip>7:00 PM</mat-chip>
+    <mat-chip selected>Open Maps</mat-chip>
+  </mat-chip-list>
+  <div class="list-container">
+    <div class="team">
+      <span class="subtitle">
+        Team Black:
+      </span>
+      <ol class='list'>
+        <li *ngFor="let player of playersListBlack">
+          <div class="content">
+            <span class="name">
+              {{player.name}}
+            </span>
+            <span class="position">
+              {{player.position}}
+            </span>
+          </div>
+        </li>
+      </ol>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="team">
+      <span class="subtitle">
+        Team White:
+      </span>
+      <ol class='list'>
+        <li *ngFor="let player of playersListWhite">
+          <div class="content">
+            <span class="name">
+              {{player.name}}
+            </span>
+            <span class="position">
+              {{player.position}}
+            </span>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+</div>

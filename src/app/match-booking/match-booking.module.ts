@@ -14,7 +14,6 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'select-ground', pathMatch: 'full' },
       { path: 'select-ground', component: GroundSelectionComponent },
-      { path: 'payment', component: PaymentComponent },
     ],
   },
 ];
@@ -25,7 +24,6 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     GroundSelectionModule,
-    PaymentModule,
   ],
 })
-export class MatchBookingModule {}
+export class MatchBookingModule { }

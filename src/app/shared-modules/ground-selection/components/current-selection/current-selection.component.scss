@@ -1,0 +1,91 @@
+@import "variables";
+@import "mixins";
+
+mat-card {
+  max-height: 370px;
+  overflow-y: auto;
+  height: auto;
+  @include flexCenter(column, 0);
+
+  .header {
+    @include flexSpaceBetween(8px);
+    width: 100%;
+  }
+
+  .mat-card-title-group {
+    @include ellipsis(85%);
+
+    .title {
+      font-size: $font-size-s;
+    }
+
+    .subtitle {
+      font-size: $font-size-s;
+    }
+  }
+
+  .mat-card-title-group:first-child {
+    width: 100%;
+
+    .mat-card-title {
+      width: 100%;
+
+      span.title {
+        @include ellipsis(99%);
+      }
+    }
+  }
+
+  .mat-tab-group {
+    width: 100%;
+
+    .content {
+      @include flexStartCol(16px);
+
+      font-size: $font-size-m;
+      padding: 8px;
+
+      .option {
+        .sub-heading {
+          font-size: $font-size-xs;
+        }
+      }
+
+      .spot-count-option-for-managers {
+        @include flexSpaceBetween(8px, center);
+
+        .label {
+          font-size: $font-size-xs;
+        }
+
+        .spot-meter {
+          @include flexCenter(row, 4px);
+
+          .count-chip {
+            width: 40px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.count-chip {
+  opacity: 1 !important;
+  background-color: green;
+  @include flexCenter(row, 4px);
+
+  .mat-chip-list-wrapper {
+    @include flexCenter(row, 4px);
+  }
+}
+
+.hide-bg {
+  background-image: $white;
+  color: $black;
+}
+
+.show-bg {
+  background-image: $primary-gradient;
+  color: $white;
+}

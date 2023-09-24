@@ -1,1 +1,31 @@
-<p>failure works!</p>
+<div class="main-container">
+  <div class="heading">
+    <span class="page-sub-label">
+      Order Overview:
+    </span>
+  </div>
+  <app-result-box [type]="ResultType.failure" [data]="data">
+    <div class="info">
+      <div class="metric">
+        <div class="metric-label">NA</div>
+        <div class="metric-value">Amount</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label"> NA </div>
+        <div class="metric-value">Date</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">NA</div>
+        <div class="metric-value">Spot</div>
+      </div>
+    </div>
+  </app-result-box>
+  <app-wide-button [displayDetails]="homeBtnDetails" [theme]='ButtonTheme.primary'
+    (clickEv)="navigateHome()"></app-wide-button>
+  <app-wide-button [displayDetails]="mapsBtnDetails" [theme]='ButtonTheme.secondary'
+    (clickEv)="openMaps()"></app-wide-button>
+  <app-wide-button [displayDetails]="invoiceBtnDetails" [theme]='ButtonTheme.secondary'
+    (clickEv)="emailInvoice()"></app-wide-button>
+</div>
+
+<app-footer></app-footer>

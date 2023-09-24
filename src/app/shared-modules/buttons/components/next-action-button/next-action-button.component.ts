@@ -8,8 +8,7 @@ import { WideButtonComponent } from '../wide-button/wide-button.component';
 })
 export class NextActionButtonComponent
   extends WideButtonComponent
-  implements OnInit
-{
+  implements OnInit {
   @Input() buttonID = '';
   @Input() disabled = false;
 }

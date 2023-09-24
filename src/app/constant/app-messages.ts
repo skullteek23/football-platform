@@ -47,3 +47,20 @@ export const CommonFormFieldMessages = {
     pattern: 'Invalid ',
   },
 };
+
+export const PositionSelectionMessages = {
+  tip: {
+    player: 'Tip: Player can book a slot only for themselves.',
+    manager: 'Tip: Manager can book a slot for the team or other players.',
+  },
+};
+
+export const OrderMessages = {
+  success: {
+    invoice: 'Invoice sent successfully to your mail ID!',
+  },
+  error: {
+    invoice: 'Error! Unable to send invoice.',
+    emailNotRegistered: 'Email not registered! Please try again.',
+  },
+}

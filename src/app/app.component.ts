@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { AnimationService } from './services/animation.service';
+import { AnimationsList } from './services/animation.service';
 import { AuthService } from './authentication/auth.service';
-import { LocalStorageProperties } from './constant/app-constants';
+import { GlobalConstants, LocalStorageProperties } from './constant/app-constants';
 import { LocalStorageService } from './services/local-storage.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { AuthConstants } from './authentication/constants/auth.constant';
@@ -10,7 +10,7 @@ import { AuthConstants } from './authentication/constants/auth.constant';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  animations: [AnimationService.fadeInOutAnimation],
+  animations: [AnimationsList.fadeInOutAnimation],
 })
 export class AppComponent {
   readonly loginCaptcha = AuthConstants.LOGIN_CAPTCHA_PLACEHOLDER;
@@ -28,9 +28,12 @@ export class AppComponent {
         const sheetOpen = this.localStorageService.get(
           LocalStorageProperties.BOTTOM_SHEET
         );
-        if (sheetOpen && window.location.pathname.includes('login')) {
+        const loginRoute = `/${GlobalConstants.loginURL}`;
+        const signupRoute = `/${GlobalConstants.signupURL}`;
+
+        if (sheetOpen && window.location.pathname.includes(loginRoute)) {
           this.authService.openLogin();
-        } else if (window.location.pathname.includes('signup')) {
+        } else if (window.location.pathname.includes(signupRoute)) {
           this.authService.openSignup();
         }
       }

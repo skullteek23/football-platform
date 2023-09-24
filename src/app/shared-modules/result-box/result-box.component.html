@@ -1,0 +1,18 @@
+<div class="result-box" [ngClass]="{'success': type === resultType.success, 'failure': type === resultType.failure}">
+  <div class="icon-circle">
+    <mat-icon *ngIf="type === resultType.success" fontSet="material-icons-round">done</mat-icon>
+    <mat-icon *ngIf="type === resultType.failure" fontSet="material-icons-round">close</mat-icon>
+  </div>
+  <div class="content">
+    <div class="title">
+      <div class="heading" [innerHtml]='data.title'>
+      </div>
+      <div class="description" [innerHtml]="data.description">
+      </div>
+    </div>
+    <ng-content></ng-content>
+
+  </div>
+  <div class="footer" [innerHtml]='data.footer'>
+  </div>
+</div>

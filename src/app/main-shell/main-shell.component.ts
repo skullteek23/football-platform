@@ -1,5 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-main-shell',
@@ -7,5 +6,5 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./main-shell.component.scss'],
 })
 export class MainShellComponent {
-  constructor() {}
+  constructor() { }
 }

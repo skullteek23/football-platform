@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
-import { AnimationService } from '@app/services/animation.service';
+import { AnimationsList } from '@app/services/animation.service';
 import { AuthBaseComponent } from '../auth-base.component';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AuthConstants } from '../constants/auth.constant';
@@ -28,12 +28,11 @@ import { SessionStorageService } from '@app/services/session-storage.service';
   selector: 'app-signup-bottom-sheet',
   templateUrl: './signup-bottom-sheet.component.html',
   styleUrls: ['./signup-bottom-sheet.component.scss'],
-  animations: [AnimationService.fadeInOutAnimation],
+  animations: [AnimationsList.fadeInOutAnimation],
 })
 export class SignupBottomSheetComponent
   extends AuthBaseComponent
-  implements OnDestroy, AfterViewInit
-{
+  implements OnDestroy, AfterViewInit {
   readonly captchaContainer = AuthConstants.LOGIN_CAPTCHA_PLACEHOLDER;
   confirmationResult: IConfirmationResult = null;
 

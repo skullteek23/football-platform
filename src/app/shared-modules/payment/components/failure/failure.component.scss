@@ -1,0 +1,13 @@
+@import '../success/success.component.scss';
+
+.info {
+  .metric {
+    &-label {
+      color: $white !important;
+    }
+
+    &-value {
+      color: $white !important;
+    }
+  }
+}

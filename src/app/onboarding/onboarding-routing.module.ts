@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { OnboardingComponent } from './onboarding.component';
 import { PositionSelectionComponent } from '@app/position-selection/position-selection.component';
 import { GroundSelectionComponent } from '@app/shared-modules/ground-selection/ground-selection.component';
-import { PaymentComponent } from '@app/shared-modules/payment/payment.component';
 
 const routes: Routes = [
   {
@@ -11,9 +10,11 @@ const routes: Routes = [
     component: OnboardingComponent,
     children: [
       { path: '', redirectTo: 'select-position', pathMatch: 'full' },
-      { path: 'select-position', component: PositionSelectionComponent },
-      { path: 'select-ground', component: GroundSelectionComponent },
-      { path: 'payment', component: PaymentComponent },
+      {
+        path: 'select-position',
+        component: PositionSelectionComponent,
+      },
+      { path: 'select-ground', component: GroundSelectionComponent, },
     ],
   },
 ];
@@ -22,4 +23,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class OnboardingRoutingModule {}
+export class OnboardingRoutingModule { }

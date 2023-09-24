@@ -1,16 +1,9 @@
-<button
-  class="custom-short-button custom-button mat-elevation"
-  mat-raised-button
-  (click)="onClickButton()"
-  *ngIf="displayDetails"
-  [type]="displayDetails.type"
-  [id]="buttonID"
-  [disabled]="disabled"
->
+<button class="custom-short-button custom-button mat-elevation" mat-raised-button (click)="onClickButton()"
+  *ngIf="displayDetails" [type]="displayDetails.type" [id]="buttonID" [disabled]="disabled" @fadeAppearSideways>
   <span class="label">
     {{ displayDetails.label }}
   </span>
   <mat-icon fontSet="material-icons-round">{{
     displayDetails.secondaryIcon
-  }}</mat-icon>
+    }}</mat-icon>
 </button>

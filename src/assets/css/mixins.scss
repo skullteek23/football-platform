@@ -52,6 +52,21 @@
     @content;
   }
 }
+@mixin medium-screen {
+  @media only screen and (min-width: 306px) and (max-width: 420px) {
+    @content;
+  }
+}
+@mixin large-screen {
+  @media only screen and (min-width: 421px) and (max-width: 650px) {
+    @content;
+  }
+}
+@mixin extra-large-screen {
+  @media only screen and (min-width: 651px) {
+    @content;
+  }
+}
 
 @mixin primary-gradient-background {
   background-image: $primary-gradient;
@@ -67,4 +82,11 @@
 @mixin commonBtnUI {
   font-size: $font-size-m;
   @include primary-gradient-background();
+}
+
+@mixin ellipsis($max-width: 100%, $white-space: nowrap) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: $white-space;
+  max-width: $max-width;
 }

@@ -34,7 +34,7 @@
   }
   .salutation-strip {
     width: 100%;
-    height: 40px;
+    height: $heading-height;
     @include flexSpaceBetween(0px);
     a {
       @include flexCenter(row);

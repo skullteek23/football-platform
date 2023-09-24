@@ -1,0 +1,54 @@
+<mat-card class="selected-ground" *ngIf="_data" [ngClass]="{'mat-elevation-z8': isFocused}">
+  <div class="header">
+    <mat-card-title-group>
+      <mat-card-title>
+        <span class="title"> {{ _data.title }} </span>
+      </mat-card-title>
+      <mat-card-subtitle>
+        <span class="subtitle"> {{ _data.subtitle }} </span>
+      </mat-card-subtitle>
+    </mat-card-title-group>
+    <button mat-icon-button (click)="close()">
+      <mat-icon fontSet="material-icons-round">close</mat-icon>
+    </button>
+  </div>
+  <mat-tab-group mat-stretch-tabs *ngIf="_data.tabs" (selectedTabChange)="tabChange()">
+    <mat-tab *ngFor="let tab of _data.tabs" [label]="tab.label">
+      <ng-template mat-tab-label>
+        <div class="custom-tab-label">
+          <span class="label" *ngIf="tab.label"> {{ tab.label }} </span>
+          <span class="sub-label" *ngIf="tab.subLabel"> ({{ tab.subLabel }}) </span>
+        </div>
+      </ng-template>
+      <ng-template matTabContent>
+        <div class="content" [ngClass]="{'hide-bg': !isFocused, 'show-bg': isFocused}">
+          <div class="option" *ngIf="facilityNames.length">
+            <div class="sub-heading">Choose Turf:</div>
+            <app-custom-chip-button [chipsData]="facilityNames" [selectedChip]="facility.name"
+              panelClass="ground-selection-list turf-list"
+              (selectionChange)="selectFacility($event)"></app-custom-chip-button>
+          </div>
+          <div class="option" *ngIf="selectedFacilitySlots.length">
+            <div class="sub-heading">Choose Time:</div>
+            <app-custom-chip-button [chipsData]="selectedFacilitySlots" panelClass="ground-selection-list slot-hrs-list"
+              (selectionChange)="selectSlot($event)"></app-custom-chip-button>
+          </div>
+          <div class="spot-count-option-for-managers" *ngIf="showSpotCount">
+            <span class="label">Choose spots count:</span>
+            <div class="spot-meter" *ngIf="_data.spotData">
+              <button [disabled]="spotCount <= _data.spotData.min" mat-icon-button (click)="subtractSpotCount()">
+                <mat-icon fontSet="material-icons-round">remove</mat-icon>
+              </button>
+              <mat-chip class="count-chip tab-basic-chip">
+                {{ spotCount }}
+              </mat-chip>
+              <button [disabled]="spotCount >= _data.spotData.max" mat-icon-button (click)="addSpotCount()">
+                <mat-icon fontSet="material-icons-round">add</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>

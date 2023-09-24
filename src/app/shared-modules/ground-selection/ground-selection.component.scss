@@ -1,0 +1,19 @@
+@import "variables";
+@import "mixins";
+
+.main-container {
+  @include mainPageContainer;
+  .heading {
+    @include flexCenter(row);
+    text-align: center;
+    width: 100%;
+    height: $heading-height;
+  }
+  .book-confirm {
+    @include flexCenter(row);
+  }
+  .card-container {
+    flex-wrap: wrap;
+    @include flexSpaceBetween(16px);
+  }
+}

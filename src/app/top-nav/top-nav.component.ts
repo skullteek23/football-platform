@@ -12,11 +12,12 @@ export class TopNavComponent implements OnInit {
 
   isUserLogged = false;
   userBalance: number = 0;
+  isHeaderInitialized = false;
 
   /**
    * Constructor method
    */
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) { }
 
   /**
    * Lifecycle method
@@ -32,6 +33,7 @@ export class TopNavComponent implements OnInit {
   checkUserLogin() {
     this.authService._user().subscribe({
       next: (resp) => {
+        this.isHeaderInitialized = true;
         this.isUserLogged = resp ? true : false;
       },
     });

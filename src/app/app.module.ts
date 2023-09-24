@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -23,6 +23,9 @@ import { LoginBottomSheetModule } from './authentication/login-bottom-sheet/logi
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { LoaderModule } from './shared-modules/loader/loader.module';
 import { HomeModule } from './home/home.module';
+import { SignupBottomSheetModule } from './authentication/signup-bottom-sheet/signup-bottom-sheet.module';
+import { NavigationService } from './services/navigation.service';
+import { CoreApiService } from './services/core-api.service';
 
 @NgModule({
   declarations: [AppComponent, TopNavComponent],
@@ -33,6 +36,7 @@ import { HomeModule } from './home/home.module';
     MaterialModule,
     LogoModule,
     LoginBottomSheetModule,
+    SignupBottomSheetModule,
     LoaderModule,
     HomeModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
@@ -52,7 +56,14 @@ import { HomeModule } from './home/home.module';
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
       useValue: { appearance: 'outline' },
     },
+    /* Initialize Services and/or run code on application initialization. */
+    {
+      provide: APP_INITIALIZER,
+      useFactory: () => () => null,
+      deps: [NavigationService, CoreApiService],
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

@@ -1,1 +1,20 @@
-<p>ground-selection works!</p>
+<div class="main-container">
+  <div class="heading" *ngIf="!isGroundSelected">
+    <span class="page-sub-label">Select Ground to book:</span>
+  </div>
+  <div class="selected-ground" *ngIf="isGroundSelected" @fadeAppearSideways>
+    <app-current-selection [isFocused]="!isSlotSelected" [data]="selectionData" (panelClosed)="closePanel()"
+      [showSpotCount]="showSpotCount"></app-current-selection>
+  </div>
+
+  <div class="book-confirm" *ngIf="isSlotSelected">
+    <app-next-action-button [displayDetails]="payBtnDetails" (clickEv)="continueWithPay()"></app-next-action-button>
+  </div>
+
+  <div class="card-container">
+    <ng-container *ngFor="let ground of grounds">
+      <app-interactive-card @fadeAppearSideways [data]="ground" [selected]="selectedGround?.id === ground.id"
+        (actionBtnClick)="selectGround($event)"></app-interactive-card>
+    </ng-container>
+  </div>
+</div>

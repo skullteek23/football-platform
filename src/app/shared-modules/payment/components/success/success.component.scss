@@ -1,0 +1,40 @@
+@import 'variables';
+@import 'mixins';
+
+.main-container {
+  @include mainPageContainer;
+
+  .heading {
+    @include flexCenter(row);
+    text-align: center;
+    width: 100%;
+    height: $heading-height;
+  }
+
+  .info {
+    width: 100%;
+    @include flexSpaceEvenly;
+
+    .metric {
+      max-width: 100px;
+
+      &-label {
+        max-width: 100%;
+        font-size: $font-size-s;
+        font-weight: 500;
+        color: $black;
+        text-align: center;
+        @include ellipsis;
+      }
+
+      &-value {
+        max-width: 100%;
+        font-size: $font-size-xs;
+        font-weight: 300;
+        color: $grey-1;
+        text-align: center;
+        @include ellipsis;
+      }
+    }
+  }
+}

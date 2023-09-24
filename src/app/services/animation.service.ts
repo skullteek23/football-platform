@@ -6,19 +6,14 @@ import {
   animate,
 } from '@angular/animations';
 
-export class AnimationService {
-  /**
-   * Rotates the expand icon by 180 degrees based on element's state
-   */
+export class AnimationsList {
+
   static expandCollapseAnimationTrigger = trigger('iconState', [
     state('expanded', style({ transform: 'rotate(180deg)' })),
     state('collapsed', style({ transform: 'rotate(0deg)' })),
     transition('expanded <=> collapsed', animate('0.3s ease')),
   ]);
 
-  /**
-   * For fade in/out transition when element enters or leaves
-   */
   static fadeInOutAnimation = trigger('fadeInOut', [
     transition(':enter', [
       style({ opacity: 0 }),
@@ -27,9 +22,6 @@ export class AnimationService {
     transition(':leave', [animate('300ms', style({ opacity: 0 }))]),
   ]);
 
-  /**
-   * For fade in/out transition when element enters or leaves
-   */
   static fadeOutInAnimation = trigger('fadeOutIn', [
     transition(':leave', [animate('500ms', style({ opacity: 0 }))]),
     transition(':enter', [
@@ -38,13 +30,31 @@ export class AnimationService {
     ]),
   ]);
 
-  /**
-   * For slide-in animation when element enters
-   */
-  static slideInAnimation = trigger('slideIn', [
-    transition(':enter', [
-      style({ transform: 'translateY(100%)' }),
-      animate('300ms ease-out', style({ transform: 'translateY(0)' })),
-    ]),
+  static sliderSidewayAnimation = trigger('slideSideways', [
+    state('0', style({ transform: 'translateX(50%)' })),
+    state('1', style({ transform: 'translateX(-50%)' })),
+    state('2', style({ transform: 'translateX(-150%)' })),
+    state('3', style({ transform: 'translateX(-250%)' })),
+    state('4', style({ transform: 'translateX(-350%)' })),
+    state('5', style({ transform: 'translateX(0)' })),
+    transition('* => *', animate('0.5s ease-in-out')),
+  ]);
+
+  static fadeAppear = trigger('fadeAppear', [
+    state('void', style({ opacity: 0 })),
+    state('default', style({ opacity: 1 })),
+    transition('void => *', animate('0.3s ease-in-out')),
+  ]);
+
+  static fadeAppearSideways = trigger('fadeAppearSideways', [
+    state('void', style({ opacity: 0, transform: 'translateX(-30%)' })),
+    state('default', style({ opacity: 1, transform: 'translateX(0%)' })),
+    transition('void => *', animate('0.3s ease-out')),
+  ]);
+
+  static fadeAppearBottomTop = trigger('fadeAppearBottomTop', [
+    state('void', style({ opacity: 0, transform: 'translateY(30%)' })),
+    state('default', style({ opacity: 1, transform: 'translateY(0%)' })),
+    transition('void => *', animate('0.3s ease-out')),
   ]);
 }
