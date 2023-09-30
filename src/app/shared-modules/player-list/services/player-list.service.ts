@@ -28,8 +28,7 @@ export class PlayerListService {
     }
 
     const list: PlayerListItem[] = [];
-    for (let i = 0; i <= maxPlayers; i++) {
-      const booking = bookings[i];
+    bookings.forEach(booking => {
       if (booking && booking.spots === 1) {
         const user = users.find((user: Player) => user.id === booking?.uid);
         list.push(this.getListItem(user?.name, user?.position, user?.id));
@@ -42,9 +41,11 @@ export class PlayerListService {
             list.push(this.getListItem(this.getCustomName(user?.name, booking.spots - 1), user?.position, user?.id));
           }
           booking.spots--;
-          maxPlayers--;
         }
-      } else {
+      }
+    });
+    if (list.length < maxPlayers) {
+      for (let i = list.length; i < maxPlayers; i++) {
         list.push(this.getListItem('', '', ''));
       }
     }

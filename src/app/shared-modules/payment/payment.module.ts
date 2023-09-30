@@ -8,6 +8,7 @@ import { PaymentGatewayComponent } from './components/payment-gateway/payment-ga
 import { ResultBoxModule } from '../result-box/result-box.module';
 import { ButtonsModule } from '../buttons/buttons.module';
 import { FooterModule } from '@app/footer/footer.module';
+import { LoaderModule } from '../loader/loader.module';
 
 const routes: Routes = [
   {
@@ -23,6 +24,6 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [PaymentComponent, SuccessComponent, FailureComponent, PaymentGatewayComponent],
-  imports: [CommonModule, RouterModule.forChild(routes), ResultBoxModule, ButtonsModule, FooterModule],
+  imports: [CommonModule, RouterModule.forChild(routes), ResultBoxModule, ButtonsModule, LoaderModule, FooterModule],
 })
 export class PaymentModule { }

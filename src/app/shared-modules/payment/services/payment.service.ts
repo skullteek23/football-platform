@@ -15,12 +15,14 @@ import { UserSlotSelectionInfo } from '@app/shared-modules/ground-selection/mode
 import { getApiErrorMsg, getCloudFnErrorMsg } from '@app/utils/api-error-handling-utility';
 import { isEnumKey } from '@app/utils/objects-utility';
 import { getRandomString } from '@app/utils/string-utility';
-import { lastValueFrom } from 'rxjs';
+import { Subject, lastValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PaymentService {
+
+  private loaderStatus = new Subject<boolean>();
 
   constructor(
     private orderService: OrderService,
@@ -35,6 +37,7 @@ export class PaymentService {
   continue(): void {
     this.authService._user().subscribe(async user => {
       if (user?.uid) {
+        this.showLoader();
         const ground: UserSlotSelectionInfo = this.sessionStorageService.get(SessionStorageProperties.USER_GROUND_SELECTION);
         const role = this.sessionStorageService.get(SessionStorageProperties.USER_POSITION_SELECTION);
 
@@ -103,12 +106,14 @@ export class PaymentService {
 
         Promise.all(allPromises)
           .then(() => {
+            this.hideLoader();
             this.sessionStorageService.remove(SessionStorageProperties.USER_GROUND_SELECTION);
             this.sessionStorageService.remove(SessionStorageProperties.USER_POSITION_SELECTION);
             this.snackbarService.displayCustomMsg(PaymentMessages.success);
             this.router.navigate(['/main', 'payment', 'success'], { queryParams: { oid } });
           })
           .catch(error => {
+            this.hideLoader();
             this.router.navigate(['/main', 'payment', 'failure']);
             this.snackbarService.displayError(getApiErrorMsg(error));
           });
@@ -118,6 +123,7 @@ export class PaymentService {
   }
 
   fail() {
+    this.showLoader();
     this.authService._user().subscribe(user => {
       if (user?.uid) {
         const role = this.sessionStorageService.get(SessionStorageProperties.USER_POSITION_SELECTION);
@@ -126,13 +132,33 @@ export class PaymentService {
             this.sessionStorageService.remove(SessionStorageProperties.USER_GROUND_SELECTION);
             this.sessionStorageService.remove(SessionStorageProperties.USER_POSITION_SELECTION);
             this.snackbarService.displayCustomMsg(PaymentMessages.success);
+            this.hideLoader();
             this.router.navigate(['/main', 'payment', 'failure']);
           })
           .catch(error => {
+            this.hideLoader();
             this.router.navigate(['/main', 'payment', 'failure']);
             this.snackbarService.displayError(getApiErrorMsg(error));
           })
       }
     });
+  }
+
+  _loaderStatus() {
+    return this.loaderStatus.asObservable();
+  }
+
+  /**
+   * Show loader
+   */
+  showLoader() {
+    this.loaderStatus.next(true);
+  }
+
+  /**
+   * Hide loader
+   */
+  hideLoader() {
+    this.loaderStatus.next(false);
   }
 }

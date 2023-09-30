@@ -1,4 +1,4 @@
-<div class="main-container">
+<div class="main-container" *ngIf="!isLoaderShown">
   <p>
     This gateway is not available due to some reasons.
   </p>
@@ -8,3 +8,4 @@
       (clickEv)="continueWithFail()"></app-wide-button>
   </div>
 </div>
+<app-loader *ngIf="isLoaderShown"></app-loader>

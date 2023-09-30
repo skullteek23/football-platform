@@ -12,10 +12,13 @@ export class PaymentGatewayComponent implements OnInit {
 
   btnDetails = new ButtonConfig();
   btnDetailsFail = new ButtonConfig();
+  isLoaderShown = false;
 
   constructor(
     private paymentService: PaymentService,
-  ) { }
+  ) {
+    this.paymentService._loaderStatus().subscribe(response => this.isLoaderShown = response);
+  }
 
   ngOnInit(): void {
     this.btnDetails.label = 'Success';
