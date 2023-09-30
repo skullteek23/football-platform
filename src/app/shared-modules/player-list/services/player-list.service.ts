@@ -39,7 +39,7 @@ export class PlayerListService {
           if (booking.spots === 1) {
             list.push(this.getListItem(user?.name, user?.position, user?.id));
           } else {
-            list.push(this.getListItem(this.getCustomName(user?.name, booking.spots), user?.position, user?.id));
+            list.push(this.getListItem(this.getCustomName(user?.name, booking.spots - 1), user?.position, user?.id));
           }
           booking.spots--;
           maxPlayers--;
