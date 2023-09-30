@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { IListOption } from '@app/models/common.model';
 import { AnimationsList } from '@app/services/animation.service';
 
 @Component({
@@ -8,12 +9,12 @@ import { AnimationsList } from '@app/services/animation.service';
   animations: [AnimationsList.fadeAppearSideways],
 })
 export class CustomChipButtonComponent implements OnInit {
-  @Input() chipsData: string[] = [];
+  @Input() chipsData: IListOption[] = [];
   @Input() panelClass!: string;
   @Input() selectable = true;
   @Input() disabled = false;
-  @Input() selectedChip = '';
-  @Output() selectionChange = new EventEmitter<string>();
+  @Input() selectedChip!: IListOption;
+  @Output() selectionChange = new EventEmitter<IListOption>();
 
 
   constructor() { }
@@ -24,10 +25,10 @@ export class CustomChipButtonComponent implements OnInit {
    * Sets the selected chip
    * @param chip
    */
-  selectChip(chip: string) {
+  selectChip(chip: IListOption) {
     if (chip) {
       this.selectedChip = chip;
-      this.selectionChange.emit(chip.trim());
+      this.selectionChange.emit(chip);
     }
   }
 }

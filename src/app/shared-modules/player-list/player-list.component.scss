@@ -28,10 +28,31 @@
     }
   }
 
+  .placeholder-chip {
+    @include flexCenter(row, 8px);
+
+    .box-chip {
+      height: 32px;
+      min-width: 70px;
+      border-radius: $border-radius-secondary;
+    }
+  }
+
+  .placeholder {
+    @include flexCenter(column, 20px);
+    min-height: 500px;
+
+    .box {
+      height: 500px;
+      width: 100%;
+      border-radius: $border-radius-primary;
+    }
+  }
+
   .list-container {
     background-image: $primary-gradient;
     color: $white;
-    min-height: 500px;
+    min-height: 300px;
     padding: 16px;
     border-radius: $border-radius-primary;
     @include flexStartCol(16px);

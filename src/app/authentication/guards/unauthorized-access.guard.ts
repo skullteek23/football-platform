@@ -7,7 +7,7 @@ import {
 } from '@angular/router';
 import { AuthService } from '../auth.service';
 import {
-  GlobalConstants,
+  Constants,
   LocalStorageProperties,
   SessionStorageProperties,
 } from '@app/constant/app-constants';
@@ -19,10 +19,10 @@ import { LocalStorageService } from '@app/services/local-storage.service';
 })
 export class UnauthorizedAccessGuard implements CanActivate {
   readonly NON_REDIRECT_URLS = [
-    GlobalConstants.loginURL,
-    GlobalConstants.signupURL,
-    '/' + GlobalConstants.loginURL,
-    '/' + GlobalConstants.signupURL,
+    Constants.loginURL,
+    Constants.signupURL,
+    '/' + Constants.loginURL,
+    '/' + Constants.signupURL,
     '/'
   ];
 
@@ -45,7 +45,7 @@ export class UnauthorizedAccessGuard implements CanActivate {
     }
     this.localStorageService.set(LocalStorageProperties.BOTTOM_SHEET, true);
     this.router.navigate([
-      { outlets: { [GlobalConstants.SHEET_OPEN_OUTLET]: 'login' } },
+      { outlets: { [Constants.SHEET_OPEN_OUTLET]: 'login' } },
     ]);
     return false;
   }

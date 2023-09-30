@@ -26,6 +26,8 @@ import { HomeModule } from './home/home.module';
 import { SignupBottomSheetModule } from './authentication/signup-bottom-sheet/signup-bottom-sheet.module';
 import { NavigationService } from './services/navigation.service';
 import { CoreApiService } from './services/core-api.service';
+import { DummyDataService } from './services/dummy-data.service';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent, TopNavComponent],
@@ -60,9 +62,10 @@ import { CoreApiService } from './services/core-api.service';
     {
       provide: APP_INITIALIZER,
       useFactory: () => () => null,
-      deps: [NavigationService, CoreApiService],
+      deps: [NavigationService, CoreApiService, DummyDataService],
       multi: true,
     },
+    DatePipe
   ],
   bootstrap: [AppComponent],
 })

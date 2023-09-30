@@ -12,37 +12,38 @@
       <mat-icon fontSet="material-icons-round">close</mat-icon>
     </button>
   </div>
-  <mat-tab-group mat-stretch-tabs *ngIf="_data.tabs" (selectedTabChange)="tabChange()">
-    <mat-tab *ngFor="let tab of _data.tabs" [label]="tab.label">
+  <mat-tab-group mat-stretch-tabs *ngIf="_data.tabs" [(selectedIndex)]='selectedIndex'
+    (selectedTabChange)="tabChange()">
+    <mat-tab *ngFor="let tab of _data.tabs" [label]="formatter[tab.label]">
       <ng-template mat-tab-label>
         <div class="custom-tab-label">
-          <span class="label" *ngIf="tab.label"> {{ tab.label }} </span>
+          <span class="label" *ngIf="tab.label || tab.label === 0"> {{ formatter[tab.label] }} </span>
           <span class="sub-label" *ngIf="tab.subLabel"> ({{ tab.subLabel }}) </span>
         </div>
       </ng-template>
       <ng-template matTabContent>
         <div class="content" [ngClass]="{'hide-bg': !isFocused, 'show-bg': isFocused}">
-          <div class="option" *ngIf="facilityNames.length">
+          <div class="option" *ngIf="facilityList.length">
             <div class="sub-heading">Choose Turf:</div>
-            <app-custom-chip-button [chipsData]="facilityNames" [selectedChip]="facility.name"
+            <app-custom-chip-button [chipsData]="namesList" [selectedChip]="selectedFacility"
               panelClass="ground-selection-list turf-list"
               (selectionChange)="selectFacility($event)"></app-custom-chip-button>
           </div>
-          <div class="option" *ngIf="selectedFacilitySlots.length">
+          <div class="option" *ngIf="slotsViewList.length">
             <div class="sub-heading">Choose Time:</div>
-            <app-custom-chip-button [chipsData]="selectedFacilitySlots" panelClass="ground-selection-list slot-hrs-list"
+            <app-custom-chip-button [chipsData]="slotsViewList" panelClass="ground-selection-list slot-hrs-list"
               (selectionChange)="selectSlot($event)"></app-custom-chip-button>
           </div>
-          <div class="spot-count-option-for-managers" *ngIf="showSpotCount">
+          <div class="spot-count-option-for-managers" *ngIf="showSpotCount && selectedSlot">
             <span class="label">Choose spots count:</span>
-            <div class="spot-meter" *ngIf="_data.spotData">
-              <button [disabled]="spotCount <= _data.spotData.min" mat-icon-button (click)="subtractSpotCount()">
+            <div class="spot-meter" *ngIf="selectedSlot">
+              <button [disabled]="spotCount < 1" mat-icon-button (click)="subtractSpotCount()">
                 <mat-icon fontSet="material-icons-round">remove</mat-icon>
               </button>
               <mat-chip class="count-chip tab-basic-chip">
                 {{ spotCount }}
               </mat-chip>
-              <button [disabled]="spotCount >= _data.spotData.max" mat-icon-button (click)="addSpotCount()">
+              <button [disabled]="spotCount >= selectedSlot.availableSpot" mat-icon-button (click)="addSpotCount()">
                 <mat-icon fontSet="material-icons-round">add</mat-icon>
               </button>
             </div>

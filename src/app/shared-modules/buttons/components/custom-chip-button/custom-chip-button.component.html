@@ -1,6 +1,6 @@
 <mat-chip-list [selectable]="selectable" [class]="panelClass">
-  <mat-chip @fadeAppearSideways *ngFor="let chip of chipsData" [selected]="selectedChip === chip" [disabled]="disabled"
-    (click)="selectChip(chip)">
-    {{ chip }}
+  <mat-chip @fadeAppearSideways *ngFor="let chip of chipsData" [selected]="selectedChip?.value === chip?.value"
+    [disabled]="disabled" (click)="selectChip(chip)">
+    {{ chip.viewValue }}
   </mat-chip>
 </mat-chip-list>

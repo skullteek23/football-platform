@@ -5,8 +5,9 @@ import { ButtonConfig } from '@app/shared-modules/buttons/models/button.model';
 import { PositionSelectionMessages } from '@app/constant/app-messages';
 import { Router } from '@angular/router';
 import { SessionStorageService } from '@app/services/session-storage.service';
-import { Position, SessionStorageProperties } from '@app/constant/app-constants';
-import { isEnumKey } from '@app/utils/objects-utility';
+import { SessionStorageProperties } from '@app/constant/app-constants';
+import { findIndexByValue, getValueByIndex, isEnumKey } from '@app/utils/objects-utility';
+import { Position } from '@app/models/user.model';
 
 @Component({
   selector: 'app-position-selection',
@@ -16,8 +17,9 @@ import { isEnumKey } from '@app/utils/objects-utility';
 })
 export class PositionSelectionComponent implements OnInit {
   readonly positionMap = PositionData;
+  readonly PositionEnum = Position;
 
-  position = Position.striker;
+  positionFlag: number = 1;
   selectBtnDetails!: ButtonConfig;
   tip = PositionSelectionMessages.tip.player;
 
@@ -29,8 +31,11 @@ export class PositionSelectionComponent implements OnInit {
   ngOnInit(): void {
     const prevSelection = this.sessionStorage.get(SessionStorageProperties.USER_POSITION_SELECTION);
     if (String(prevSelection) && isEnumKey(prevSelection, Position)) {
-      this.position = Number(Position[prevSelection]);
-      this.setTip();
+      const index = findIndexByValue(prevSelection, Position);
+      if (index && index === 0) {
+        this.positionFlag = index;
+        this.setTip();
+      }
     }
     this.selectBtnDetails = new ButtonConfig();
     this.selectBtnDetails.label = 'Select';
@@ -40,10 +45,10 @@ export class PositionSelectionComponent implements OnInit {
    * Increments the position by 1
    */
   next() {
-    if (this.position >= Position.goalkeeper) {
+    if (this.positionFlag >= 4) {
       return;
     }
-    this.position = (this.position + 1 + 5) % 5;
+    this.positionFlag = (this.positionFlag + 1 + 5) % 5;
     this.setTip();
   }
 
@@ -51,10 +56,10 @@ export class PositionSelectionComponent implements OnInit {
    * Decrements the position by 1
    */
   prev() {
-    if (this.position <= Position.manager) {
+    if (this.positionFlag <= 0) {
       return;
     }
-    this.position = (this.position - 1 + 5) % 5;
+    this.positionFlag = (this.positionFlag - 1 + 5) % 5;
     this.setTip();
   }
 
@@ -62,7 +67,7 @@ export class PositionSelectionComponent implements OnInit {
    * Sets the tip based on the position
    */
   setTip() {
-    if (this.position === 0) {
+    if (this.positionFlag === 0) {
       this.tip = PositionSelectionMessages.tip.manager;
     } else {
       this.tip = PositionSelectionMessages.tip.player;
@@ -73,8 +78,9 @@ export class PositionSelectionComponent implements OnInit {
    * Navigates to the ground selection page
    */
   selectPos() {
-    if (this.position >= 0 && this.position <= 4 && isEnumKey(this.position, Position)) {
-      this.sessionStorage.set(SessionStorageProperties.USER_POSITION_SELECTION, Position[this.position]);
+    if (this.positionFlag >= 0 && this.positionFlag <= 4) {
+      const value = getValueByIndex(Position, this.positionFlag);
+      this.sessionStorage.set(SessionStorageProperties.USER_POSITION_SELECTION, value);
       this.navigateToNext();
     }
   }

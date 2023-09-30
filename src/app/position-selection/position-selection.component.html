@@ -4,38 +4,38 @@
   </div>
   <div class="position-figures-container">
     <button mat-mini-fab (click)="prev()" color="primary" class="floating-buttons button-left"
-      [ngStyle]="{ visibility: position === 0 ? 'hidden' : 'visible' }">
+      [ngStyle]="{ visibility: positionFlag === 0 ? 'hidden' : 'visible' }">
       <mat-icon fontSet="material-icons-round">arrow_back_ios</mat-icon>
     </button>
     <div class="position-figure">
-      <div class="figure" [@slideSideways]="position" [ngClass]="{ 'reduced-opacity': position !== 0 }">
+      <div class="figure" [@slideSideways]="positionFlag" [ngClass]="{ 'reduced-opacity': positionFlag !== 0}">
         <img src="assets/images/manager.png" alt="manager" />
       </div>
-      <div class="figure" [@slideSideways]="position" [ngClass]="{ 'reduced-opacity': position !== 1 }">
+      <div class="figure" [@slideSideways]="positionFlag" [ngClass]="{ 'reduced-opacity': positionFlag !== 1 }">
         <img src="assets/images/striker.png" alt="striker" />
       </div>
-      <div class="figure" [@slideSideways]="position" [ngClass]="{ 'reduced-opacity': position !== 2 }">
+      <div class="figure" [@slideSideways]="positionFlag" [ngClass]="{ 'reduced-opacity': positionFlag !== 2 }">
         <img src="assets/images/midfielder.png" alt="midfielder" />
       </div>
-      <div class="figure" [@slideSideways]="position" [ngClass]="{ 'reduced-opacity': position !== 3 }">
+      <div class="figure" [@slideSideways]="positionFlag" [ngClass]="{ 'reduced-opacity': positionFlag !== 3 }">
         <img src="assets/images/defender.png" alt="defender" />
       </div>
-      <div class="figure" [@slideSideways]="position" [ngClass]="{ 'reduced-opacity': position !== 4 }">
+      <div class="figure" [@slideSideways]="positionFlag" [ngClass]="{ 'reduced-opacity': positionFlag !== 4}">
         <img src="assets/images/goalkeeper.png" alt="goalkeeper" />
       </div>
     </div>
     <button mat-mini-fab color="primary" (click)="next()" class="floating-buttons button-right"
-      [ngStyle]="{ visibility: position > 3 ? 'hidden' : 'visible' }">
+      [ngStyle]="{ visibility: positionFlag > 3 ? 'hidden' : 'visible' }">
       <mat-icon fontSet="material-icons-round">arrow_forward_ios</mat-icon>
     </button>
   </div>
   <div class="selected-option-text">
     <div class="position-text">
       <span class="position-text-title">
-        {{ positionMap[position].title }}
+        {{ positionMap[positionFlag]?.title }}
       </span>
       <span class="position-text-sub-title">
-        {{ positionMap[position].subtitle }}
+        {{ positionMap[positionFlag]?.subtitle }}
       </span>
     </div>
     <app-next-action-button (clickEv)="selectPos()" [displayDetails]="selectBtnDetails"></app-next-action-button>

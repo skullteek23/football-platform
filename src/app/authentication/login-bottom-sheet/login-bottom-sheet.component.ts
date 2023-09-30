@@ -11,9 +11,8 @@ import { Router } from '@angular/router';
 import { AnimationsList } from '@app/services/animation.service';
 import { AuthService } from '../auth.service';
 import { AuthConstants } from '../constants/auth.constant';
-import { IAuthError, IConfirmationResult } from '@app/models/common.model';
+import { IConfirmationResult } from '@app/models/common.model';
 import { SnackbarService } from '@app/services/snackbar.service';
-import { getAuthErrorMsg } from '@app/utils/auth-error-handling-utility';
 import {
   MOBILE_VALIDATORS,
   OTP_VALIDATORS,
@@ -22,6 +21,7 @@ import { BottomSheetService } from '@app/services/bottom-sheet.service';
 import { MatInput } from '@angular/material/input';
 import { ShowConfirmationService } from '@app/services/show-confirmation.service';
 import { SessionStorageService } from '@app/services/session-storage.service';
+import { getCloudFnErrorMsg } from '@app/utils/api-error-handling-utility';
 
 @Component({
   selector: 'app-login-bottom-sheet',
@@ -105,19 +105,29 @@ export class LoginBottomSheetComponent
             .catch(this.handleRequestOtpError.bind(this));
         }
       })
-      .catch(this.handleRequestOtpError.bind(this));
+      .catch(this.handleApiError.bind(this));
   }
 
   /**
    * Handles the error while requesting otp
    * @param error
-   */
-  handleRequestOtpError(error: IAuthError) {
-    this.snackbarService.displayError(getAuthErrorMsg(error));
+  */
+  handleRequestOtpError(error: any) {
     this.confirmationResult = null;
     this.otpSent = false;
     this.phoneNumber?.enable();
     this.hideLoader();
+  }
+
+  /**
+   * Handles the error when cloud function returns http error
+   * @param error
+   */
+  handleApiError(error: any) {
+    this.hideLoader();
+    this.snackbarService.displayError(getCloudFnErrorMsg(error));
+    this.confirmationResult = null;
+    this.otpSent = false;
   }
 
   /**

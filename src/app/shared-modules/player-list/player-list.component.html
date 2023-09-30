@@ -1,19 +1,28 @@
 <div class="main-container">
   <div class="header-content-container">
     <span class="page-sub-label">
-      Player's List
+      Match Details
     </span>
     <button mat-icon-button appBackButton>
       <mat-icon fontSet="material-icons-round">close</mat-icon>
     </button>
   </div>
-  <mat-chip-list class="ground-info">
-    <mat-chip>10v10</mat-chip>
-    <mat-chip>Evening</mat-chip>
-    <mat-chip>7:00 PM</mat-chip>
-    <mat-chip selected>Open Maps</mat-chip>
+  <div class="placeholder-chip" *ngIf="!facility || !slot">
+    <div class="shine box-chip"></div>
+    <div class="shine box-chip"></div>
+    <div class="shine box-chip"></div>
+    <div class="shine box-chip"></div>
+  </div>
+  <mat-chip-list class="ground-info" *ngIf="facility && slot">
+    <mat-chip>{{ dayTime }}</mat-chip>
+    <mat-chip>{{ slot.timestamp | date: timeFormat}}</mat-chip>
+    <mat-chip selected (click)='openMaps()'>Open Maps</mat-chip>
+    <mat-chip>{{ facility.name }}</mat-chip>
   </mat-chip-list>
-  <div class="list-container">
+  <div class="placeholder" *ngIf="!isPageInit">
+    <div class="shine box"></div>
+  </div>
+  <div class="list-container" *ngIf="isPageInit">
     <div class="team">
       <span class="subtitle">
         Team Black:
@@ -30,6 +39,7 @@
           </div>
         </li>
       </ol>
+      <app-placeholder message="List is empty!" *ngIf="!playersListBlack.length"></app-placeholder>
     </div>
     <mat-divider></mat-divider>
     <div class="team">
@@ -48,6 +58,7 @@
           </div>
         </li>
       </ol>
+      <app-placeholder message="List is empty!" *ngIf="!playersListWhite.length"></app-placeholder>
     </div>
   </div>
 </div>

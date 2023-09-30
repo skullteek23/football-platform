@@ -19,10 +19,8 @@ import {
   IUserProperties,
 } from '@app/models/common.model';
 import {
-  GlobalConstants,
+  Constants,
   LocalStorageProperties,
-  Position,
-  SessionStorageProperties,
 } from '@app/constant/app-constants';
 import { AuthConstants } from './constants/auth.constant';
 import { SnackbarService } from '@app/services/snackbar.service';
@@ -33,6 +31,8 @@ import { CoreApiService } from '@app/services/core-api.service';
 import { HttpsCallableResult } from 'firebase/functions';
 import { cloudFunctionNames } from '@app/constant/api-constants';
 import { isEnumKey } from '@app/utils/objects-utility';
+import { Position } from '@app/models/user.model';
+import { getCloudFnErrorMsg } from '@app/utils/api-error-handling-utility';
 
 @Injectable({
   providedIn: 'root',
@@ -84,11 +84,7 @@ export class AuthService {
    */
   _user(): Observable<IUser> {
     if (this.auth) {
-      return authState(this.auth).pipe(
-        catchError((error) => {
-          return of(null);
-        })
-      );
+      return authState(this.auth);
     } else if (this.isUserLogin()) {
       return of(this.user);
     } else {
@@ -110,7 +106,7 @@ export class AuthService {
    */
   openLogin() {
     this.router.navigate([
-      { outlets: { [GlobalConstants.SHEET_OPEN_OUTLET]: 'login' } },
+      { outlets: { [Constants.SHEET_OPEN_OUTLET]: 'login' } },
     ]);
     this.sheetService.openSheet(LoginBottomSheetComponent);
   }
@@ -120,7 +116,7 @@ export class AuthService {
    */
   openSignup() {
     this.router.navigate([
-      { outlets: { [GlobalConstants.SHEET_OPEN_OUTLET]: 'signup' } },
+      { outlets: { [Constants.SHEET_OPEN_OUTLET]: 'signup' } },
     ]);
     this.sheetService.openSheet(SignupBottomSheetComponent);
   }
@@ -220,11 +216,23 @@ export class AuthService {
   }
 
   /**
+   * Adds user role by calling cloud function
+   * @param role
+   */
+  addUserRole(role: Position): Promise<any> {
+    const data = {
+      role: role
+    };
+    return this.coreApiService.callHttpFunction(cloudFunctionNames.updateUser, data)
+      .catch(error => this.snackbarService.displayError(getCloudFnErrorMsg(error)));
+  }
+
+  /**
    * Checks whether user exists or not
    * @param phoneNumber
    */
   checkUserExists(phoneNumber: string): Promise<HttpsCallableResult<any>> {
-    return this.coreApiService.callBackendFn(cloudFunctionNames.userExists, {
+    return this.coreApiService.callHttpFunction(cloudFunctionNames.userExists, {
       phoneNumber,
     });
   }
@@ -232,13 +240,13 @@ export class AuthService {
   /**
    * Checks whether user has a role set or not
    */
-  async getRole(): Promise<Number> {
+  async getRole(): Promise<string> {
     if (this.auth) {
       const result = await this.auth?.currentUser?.getIdTokenResult(true);
       if (result?.hasOwnProperty('claims') && result.claims.hasOwnProperty('role')) {
-        return Number(result.claims['role']);
+        return String(result.claims['role']);
       }
-      return Promise.resolve(-1);
+      return Promise.resolve('');
     }
     return Promise.reject('Error: Auth not initialized');
   }

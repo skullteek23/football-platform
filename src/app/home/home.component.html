@@ -3,32 +3,21 @@
     <div class="shine strip"></div>
     <div class="shine header"></div>
   </div>
-  <div class="content-placeholder">
-    <div class="shine heading"></div>
-    <div class="shine content"></div>
-  </div>
 </div>
-<section class="main-container" *ngIf="isPageInitialized">
-  <div class="header-content-container">
+<section class="main-container">
+  <div class="header-content-container" *ngIf="isPageInitialized">
     <div class="salutation-strip">
       <span class="page-sub-label" *ngIf="name">
         Hi, {{ name | titlecase }}!
       </span>
-      <button
-        mat-icon-button
-        (click)="navigateTo('/main/user/account')"
-        *ngIf="isUserLogged"
-      >
+      <button mat-icon-button (click)="navigateTo('/main/user/account')" *ngIf="isUserLogged">
         <mat-icon fontSet="material-icons-round">account_circle</mat-icon>
       </button>
     </div>
-    <app-icon-selection-menu
-      [data]="data"
-      (selectionChange)="onSelectOption($event)"
-    ></app-icon-selection-menu>
+    <app-icon-selection-menu [data]="data" (selectionChange)="onSelectOption($event)"></app-icon-selection-menu>
   </div>
 
-  <div class="content-container">
+  <div class="content-container" *ngIf="isBookingsInitialized">
     <div class="salutation-strip">
       <div class="page-sub-label">Your booked matches:</div>
       <button mat-icon-button (click)="refreshContent()" *ngIf="isUserLogged">
@@ -37,19 +26,26 @@
     </div>
     <div class="content">
       <div class="onboarding-content" *ngIf="!userBookings.length">
-        <app-wide-button
-          *ngIf="!isUserLogged"
-          (clickEv)="getStarted()"
-          [displayDetails]="buttonDetails"
-        ></app-wide-button>
+        <app-wide-button *ngIf="!isUserLogged" (clickEv)="getStarted()"
+          [displayDetails]="buttonDetails"></app-wide-button>
         <app-placeholder [message]="messages.error.noBooking"></app-placeholder>
       </div>
       <div class="bookings-content" *ngIf="userBookings.length">
-        <mat-list></mat-list>
+        <ng-container *ngFor="let content of contentList">
+          <app-interactive-card [data]="content" [selected]="false"
+            (actionBtnClick)="openList($event)"></app-interactive-card>
+        </ng-container>
       </div>
     </div>
   </div>
 </section>
+
+<div class="placeholder-shimmer" *ngIf="!isBookingsInitialized">
+  <div class="content-placeholder">
+    <div class="shine heading"></div>
+    <div class="shine content"></div>
+  </div>
+</div>
 
 <app-footer></app-footer>
 

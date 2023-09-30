@@ -6,6 +6,12 @@ mat-chip-list {
   }
 }
 
+.ground-info.mat-chip-list {
+  .mat-chip-list-wrapper {
+    @include flexStartRow(8px);
+  }
+}
+
 .ground-info {
   mat-chip-list {
     .mat-chip-list-wrapper {
@@ -66,7 +72,7 @@ mat-chip-list {
     overflow-y: auto;
 
     .mat-chip {
-      width: 68px;
+      width: 78px;
       text-align: center;
       @include flexCenter(row);
     }

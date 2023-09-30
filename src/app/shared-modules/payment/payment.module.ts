@@ -11,9 +11,11 @@ import { FooterModule } from '@app/footer/footer.module';
 
 const routes: Routes = [
   {
-    path: '', component: PaymentComponent, children: [
-      { path: '', pathMatch: 'full', redirectTo: 'success', component: PaymentGatewayComponent },
+    path: '', component: PaymentComponent,
+    children: [
+      { path: '', pathMatch: 'full', component: PaymentGatewayComponent },
       { path: 'success', component: SuccessComponent },
+      { path: 'success/:oid', component: SuccessComponent },
       { path: 'failure', component: FailureComponent },
     ]
   }

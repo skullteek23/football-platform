@@ -11,9 +11,9 @@ import { AnimationsList } from '@app/services/animation.service';
 import { AuthBaseComponent } from '../auth-base.component';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AuthConstants } from '../constants/auth.constant';
-import { IAuthError, IConfirmationResult } from '@app/models/common.model';
+import { IApiError, IConfirmationResult } from '@app/models/common.model';
 import { SnackbarService } from '@app/services/snackbar.service';
-import { getAuthErrorMsg } from '@app/utils/auth-error-handling-utility';
+import { getAuthErrorMsg, getCloudFnErrorMsg } from '@app/utils/api-error-handling-utility';
 import {
   FULL_NAME_VALIDATORS,
   MOBILE_VALIDATORS,
@@ -104,7 +104,7 @@ export class SignupBottomSheetComponent
               this.phoneNumber?.disable();
               this.continueBtnDetails.label = 'Continue';
             })
-            .catch((error: IAuthError) => {
+            .catch((error: IApiError) => {
               this.snackbarService.displayError(getAuthErrorMsg(error));
               this.hideLoader();
               this.confirmationResult = null;
@@ -113,8 +113,8 @@ export class SignupBottomSheetComponent
             });
         }
       })
-      .catch((error: IAuthError) => {
-        this.snackbarService.displayError(getAuthErrorMsg(error));
+      .catch((error: any) => {
+        this.snackbarService.displayError(getCloudFnErrorMsg(error));
         this.hideLoader();
         this.phoneNumber?.enable();
       });

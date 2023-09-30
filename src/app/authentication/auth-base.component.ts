@@ -5,11 +5,11 @@ import { AuthService } from './auth.service';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { CanComponentDeactivate } from '@app/guards/confirm-form-closure.guard';
 import { FormGroup } from '@angular/forms';
-import { IAuthError, IConfirmationResult } from '@app/models/common.model';
+import { IApiError, IConfirmationResult } from '@app/models/common.model';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { AuthConstants } from './constants/auth.constant';
 import { BottomSheetService } from '@app/services/bottom-sheet.service';
-import { getAuthErrorMsg } from '@app/utils/auth-error-handling-utility';
+import { getAuthErrorMsg } from '@app/utils/api-error-handling-utility';
 import { ShowConfirmationService } from '@app/services/show-confirmation.service';
 import { LocalStorageService } from '@app/services/local-storage.service';
 import { SessionStorageService } from '@app/services/session-storage.service';
@@ -155,7 +155,7 @@ export class AuthBaseComponent implements CanComponentDeactivate {
    * Handle sign in error and display error message
    * @param error
    */
-  handleSignInError(error: IAuthError) {
+  handleSignInError(error: IApiError) {
     this.snackbarService.displayCustomMsg(getAuthErrorMsg(error));
     this.hideLoader();
   }

@@ -11,16 +11,22 @@ export class InteractiveCardComponent implements OnInit {
   @Input() selected = false;
   @Output() actionBtnClick = new EventEmitter<InteractiveCardData>();
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
+  /**
+   * Selects the card
+   */
   select() {
     if (!this.selected) {
       this.actionBtnClick.emit(this.data);
     }
   }
 
+  /**
+   * Gets the selected state of the card
+   */
   get isSelected(): boolean {
     return this.selected && this.data.actionBtn.isSelectable;
   }

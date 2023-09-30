@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { ButtonsModule } from '../buttons/buttons.module';
+import { PlaceholderModule } from '../placeholder/placeholder.module';
 
 @NgModule({
   declarations: [GroundSelectionComponent, CurrentSelectionComponent],
@@ -21,7 +22,8 @@ import { ButtonsModule } from '../buttons/buttons.module';
     MatButtonModule,
     MatChipsModule,
     ButtonsModule,
+    PlaceholderModule
   ],
   exports: [GroundSelectionComponent],
 })
-export class GroundSelectionModule {}
+export class GroundSelectionModule { }

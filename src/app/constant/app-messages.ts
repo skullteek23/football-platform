@@ -1,4 +1,7 @@
 export const HomeMessages = {
+  success: {
+    refreshPage: 'Bookings refreshed!',
+  },
   error: {
     noBooking: 'Bookings will appear here.',
   },
@@ -18,7 +21,7 @@ export const AuthMessages = {
     invalidNumber: 'Error! Phone Number is invalid.',
     signOutError: 'Error! Unable to logout.',
     alreadySignOut: 'You are already signed out.',
-    userNotExist: 'User does not exists. Please create an account.',
+    userNotExist: 'User not registered! Please create an account.',
     userAlreadyExists:
       'Phone number is already in use. Please login to continue.',
     tooManyRequests: 'Too many requests! Please try again later.',
@@ -31,6 +34,24 @@ export const AuthMessages = {
     captchaFailed: 'Captcha failed! Please try again.',
   },
 };
+
+export const ApiMessages = {
+  error: {
+    cancelled: 'Operation cancelled! Please try again.',
+    unknown: 'Unknown error occurred! Please try again.',
+    deadline: 'Operation timed out! Please try again.',
+    alreadyExists: 'Already exists! Please try again.',
+    notFound: 'Not found! Please try again.',
+    failedPrecondition: 'Condition failed! Please contact admin.',
+    aborted: 'Operation aborted by system! Please try again.',
+    internal: 'Internal error! Please try again later.',
+    permissionDenied: 'Permission denied! Please try again.',
+    notSupported: 'Operation not supported! Please try again.',
+    unavailable: 'Service unavailable! Please try again.',
+    unauthenticated: 'Invalid credentials! Please try again.',
+    somethingWentWrong: 'Something went wrong! Please try again.',
+  }
+}
 
 export const CommonMessages = {
   error: {
@@ -63,4 +84,29 @@ export const OrderMessages = {
     invoice: 'Error! Unable to send invoice.',
     emailNotRegistered: 'Email not registered! Please try again.',
   },
+  booking: {
+    thankYou: 'Thank you for your booking!',
+    thankYouNote: 'Get ready to score goals and make memories on the field - see you at the game!',
+  }
+}
+
+export const GroundSelectionMessages = {
+  error: {
+    noSlots: 'No slots are available!',
+    noGrounds: 'No grounds are available!',
+    slotError: 'Error! Unable to fetch slots.',
+  }
+}
+
+export const PaymentMessages = {
+  success: 'Payment successful!',
+  error: {
+    slotFull: 'Slot is full! Please try another one.',
+  }
+}
+
+export const PlayerListMessages = {
+  error: {
+    noBookings: 'No bookings yet!',
+  }
 }

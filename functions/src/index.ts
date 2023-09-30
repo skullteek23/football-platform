@@ -1,11 +1,15 @@
 import * as admin from "firebase-admin";
+import * as functions from "firebase-functions";
 admin.initializeApp();
 
-import {withErrorHandling} from "./functions-utils";
+// import {withErrorHandling} from "./functions-utils";
 import {checkUserExist} from "./checkUserExist";
+import {updateUserRole} from "./updateUserRole";
 
 // Start writing Firebase Functions
 // https://firebase.google.com/docs/functions/typescript
+const REGION = "asia-south1";
 
 // Callable functions
-export const userExists = withErrorHandling(checkUserExist);
+export const userExists = functions.region(REGION).https.onCall(checkUserExist);
+export const updateUser = functions.region(REGION).https.onCall(updateUserRole);

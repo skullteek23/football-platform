@@ -1,19 +1,25 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@app/authentication/auth.service';
-import { GlobalConstants } from '@app/constant/app-constants';
+import { Constants } from '@app/constant/app-constants';
 import { HomeMessages } from '@app/constant/app-messages';
 import {
   HomeConstants,
   ACTIONS_MENU_NEW_USER,
   ACTIONS_MENU_EXISTING_USER,
 } from '@app/home/constants/home.constants';
+import { Booking } from '@app/models/order.model';
+import { OrderService } from '@app/services/order.service';
 import { ButtonConfig } from '@app/shared-modules/buttons/models/button.model';
 import {
   IconSelectionData,
   IconSelectionDataItem,
 } from '@app/shared-modules/icon-selection-menu/models/icon-selection.model';
-import { Subscription } from 'rxjs';
+import { InteractiveCardData } from '@app/shared-modules/interactive-card/models/interactive-card.model';
+import { Subscription, combineLatest } from 'rxjs';
+import { HomeService } from './services/home.service';
+import { GroundService } from '@app/services/ground.service';
+import { SnackbarService } from '@app/services/snackbar.service';
 
 @Component({
   selector: 'app-home',
@@ -31,13 +37,23 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   isPageInitialized = false;
   subscriptions = new Subscription();
   isLoaderShown = false;
+  uid: string = '';
+  contentList: InteractiveCardData[] = [];
+  isBookingsInitialized = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private orderService: OrderService,
+    private homeService: HomeService,
+    private groundService: GroundService,
+    private snackbarService: SnackbarService
+  ) { }
 
   ngOnInit(): void {
     this.checkUserLogin();
     this.buttonDetails.icon = 'sports_soccer';
-    this.buttonDetails.label = GlobalConstants.GET_STARTED;
+    this.buttonDetails.label = Constants.GET_STARTED;
   }
 
   ngOnDestroy(): void {
@@ -45,7 +61,8 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    window.scrollTo(0, 0);
+    const contextWindow = document.getElementById('primary-content-render');
+    contextWindow?.scrollTo(0, 0);
   }
 
   /**
@@ -61,11 +78,16 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
           this.isUserLogged = response ? true : false;
           this.data.items = JSON.parse(JSON.stringify(ACTIONS_MENU_NEW_USER));
           if (response) {
+            this.uid = response.uid;
             this.data.extraItems = JSON.parse(
               JSON.stringify(ACTIONS_MENU_EXISTING_USER)
             );
+            this.getBookings();
           } else {
             this.data.extraItems = [];
+            this.isBookingsInitialized = true;
+            this.userBookings = [];
+            this.contentList = [];
           }
           this.isPageInitialized = true;
         },
@@ -100,7 +122,40 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
    * Refreshes user bookings by making APi call again
    */
   refreshContent() {
-    // APi call to refresh content
+    this.getBookings();
+    this.snackbarService.displayCustomMsg(this.messages.success.refreshPage);
+  }
+
+  /**
+   * Gets the bookings of the user
+   */
+  getBookings() {
+    this.isBookingsInitialized = false;
+    combineLatest([
+      this.orderService.getBookingByUserId(this.uid),
+      this.groundService.getGrounds()
+    ]).subscribe(response => {
+      if (response?.length === 2 && response[0] && response[1] && this.isUserLogged) {
+        const bookings = response[0];
+        const grounds = response[1];
+        this.userBookings = bookings || [];
+        this.contentList = this.homeService.parseBookingData(bookings, grounds);
+      }
+      this.isBookingsInitialized = true;
+    })
+  }
+
+  /**
+   * Triggered when user clicks on any booking
+   * @param item
+   */
+  openList(item: InteractiveCardData) {
+    // Saving slot id in the ID field of the card data
+    if (item.id) {
+      this.router.navigate(['/main', 'players-list', item.id]);
+    } else {
+      console.log('Invalid selection!')
+    }
   }
 
   /**

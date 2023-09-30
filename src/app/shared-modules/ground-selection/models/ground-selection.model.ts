@@ -1,15 +1,16 @@
+import { GroundFacility } from "@app/models/ground.model";
+
 export class SelectedGroundInfo {
   title: string = 'Title';
   subtitle: string = 'Subtitle';
   tabs: TabData[] = [];
-  facilities: TurfData[] = [];
-  spotData: SpotData = new SpotData();
+  facilities: GroundFacility[] = [];
 }
 
 export class UserSlotSelectionInfo {
-  ground: string = '';
-  facility: string = '';
-  slot: string = '';
+  groundId: string = '';
+  facilityId: string = '';
+  slotId: string = '';
   spots: number = 1;
 }
 
@@ -18,21 +19,10 @@ export class TabData {
   subLabel: string = 'Sub';
 }
 
-export class TurfData {
-  name: string = '';
-  slotHrs: string[] = [];
-}
-
 export enum TabLabel {
-  today = 'Today',
-  tomorrow = 'Tomorrow',
-  dayAfter = 'Day After',
-}
-
-export enum DayTimes {
-  morning = 'Morning',
-  afternoon = 'Afternoon',
-  evening = 'Evening',
+  today = 0,
+  tomorrow = 1,
+  dayAfter = 2,
 }
 
 export class SpotData {

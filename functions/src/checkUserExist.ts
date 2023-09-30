@@ -43,7 +43,6 @@ export async function checkUserExist(data: any, context: any): Promise<any> {
     return true;
   } catch (error: any) {
     if (error.code === "auth/user-not-found") {
-      // Handle the case where no user is found
       return false;
     } else {
       // Handle other errors

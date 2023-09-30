@@ -3,7 +3,11 @@ import { InteractiveCardData } from '@app/shared-modules/interactive-card/models
 import { SelectedGroundInfo, TabLabel, UserSlotSelectionInfo } from '../models/ground-selection.model';
 import { Router } from '@angular/router';
 import { SessionStorageService } from '@app/services/session-storage.service';
-import { SessionStorageProperties } from '@app/constant/app-constants';
+import { Constants, SessionStorageProperties } from '@app/constant/app-constants';
+import { Ground, GroundFacility, GroundPrice } from '@app/models/ground.model';
+import { ArraySorting } from '@app/utils/array-sorting-utility';
+import { DatePipe } from '@angular/common';
+import { GroundService } from '@app/services/ground.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,52 +18,59 @@ export class GroundSelectionService {
 
   constructor(
     private router: Router,
-    private sessionStorage: SessionStorageService
+    private sessionStorage: SessionStorageService,
+    private datePipe: DatePipe,
+    private groundService: GroundService
   ) { }
 
   /**
-   * Creates the ground selection data
+   * Parses the ground response
+   * @param response
+   * @returns
+   */
+  parseGroundResponse(response: Ground[]): InteractiveCardData[] {
+    const grounds: InteractiveCardData[] = [];
+    if (response && response.length) {
+      response.forEach((ground: Ground) => {
+        const grData = new InteractiveCardData();
+        grData.id = ground.id;
+        grData.title = ground.name.trim();
+        grData.subtitle = ground.city;
+        grData.descriptionHtml = this.getLeastPrice(ground.price);
+        grData.actionBtn.label = 'Select';
+        grData.actionBtn.isSelectable = true;
+        grData.imgSrc = ground.imgLink;
+        grounds.push(grData);
+      })
+    }
+    return grounds.sort(ArraySorting.sortObjectByKey('title'));
+  }
+
+  /**
+   * Parses the ground facility response
+   * @param facilityList
    * @param selection
    * @returns
    */
-  createGroundSelectionData(selection: InteractiveCardData): SelectedGroundInfo {
+  parseGroundFacilitySlots(facilityList: GroundFacility[], selection: InteractiveCardData): SelectedGroundInfo {
+    const sortedFacilityList = facilityList.sort(ArraySorting.sortObjectByKey('name'));
+    const today = new Date();
+    const tomorrow = new Date();
+    const dayAfter = new Date();
+    tomorrow.setDate(today.getDate() + 1);
+    dayAfter.setDate(today.getDate() + 2);
+
     const data = new SelectedGroundInfo();
     data.title = selection.title;
     data.subtitle = selection.subtitle;
     data.tabs = [
-      { label: TabLabel.today, subLabel: '8 Tue', },
-      { label: TabLabel.tomorrow, subLabel: '9 Wed', },
-      { label: TabLabel.dayAfter, subLabel: '10 Thu', },
-    ]
-    data.facilities = [
-      { name: '7v7 A', slotHrs: ['12 AM', '1 AM', '2 AM', '3 AM', '4 AM', '5 AM', '6 AM', '7 AM', '8 AM', '10 AM',] },
-      { name: '7v7 B', slotHrs: ['12 PM', '1 PM', '2 PM', '3 PM', '4 PM', '5 PM', '6 PM', '7 PM', '8 PM', '9 PM', '10 PM', '11 PM'] },
-      { name: '10v10 B', slotHrs: ['7 PM', '8 PM', '9 PM',] },
+      { label: TabLabel.today, subLabel: '', },
+      { label: TabLabel.tomorrow, subLabel: '', },
+      { label: TabLabel.dayAfter, subLabel: '', },
     ];
-    data.spotData = { min: 0, max: 1 };
-    return data;
-  }
+    data.facilities = JSON.parse(JSON.stringify(sortedFacilityList));
 
-  /**
-   * Fetches the grounds from the API
-   * @returns
-   */
-  getGrounds() {
-    // API call
-    const grounds: InteractiveCardData[] = [];
-    for (let i = 1; i <= 14; i++) {
-      const data = new InteractiveCardData();
-      data.id = i.toString();
-      data.title = 'Gallant Play Arena ' + i;
-      data.subtitle = 'Vaishali, Ghaziabad';
-      data.descriptionHtml = '₹110 onwards<br> (per person)';
-      data.actionBtn.label = 'Select';
-      data.actionBtn.isSelectable = true;
-      data.imgSrc =
-        'https://cdn.pixabay.com/photo/2015/03/17/02/01/cubes-677092_1280.png';
-      grounds.push(data);
-    }
-    return grounds;
+    return data;
   }
 
   /**
@@ -67,7 +78,7 @@ export class GroundSelectionService {
    * @param updatedValue
    */
   updateGround(updatedValue: string) {
-    this.userSelectionData.ground = updatedValue;
+    this.userSelectionData.groundId = updatedValue;
   }
 
   /**
@@ -83,7 +94,7 @@ export class GroundSelectionService {
    * @param facility
    */
   updateFacility(facility: string) {
-    this.userSelectionData.facility = facility;
+    this.userSelectionData.facilityId = facility;
   }
 
   /**
@@ -91,7 +102,7 @@ export class GroundSelectionService {
    * @param slot
    */
   updateSlotSelection(slot: string) {
-    this.userSelectionData.slot = slot;
+    this.userSelectionData.slotId = slot;
   }
 
   /**
@@ -105,29 +116,55 @@ export class GroundSelectionService {
    * Resets the facility selection
    */
   resetFacilitySelection() {
-    this.userSelectionData.facility = '';
+    this.userSelectionData.facilityId = '';
   }
 
   /**
    * Resets the slot selection
    */
   resetSlotSelection() {
-    this.userSelectionData.slot = '';
+    this.userSelectionData.slotId = '';
   }
 
   /**
    * Returns true if the slot is selected
    */
   get isSlotSelected(): boolean {
-    return this.userSelectionData.slot !== '' && this.userSelectionData.facility !== '';
+    return this.userSelectionData.slotId !== '' && this.userSelectionData.facilityId !== '';
+  }
+
+  /**
+   * Gets the least price
+   * @param price
+   * @returns
+   */
+  getLeastPrice(price: GroundPrice): string {
+    if (price.weekdays > price.weekends) {
+      return Constants.RUPEE_SYMBOL + price.weekends + ' onwards <br> (per person)';
+    } else {
+      return Constants.RUPEE_SYMBOL + price.weekdays + ' onwards <br> (per person)';
+    }
+  }
+
+  /**
+   * Gets the tab date
+   * @param date
+   * @returns
+   */
+  getTabDate(date: any): string {
+    return this.datePipe.transform(new Date(date).getTime(), Constants.DATE_TIME_FORMATS.format_1) || '';
   }
 
   /**
    * Continues to the next step
    */
-  continue() {
+  continue(): void {
     this.sessionStorage.set(SessionStorageProperties.USER_GROUND_SELECTION, this.userSelectionData);
+    if (this.userSelectionData.slotId && this.userSelectionData.facilityId) {
+      this.router.navigate(['/main', 'payment']);
+    } else {
+      console.log('Invalid selection data!');
+    }
     this.resetGroundSelection();
-    this.router.navigate(['/main', 'payment']);
   }
 }

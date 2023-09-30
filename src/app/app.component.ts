@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AnimationsList } from './services/animation.service';
 import { AuthService } from './authentication/auth.service';
-import { GlobalConstants, LocalStorageProperties } from './constant/app-constants';
+import { Constants, LocalStorageProperties } from './constant/app-constants';
 import { LocalStorageService } from './services/local-storage.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { AuthConstants } from './authentication/constants/auth.constant';
@@ -28,8 +28,8 @@ export class AppComponent {
         const sheetOpen = this.localStorageService.get(
           LocalStorageProperties.BOTTOM_SHEET
         );
-        const loginRoute = `/${GlobalConstants.loginURL}`;
-        const signupRoute = `/${GlobalConstants.signupURL}`;
+        const loginRoute = `/${Constants.loginURL}`;
+        const signupRoute = `/${Constants.signupURL}`;
 
         if (sheetOpen && window.location.pathname.includes(loginRoute)) {
           this.authService.openLogin();

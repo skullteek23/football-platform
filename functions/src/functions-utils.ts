@@ -31,37 +31,22 @@ export function checkKeysExist(data: any, parameters: string[]): string {
  * @param {any} context
  * @return {boolean}
  */
-export function isRequestAuthenticated(context: any): boolean {
-  if (!context?.auth) {
-    return false;
+export function isRequestAuthenticated(
+  context: functions.https.CallableContext
+): boolean {
+  if (context?.auth?.uid) {
+    return true;
   }
   return false;
 }
 
 /**
- * Perform error handling for a callable function
- * @param {any} func
- * @return {functions.HttpsFunction}
+ * Available roles for a user
  */
-export function withErrorHandling(
-  func: (data: any, context: functions.https.CallableContext) => any
-): functions.HttpsFunction {
-  return functions.region("asia-south1").https.onCall(async (data, context) => {
-    try {
-      // Call the provided function and pass required keys
-      return await func(data, context);
-    } catch (error: any) {
-      // Handle other errors here
-      console.error("Error:", error);
-      if (error.message === "INTERNAL") {
-        throw new functions.https.HttpsError(
-          "internal",
-          "Internal server error"
-        );
-      } else {
-        // Rethrow the error to propagate it to the client
-        throw error;
-      }
-    }
-  });
-}
+export const Position = [
+  "manager",
+  "striker",
+  "midfielder",
+  "defender",
+  "goalkeeper",
+];

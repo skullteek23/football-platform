@@ -6,7 +6,7 @@ import { ConfirmFormClosureGuard } from './guards/confirm-form-closure.guard';
 import { RedirectLoggedUserGuard } from './authentication/guards/redirect-logged-user.guard';
 import { HomeComponent } from './home/home.component';
 import { UnauthorizedAccessGuard } from './authentication/guards/unauthorized-access.guard';
-import { GlobalConstants } from './constant/app-constants';
+import { Constants } from './constant/app-constants';
 
 const routes: Routes = [
   {
@@ -24,14 +24,14 @@ const routes: Routes = [
     component: LoginBottomSheetComponent,
     canActivate: [RedirectLoggedUserGuard],
     canDeactivate: [ConfirmFormClosureGuard],
-    outlet: GlobalConstants.SHEET_OPEN_OUTLET,
+    outlet: Constants.SHEET_OPEN_OUTLET,
   },
   {
     path: 'signup',
     component: SignupBottomSheetComponent,
     canActivate: [RedirectLoggedUserGuard],
     canDeactivate: [ConfirmFormClosureGuard],
-    outlet: GlobalConstants.SHEET_OPEN_OUTLET,
+    outlet: Constants.SHEET_OPEN_OUTLET,
   },
   {
     path: 'register',

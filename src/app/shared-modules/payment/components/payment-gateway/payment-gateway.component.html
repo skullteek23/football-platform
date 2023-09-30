@@ -1,1 +1,10 @@
-<p>payment-gateway works!</p>
+<div class="main-container">
+  <p>
+    This gateway is not available due to some reasons.
+  </p>
+  <div class="button-container">
+    <app-wide-button [displayDetails]="btnDetails" (clickEv)="continue()"></app-wide-button>
+    <app-wide-button [displayDetails]="btnDetailsFail" [theme]="ButtonTheme.secondary"
+      (clickEv)="continueWithFail()"></app-wide-button>
+  </div>
+</div>

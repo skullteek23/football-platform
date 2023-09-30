@@ -1,5 +1,6 @@
 import { ConfirmationResult, User } from '@angular/fire/auth';
 import { FirebaseError } from 'firebase/app';
+import { FunctionsErrorCode } from 'firebase/functions';
 
 // Classes
 export class IListOption {
@@ -14,4 +15,5 @@ export interface IUserProperties {
   displayName?: string | null;
   photoURL?: string | null;
 }
-export interface IAuthError extends FirebaseError {}
+export interface IApiError extends FirebaseError { }
+export type CloudFnErrorCode = FunctionsErrorCode;

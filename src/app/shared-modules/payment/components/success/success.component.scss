@@ -1,13 +1,31 @@
 @import 'variables';
 @import 'mixins';
 
+.placeholder {
+  @include mainPageContainer;
+
+  .heading {
+    width: 100%;
+    height: $heading-height;
+  }
+
+  .box {
+    height: 300px;
+    width: 100%
+  }
+
+  .button {
+    width: 100%;
+    height: $button-height;
+  }
+}
+
 .main-container {
   @include mainPageContainer;
 
   .heading {
     @include flexCenter(row);
     text-align: center;
-    width: 100%;
     height: $heading-height;
   }
 

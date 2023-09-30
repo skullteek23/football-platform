@@ -8,6 +8,7 @@ import { ButtonsModule } from '@app/shared-modules/buttons/buttons.module';
 import { IconSelectionMenuModule } from '@app/shared-modules/icon-selection-menu/icon-selection-menu.module';
 import { PlaceholderModule } from '@app/shared-modules/placeholder/placeholder.module';
 import { LoaderModule } from '@app/shared-modules/loader/loader.module';
+import { InteractiveCardModule } from '@app/shared-modules/interactive-card/interactive-card.module';
 
 @NgModule({
   declarations: [HomeComponent],
@@ -20,7 +21,8 @@ import { LoaderModule } from '@app/shared-modules/loader/loader.module';
     ButtonsModule,
     PlaceholderModule,
     LoaderModule,
+    InteractiveCardModule
   ],
   exports: [HomeComponent],
 })
-export class HomeModule {}
+export class HomeModule { }

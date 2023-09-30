@@ -1,0 +1,10 @@
+@import 'mixins';
+@import 'variables';
+
+.main-container {
+  @include mainPageContainer;
+
+  .button-container {
+    @include flexStartCol();
+  }
+}

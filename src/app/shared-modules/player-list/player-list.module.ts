@@ -6,14 +6,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { DirectivesModule } from '../directives/directives.module';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDividerModule } from '@angular/material/divider';
-
-
+import { PlaceholderModule } from '../placeholder/placeholder.module';
 
 @NgModule({
   declarations: [PlayerListComponent],
   imports: [
     CommonModule,
-    MatButtonModule, MatIconModule, DirectivesModule, MatChipsModule, MatDividerModule
+    MatButtonModule, MatIconModule, DirectivesModule, MatChipsModule, MatDividerModule, PlaceholderModule
   ],
   exports: [PlayerListComponent]
 })

@@ -3,7 +3,7 @@
     <img [src]="data.imgSrc" [alt]="data.title" />
   </div>
   <div class="content-container" [ngClass]="{ active: isSelected }">
-    <mat-card-title-group>
+    <div class=custom-card-title-group>
       <mat-card-title>
         <span class="title">
           {{ data.title }}
@@ -12,19 +12,13 @@
       <mat-card-subtitle>
         <span class="subtitle"> {{ data.subtitle }} </span>
       </mat-card-subtitle>
-    </mat-card-title-group>
+    </div>
     <mat-card-content>
       <p class="description" [innerHtml]="data.descriptionHtml"></p>
     </mat-card-content>
     <mat-card-footer>
-      <mat-chip-list
-        [selectable]="data.actionBtn.isSelectable"
-        *ngIf="data.actionBtn.type === 'chip'"
-      >
-        <mat-chip
-          [ngClass]="{ 'primary-chip': isSelected }"
-          class="custom-btn-chip"
-        >
+      <mat-chip-list [selectable]="data.actionBtn.isSelectable" *ngIf="data.actionBtn.type === 'chip'">
+        <mat-chip [ngClass]="{ 'primary-chip': isSelected }" class="custom-btn-chip">
           <span *ngIf="isSelected"> Selected </span>
           <span *ngIf="!isSelected">
             {{ data.actionBtn.label }}

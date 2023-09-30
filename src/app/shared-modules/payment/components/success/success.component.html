@@ -1,4 +1,10 @@
-<div class="main-container">
+<div class="placeholder" *ngIf="!isPageInit">
+  <div class="shine heading"></div>
+  <div class="shine box"></div>
+  <div class="button shine"></div>
+  <div class="button shine"></div>
+</div>
+<div class="main-container" *ngIf="isPageInit">
   <div class="heading">
     <span class="page-sub-label">
       Order Overview:
@@ -7,16 +13,16 @@
   <app-result-box [type]="ResultType.success" [data]="data">
     <div class="info">
       <div class="metric">
-        <div class="metric-label">{{'100' | currency: "INR"}}</div>
+        <div class="metric-label">{{order?.amount | currency: "INR":undefined:numberFormat}}</div>
         <div class="metric-value">Amount</div>
       </div>
       <div class="metric">
-        <div class="metric-label"> 14 Aug, 2023 </div>
+        <div class="metric-label"> {{order?.timestamp | date: dateFormat}} </div>
         <div class="metric-value">Date</div>
       </div>
       <div class="metric">
-        <div class="metric-label">1</div>
-        <div class="metric-value">Spot</div>
+        <div class="metric-label">{{booking?.spots}}</div>
+        <div class="metric-value">Spot (s)</div>
       </div>
     </div>
   </app-result-box>

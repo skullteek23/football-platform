@@ -11,10 +11,10 @@ const routes: Routes = [
   {
     path: '',
     component: MatchBookingComponent,
-    children: [
-      { path: '', redirectTo: 'select-ground', pathMatch: 'full' },
-      { path: 'select-ground', component: GroundSelectionComponent },
-    ],
+    // children: [
+    //   { path: '', redirectTo: 'select-ground', pathMatch: 'full' },
+    //   { path: 'select-ground', component: GroundSelectionComponent },
+    // ],
   },
 ];
 
