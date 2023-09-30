@@ -1,20 +1,18 @@
-<header>
-  <mat-toolbar class="toolbar mat-elevation-z4">
-    <app-logo></app-logo>
-    <div class="side-buttons">
-      <span class="circle shine" *ngIf="!isHeaderInitialized"></span>
-      <span class="rectangle shine" *ngIf="!isHeaderInitialized"></span>
-      <button mat-icon-button (click)="redirectToWhatsapp()" *ngIf="isHeaderInitialized">
-        <img src="assets/icons/whatsapp.svg" alt="WhatsApp Icon" class="whatsapp-icon" />
-      </button>
-      <mat-chip-list *ngIf="isUserLogged && isHeaderInitialized">
-        <mat-chip>
-          <span routerLink="/main/user/wallet">
-            {{ userBalance | currency : "INR" }}
-          </span>
-          <mat-icon fontSet="material-icons-round">keyboard_arrow_right</mat-icon>
-        </mat-chip>
-      </mat-chip-list>
-    </div>
-  </mat-toolbar>
-</header>
+<mat-toolbar class="toolbar mat-elevation-z4" appStickyTopBar panelClass="sticky-header">
+  <app-logo></app-logo>
+  <div class="side-buttons">
+    <span class="circle shine" *ngIf="!isHeaderInitialized"></span>
+    <span class="rectangle shine" *ngIf="!isHeaderInitialized"></span>
+    <button mat-icon-button (click)="redirectToWhatsapp()" *ngIf="isHeaderInitialized">
+      <img src="assets/icons/whatsapp.svg" alt="WhatsApp Icon" class="whatsapp-icon" />
+    </button>
+    <mat-chip-list *ngIf="isUserLogged && isHeaderInitialized">
+      <mat-chip>
+        <span routerLink="/main/user/wallet">
+          {{ userBalance | currency : "INR" }}
+        </span>
+        <mat-icon fontSet="material-icons-round">keyboard_arrow_right</mat-icon>
+      </mat-chip>
+    </mat-chip-list>
+  </div>
+</mat-toolbar>

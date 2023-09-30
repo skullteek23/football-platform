@@ -158,3 +158,16 @@ ol {
   animation-timing-function: linear;
   border-radius: $border-radius-primary;
 }
+
+.sticky-header {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  z-index: 99;
+  height: 56px;
+
+  -webkit-transition: 0.15s ease-in-out all;
+  -moz-transition: 0.15s ease-in-out all;
+  -o-transition: 0.15s ease-in-out all;
+  transition: 0.15s ease-in-out all;
+}

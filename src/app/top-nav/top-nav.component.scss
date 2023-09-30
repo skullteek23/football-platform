@@ -4,8 +4,6 @@
 .toolbar {
   padding: 16px;
   background-color: $white;
-  position: sticky;
-  z-index: 99;
   @include flexSpaceBetween;
 
   .side-buttons {
