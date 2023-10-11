@@ -46,8 +46,8 @@
   }
 }
 
-.details-container {
-  app-wide-button {
+.main-container.view-account-details {
+  app-wide-button:last-child {
     .custom-button {
       border-color: $logout;
       color: $logout;

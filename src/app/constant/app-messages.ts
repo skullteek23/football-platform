@@ -110,3 +110,13 @@ export const PlayerListMessages = {
     noBookings: 'No bookings yet!',
   }
 }
+
+export const AccountMessages = {
+  success: {
+    roleChange: 'Congrats! You are now a Manager.',
+  },
+  confirmation: {
+    logout: 'Are you sure you want to logout?',
+    becomeManager: 'Are you sure you want to become a Manager?'
+  }
+}

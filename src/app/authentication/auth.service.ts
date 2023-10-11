@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject, catchError, of } from 'rxjs';
+import { Observable, Subject, of, switchMap } from 'rxjs';
 import { BottomSheetService } from '../services/bottom-sheet.service';
 import { LoginBottomSheetComponent } from '@app/authentication/login-bottom-sheet/login-bottom-sheet.component';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
 import { SignupBottomSheetComponent } from './signup-bottom-sheet/signup-bottom-sheet.component';
 import {
   Auth,
-  IdTokenResult,
   RecaptchaVerifier,
   authState,
   signInWithPhoneNumber,
@@ -219,7 +218,7 @@ export class AuthService {
    * Adds user role by calling cloud function
    * @param role
    */
-  addUserRole(role: Position): Promise<any> {
+  setUserRole(role: Position): Promise<any> {
     const data = {
       role: role
     };
@@ -242,13 +241,36 @@ export class AuthService {
    */
   async getRole(): Promise<string> {
     if (this.auth) {
-      const result = await this.auth?.currentUser?.getIdTokenResult(true);
-      if (result?.hasOwnProperty('claims') && result.claims.hasOwnProperty('role')) {
-        return String(result.claims['role']);
-      }
-      return Promise.resolve('');
+      return firstValueFrom(
+        this._user().pipe(
+          switchMap(
+            user => new Promise<string>((resolve, reject) => {
+              user?.getIdTokenResult().then(value => {
+                if (value?.hasOwnProperty('claims') && value.claims.hasOwnProperty('role')) {
+                  resolve(String(value.claims['role']));
+                } else {
+                  reject('Error: Role not found!');
+                }
+              }).catch(error => {
+                reject('Error: Role not found!');
+              });
+            })
+          )
+        )
+      )
     }
     return Promise.reject('Error: Auth not initialized');
+  }
+
+  /**
+   * Checks whether user has a role set or not
+   */
+  parseRole(value?: any): string {
+    if (value?.hasOwnProperty('claims') && value.claims.hasOwnProperty('role')) {
+      return String(value.claims['role']);
+    } else {
+      return 'Error: Role not found!';
+    }
   }
 
   /**
@@ -286,3 +308,7 @@ export class AuthService {
     return false;
   }
 }
+function firstValueFrom(arg0: Observable<unknown>): string | PromiseLike<string> {
+  throw new Error('Function not implemented.');
+}
+

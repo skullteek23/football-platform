@@ -17,3 +17,4 @@ export interface IUserProperties {
 }
 export interface IApiError extends FirebaseError { }
 export type CloudFnErrorCode = FunctionsErrorCode;
+export type IUserRole = { user: IUser, role: string };

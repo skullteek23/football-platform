@@ -5,6 +5,10 @@ import { ViewDetailsComponent } from './components/view-details/view-details.com
 import { EditDetailsComponent } from './components/edit-details/edit-details.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ButtonsModule } from '@app/shared-modules/buttons/buttons.module';
+import { ChangeNumberModule } from '@app/shared-modules/change-number/change-number.module';
+import { MatIconModule } from '@angular/material/icon';
+import { DetailsContainerModule } from '@app/shared-modules/details-container/details-container.module';
+import { FooterModule } from '@app/footer/footer.module';
 
 const routes: Routes = [
   {
@@ -19,6 +23,14 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [AccountComponent, ViewDetailsComponent, EditDetailsComponent],
-  imports: [CommonModule, ButtonsModule, RouterModule.forChild(routes)],
+  imports: [
+    CommonModule,
+    ButtonsModule,
+    RouterModule.forChild(routes),
+    ChangeNumberModule,
+    MatIconModule,
+    DetailsContainerModule,
+    FooterModule
+  ],
 })
-export class AccountModule {}
+export class AccountModule { }

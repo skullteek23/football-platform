@@ -94,7 +94,7 @@ export class PaymentService {
         }
 
         try {
-          await this.authService.addUserRole(role);
+          await this.authService.setUserRole(role);
         } catch (error) {
           this.snackbarService.displayError(getCloudFnErrorMsg(error));
         }

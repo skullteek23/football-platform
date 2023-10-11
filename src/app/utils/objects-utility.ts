@@ -7,6 +7,9 @@ import { QueryDocumentSnapshot } from "@angular/fire/firestore";
  * @returns {boolean}
  */
 export function isEnumKey(value: any, myEnum: any): boolean {
+  if (value === null || value === undefined) {
+    return false;
+  }
   for (const enumKey in myEnum) {
     if (myEnum.hasOwnProperty(enumKey) && myEnum[enumKey] === value) {
       return true;
