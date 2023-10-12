@@ -46,12 +46,12 @@ export function getAuthErrorMsg(error: IApiError): string {
 }
 
 /**
- * Returns the error message from the API error
+ * Returns the error message from the Firestore API error
  * Verified from https://firebase.google.com/docs/reference/js/firestore_#firestoreerrorcode
  * @param error
  * @returns
  */
-export function getApiErrorMsg(error: IApiError): string {
+export function getFirestoreErrorMsg(error: IApiError): string {
   if (error?.code) {
     switch (error.code) {
       case 'cancelled':

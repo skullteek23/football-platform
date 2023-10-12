@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject, of, switchMap } from 'rxjs';
+import { Observable, Subject, firstValueFrom, of, switchMap } from 'rxjs';
 import { BottomSheetService } from '../services/bottom-sheet.service';
 import { LoginBottomSheetComponent } from '@app/authentication/login-bottom-sheet/login-bottom-sheet.component';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
@@ -307,8 +307,5 @@ export class AuthService {
     }
     return false;
   }
-}
-function firstValueFrom(arg0: Observable<unknown>): string | PromiseLike<string> {
-  throw new Error('Function not implemented.');
 }
 

@@ -13,6 +13,7 @@ export class WideButtonComponent implements OnInit {
 
   @Input() displayDetails = new ButtonConfig();
   @Input() theme: ButtonTheme = ButtonTheme.primary;
+  @Input() disabled = false;
   @Output() clickEv = new EventEmitter<void>();
 
 

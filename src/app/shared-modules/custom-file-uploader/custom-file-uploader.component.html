@@ -1,0 +1,15 @@
+<div class="uploader-container" *ngIf="options">
+  <div class="uploader-box" (click)="customFile.click()" [class.disabled]='isDisabled' matRipple>
+    <span class="placeholder"> {{options.placeholder}} </span>
+    <input type="file" [disabled]='isDisabled' #customFile (change)='browse($event)' [accept]="options.allowedFormats">
+    <mat-icon fontSet="material-icons-round">upload_file</mat-icon>
+  </div>
+</div>
+<div class="files-container" *ngIf="filesList?.length">
+  <div class="file" *ngFor="let file of filesList; let i = index">
+    <div class="file-name"> {{ file.name }} </div>
+    <button mat-icon-button (click)="deleteFile(i)">
+      <mat-icon fontSet="material-icons-round">delete</mat-icon>
+    </button>
+  </div>
+</div>

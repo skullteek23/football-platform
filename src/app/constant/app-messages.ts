@@ -120,3 +120,9 @@ export const AccountMessages = {
     becomeManager: 'Are you sure you want to become a Manager?'
   }
 }
+
+export const SupportMessages = {
+  success: {
+    request: 'Support request submitted successfully',
+  },
+}

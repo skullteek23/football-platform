@@ -24,25 +24,23 @@
   @include commonBtnUI;
   height: $button-height;
   width: 100%;
+  font-size: $font-size-m;
   border-radius: $border-radius-primary !important;
 
   .start-content {
+    width: 100%;
+    max-width: 90%;
     @include flexStartRow(8px);
+
+    .label {
+      @include ellipsis;
+      max-width: 90%;
+    }
   }
 
   .mat-button-wrapper {
     @include flexSpaceBetween(0px);
     width: 100%;
-  }
-}
-
-.custom-button:disabled {
-  background: $grey-3;
-  cursor: not-allowed;
-  pointer-events: none;
-
-  .mat-button-wrapper {
-    color: white;
   }
 }
 

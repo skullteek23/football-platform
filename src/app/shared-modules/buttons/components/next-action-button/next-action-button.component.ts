@@ -10,5 +10,4 @@ export class NextActionButtonComponent
   extends WideButtonComponent
   implements OnInit {
   @Input() buttonID = '';
-  @Input() disabled = false;
 }

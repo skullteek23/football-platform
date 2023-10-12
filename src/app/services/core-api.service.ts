@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Firestore, QueryFieldFilterConstraint, WhereFilterOp, addDoc, collection, collectionData, collectionSnapshots, deleteDoc, doc, docData, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
 import { Functions, httpsCallable } from '@angular/fire/functions';
-import { getApiErrorMsg } from '@app/utils/api-error-handling-utility';
+import { getFirestoreErrorMsg } from '@app/utils/api-error-handling-utility';
 import { combineArrayDataWithId, convertObjectToFirestoreData } from '@app/utils/objects-utility';
 import { Observable, catchError, map, of, take, tap, throwError } from 'rxjs';
 import { SnackbarService } from './snackbar.service';
@@ -243,7 +243,7 @@ export class CoreApiService {
     if (!environment.production) {
       console.log(err);
     }
-    const errorMsg = getApiErrorMsg(err);
+    const errorMsg = getFirestoreErrorMsg(err);
     return throwError(() => errorMsg);
   }
 }

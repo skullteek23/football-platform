@@ -171,3 +171,7 @@ ol {
   -o-transition: 0.15s ease-in-out all;
   transition: 0.15s ease-in-out all;
 }
+
+input[type="file" i] {
+  display: none;
+}

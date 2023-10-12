@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { PlayerListItem } from './models/player-list.model';
 import { Observable, combineLatest, } from 'rxjs';
 import { SnackbarService } from '@app/services/snackbar.service';
-import { getApiErrorMsg } from '@app/utils/api-error-handling-utility';
+import { getFirestoreErrorMsg } from '@app/utils/api-error-handling-utility';
 import { PlayerListMessages } from '@app/constant/app-messages';
 import { PlayerListService } from './services/player-list.service';
 import { GroundService } from '@app/services/ground.service';
@@ -79,7 +79,7 @@ export class PlayerListComponent implements OnInit {
           },
           error: (error) => {
             this.isPageInit = true;
-            this.snackService.displayError(getApiErrorMsg(error));
+            this.snackService.displayError(getFirestoreErrorMsg(error));
             this.playersListWhite = [];
             this.playersListBlack = [];
           },

@@ -1,12 +1,33 @@
 .mat-hint.custom-hints {
   color: $primary-color;
 }
+
 .mat-form-field-appearance-outline .mat-form-field-prefix {
   top: 0px !important;
+
   .country-code {
     margin-right: 4px;
   }
 }
+
 mat-form-field {
   font-size: $font-size-primary !important;
+}
+
+.mat-form-field-label,
+mat-label {
+  line-height: 20px;
+  font-size: $font-size-m;
+  font-family: $font-family;
+  font-weight: 400;
+}
+
+mat-hint {
+  top: 30px;
+  position: relative;
+  font-size: $font-size-xs;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: $primary-color;
 }

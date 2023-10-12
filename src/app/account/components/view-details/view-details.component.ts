@@ -36,7 +36,8 @@ export class ViewDetailsComponent implements OnInit {
   user: IUser = null;
   personalDetailsData = new DetailsContainerData();
   role: Position = Position.striker;
-  playerStats = new PlayerStats()
+  playerStats = new PlayerStats();
+  disableManagerBtn = true;
 
   constructor(
     private authService: AuthService,
@@ -99,9 +100,9 @@ export class ViewDetailsComponent implements OnInit {
       .then(value => {
         const role = this.authService.parseRole(value);
         if (role && isEnumKey(role, Position) && role === Position.manager) {
-          this.becomeManagerBtn.disableBtn = true;
+          this.disableManagerBtn = true;
         } else {
-          this.becomeManagerBtn.disableBtn = false;
+          this.disableManagerBtn = false;
         }
         this.isPageInitialized = true;
       })

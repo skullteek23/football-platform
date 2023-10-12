@@ -52,16 +52,19 @@
     @content;
   }
 }
+
 @mixin medium-screen {
   @media only screen and (min-width: 306px) and (max-width: 420px) {
     @content;
   }
 }
+
 @mixin large-screen {
   @media only screen and (min-width: 421px) and (max-width: 650px) {
     @content;
   }
 }
+
 @mixin extra-large-screen {
   @media only screen and (min-width: 651px) {
     @content;
@@ -82,6 +85,18 @@
 @mixin commonBtnUI {
   font-size: $font-size-m;
   @include primary-gradient-background();
+
+  &:disabled {
+    opacity: $disable-opacity;
+    cursor: not-allowed;
+    pointer-events: none;
+    border: none;
+    filter: grayscale(100%);
+  }
+
+  .mat-button-wrapper {
+    color: $white;
+  }
 }
 
 @mixin ellipsis($max-width: 100%, $white-space: nowrap) {

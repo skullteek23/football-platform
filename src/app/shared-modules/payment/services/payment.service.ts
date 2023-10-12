@@ -12,7 +12,7 @@ import { SessionStorageService } from '@app/services/session-storage.service';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { UserService } from '@app/services/user.service';
 import { UserSlotSelectionInfo } from '@app/shared-modules/ground-selection/models/ground-selection.model';
-import { getApiErrorMsg, getCloudFnErrorMsg } from '@app/utils/api-error-handling-utility';
+import { getFirestoreErrorMsg, getCloudFnErrorMsg } from '@app/utils/api-error-handling-utility';
 import { isEnumKey } from '@app/utils/objects-utility';
 import { getRandomString } from '@app/utils/string-utility';
 import { Subject, lastValueFrom } from 'rxjs';
@@ -115,7 +115,7 @@ export class PaymentService {
           .catch(error => {
             this.hideLoader();
             this.router.navigate(['/main', 'payment', 'failure']);
-            this.snackbarService.displayError(getApiErrorMsg(error));
+            this.snackbarService.displayError(getFirestoreErrorMsg(error));
           });
       }
       return false;
@@ -138,7 +138,7 @@ export class PaymentService {
           .catch(error => {
             this.hideLoader();
             this.router.navigate(['/main', 'payment', 'failure']);
-            this.snackbarService.displayError(getApiErrorMsg(error));
+            this.snackbarService.displayError(getFirestoreErrorMsg(error));
           })
       }
     });

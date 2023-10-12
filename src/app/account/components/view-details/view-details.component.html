@@ -57,7 +57,7 @@
   </div>
   <app-wide-button [theme]="ButtonTheme.secondary" [displayDetails]="prevOrdersBtn"
     (clickEv)="goToOrders()"></app-wide-button>
-  <app-wide-button [theme]="ButtonTheme.secondary" [displayDetails]="becomeManagerBtn"
+  <app-wide-button [disabled]="disableManagerBtn" [theme]="ButtonTheme.secondary" [displayDetails]="becomeManagerBtn"
     (clickEv)="changeRole()"></app-wide-button>
   <app-wide-button [theme]="ButtonTheme.secondary" [displayDetails]="logoutBtn" (clickEv)="logout()"></app-wide-button>
 </div>
