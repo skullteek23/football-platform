@@ -92,11 +92,16 @@
     pointer-events: none;
     border: none;
     filter: grayscale(100%);
+
+    .mat-button-wrapper {
+      color: $white;
+    }
   }
 
   .mat-button-wrapper {
-    color: $white;
+    color: $black;
   }
+
 }
 
 @mixin ellipsis($max-width: 100%, $white-space: nowrap) {

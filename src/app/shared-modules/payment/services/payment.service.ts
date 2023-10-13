@@ -34,6 +34,9 @@ export class PaymentService {
     private userService: UserService,
   ) { }
 
+  /**
+   * Payment success
+   */
   continue(): void {
     this.authService._user().subscribe(async user => {
       if (user?.uid) {
@@ -122,6 +125,9 @@ export class PaymentService {
     });
   }
 
+  /**
+   * Payment failure
+   */
   fail() {
     this.showLoader();
     this.authService._user().subscribe(user => {
@@ -144,6 +150,9 @@ export class PaymentService {
     });
   }
 
+  /**
+   * Gets the loader status
+   */
   _loaderStatus() {
     return this.loaderStatus.asObservable();
   }
