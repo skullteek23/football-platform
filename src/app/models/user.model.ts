@@ -31,10 +31,10 @@ export class Player {
   get _location(): string {
     if (this.locationCity && this.locationState) {
       return `${this.locationCity}, ${this.locationState}`;
-    } else if (!this.locationCity) {
-      return this.locationState;
-    } else if (!this.locationState) {
+    } else if (this.locationCity) {
       return this.locationCity;
+    } else if (this.locationState) {
+      return this.locationState;
     } else {
       return Constants.NOT_AVAILABLE;
     }

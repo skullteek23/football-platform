@@ -82,6 +82,7 @@ export class GroundService {
    * @returns
    */
   getGround(groundId: string): Observable<Ground> {
+
     return this.apiService.getDocument('grounds', groundId)
       .pipe(
         map(response => convertFirestoreData(response, Ground)),

@@ -131,7 +131,6 @@ export class CurrentSelectionComponent implements OnInit {
     } else {
       this.selectedFacility = new IListOption();
       this.setSlots([]);
-      console.log('Facility selection reset!');
     }
   }
 

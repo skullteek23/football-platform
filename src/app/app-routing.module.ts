@@ -41,12 +41,12 @@ const routes: Routes = [
     path: 'terms',
     data: { animation: 'fadeInOut' },
     loadChildren: () =>
-      import('./terms/terms.module').then((m) => m.TermsModule),
+      import('./legal-info/terms/terms.module').then((m) => m.TermsModule),
   },
   {
     path: 'privacy-policy',
     loadChildren: () =>
-      import('./privacy-policy/privacy-policy.module').then(
+      import('./legal-info/privacy-policy/privacy-policy.module').then(
         (m) => m.PrivacyPolicyModule
       ),
   },

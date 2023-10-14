@@ -14,7 +14,12 @@ export class OrderService {
     private apiService: CoreApiService
   ) { }
 
-  private generateOID(tempID: string): string {
+  /**
+   * Generates the order id
+   * @param tempID
+   * @returns
+   */
+  generateOID(tempID: string): string {
     return `${Constants.ORDER_PREFIX}${tempID.toUpperCase()}`;
   }
 
@@ -25,8 +30,7 @@ export class OrderService {
    * @returns
    */
   saveOrder(data: Order, orderID?: string): Promise<any> {
-    const id = orderID ? this.generateOID(orderID) : '';
-    return this.apiService.addDocument('orders', convertObjectToFirestoreData(data), id);
+    return this.apiService.addDocument('orders', convertObjectToFirestoreData(data), orderID);
   }
 
   /**

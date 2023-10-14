@@ -9,6 +9,8 @@ import { ResultBoxModule } from '../result-box/result-box.module';
 import { ButtonsModule } from '../buttons/buttons.module';
 import { FooterModule } from '@app/footer/footer.module';
 import { LoaderModule } from '../loader/loader.module';
+import { MatIconModule } from '@angular/material/icon';
+import { CancellationPolicyModule } from '@app/legal-info/cancellation-policy/cancellation-policy.module';
 
 const routes: Routes = [
   {
@@ -24,6 +26,14 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [PaymentComponent, SuccessComponent, FailureComponent, PaymentGatewayComponent],
-  imports: [CommonModule, RouterModule.forChild(routes), ResultBoxModule, ButtonsModule, LoaderModule, FooterModule],
+  imports: [CommonModule,
+    RouterModule.forChild(routes),
+    ResultBoxModule,
+    ButtonsModule,
+    LoaderModule,
+    FooterModule,
+    MatIconModule,
+    CancellationPolicyModule
+  ],
 })
 export class PaymentModule { }

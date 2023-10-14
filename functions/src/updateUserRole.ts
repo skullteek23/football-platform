@@ -40,17 +40,5 @@ export async function updateUserRole(data: any, context: any): Promise<any> {
     );
   }
 
-  try {
-    await admin.auth().setCustomUserClaims(
-      context.auth.uid, {role: newRole}
-    );
-
-    // User updated, return success
-    return true;
-  } catch (error: any) {
-    throw new functions.https.HttpsError(
-      "internal",
-      "Error updating user."
-    );
-  }
+  return admin.auth().setCustomUserClaims(context.auth.uid, {role: newRole});
 }

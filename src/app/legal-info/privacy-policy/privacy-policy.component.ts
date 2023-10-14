@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PRIVACY_POLICY_CONTENT } from './constants/privacy-policy.constants';
 
 @Component({
   selector: 'app-privacy-policy',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./privacy-policy.component.scss']
 })
 export class PrivacyPolicyComponent implements OnInit {
+
+  readonly content = PRIVACY_POLICY_CONTENT;
 
   constructor() { }
 

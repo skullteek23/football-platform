@@ -90,14 +90,9 @@
     opacity: $disable-opacity;
     cursor: not-allowed;
     pointer-events: none;
-    border: none;
+    border: none !important;
     filter: grayscale(100%);
-
-    .mat-button-wrapper {
-      color: $white;
-    }
   }
-
 }
 
 @mixin ellipsis($max-width: 100%, $white-space: nowrap) {

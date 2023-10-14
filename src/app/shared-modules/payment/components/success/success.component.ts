@@ -1,15 +1,21 @@
 import { Component, OnInit } from '@angular/core';
+import { MatBottomSheetConfig } from '@angular/material/bottom-sheet';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@app/authentication/auth.service';
 import { EmailService } from '@app/authentication/email.service';
 import { Constants } from '@app/constant/app-constants';
 import { OrderMessages, PlayerListMessages } from '@app/constant/app-messages';
+import { CancellationPolicyComponent } from '@app/legal-info/cancellation-policy/cancellation-policy.component';
+import { IUser } from '@app/models/common.model';
 import { Ground } from '@app/models/ground.model';
 import { Booking, Order } from '@app/models/order.model';
+import { Position } from '@app/models/user.model';
+import { BottomSheetService } from '@app/services/bottom-sheet.service';
 import { GroundService } from '@app/services/ground.service';
 import { OrderService } from '@app/services/order.service';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { ButtonConfig, ButtonTheme } from '@app/shared-modules/buttons/models/button.model';
+import { PlainTextViewerComponent } from '@app/shared-modules/plain-text-viewer/plain-text-viewer.component';
 import { ResultBoxData, ResultType } from '@app/shared-modules/result-box/models/result-box.model';
 
 @Component({
@@ -23,6 +29,7 @@ export class SuccessComponent implements OnInit {
   readonly ButtonTheme = ButtonTheme;
   readonly dateFormat = Constants.DATE_TIME_FORMATS.format_2;
   readonly numberFormat = Constants.NUMBER_FORMATS.format_1;
+  readonly messages = OrderMessages;
 
   data = new ResultBoxData();
   orderID: string = '';
@@ -34,6 +41,9 @@ export class SuccessComponent implements OnInit {
   isPageInit = false;
   booking!: Booking;
   ground!: Ground;
+  user!: IUser;
+  role: string = Position.striker;
+  slotMsg = '';
 
   constructor(
     private router: Router,
@@ -42,7 +52,8 @@ export class SuccessComponent implements OnInit {
     private emailService: EmailService,
     private route: ActivatedRoute,
     private orderService: OrderService,
-    private groundService: GroundService
+    private groundService: GroundService,
+    private bottomSheetService: BottomSheetService
   ) { }
 
   ngOnInit(): void {
@@ -55,8 +66,18 @@ export class SuccessComponent implements OnInit {
         this.setBtnDetails();
         this.getOrderDetails();
         this.getBookingDetails();
+      } else {
+        this.router.navigate(['/error']);
       }
     });
+    this.authService._user().subscribe(user => {
+      if (user?.uid) {
+        this.user = user;
+        this.getRole();
+      } else {
+        this.router.navigate(['/error']);
+      }
+    })
   }
 
   /**
@@ -85,7 +106,9 @@ export class SuccessComponent implements OnInit {
       next: booking => {
         if (booking) {
           this.booking = booking;
-          this.getGroundDetails();
+          if (this.booking.groundId) {
+            this.getGroundDetails();
+          }
         }
         this.isPageInit = true;
       },
@@ -157,17 +180,46 @@ export class SuccessComponent implements OnInit {
    * Emails the invoice to the user
    */
   emailInvoice() {
-    this.authService._user().subscribe(user => {
-      if (user?.email && user?.email.trim()) {
+    if (this.user) {
+      if (this.user?.email && this.user?.email.trim()) {
         this.isPageInit = false;
-        this.emailService.sendEmail(user.email).subscribe(res => {
+        this.emailService.sendEmail(this.user.email).subscribe(res => {
           this.isPageInit = true;
           this.snackbarService.displayCustomMsg(OrderMessages.success.invoice);
         })
       } else {
         this.snackbarService.displayError(OrderMessages.error.emailNotRegistered);
       }
-    })
+    }
+  }
+
+  /**
+   * Open cancellation policy
+   */
+  openCancellationPolicy() {
+    const config = new MatBottomSheetConfig();
+    config.disableClose = false;
+    config.hasBackdrop = true;
+    config.backdropClass = 'sheet-backdrop';
+    config.panelClass = 'sheet-custom';
+    this.bottomSheetService.openSheet(CancellationPolicyComponent, config);
+  }
+
+  /**
+   * Get user role
+   */
+  getRole() {
+    if (this.user) {
+      this.authService.getCustomClaims(this.user)
+        .then(value => {
+          this.role = this.authService.parseRole(value);
+          if (this.role === Position.manager) {
+            this.slotMsg = 'Note: ' + this.messages.booking.managerSlot;
+          } else {
+            this.slotMsg = 'Note: ' + this.messages.booking.playerSlot;
+          }
+        })
+    }
   }
 
 }

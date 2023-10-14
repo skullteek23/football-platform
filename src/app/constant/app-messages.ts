@@ -87,6 +87,8 @@ export const OrderMessages = {
   booking: {
     thankYou: 'Thank you for your booking!',
     thankYouNote: 'Get ready to score goals and make memories on the field - see you at the game!',
+    playerSlot: `This slot is only for one person per time slot. To buy more than one slots, Become a 'Manager'.`,
+    managerSlot: `This slot is for more than one person. To buy slot for only yourself, Become a 'Player'.`
   }
 }
 
@@ -102,7 +104,7 @@ export const PaymentMessages = {
   success: 'Payment successful!',
   error: {
     slotFull: 'Slot is full! Please try another one.',
-  }
+  },
 }
 
 export const PlayerListMessages = {

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '@app/authentication/auth.service';
 import { SessionStorageProperties } from '@app/constant/app-constants';
 import { PaymentMessages } from '@app/constant/app-messages';
-import { GroundSlot, SlotStatus } from '@app/models/ground.model';
+import { GroundSlot } from '@app/models/ground.model';
 import { Booking, Order } from '@app/models/order.model';
 import { Player, Position } from '@app/models/user.model';
 import { GroundService } from '@app/services/ground.service';
@@ -61,7 +61,8 @@ export class PaymentService {
         const updatedSlot = new GroundSlot();
         const userDetails = new Player();
 
-        const oid = getRandomString(10);
+        let oid = getRandomString(10);
+        oid = this.orderService.generateOID(oid);
         const allPromises = [];
 
         order.amount = order.getTotalSlotAmount(ground.spots, slotInfo.price);

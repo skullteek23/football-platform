@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TERMS_CONTENT } from './constants/terms.constants';
 
 @Component({
   selector: 'app-terms',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./terms.component.scss']
 })
 export class TermsComponent implements OnInit {
+
+  readonly content = TERMS_CONTENT;
 
   constructor() { }
 

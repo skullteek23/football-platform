@@ -55,4 +55,22 @@
       }
     }
   }
+
+  .cancellations-policy {
+    height: 100px;
+    padding: 20px;
+    border-radius: $border-radius-primary;
+    background: $grey-3;
+    @include flexCenter(column, 8px);
+
+    .read-policy {
+      @include flexCenter(row, 0px);
+    }
+
+    .note {
+      font-size: $font-size-xs;
+      font-weight: 300;
+      text-align: center;
+    }
+  }
 }

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TermsComponent } from './terms.component';
 import { Route, RouterModule } from '@angular/router';
+import { PlainTextViewerModule } from '@app/shared-modules/plain-text-viewer/plain-text-viewer.module';
 
 const route: Route[] = [
   {
@@ -14,6 +15,6 @@ const route: Route[] = [
 
 @NgModule({
   declarations: [TermsComponent],
-  imports: [CommonModule, RouterModule.forChild(route)],
+  imports: [CommonModule, RouterModule.forChild(route), PlainTextViewerModule],
 })
-export class TermsModule {}
+export class TermsModule { }

@@ -96,7 +96,7 @@ export class ViewDetailsComponent implements OnInit {
    */
   getUserRole() {
     this.isPageInitialized = false;
-    this.user?.getIdTokenResult()
+    this.authService.getCustomClaims(this.user)
       .then(value => {
         const role = this.authService.parseRole(value);
         if (role && isEnumKey(role, Position) && role === Position.manager) {

@@ -72,6 +72,8 @@ export class CoreApiService {
    * @returns {Promise<any>}
    */
   callHttpFunction(functionName: string, data: any = {}): Promise<any> {
+    console.log(data)
+    console.log(functionName)
     if (data !== null && data !== undefined) {
       const callable = httpsCallable(this.cloudFn, functionName);
       return callable(data);

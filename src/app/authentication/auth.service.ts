@@ -219,9 +219,8 @@ export class AuthService {
    * @param role
    */
   setUserRole(role: Position): Promise<any> {
-    const data = {
-      role: role
-    };
+    console.log(role);
+    const data = { role };
     return this.coreApiService.callHttpFunction(cloudFunctionNames.updateUser, data)
       .catch(error => this.snackbarService.displayError(getCloudFnErrorMsg(error)));
   }
@@ -245,15 +244,9 @@ export class AuthService {
         this._user().pipe(
           switchMap(
             user => new Promise<string>((resolve, reject) => {
-              user?.getIdTokenResult().then(value => {
-                if (value?.hasOwnProperty('claims') && value.claims.hasOwnProperty('role')) {
-                  resolve(String(value.claims['role']));
-                } else {
-                  reject('Error: Role not found!');
-                }
-              }).catch(error => {
-                reject('Error: Role not found!');
-              });
+              this.getCustomClaims(user)
+                .then(value => resolve(this.parseRole(value)))
+                .catch(error => reject('Error: Role not found!'));
             })
           )
         )
@@ -263,10 +256,20 @@ export class AuthService {
   }
 
   /**
+   * Returns custom claims of the user
+   */
+  getCustomClaims(user: IUser): Promise<any> {
+    if (user) {
+      return user?.getIdTokenResult(true);
+    }
+    return Promise.resolve(null);
+  }
+
+  /**
    * Checks whether user has a role set or not
    */
   parseRole(value?: any): string {
-    if (value?.hasOwnProperty('claims') && value.claims.hasOwnProperty('role')) {
+    if (value?.hasOwnProperty('claims') && value.claims.hasOwnProperty('role') && isEnumKey(value.claims.role, Position)) {
       return String(value.claims['role']);
     } else {
       return 'Error: Role not found!';
@@ -289,6 +292,7 @@ export class AuthService {
    */
   async resolveOnboarding(route: ActivatedRouteSnapshot): Promise<boolean> {
     const role = await this.getRole();
+    console.log(role);
     const data = route?.data?.hasOwnProperty('destination') ? route.data['destination'] : null;
     if (data && data === 'onboarding') {
       if (this.isUserOnboard(role)) {

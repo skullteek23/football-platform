@@ -26,14 +26,25 @@
       </div>
     </div>
   </app-result-box>
+
   <app-wide-button [displayDetails]="listBtnDetails" [theme]='ButtonTheme.primary'
     (clickEv)="showList()"></app-wide-button>
-  <app-wide-button [displayDetails]="mapsBtnDetails" [theme]='ButtonTheme.secondary'
+  <app-wide-button [disabled]="ground?.mapLink === ''" [displayDetails]="mapsBtnDetails" [theme]='ButtonTheme.secondary'
     (clickEv)="openMaps()"></app-wide-button>
   <app-wide-button [displayDetails]="invoiceBtnDetails" [theme]='ButtonTheme.secondary'
     (clickEv)="emailInvoice()"></app-wide-button>
   <app-wide-button [displayDetails]="homeBtnDetails" [theme]='ButtonTheme.secondary'
     (clickEv)="navigateHome()"></app-wide-button>
+
+  <div class="cancellations-policy">
+    <a (click)="openCancellationPolicy()" class="read-policy">
+      Read Cancellation Policy
+      <mat-icon fontSet="material-icons-round">chevron_right</mat-icon>
+    </a>
+    <div class='note' [innerText]="slotMsg">
+    </div>
+
+  </div>
 </div>
 
 <app-footer></app-footer>
