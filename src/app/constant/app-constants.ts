@@ -28,6 +28,7 @@ export class Constants {
     evening: 'Evening',
     night: 'Night',
   };
+  static readonly DELETED_USER_PLACEHOLDER = 'Unknown User'
 }
 
 export class LocalStorageProperties {

@@ -12,6 +12,7 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
+    data: { scrollToTop: true },
   },
   {
     path: 'main',

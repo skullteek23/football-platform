@@ -43,7 +43,6 @@ export class BottomSheetService {
     if (this.sheetRef) {
       this.sheetRef.dismiss();
       this.localStorageService.set(LocalStorageProperties.BOTTOM_SHEET, false);
-      window.scrollTo(0, 0);
       return true;
     }
     return false;

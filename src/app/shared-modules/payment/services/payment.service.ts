@@ -113,7 +113,6 @@ export class PaymentService {
             this.hideLoader();
             this.sessionStorageService.remove(SessionStorageProperties.USER_GROUND_SELECTION);
             this.sessionStorageService.remove(SessionStorageProperties.USER_POSITION_SELECTION);
-            this.snackbarService.displayCustomMsg(PaymentMessages.success);
             this.router.navigate(['/main', 'payment', 'success'], { queryParams: { oid } });
           })
           .catch(error => {

@@ -9,7 +9,7 @@ const route: Route[] = [
     path: '',
     pathMatch: 'full',
     component: TermsComponent,
-    data: { animation: 'fadeInOut' },
+    data: { animation: 'fadeInOut', scrollToTop: true },
   },
 ];
 

@@ -9,7 +9,7 @@ const routes: Route[] = [
     path: '',
     pathMatch: 'full',
     component: PrivacyPolicyComponent,
-    data: { animation: 'fadeInOut' },
+    data: { animation: 'fadeInOut', scrollToTop: true },
   },
 ];
 

@@ -5,6 +5,7 @@ import { Player } from '@app/models/user.model';
 import { OrderService } from '@app/services/order.service';
 import { UserService } from '@app/services/user.service';
 import { Observable } from 'rxjs';
+import { Constants } from '@app/constant/app-constants';
 
 @Injectable({
   providedIn: 'root'
@@ -29,19 +30,22 @@ export class PlayerListService {
 
     const list: PlayerListItem[] = [];
     bookings.forEach(booking => {
-      if (booking && booking.spots === 1) {
-        const user = users.find((user: Player) => user.id === booking?.uid);
-        list.push(this.getListItem(user?.name, user?.position, user?.id));
-      } else if (booking && booking.spots > 1) {
-        const user = users.find((user: Player) => user.id === booking?.uid);
-        while (booking.spots > 0) {
-          if (booking.spots === 1) {
-            list.push(this.getListItem(user?.name, user?.position, user?.id));
-          } else {
-            list.push(this.getListItem(this.getCustomName(user?.name, booking.spots - 1), user?.position, user?.id));
+      const user = users.find((user: Player) => user.id === booking?.uid);
+      if (user) {
+        if (booking && booking.spots === 1) {
+          list.push(this.getListItem(user?.name, user?.position, user?.id));
+        } else if (booking && booking.spots > 1) {
+          while (booking.spots > 0) {
+            if (booking.spots === 1) {
+              list.push(this.getListItem(user?.name, user?.position, user?.id));
+            } else {
+              list.push(this.getListItem(this.getCustomName(user?.name, booking.spots - 1), user?.position, user?.id));
+            }
+            booking.spots--;
           }
-          booking.spots--;
         }
+      } else {
+        list.push(this.getListItem(Constants.DELETED_USER_PLACEHOLDER, Constants.NOT_AVAILABLE, ''));
       }
     });
     if (list.length < maxPlayers) {
