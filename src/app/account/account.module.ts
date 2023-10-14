@@ -14,7 +14,6 @@ const routes: Routes = [
   {
     path: '',
     component: AccountComponent,
-    data: { scrollToTop: true },
     children: [
       { path: '', component: ViewDetailsComponent, pathMatch: 'full' },
       { path: 'edit', pathMatch: 'full', component: EditDetailsComponent },

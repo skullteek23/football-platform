@@ -2,7 +2,7 @@ export class Constants {
   static readonly GET_STARTED = 'Get Started';
   static readonly SHEET_OPEN_OUTLET = 'open';
   static readonly INPUT_NAME = 'input';
-  static readonly NOT_AVAILABLE = 'N/A';
+  static readonly NOT_AVAILABLE = '-';
   static readonly loginURL = `(${Constants.SHEET_OPEN_OUTLET}:login)`;
   static readonly signupURL = `(${Constants.SHEET_OPEN_OUTLET}:signup)`;
   static readonly RUPEE_SYMBOL = '₹';
