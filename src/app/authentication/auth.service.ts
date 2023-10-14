@@ -219,7 +219,6 @@ export class AuthService {
    * @param role
    */
   setUserRole(role: Position): Promise<any> {
-    console.log(role);
     const data = { role };
     return this.coreApiService.callHttpFunction(cloudFunctionNames.updateUser, data)
       .catch(error => this.snackbarService.displayError(getCloudFnErrorMsg(error)));
@@ -292,7 +291,6 @@ export class AuthService {
    */
   async resolveOnboarding(route: ActivatedRouteSnapshot): Promise<boolean> {
     const role = await this.getRole();
-    console.log(role);
     const data = route?.data?.hasOwnProperty('destination') ? route.data['destination'] : null;
     if (data && data === 'onboarding') {
       if (this.isUserOnboard(role)) {
