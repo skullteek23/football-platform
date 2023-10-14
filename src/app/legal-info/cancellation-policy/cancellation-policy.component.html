@@ -1,4 +1,6 @@
-<button mat-icon-button (click)="closeSheet()" class="floating-button">
-  <mat-icon fontSet="material-icons-round">close</mat-icon>
-</button>
-<app-plain-text-viewer [heading]="content.heading" [HTMLText]="content.content"></app-plain-text-viewer>
+<div class="close-button-container">
+  <button mat-icon-button (click)="closeSheet()" class="floating-button">
+    <mat-icon fontSet="material-icons-round">close</mat-icon>
+  </button>
+</div>
+<app-plain-text-viewer [HTMLText]="content"></app-plain-text-viewer>

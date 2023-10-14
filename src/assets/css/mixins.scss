@@ -40,6 +40,14 @@
   gap: $gap;
 }
 
+@mixin flexEndRow($gap: 16px) {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  gap: $gap;
+}
+
 @mixin mainPageContainer($gap: 20px) {
   padding: 12px 12px 20px;
   display: flex;
