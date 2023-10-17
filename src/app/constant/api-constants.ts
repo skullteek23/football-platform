@@ -1,6 +1,7 @@
 export enum cloudFunctionNames {
   userExists = 'userExists',
-  updateUser = 'updateUser',
+  setRole = 'setRole',
+  updateUserProfile = 'updateUserProfile',
 }
 
 export enum CloudStorageFileScreens {

@@ -1,1 +1,56 @@
-<p>change-number works!</p>
+<div class="sheet-content-container">
+  <button mat-icon-button (click)="canDeactivate()" class="floating-button">
+    <mat-icon fontSet="material-icons-round">close</mat-icon>
+  </button>
+  <div class="heading">
+    <app-logo></app-logo>
+    <div><strong class="semi-strong">Discover, Book, and Play!</strong></div>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="content-form" *ngIf="numberForm">
+    <div class="heading">
+      <span class="page-sub-label">
+        Update Mobile Number:
+      </span>
+    </div>
+    <form [formGroup]="numberForm">
+      <mat-form-field color="primary">
+        <mat-label>Phone Number</mat-label>
+        <input #firstInputRef matInput type="tel" name="phone-number" id="contact-number" formControlName="phoneNumber"
+          placeholder="Enter Your 10-digit Mobile Number" />
+        <mat-hint [@fadeInOut]="otpSent" class="custom-hints" *ngIf="otpSent">
+          {{ messages.hints.otpSent }}
+        </mat-hint>
+        <mat-error *ngIf="phoneNumber?.errors">
+          <app-form-field-errors [control]="phoneNumber" inputName="phone number"></app-form-field-errors>
+        </mat-error>
+        <mat-error *ngIf="phoneNumber?.hasError('valueSame')">
+          {{messages.error.sameNumber}}
+        </mat-error>
+      </mat-form-field>
+      <ng-container *ngIf="otpSent">
+        <mat-form-field color="primary">
+          <mat-label>Enter OTP</mat-label>
+          <input matInput type="tel" autocomplete="one-time-code" name="otp" id="otp" formControlName="otp"
+            placeholder="Enter 6-digit OTP" />
+
+          <mat-error *ngIf="otp?.errors">
+            <app-form-field-errors [control]="otp" inputName="OTP"></app-form-field-errors>
+          </mat-error>
+        </mat-form-field>
+        <div class="actions">
+          <app-next-action-button [disabled]="isDisableFinalBtn()" (clickEv)="verifyOtp()"
+            [displayDetails]="continueBtnDetails"></app-next-action-button>
+          <button mat-icon-button (click)="editNumber()">
+            <mat-icon fontSet="material-icons-round">edit</mat-icon>
+          </button>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="!otpSent">
+        <app-next-action-button [disabled]="isDisableSendOtpBtn()" (clickEv)="sendOtp()"
+          [displayDetails]="requestOtpBtnDetails"></app-next-action-button>
+      </ng-container>
+    </form>
+  </div>
+</div>
+<app-loader *ngIf="isLoaderShown"></app-loader>

@@ -10,6 +10,7 @@ export const HomeMessages = {
 export const AuthMessages = {
   success: {
     logout: 'Logged out successfully!',
+    numberChanged: 'Phone number updated successfully!',
   },
   hints: {
     otpSent: 'OTP sent successfully!',
@@ -17,13 +18,16 @@ export const AuthMessages = {
     loginToContinue: 'Please login to continue.',
   },
   error: {
+    sameNumber: 'New number cannot be same as old number.',
+    authNotInit: 'Error! Auth instance not initialized.',
+    phoneNotUpdated: 'Error! Phone number not updated.',
     invalidOtp: 'Error! OTP is invalid.',
     invalidNumber: 'Error! Phone Number is invalid.',
     signOutError: 'Error! Unable to logout.',
     alreadySignOut: 'You are already signed out.',
     userNotExist: 'User not registered! Please create an account.',
-    userAlreadyExists:
-      'Phone number is already in use. Please login to continue.',
+    userAlreadyExists: 'Phone number is already in use. Please login to continue.',
+    numberAlreadyInUse: 'Phone number is already in use.',
     tooManyRequests: 'Too many requests! Please try again later.',
     incorrectPassword: 'Incorrect password! Please try again.',
     weakPassword: 'Password too weak! Please try another one.',
@@ -119,7 +123,8 @@ export const AccountMessages = {
   },
   confirmation: {
     logout: 'Are you sure you want to logout?',
-    becomeManager: 'Are you sure you want to become a Manager?'
+    becomeManager: 'Are you sure you want to become a Manager?',
+    changeNumber: 'Are you sure you want to leave?'
   }
 }
 

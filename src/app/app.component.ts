@@ -15,7 +15,6 @@ import { filter } from 'rxjs';
 })
 export class AppComponent {
   readonly loginCaptcha = AuthConstants.LOGIN_CAPTCHA_PLACEHOLDER;
-  readonly signupCaptcha = AuthConstants.SIGNUP_CAPTCHA_PLACEHOLDER;
   title = 'football-platform';
 
   constructor(

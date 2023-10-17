@@ -8,21 +8,51 @@ import * as functions from "firebase-functions";
  */
 export function checkKeysExist(data: any, parameters: string[]): string {
   if (!data) {
-    return "data property is missing.";
+    return "unknown";
   } else if (!parameters.length) {
     return "";
   } else {
     for (let index = 0; index < parameters.length; index++) {
+      const parameter = parameters[index];
       if (
-        !Object.prototype.hasOwnProperty.call(data, parameters[index]) ||
-        (Object.prototype.hasOwnProperty.call(data, parameters[index]) &&
-          (data[parameters[index]] === undefined ||
-            data[parameters[index]] === null))
+        !Object.prototype.hasOwnProperty.call(data, parameter) ||
+        (Object.prototype.hasOwnProperty.call(data, parameter) &&
+          (data[parameter] === undefined ||
+            data[parameter] === null))
       ) {
-        return parameters[index];
+        return parameter;
       }
     }
     return "";
+  }
+}
+
+/**
+ * Check if atleast one of the keys exist in the data object
+ * @param {any} data
+ * @param {string[]} parameters
+ * @return {string}
+ */
+export function checkSomeKeysExist(data: any, parameters: string[]): string {
+  if (!data) {
+    return "one";
+  } else if (!parameters.length) {
+    return "one";
+  } else {
+    const result = parameters.some((parameter) => {
+      if (
+        !Object.prototype.hasOwnProperty.call(data, parameter) ||
+        (Object.prototype.hasOwnProperty.call(data, parameter) &&
+          (data[parameter] === undefined ||
+            data[parameter] === null))
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+
+    return result ? "" : "one";
   }
 }
 

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable, Subject, firstValueFrom, of, switchMap } from 'rxjs';
 import { BottomSheetService } from '../services/bottom-sheet.service';
 import { LoginBottomSheetComponent } from '@app/authentication/login-bottom-sheet/login-bottom-sheet.component';
@@ -6,10 +6,13 @@ import { ActivatedRouteSnapshot, Router } from '@angular/router';
 import { SignupBottomSheetComponent } from './signup-bottom-sheet/signup-bottom-sheet.component';
 import {
   Auth,
+  PhoneAuthCredential,
+  PhoneAuthProvider,
   RecaptchaVerifier,
   authState,
   signInWithPhoneNumber,
   signOut,
+  updatePhoneNumber,
   updateProfile,
 } from '@angular/fire/auth';
 import {
@@ -220,7 +223,7 @@ export class AuthService {
    */
   setUserRole(role: Position): Promise<any> {
     const data = { role };
-    return this.coreApiService.callHttpFunction(cloudFunctionNames.updateUser, data)
+    return this.coreApiService.callHttpFunction(cloudFunctionNames.setRole, data)
       .catch(error => this.snackbarService.displayError(getCloudFnErrorMsg(error)));
   }
 
@@ -251,7 +254,7 @@ export class AuthService {
         )
       )
     }
-    return Promise.reject('Error: Auth not initialized');
+    return Promise.reject(AuthMessages.error.authNotInit);
   }
 
   /**
@@ -308,6 +311,73 @@ export class AuthService {
       }
     }
     return false;
+  }
+
+  /**
+   * Updates user phone number
+   * @param data
+   */
+  updateSensitiveUserData(data: any): Promise<any> {
+    return this.coreApiService.callHttpFunction(cloudFunctionNames.updateUserProfile, data);
+  }
+
+  /**
+   * Get phone auth provider
+   * @returns {PhoneAuthProvider}
+   */
+  getPhoneAuthProvider(): PhoneAuthProvider {
+    let authInstance = this.auth;
+
+    // Initialize auth instance if not already initialized
+    if (!authInstance) {
+      authInstance = inject(Auth);
+    }
+    const provider = new PhoneAuthProvider(authInstance);
+    return provider;
+  }
+
+  /**
+   * Verify phone number by sending otp and returns verification id
+   * @param number
+   * @returns
+   */
+  verifyPhoneNumber(number: string, provider: PhoneAuthProvider): Promise<string> {
+    // Initialize captcha if not already initialized
+    if (!this.captchaVerifier) {
+      this.initCaptcha(AuthConstants.LOGIN_CAPTCHA_PLACEHOLDER);
+    }
+
+    if (typeof number !== 'string' || !number?.startsWith(AuthConstants.INDIAN_DIAL_CODE)) {
+      return Promise.reject(AuthMessages.error.invalidNumber);
+    }
+
+    return provider.verifyPhoneNumber(number, this.captchaVerifier);
+  }
+
+  /**
+   * Get phone auth credential
+   * @param code
+   * @param verificationId
+   * @returns
+   */
+  getCredential(verificationId: string, code: string): PhoneAuthCredential {
+    return PhoneAuthProvider.credential(verificationId, code);
+  }
+
+  /**
+   * Updates user phone number using firebase SDK
+   */
+  async updatePhone(user: IUser, credential: PhoneAuthCredential): Promise<string> {
+    if (user) {
+      try {
+        await updatePhoneNumber(user, credential);
+        return Promise.resolve(AuthMessages.success.numberChanged);
+      } catch (error) {
+        console.log(error);
+        return Promise.reject(AuthMessages.error.phoneNotUpdated);
+      }
+    }
+    return Promise.reject(AuthMessages.error.authNotInit);
   }
 }
 

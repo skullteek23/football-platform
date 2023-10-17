@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AccountService } from '@app/account/services/account.service';
 import { AuthService } from '@app/authentication/auth.service';
@@ -41,7 +40,6 @@ export class ViewDetailsComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private _dialog: MatDialog,
     private router: Router,
     private showConfirmationService: ShowConfirmationService,
     private snackbarService: SnackbarService,
@@ -166,7 +164,7 @@ export class ViewDetailsComponent implements OnInit {
    * Change the phone number
    */
   changePhoneNumber() {
-    this.bottomSheetService.openSheet(ChangeNumberComponent)
+    this.bottomSheetService.openSheet(ChangeNumberComponent);
   }
 
   /**
