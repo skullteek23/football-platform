@@ -36,7 +36,7 @@ export class GroundSelectionService {
         grData.id = ground.id;
         grData.title = ground.name.trim();
         grData.subtitle = ground.city;
-        grData.descriptionHtml = this.getLeastPrice(ground.price);
+        grData.descriptionHtml = this.groundService.getLeastPrice(ground.price);
         grData.actionBtn.label = 'Select';
         grData.actionBtn.isSelectable = true;
         grData.imgSrc = ground.imgLink;
@@ -131,19 +131,6 @@ export class GroundSelectionService {
    */
   get isSlotSelected(): boolean {
     return this.userSelectionData.slotId !== '' && this.userSelectionData.facilityId !== '';
-  }
-
-  /**
-   * Gets the least price
-   * @param price
-   * @returns
-   */
-  getLeastPrice(price: GroundPrice): string {
-    if (price.weekdays > price.weekends) {
-      return Constants.RUPEE_SYMBOL + price.weekends + ' onwards <br> (per person)';
-    } else {
-      return Constants.RUPEE_SYMBOL + price.weekdays + ' onwards <br> (per person)';
-    }
   }
 
   /**

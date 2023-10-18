@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CoreApiService } from './core-api.service';
 import { Observable, map, tap } from 'rxjs';
 import { combineArrayDataWithId, convertFirestoreData, convertFirestoreDataArray, convertObjectToFirestoreData } from '@app/utils/objects-utility';
-import { FacilityStatus, Ground, GroundFacility, GroundSlot, GroundStatus, SlotStatus } from '@app/models/ground.model';
+import { FacilityStatus, Ground, GroundFacility, GroundPrice, GroundSlot, GroundStatus, SlotStatus } from '@app/models/ground.model';
 import { TabLabel } from '@app/shared-modules/ground-selection/models/ground-selection.model';
 import { DateParseUtility } from '@app/utils/date-parse-utility';
 import { Constants } from '@app/constant/app-constants';
@@ -22,6 +22,20 @@ export class GroundService {
    */
   getGrounds(): Observable<Ground[]> {
     return this.apiService.getCollectionWithIds('grounds')
+      .pipe(
+        map(response => convertFirestoreDataArray(response, Ground)),
+        map(response => this.filterAvailableGrounds(response)),
+      );
+  }
+
+  /**
+   * Gets the grounds
+   * @returns
+   */
+  getGroundsByCity(city: string): Observable<Ground[]> {
+    const query = [];
+    query.push(this.apiService.getWhereQuery('city', '==', city));
+    return this.apiService.queryCollection('grounds', query)
       .pipe(
         map(response => convertFirestoreDataArray(response, Ground)),
         map(response => this.filterAvailableGrounds(response)),
@@ -150,6 +164,19 @@ export class GroundService {
       (slot.participantCount < slot.allowedCount)
       // (!slot.hasOwnProperty('lockedAt') || ((slot.lockedAt + Constants.SEVEN_MINUTES_IN_MILLISECONDS) < new Date().getTime()))
     );
+  }
+
+  /**
+ * Gets the least price
+ * @param price
+ * @returns
+ */
+  getLeastPrice(price: GroundPrice): string {
+    if (price.weekdays > price.weekends) {
+      return Constants.RUPEE_SYMBOL + price.weekends + ' onwards <br> (per person)';
+    } else {
+      return Constants.RUPEE_SYMBOL + price.weekdays + ' onwards <br> (per person)';
+    }
   }
 
 }

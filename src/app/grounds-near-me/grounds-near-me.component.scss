@@ -1,0 +1,23 @@
+@import 'variables';
+@import 'mixins';
+
+.main-container {
+  @include mainPageContainer;
+
+  .heading {
+    @include flexCenter(row);
+    text-align: center;
+    width: 100%;
+    height: $heading-height;
+  }
+
+  .placeholder {
+    flex-wrap: wrap;
+    @include flexSpaceEvenly(16px);
+
+    .card {
+      height: 280px;
+      width: 150px;
+    }
+  }
+}
