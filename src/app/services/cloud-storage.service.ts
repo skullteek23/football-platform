@@ -54,6 +54,8 @@ export class CloudStorageService {
     switch (screen) {
       case CloudStorageFileScreens.support:
         return `/support/screenshots/${uniqueName}`;
+      case CloudStorageFileScreens.userProfilePhoto:
+        return `/users/profile-photos/${uniqueName}`;
 
       default:
         return `/${uniqueName}`;
