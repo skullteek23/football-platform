@@ -70,6 +70,7 @@ export const CommonFormFieldMessages = {
     maxlength: 'Maximum length exceeded',
     minlength: 'Minimum length required',
     pattern: 'Invalid ',
+    email: 'Invalid email',
   },
 };
 
@@ -120,6 +121,8 @@ export const PlayerListMessages = {
 export const AccountMessages = {
   success: {
     roleChange: 'Congrats! You are now a Manager.',
+    changesSaved: 'Changes saved!',
+    noChanges: 'No changes made!',
   },
   confirmation: {
     logout: 'Are you sure you want to logout?',

@@ -28,7 +28,8 @@ export class Constants {
     evening: 'Evening',
     night: 'Night',
   };
-  static readonly DELETED_USER_PLACEHOLDER = 'Unknown User'
+  static readonly DELETED_USER_PLACEHOLDER = 'Unknown User';
+  static readonly DEFAULT_IMG = 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png';
 }
 
 export class LocalStorageProperties {

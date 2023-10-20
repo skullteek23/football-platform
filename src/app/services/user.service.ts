@@ -24,6 +24,16 @@ export class UserService {
   }
 
   /**
+   * Updates the user details in firestore
+   * @param data
+   * @param uid
+   * @returns
+   */
+  updateUserDetails(data: Partial<Player>, uid: string) {
+    return this.apiService.updateDocument('players', data, uid);
+  }
+
+  /**
    * Returns the list of users
    * @returns
    */

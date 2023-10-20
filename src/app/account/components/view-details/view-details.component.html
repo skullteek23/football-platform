@@ -28,8 +28,8 @@
       </div>
     </div>
     <div class="account-photo">
-      <mat-icon fontSet='material-icons-round'>account_circle</mat-icon>
-      <img [src]="user?.photoURL" alt="User photo" *ngIf="user?.photoURL">
+      <mat-icon fontSet='material-icons-round' *ngIf="!user?.photoURL">account_circle</mat-icon>
+      <img [src]="user?.photoURL" alt="User photo" *ngIf="user?.photoURL" (click)="imageFullScreen.open()">
     </div>
   </div>
 
@@ -62,4 +62,4 @@
   <app-wide-button [theme]="ButtonTheme.secondary" [displayDetails]="logoutBtn" (clickEv)="logout()"></app-wide-button>
 </div>
 
-<app-footer></app-footer>
+<app-image-viewer #imageFullScreen [url]="user?.photoURL"></app-image-viewer>

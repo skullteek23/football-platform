@@ -10,3 +10,6 @@
 <div *ngIf="control?.hasError('pattern')">
   {{ messages.error.pattern + inputName }}
 </div>
+<div *ngIf="control?.hasError('email')">
+  {{ messages.error.email }}
+</div>

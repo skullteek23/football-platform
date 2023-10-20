@@ -6,4 +6,5 @@ export enum cloudFunctionNames {
 
 export enum CloudStorageFileScreens {
   support = 'support',
+  userProfilePhoto = 'userProfilePhoto',
 }

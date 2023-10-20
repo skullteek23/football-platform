@@ -5,22 +5,28 @@
   height: auto;
   width: auto;
   @include mainPageContainer;
+
   .header-placeholder {
     @include flexStartCol(4px);
     width: 100%;
+
     .strip {
       min-height: 40px;
     }
+
     .header {
       min-height: 114px;
     }
   }
+
   .content-placeholder {
     @include flexStartCol(4px);
     width: 100%;
+
     .heading {
       min-height: 40px;
     }
+
     .content {
       min-height: 150px;
     }
@@ -29,22 +35,44 @@
 
 .main-container {
   @include mainPageContainer;
+
   .header-content-container {
     @include flexStartCol(4px);
   }
+
   .salutation-strip {
     width: 100%;
     height: $heading-height;
     @include flexSpaceBetween(0px);
+
     a {
       @include flexCenter(row);
     }
+
+    .account-photo {
+      height: 30px;
+      width: 30px;
+      overflow: hidden;
+      box-sizing: border-box;
+      border-radius: 50%;
+      border: 1px solid $grey-3;
+
+      img {
+        height: auto;
+        width: 100%;
+        max-height: 30px;
+        object-fit: contain;
+      }
+    }
   }
+
   .content-container {
     @include flexCenter(column, 4px);
+
     .content {
       width: 100%;
       height: auto;
+
       .onboarding-content {
         @include flexStartCol(8px);
       }

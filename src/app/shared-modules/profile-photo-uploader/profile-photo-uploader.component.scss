@@ -1,0 +1,36 @@
+@import 'variables';
+@import 'mixins';
+
+.photo-uploader-container {
+  @include flexCenter(row);
+
+  .image-container {
+    height: 100px;
+    width: 100px;
+    overflow: hidden;
+    box-sizing: border-box;
+    border-radius: 50%;
+    border: 1px solid $white;
+
+    img {
+      height: 100%;
+      width: 100%;
+      max-height: 300px;
+      object-fit: contain;
+    }
+
+    &:active {
+      border: 1px solid $primary-color;
+    }
+  }
+}
+
+.helper-text {
+  width: 100%;
+  text-align: center;
+
+  &-label {
+    font-size: $font-size-s;
+    font-weight: 400;
+  }
+}

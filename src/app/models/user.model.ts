@@ -24,9 +24,7 @@ export class Player {
 
   /**
    * Gets the location
-   * @param city
-   * @param state
-   * @returns
+   * @returns {string}
    */
   get _location(): string {
     if (this.locationCity && this.locationState) {
@@ -38,6 +36,16 @@ export class Player {
     } else {
       return Constants.NOT_AVAILABLE;
     }
+  }
+
+  /**
+   * Gets the date of birth
+   */
+  get _dateOfBirthString(): any {
+    if (this.dob) {
+      return new Date(this.dob);
+    }
+    return null;
   }
 }
 

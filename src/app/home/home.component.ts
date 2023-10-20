@@ -40,6 +40,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   uid: string = '';
   contentList: InteractiveCardData[] = [];
   isBookingsInitialized = false;
+  photoUrl: string = '';
 
   constructor(
     private authService: AuthService,
@@ -74,6 +75,9 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
         next: (response) => {
           if (response?.displayName) {
             this.name = response?.displayName;
+          }
+          if (response?.photoURL) {
+            this.photoUrl = response.photoURL
           }
           this.isUserLogged = response ? true : false;
           this.data.items = JSON.parse(JSON.stringify(ACTIONS_MENU_NEW_USER));

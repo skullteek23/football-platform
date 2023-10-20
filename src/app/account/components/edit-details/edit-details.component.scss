@@ -1,0 +1,16 @@
+@import 'variables';
+@import 'mixins';
+
+.main-container {
+  @include mainPageContainer;
+
+  .heading {
+    @include flexCenter(row);
+    width: 100%;
+  }
+
+  form {
+    @include flexStartCol(8px);
+  }
+
+}

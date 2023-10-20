@@ -21,3 +21,8 @@ app-cancellation-policy {
     }
   }
 }
+
+.mat-calendar-body-selected {
+  color: $white;
+  background-image: $primary-gradient;
+}
