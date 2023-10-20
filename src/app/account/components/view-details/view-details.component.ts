@@ -55,7 +55,6 @@ export class ViewDetailsComponent implements OnInit {
         this.personalDetailsData.title = 'Personal Details';
         this.personalDetailsData.actionIcon = 'edit';
         this.personalDetailsData.detailData = [];
-        this.personalDetailsData.detailData.push({ icon: 'email', label: user.email || Constants.NOT_AVAILABLE });
         this.getUserDetails(user.uid);
         this.getUserStats(user.uid);
         this.setBtnDetails();
@@ -67,12 +66,13 @@ export class ViewDetailsComponent implements OnInit {
   /**
    * Get the user details
    * @param uid
-   */
+  */
   getUserDetails(uid: string) {
     this.userService.getUser(uid).subscribe(response => {
       if (response) {
         this.personalDetailsData.detailData.push({ icon: 'cake', label: this.accountService.getDob(response.dob) });
         this.personalDetailsData.detailData.push({ icon: 'place', label: response._location });
+        this.personalDetailsData.detailData.push({ icon: 'email', label: this.user?.email || Constants.NOT_AVAILABLE });
       }
     })
   }
