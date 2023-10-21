@@ -54,3 +54,8 @@ export class PlayerStats {
   goals: number = 0;
   wins: number = 0;
 }
+
+export class UserWallet {
+  amount: number = 0;
+  disabled = false;
+}

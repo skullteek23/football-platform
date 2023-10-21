@@ -94,6 +94,10 @@ export const OrderMessages = {
     thankYouNote: 'Get ready to score goals and make memories on the field - see you at the game!',
     playerSlot: `This slot is only for one person per time slot. To buy more than one slots, Become a 'Manager'.`,
     managerSlot: `This slot is for more than one person. To buy slot for only yourself, Become a 'Player'.`
+  },
+  transaction: {
+    credit: 'Received refund for',
+    debit: 'Paid for',
   }
 }
 
@@ -110,6 +114,9 @@ export const PaymentMessages = {
   error: {
     slotFull: 'Slot is full! Please try another one.',
   },
+  note: {
+    walletMoney: 'Ballzo money can be used to pay for all your ground bookings. Max Balance cannot be more than ₹10,000.'
+  }
 }
 
 export const PlayerListMessages = {

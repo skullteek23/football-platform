@@ -10,12 +10,14 @@
       <span class="page-sub-label" *ngIf="name">
         Hi, {{ name | titlecase }}!
       </span>
-      <button mat-icon-button (click)="navigateTo('/main/user/account')" *ngIf="isUserLogged">
-        <mat-icon fontSet='material-icons-round' *ngIf="!photoUrl">account_circle</mat-icon>
-      </button>
-      <a class="account-photo" (click)="navigateTo('/main/user/account')">
-        <img [src]="photoUrl" alt="User photo" *ngIf="photoUrl">
-      </a>
+      <ng-container *ngIf="isUserLogged">
+        <button mat-icon-button (click)="navigateTo('/main/user/account')" *ngIf="!photoUrl">
+          <mat-icon fontSet='material-icons-round'>account_circle</mat-icon>
+        </button>
+        <a class="account-photo" (click)="navigateTo('/main/user/account')" *ngIf="photoUrl">
+          <img [src]="photoUrl" alt="User photo">
+        </a>
+      </ng-container>
     </div>
     <app-icon-selection-menu [data]="data" (selectionChange)="onSelectOption($event)"></app-icon-selection-menu>
   </div>

@@ -1,0 +1,41 @@
+@import 'variables';
+@import 'mixins';
+
+.strip {
+  @include flexSpaceBetween(row);
+  overflow: hidden;
+  height: 72px;
+  box-sizing: border-box;
+  background-color: $grey-3;
+  color: $black;
+  padding: 8px 12px;
+  border-radius: $border-radius-primary;
+
+  .content {
+    width: 100%;
+    @include flexSpaceBetween;
+
+    &-text {
+      &-description {
+        font-size: $font-size-s;
+        font-weight: 400;
+        color: $grey-text;
+        max-height: 40px;
+        overflow-y: clip;
+        text-overflow: ellipsis;
+        white-space: pre-line;
+      }
+
+      &-date {
+        font-size: $font-size-s;
+        font-weight: 400;
+        color: $grey-1;
+      }
+    }
+
+    &-highlighted-text {
+      font-size: $font-size-m;
+      font-weight: 600;
+    }
+  }
+}

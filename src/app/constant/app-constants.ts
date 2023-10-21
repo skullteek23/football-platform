@@ -15,6 +15,7 @@ export class Constants {
     format_1: 'dd EEE', // 8 Sat
     format_2: 'd MMM, y', // 14 Aug, 2021
     format_3: 'h:mm a', // 8:03 PM
+    format_4: 'd MMM, hh:mm a' // 14 Aug, 08:03 PM
   };
   static readonly NUMBER_FORMATS = {
     format_1: '1.0-0', // 3.6 -> 4
@@ -29,7 +30,9 @@ export class Constants {
     night: 'Night',
   };
   static readonly DELETED_USER_PLACEHOLDER = 'Unknown User';
-  static readonly DEFAULT_IMG = 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png';
+  static readonly DEFAULT_IMG = 'assets/images/placeholder.png';
+  static readonly PLUS_SIGN = '+';
+  static readonly MINUS_SIGN = '-';
 }
 
 export class LocalStorageProperties {

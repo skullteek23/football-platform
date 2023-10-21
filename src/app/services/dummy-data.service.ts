@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CoreApiService } from './core-api.service';
 import { convertObjectToFirestoreData } from '@app/utils/objects-utility';
 import { FacilityStatus, Ground, GroundFacility, GroundSlot, GroundStatus, SlotStatus } from '@app/models/ground.model';
+import { TransactionType, WalletTransaction } from '@app/models/order.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +16,11 @@ export class DummyDataService {
   }
 
   addData() {
-    const collection = 'slots';
+    const collection = 'wallet-transactions';
     // const data = convertObjectToFirestoreData(this.buildGroundData());
     // const data = convertObjectToFirestoreData(this.buildFacilityData());
-    const data = convertObjectToFirestoreData(this.buildSlotData());
+    // const data = convertObjectToFirestoreData(this.buildSlotData());
+    const data = convertObjectToFirestoreData(this.buildTransactionData());
     this.apiService.addDocument(collection, data);
   }
 
@@ -48,10 +50,20 @@ export class DummyDataService {
     const data = new GroundSlot();
     data.facilityId = 'xl4sZoQ7O3oJu9wqrbr6';
     data.groundId = 'BUSm4jeSbdxBtpUJFewb';
-    data.timestamp = new Date('19 October, 2023 16:00:00').getTime();
+    data.timestamp = new Date('21 October, 2023 16:00:00').getTime();
     data.status = SlotStatus.available;
     data.allowedCount = 14;
     data.price = 200;
+    return data;
+  }
+
+  buildTransactionData() {
+    const data = new WalletTransaction();
+    data.amount = 2500;
+    data.transactionFor = 'ground booking';
+    data.type = TransactionType.debit;
+    data.uid = 'Z3bCRLp4mtSvHO0othLHerlU8EE3';
+    data.orderId = 'ODKYQAAW01MN';
     return data;
   }
 

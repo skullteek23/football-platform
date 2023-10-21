@@ -26,3 +26,17 @@ app-cancellation-policy {
   color: $white;
   background-image: $primary-gradient;
 }
+
+mat-list {
+  mat-list-item {
+    height: unset !important;
+    margin-bottom: 12px;
+
+    .mat-list-item-content {
+      padding: unset !important;
+      flex-direction: column !important;
+      align-items: unset !important;
+      justify-content: stretch;
+    }
+  }
+}

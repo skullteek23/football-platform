@@ -1,1 +1,45 @@
-<p>wallet works!</p>
+<div class="main-container">
+  <div class="heading">
+    <div class="page-sub-label">Ballzo Money</div>
+  </div>
+
+  <div class="placeholder" *ngIf="!isBalanceInit">
+    <div class="box shine"></div>
+  </div>
+
+  <div class="wallet-balance-container" *ngIf="isBalanceInit">
+    <div class="top-header">
+      Available Balance
+    </div>
+    <div class="balance">
+      {{balance | currency: 'INR'}}
+    </div>
+    <div class="bottom-note-text">
+      {{messages.note.walletMoney}}
+    </div>
+  </div>
+
+  <div class="placeholder" *ngIf="!isTransactionsInit">
+    <div class="shine text-strip"></div>
+    <div class="placeholder-tab shine"></div>
+  </div>
+
+  <div class="content-container" *ngIf="isTransactionsInit">
+    <div class="salutation-strip">
+      <div class="page-sub-label">Transactions:</div>
+    </div>
+    <mat-tab-group mat-stretch-tabs>
+      <mat-tab label='All'>
+        <app-wallet-transaction-list [list]="transactionsList"></app-wallet-transaction-list>
+      </mat-tab>
+      <mat-tab label='Paid'>
+        <app-wallet-transaction-list [list]="debitTxnList"></app-wallet-transaction-list>
+      </mat-tab>
+      <mat-tab label='Added'>
+        <app-wallet-transaction-list [list]="creditTxnList"></app-wallet-transaction-list>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>
+
+<app-footer></app-footer>

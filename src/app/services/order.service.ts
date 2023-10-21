@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CoreApiService } from './core-api.service';
-import { Booking, Order } from '@app/models/order.model';
+import { Booking, Order, WalletTransaction } from '@app/models/order.model';
 import { convertFirestoreData, convertFirestoreDataArray, convertObjectToFirestoreData } from '@app/utils/objects-utility';
 import { Constants } from '@app/constant/app-constants';
 import { Observable, map, tap } from 'rxjs';
@@ -94,6 +94,20 @@ export class OrderService {
    */
   addBooking(data: Booking): Promise<any> {
     return this.apiService.addDocument('bookings', convertObjectToFirestoreData(data));
+  }
+
+  /**
+   * Gets the wallet transactions by user id
+   * @param userId
+   * @returns
+   */
+  getUserTransactions(userId: string): Observable<WalletTransaction[]> {
+    const query = [];
+    query.push(this.apiService.getWhereQuery('uid', '==', userId));
+    return this.apiService.queryCollection('wallet-transactions', query)
+      .pipe(
+        map(response => convertFirestoreDataArray(response, WalletTransaction)),
+      );
   }
 }
 

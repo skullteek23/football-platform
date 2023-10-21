@@ -1,0 +1,6 @@
+<mat-list>
+  <mat-list-item *ngFor="let item of list">
+    <app-wallet-transaction-item [item]='item'></app-wallet-transaction-item>
+  </mat-list-item>
+</mat-list>
+<app-placeholder message="No transactions to show!" *ngIf="!list.length"></app-placeholder>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CoreApiService } from './core-api.service';
-import { Player, PlayerStats } from '@app/models/user.model';
+import { Player, PlayerStats, UserWallet } from '@app/models/user.model';
 import { convertFirestoreData, convertFirestoreDataArray } from '@app/utils/objects-utility';
 import { Observable, map, tap } from 'rxjs';
 
@@ -65,6 +65,18 @@ export class UserService {
     return this.apiService.getDocument('user-stats', uid)
       .pipe(
         map(response => convertFirestoreData(response, PlayerStats))
+      )
+  }
+
+  /**
+   * Gets the user wallet balance
+   * @param uid
+   * @returns
+   */
+  getUserWalletBalance(uid: string): Observable<UserWallet> {
+    return this.apiService.getDocument('user-wallet', uid)
+      .pipe(
+        map(response => convertFirestoreData(response, UserWallet))
       )
   }
 }

@@ -27,10 +27,10 @@
         </a>
       </div>
     </div>
-    <div class="account-photo">
-      <mat-icon fontSet='material-icons-round' *ngIf="!user?.photoURL">account_circle</mat-icon>
-      <img [src]="user?.photoURL" alt="User photo" *ngIf="user?.photoURL" (click)="imageFullScreen.open()">
-    </div>
+    <mat-icon fontSet='material-icons-round' *ngIf="!user?.photoURL">account_circle</mat-icon>
+    <a class="account-photo" *ngIf="user?.photoURL" (click)="imageFullScreen.open()">
+      <img [src]="user?.photoURL" alt="User photo">
+    </a>
   </div>
 
   <app-details-container (clickAction)="editDetails()" [data]="personalDetailsData"></app-details-container>
