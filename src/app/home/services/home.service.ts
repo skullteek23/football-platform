@@ -1,34 +1,75 @@
 import { Injectable } from '@angular/core';
-import { Ground } from '@app/models/ground.model';
+import { Ground, GroundSlot, SlotStatus } from '@app/models/ground.model';
 import { Booking } from '@app/models/order.model';
 import { InteractiveCardData } from '@app/shared-modules/interactive-card/models/interactive-card.model';
+import { HomeConstants } from '../constants/home.constants';
+import { BackgroundCSS } from '@app/models/common.model';
+import { ColorsUtility } from '@app/utils/colors-utility';
+import { CurrencyPipe } from '@angular/common';
+import { Constants } from '@app/constant/app-constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HomeService {
 
-  constructor() { }
+  constructor(
+    private currencyPipe: CurrencyPipe
+  ) { }
 
-  parseBookingData(bookings: Booking[], grounds: Ground[]): InteractiveCardData[] {
+  parseBookingData(bookings: Booking[], grounds: Ground[], slots: GroundSlot[]): InteractiveCardData[] {
     if (!bookings || bookings.length === 0 || !grounds || grounds.length === 0) {
       return [];
     }
     const data: InteractiveCardData[] = [];
     bookings.forEach(booking => {
       const ground = grounds.find(ground => ground.id === booking.groundId);
-      if (ground) {
+      const slot = slots.find(slot => slot.id === booking.slotId);
+      if (ground && slot) {
         const cardData = new InteractiveCardData();
         cardData.title = ground.name;
-        cardData.subtitle = ground.city;
-        cardData.descriptionHtml = 'descr';
+        cardData.subtitle = `${this.currencyPipe.transform(booking.spots * slot.price, 'INR', undefined, Constants.NUMBER_FORMATS.format_1)}`;
+        cardData.descriptionHtml = ground.addressLine;
         cardData.imgSrc = ground.imgLink;
         cardData.id = booking.slotId;
-        cardData.actionBtn.label = 'Confirmed';
+        cardData.actionBtn.label = HomeConstants.confirmed
         cardData.actionBtn.isSelectable = true;
+        cardData.actionBtn.type = 'custom';
+        cardData.actionBtn.customStyle = this.getDynamicStyle(slot);
+        if (slot.isCancelled) {
+          cardData.actionBtn.customContent = HomeConstants.CANCELLED;
+        } else if (slot.isFull) {
+          cardData.actionBtn.customContent = HomeConstants.GAME_ON;
+        } else {
+          cardData.actionBtn.customContent = `${HomeConstants.confirmed} ${slot.participantCount}/${slot.allowedCount}`;
+        }
         data.push(cardData);
       }
     })
     return data;
+  }
+
+  /**
+   * Gets the dynamic style for the slot
+   * @param slot
+   * @returns
+   */
+  getDynamicStyle(slot: GroundSlot): object {
+    let bgStyle = new BackgroundCSS();
+    if (slot) {
+      const final = slot.allowedCount;
+      const current = slot.participantCount;
+      const currentPercentage = (current / final) * 100;
+
+      if (slot.status === SlotStatus.cancelled) {
+        bgStyle.background = ColorsUtility.red;
+      } else if (currentPercentage >= 100) {
+        bgStyle.background = ColorsUtility.green;
+      } else {
+        bgStyle.background = ColorsUtility.getFillingGradient(ColorsUtility.yellow, ColorsUtility.white, currentPercentage);
+      }
+    }
+
+    return bgStyle;
   }
 }

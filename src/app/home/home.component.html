@@ -37,8 +37,13 @@
       </div>
       <div class="bookings-content" *ngIf="userBookings.length">
         <ng-container *ngFor="let content of contentList">
-          <app-interactive-card [data]="content" [selected]="false"
-            (actionBtnClick)="openList($event)"></app-interactive-card>
+          <app-interactive-card [data]="content" [selected]="false" (actionBtnClick)="openList($event)">
+            <mat-chip-list>
+              <mat-chip class="custom-footer-chip" [ngStyle]="content.actionBtn.customStyle"
+                [innerHtml]='content?.actionBtn?.customContent'>
+              </mat-chip>
+            </mat-chip-list>
+          </app-interactive-card>
         </ng-container>
       </div>
     </div>

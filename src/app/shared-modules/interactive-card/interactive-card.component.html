@@ -17,7 +17,8 @@
       <p class="description" [innerHtml]="data.descriptionHtml"></p>
     </mat-card-content>
     <mat-card-footer>
-      <mat-chip-list [selectable]="data.actionBtn.isSelectable" *ngIf="data.actionBtn.type === 'chip'">
+      <mat-chip-list [selectable]="data.actionBtn.isSelectable"
+        *ngIf="data.actionBtn.type === 'chip'; else customFooter">
         <mat-chip [ngClass]="{ 'primary-chip': isSelected }" class="custom-btn-chip">
           <span *ngIf="isSelected"> Selected </span>
           <span *ngIf="!isSelected">
@@ -25,6 +26,11 @@
           </span>
         </mat-chip>
       </mat-chip-list>
+      <ng-template #customFooter>
+        <div class="custom-footer-content">
+          <ng-content></ng-content>
+        </div>
+      </ng-template>
     </mat-card-footer>
   </div>
 </mat-card>

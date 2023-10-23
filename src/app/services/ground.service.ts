@@ -79,6 +79,17 @@ export class GroundService {
   }
 
   /**
+   * Gets all ground slots
+   * @returns
+   */
+  getSlots() {
+    return this.apiService.getCollectionWithIds('slots')
+      .pipe(
+        map(response => convertFirestoreDataArray(response, GroundSlot)),
+      );
+  }
+
+  /**
    * Gets the a particular slot by Id
    * @param slotId
    * @returns

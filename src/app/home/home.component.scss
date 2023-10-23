@@ -79,3 +79,11 @@
     }
   }
 }
+
+.custom-footer-chip {
+  font-size: $font-size-s !important;
+  min-width: 110px;
+  border: 1px solid $grey-3;
+  background-color: $white;
+  justify-content: center;
+}

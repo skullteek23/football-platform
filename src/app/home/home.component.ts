@@ -19,6 +19,9 @@ import { Subscription, combineLatest } from 'rxjs';
 import { HomeService } from './services/home.service';
 import { GroundService } from '@app/services/ground.service';
 import { SnackbarService } from '@app/services/snackbar.service';
+import { GroundSlot, SlotStatus } from '@app/models/ground.model';
+import { BackgroundCSS } from '@app/models/common.model';
+import { ColorsUtility } from '@app/utils/colors-utility';
 
 @Component({
   selector: 'app-home',
@@ -40,6 +43,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   contentList: InteractiveCardData[] = [];
   isBookingsInitialized = false;
   photoUrl: string = '';
+  slots: GroundSlot[] = [];
 
   constructor(
     private authService: AuthService,
@@ -136,13 +140,15 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     this.isBookingsInitialized = false;
     combineLatest([
       this.orderService.getBookingByUserId(this.uid),
-      this.groundService.getGrounds()
+      this.groundService.getGrounds(),
+      this.groundService.getSlots()
     ]).subscribe(response => {
-      if (response?.length === 2 && response[0] && response[1] && this.isUserLogged) {
+      if (response?.length === 3 && response[0] && response[1] && response[2] && this.isUserLogged) {
         const bookings = response[0];
         const grounds = response[1];
+        this.slots = response[2];
         this.userBookings = bookings || [];
-        this.contentList = this.homeService.parseBookingData(bookings, grounds);
+        this.contentList = this.homeService.parseBookingData(bookings, grounds, this.slots);
       }
       this.isBookingsInitialized = true;
     })

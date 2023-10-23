@@ -70,6 +70,14 @@ export class GroundSlot {
   get availableSpot(): number {
     return this.allowedCount - this.participantCount;
   }
+
+  get isFull(): boolean {
+    return this.participantCount >= this.allowedCount;
+  }
+
+  get isCancelled(): boolean {
+    return this.status === SlotStatus.cancelled;
+  }
 }
 
 export class GroundPrice {
@@ -91,5 +99,6 @@ export enum FacilityStatus {
 export enum SlotStatus {
   notAvailable = 0,
   available = 1,
-  booked = 2
+  booked = 2,
+  cancelled = 3
 }

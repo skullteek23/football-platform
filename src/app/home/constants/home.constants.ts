@@ -3,6 +3,9 @@ import { environment } from 'src/environments/environment';
 
 export class HomeConstants {
   static readonly salutation = 'Footballer';
+  static readonly confirmed = 'Confirmed';
+  static readonly GAME_ON = 'Game ON!';
+  static readonly CANCELLED = 'Cancelled';
 }
 
 export const ACTIONS_MENU_NEW_USER: IconSelectionDataItem[] = [

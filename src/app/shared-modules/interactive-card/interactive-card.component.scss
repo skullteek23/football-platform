@@ -115,6 +115,11 @@ mat-card {
   .mat-card-footer {
     margin-top: 8px;
   }
+
+  .custom-footer-content {
+    width: 100%;
+    font-size: $font-size-s !important;
+  }
 }
 
 .active {

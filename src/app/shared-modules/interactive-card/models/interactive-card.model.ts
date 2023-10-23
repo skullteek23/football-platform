@@ -8,5 +8,7 @@ export class InteractiveCardData {
     type: 'chip',
     label: 'Action',
     isSelectable: true,
+    customContent: '',
+    customStyle: {}
   };
 }
