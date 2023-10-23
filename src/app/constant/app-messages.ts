@@ -1,6 +1,6 @@
 export const HomeMessages = {
   success: {
-    refreshPage: 'Bookings refreshed!',
+    refreshPage: 'List refreshed!',
   },
   error: {
     noBooking: 'Bookings will appear here.',
