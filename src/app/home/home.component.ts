@@ -22,6 +22,7 @@ import { SnackbarService } from '@app/services/snackbar.service';
 import { GroundSlot, SlotStatus } from '@app/models/ground.model';
 import { BackgroundCSS } from '@app/models/common.model';
 import { ColorsUtility } from '@app/utils/colors-utility';
+import { getFirestoreErrorMsg } from '@app/utils/api-error-handling-utility';
 
 @Component({
   selector: 'app-home',
@@ -142,15 +143,21 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
       this.orderService.getBookingByUserId(this.uid),
       this.groundService.getGrounds(),
       this.groundService.getUpcomingSlots()
-    ]).subscribe(response => {
-      if (response?.length === 3 && response[0] && response[1] && response[2] && this.isUserLogged) {
-        const bookings = response[0];
-        const grounds = response[1];
-        this.slots = response[2];
-        this.userBookings = bookings || [];
-        this.contentList = this.homeService.parseBookingData(bookings, grounds, this.slots);
+    ]).subscribe({
+      next: response => {
+        if (response?.length === 3 && response[0] && response[1] && response[2] && this.isUserLogged) {
+          const bookings = response[0];
+          const grounds = response[1];
+          this.slots = response[2];
+          this.userBookings = bookings || [];
+          this.contentList = this.homeService.parseBookingData(bookings, grounds, this.slots);
+        }
+        this.isBookingsInitialized = true;
+      },
+      error: (err) => {
+        this.isBookingsInitialized = true;
+        this.snackbarService.displayError(getFirestoreErrorMsg(err));
       }
-      this.isBookingsInitialized = true;
     })
   }
 

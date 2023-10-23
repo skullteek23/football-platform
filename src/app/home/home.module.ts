@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule, CurrencyPipe } from '@angular/common';
+import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { HomeComponent } from './home.component';
 import { RouterModule } from '@angular/router';
 import { FooterModule } from '@app/footer/footer.module';
@@ -24,6 +24,6 @@ import { InteractiveCardModule } from '@app/shared-modules/interactive-card/inte
     InteractiveCardModule
   ],
   exports: [HomeComponent],
-  providers: [CurrencyPipe]
+  providers: [CurrencyPipe, DatePipe]
 })
 export class HomeModule { }

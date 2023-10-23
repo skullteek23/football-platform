@@ -5,7 +5,7 @@ import { InteractiveCardData } from '@app/shared-modules/interactive-card/models
 import { HomeConstants } from '../constants/home.constants';
 import { BackgroundCSS } from '@app/models/common.model';
 import { ColorsUtility } from '@app/utils/colors-utility';
-import { CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 import { Constants } from '@app/constant/app-constants';
 
 @Injectable({
@@ -14,11 +14,19 @@ import { Constants } from '@app/constant/app-constants';
 export class HomeService {
 
   constructor(
-    private currencyPipe: CurrencyPipe
+    private currencyPipe: CurrencyPipe,
+    private datePipe: DatePipe
   ) { }
 
+  /**
+   * Parses the booking data
+   * @param bookings
+   * @param grounds
+   * @param slots
+   * @returns
+   */
   parseBookingData(bookings: Booking[], grounds: Ground[], slots: GroundSlot[]): InteractiveCardData[] {
-    if (!bookings || bookings.length === 0 || !grounds || grounds.length === 0) {
+    if (!bookings || bookings.length === 0 || !grounds || grounds.length === 0 || !slots || slots.length === 0) {
       return [];
     }
     const data: InteractiveCardData[] = [];
@@ -29,7 +37,7 @@ export class HomeService {
         const cardData = new InteractiveCardData();
         cardData.title = ground.name;
         cardData.subtitle = `${this.currencyPipe.transform(booking.spots * slot.price, 'INR', undefined, Constants.NUMBER_FORMATS.format_1)}`;
-        cardData.descriptionHtml = ground.addressLine;
+        cardData.descriptionHtml = `${this.datePipe.transform(booking.timestamp, Constants.DATE_TIME_FORMATS.format_3)}<br/>${ground.addressLine}`;
         cardData.imgSrc = ground.imgLink;
         cardData.id = booking.slotId;
         cardData.actionBtn.label = HomeConstants.confirmed

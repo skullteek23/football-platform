@@ -72,8 +72,8 @@ export class GroundService {
     query.push(this.apiService.getWhereQuery('timestamp', '<=', max));
     return this.apiService.queryCollectionSnapshot('slots', query)
       .pipe(
-        map(response => combineArrayDataWithId(response)),
         map(response => convertFirestoreDataArray(response, GroundSlot)),
+        // To be useful when booking a slot
         map(response => this.filterAvailableSlots(response)),
       );
   }
@@ -83,7 +83,7 @@ export class GroundService {
    * @returns
    */
   getUpcomingSlots(): Observable<GroundSlot[]> {
-    const startDate = new Date().getTime();
+    const startDate = new Date().getTime() - Constants.THREE_DAYS_IN_MILLISECONDS - Constants.THREE_DAYS_IN_MILLISECONDS;
     const endDate = startDate + Constants.THREE_DAYS_IN_MILLISECONDS;
     const query = [];
     query.push(this.apiService.getWhereQuery('timestamp', '>=', startDate));
@@ -91,6 +91,8 @@ export class GroundService {
     return this.apiService.queryCollectionSnapshot('slots', query)
       .pipe(
         map(response => convertFirestoreDataArray(response, GroundSlot)),
+        // To be useful when viewing already booked slots
+        // All slots such as cancelled, booked, available will be shown
       );
   }
 

@@ -30,12 +30,12 @@
       </button>
     </div>
     <div class="content">
-      <div class="onboarding-content" *ngIf="!userBookings.length">
+      <div class="onboarding-content" *ngIf="!contentList.length">
         <app-wide-button *ngIf="!isUserLogged" (clickEv)="getStarted()"
           [displayDetails]="buttonDetails"></app-wide-button>
         <app-placeholder [message]="messages.error.noBooking"></app-placeholder>
       </div>
-      <div class="bookings-content" *ngIf="userBookings.length">
+      <div class="bookings-content" *ngIf="contentList.length">
         <ng-container *ngFor="let content of contentList">
           <app-interactive-card [data]="content" [selected]="false" (actionBtnClick)="openList($event)">
             <mat-chip-list>
