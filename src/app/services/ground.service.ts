@@ -79,11 +79,16 @@ export class GroundService {
   }
 
   /**
-   * Gets all ground slots
+   * Returns the slots for the next three days
    * @returns
    */
-  getSlots() {
-    return this.apiService.getCollectionWithIds('slots')
+  getUpcomingSlots(): Observable<GroundSlot[]> {
+    const startDate = new Date().getTime();
+    const endDate = startDate + Constants.THREE_DAYS_IN_MILLISECONDS;
+    const query = [];
+    query.push(this.apiService.getWhereQuery('timestamp', '>=', startDate));
+    query.push(this.apiService.getWhereQuery('timestamp', '<=', endDate));
+    return this.apiService.queryCollectionSnapshot('slots', query)
       .pipe(
         map(response => convertFirestoreDataArray(response, GroundSlot)),
       );

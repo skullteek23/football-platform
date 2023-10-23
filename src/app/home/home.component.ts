@@ -141,7 +141,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     combineLatest([
       this.orderService.getBookingByUserId(this.uid),
       this.groundService.getGrounds(),
-      this.groundService.getSlots()
+      this.groundService.getUpcomingSlots()
     ]).subscribe(response => {
       if (response?.length === 3 && response[0] && response[1] && response[2] && this.isUserLogged) {
         const bookings = response[0];
