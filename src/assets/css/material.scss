@@ -40,3 +40,9 @@ mat-list {
     }
   }
 }
+
+.user-orders-page {
+  .mat-list-base {
+    padding-top: unset !important;
+  }
+}

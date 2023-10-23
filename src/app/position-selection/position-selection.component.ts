@@ -89,6 +89,6 @@ export class PositionSelectionComponent implements OnInit {
    * Navigates to the next page
    */
   navigateToNext() {
-    this.router.navigate(['/main', 'onboarding', 'select-ground']);
+    this.router.navigate(['/m', 'onboarding', 'select-ground']);
   }
 }

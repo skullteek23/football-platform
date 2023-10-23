@@ -297,7 +297,7 @@ export class AuthService {
     const data = route?.data?.hasOwnProperty('destination') ? route.data['destination'] : null;
     if (data && data === 'onboarding') {
       if (this.isUserOnboard(role)) {
-        this.router.navigate(['/main', 'book-match']);
+        this.router.navigate(['/m', 'book-match']);
         return false;
       } else {
         return true;
@@ -306,7 +306,7 @@ export class AuthService {
       if (this.isUserOnboard(role)) {
         return true;
       } else {
-        this.router.navigate(['/main', 'onboarding']);
+        this.router.navigate(['/m', 'onboarding']);
         return false;
       }
     }

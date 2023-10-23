@@ -30,7 +30,7 @@
     }
   }
 
-  .heading {
+  .custom-heading {
     @include flexSpaceBetween;
 
     .name-text {
@@ -75,6 +75,10 @@
   }
 
   .stats-container {
+    .heading {
+      @include flexStartRow;
+    }
+
     .title-text {
       @include flexCenter(row);
       color: $grey-1;

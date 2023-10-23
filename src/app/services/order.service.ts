@@ -20,7 +20,12 @@ export class OrderService {
    * @returns
    */
   generateOID(tempID: string): string {
-    return `${Constants.ORDER_PREFIX}${tempID.toUpperCase()}`;
+    if (tempID && !tempID.startsWith(Constants.ORDER_PREFIX)) {
+      return `${Constants.ORDER_PREFIX}${tempID.toUpperCase()}`;
+    } else if (tempID) {
+      return tempID.toUpperCase();
+    }
+    return '';
   }
 
   /**
@@ -42,6 +47,20 @@ export class OrderService {
     return this.apiService.getDocument('orders', this.generateOID(orderId))
       .pipe(
         map(response => convertFirestoreData(response, Order)),
+      );
+  }
+
+  /**
+   * Gets the order by id
+   * @param orderId
+   * @returns
+   */
+  getOrdersByUser(uid: string): Observable<Order[]> {
+    const query = [];
+    query.push(this.apiService.getWhereQuery('uid', '==', uid));
+    return this.apiService.queryCollectionSnapshot('orders', query)
+      .pipe(
+        map(response => convertFirestoreDataArray(response, Order)),
       );
   }
 

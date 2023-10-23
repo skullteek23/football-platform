@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatBottomSheetConfig } from '@angular/material/bottom-sheet';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '@app/authentication/auth.service';
 import { EmailService } from '@app/authentication/email.service';
 import { Constants } from '@app/constant/app-constants';
@@ -8,22 +8,33 @@ import { OrderMessages, PlayerListMessages } from '@app/constant/app-messages';
 import { CancellationPolicyComponent } from '@app/legal-info/cancellation-policy/cancellation-policy.component';
 import { IUser } from '@app/models/common.model';
 import { Ground } from '@app/models/ground.model';
-import { Booking, Order } from '@app/models/order.model';
-import { Position } from '@app/models/user.model';
+import { Order, Booking } from '@app/models/order.model';
 import { BottomSheetService } from '@app/services/bottom-sheet.service';
 import { GroundService } from '@app/services/ground.service';
 import { OrderService } from '@app/services/order.service';
 import { SnackbarService } from '@app/services/snackbar.service';
-import { ButtonConfig, ButtonTheme } from '@app/shared-modules/buttons/models/button.model';
-import { PlainTextViewerComponent } from '@app/shared-modules/plain-text-viewer/plain-text-viewer.component';
-import { ResultBoxData, ResultType } from '@app/shared-modules/result-box/models/result-box.model';
+import { ButtonTheme, ButtonConfig } from '../buttons/models/button.model';
+import { ResultType, ResultBoxData } from '../result-box/models/result-box.model';
+import { Position } from '@app/models/user.model';
 
 @Component({
-  selector: 'app-success',
-  templateUrl: './success.component.html',
-  styleUrls: ['./success.component.scss']
+  selector: 'app-order-page-success',
+  templateUrl: './order-page-success.component.html',
+  styleUrls: ['./order-page-success.component.scss']
 })
-export class SuccessComponent implements OnInit {
+export class OrderPageSuccessComponent implements OnInit {
+
+  @Input() set oid(value: string) {
+    if (value) {
+      this.orderID = value;
+      this.data.title = OrderMessages.booking.thankYou;
+      this.data.footer = Constants.ORDER_PREFIX_UI + this.orderID;
+      this.data.description = OrderMessages.booking.thankYouNote;
+      this.setBtnDetails();
+      this.getOrderDetails();
+      this.getBookingDetails();
+    }
+  }
 
   readonly ResultType = ResultType;
   readonly ButtonTheme = ButtonTheme;
@@ -57,19 +68,6 @@ export class SuccessComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      if (params && params.hasOwnProperty('oid') && params['oid']) {
-        this.orderID = params['oid'];
-        this.data.title = OrderMessages.booking.thankYou;
-        this.data.footer = Constants.ORDER_PREFIX_UI + this.orderID;
-        this.data.description = OrderMessages.booking.thankYouNote;
-        this.setBtnDetails();
-        this.getOrderDetails();
-        this.getBookingDetails();
-      } else {
-        this.router.navigate(['/error']);
-      }
-    });
     this.authService._user().subscribe(user => {
       if (user?.uid) {
         this.user = user;
@@ -142,7 +140,7 @@ export class SuccessComponent implements OnInit {
    */
   showList() {
     if (this.booking.slotId) {
-      this.router.navigate(['/main', 'players-list', this.booking.slotId]);
+      this.router.navigate(['/m', 'players-list', this.booking.slotId]);
     } else {
       this.snackbarService.displayError(PlayerListMessages.error.noBookings)
     }

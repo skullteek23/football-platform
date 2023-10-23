@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ButtonConfig, ButtonTheme } from '@app/shared-modules/buttons/models/button.model';
-import { ResultBoxData, ResultType } from '@app/shared-modules/result-box/models/result-box.model';
+import { ButtonTheme, ButtonConfig } from '../buttons/models/button.model';
+import { ResultType, ResultBoxData } from '../result-box/models/result-box.model';
 
 @Component({
-  selector: 'app-failure',
-  templateUrl: './failure.component.html',
-  styleUrls: ['./failure.component.scss']
+  selector: 'app-order-page-failure',
+  templateUrl: './order-page-failure.component.html',
+  styleUrls: ['./order-page-failure.component.scss']
 })
-export class FailureComponent implements OnInit {
+export class OrderPageFailureComponent implements OnInit {
   readonly ResultType = ResultType;
   readonly ButtonTheme = ButtonTheme
   data = new ResultBoxData();

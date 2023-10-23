@@ -22,7 +22,7 @@ export class Constants {
   };
   static readonly SEVEN_MINUTES_IN_MILLISECONDS = 420000;
   static readonly ORDER_PREFIX = 'OD';
-  static readonly ORDER_PREFIX_UI = 'Order #' + Constants.ORDER_PREFIX;
+  static readonly ORDER_PREFIX_UI = 'Order #';
   static readonly DAY_TIMES = {
     morning: 'Morning',
     afternoon: 'Afternoon',

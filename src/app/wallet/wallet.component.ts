@@ -8,6 +8,8 @@ import { SnackbarService } from '@app/services/snackbar.service';
 import { UserService } from '@app/services/user.service';
 import { getFirestoreErrorMsg } from '@app/utils/api-error-handling-utility';
 import { ArraySorting } from '@app/utils/array-sorting-utility';
+import { WalletService } from './services/wallet.service';
+import { TransactionItemData } from '@app/shared-modules/transaction-item/models/transaction-item.model';
 
 @Component({
   selector: 'app-wallet',
@@ -20,6 +22,7 @@ export class WalletComponent implements OnInit {
 
   balance = 0;
   transactionsList: WalletTransaction[] = [];
+  transactionsListForUi: TransactionItemData[] = [];
   user!: IUser;
   isTransactionsInit = false;
   isBalanceInit = false;
@@ -30,7 +33,8 @@ export class WalletComponent implements OnInit {
     private userService: UserService,
     private authService: AuthService,
     private snackbarService: SnackbarService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private walletService: WalletService
   ) { }
 
   ngOnInit(): void {
@@ -70,7 +74,7 @@ export class WalletComponent implements OnInit {
       this.orderService.getUserTransactions(this.user.uid).subscribe({
         next: (response) => {
           // sort transactions by latest first
-          this.transactionsList = response.sort(ArraySorting.sortObjectByKey('createdOn', 'desc'));
+          this.transactionsList = response;
           this.creditTxnList = [];
           this.debitTxnList = [];
           this.transactionsList.forEach((txn) => {

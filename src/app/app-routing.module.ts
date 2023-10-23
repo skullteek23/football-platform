@@ -14,7 +14,7 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'main',
+    path: 'm',
     canActivate: [UnauthorizedAccessGuard],
     loadChildren: () =>
       import('./main-shell/main-shell.module').then((m) => m.MainShellModule),

@@ -5,12 +5,14 @@ import { SuccessComponent } from './components/success/success.component';
 import { FailureComponent } from './components/failure/failure.component';
 import { RouterModule, Routes } from '@angular/router';
 import { PaymentGatewayComponent } from './components/payment-gateway/payment-gateway.component';
-import { ResultBoxModule } from '../result-box/result-box.module';
-import { ButtonsModule } from '../buttons/buttons.module';
+import { ResultBoxModule } from '../shared-modules/result-box/result-box.module';
+import { ButtonsModule } from '../shared-modules/buttons/buttons.module';
 import { FooterModule } from '@app/footer/footer.module';
-import { LoaderModule } from '../loader/loader.module';
+import { LoaderModule } from '../shared-modules/loader/loader.module';
 import { MatIconModule } from '@angular/material/icon';
 import { CancellationPolicyModule } from '@app/legal-info/cancellation-policy/cancellation-policy.module';
+import { OrderPageSuccessModule } from '@app/shared-modules/order-page-success/order-page-success.module';
+import { OrderPageFailureModule } from '@app/shared-modules/order-page-failure/order-page-failure.module';
 
 const routes: Routes = [
   {
@@ -33,7 +35,9 @@ const routes: Routes = [
     LoaderModule,
     FooterModule,
     MatIconModule,
-    CancellationPolicyModule
-  ],
+    CancellationPolicyModule,
+    OrderPageSuccessModule,
+    OrderPageFailureModule
+  ]
 })
 export class PaymentModule { }

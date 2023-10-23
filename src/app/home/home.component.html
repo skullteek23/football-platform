@@ -11,10 +11,10 @@
         Hi, {{ name | titlecase }}!
       </span>
       <ng-container *ngIf="isUserLogged">
-        <button mat-icon-button (click)="navigateTo('/main/user/account')" *ngIf="!photoUrl">
+        <button mat-icon-button (click)="navigateTo('/m/user/account')" *ngIf="!photoUrl">
           <mat-icon fontSet='material-icons-round'>account_circle</mat-icon>
         </button>
-        <a class="account-photo" (click)="navigateTo('/main/user/account')" *ngIf="photoUrl">
+        <a class="account-photo" (click)="navigateTo('/m/user/account')" *ngIf="photoUrl">
           <img [src]="photoUrl" alt="User photo">
         </a>
       </ng-container>

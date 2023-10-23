@@ -134,7 +134,7 @@ export class EditDetailsComponent implements OnInit {
           this.snackbarService.displayCustomMsg(this.messages.success.changesSaved);
         }
         this.hideLoader();
-        this.router.navigate(['/main', 'user', 'account']);
+        this.router.navigate(['/m', 'user', 'account']);
       })
       .catch(err => {
         this.hideLoader();

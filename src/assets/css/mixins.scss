@@ -53,6 +53,13 @@
   display: flex;
   flex-direction: column;
   gap: $gap;
+
+  .heading {
+    @include flexCenter(row);
+    text-align: center;
+    width: 100%;
+    // height: $heading-height;
+  }
 }
 
 @mixin extra-small-screen {

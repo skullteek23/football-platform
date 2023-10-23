@@ -157,7 +157,7 @@ export class ViewDetailsComponent implements OnInit {
    * Navigate to orders page
    */
   goToOrders() {
-    this.router.navigate(['/main', 'user', 'orders']);
+    this.router.navigate(['/m', 'user', 'orders']);
   }
 
   /**
@@ -171,6 +171,6 @@ export class ViewDetailsComponent implements OnInit {
    * Edit the details
    */
   editDetails() {
-    this.router.navigate(['/main', 'user', 'account', 'edit'])
+    this.router.navigate(['/m', 'user', 'account', 'edit'])
   }
 }

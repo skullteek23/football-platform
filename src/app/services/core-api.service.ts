@@ -229,6 +229,7 @@ export class CoreApiService {
       const qRef = query(ref, ...q);
       return collectionSnapshots(qRef).pipe(
         take(1),
+        map(resp => combineArrayDataWithId(resp)),
         catchError(err => this.handleApiError(err))
       );
     }

@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-view-order',
-  templateUrl: './view-order.component.html',
-  styleUrls: ['./view-order.component.scss']
+  selector: 'app-success',
+  templateUrl: './success.component.html',
+  styleUrls: ['./success.component.scss']
 })
-export class ViewOrderComponent implements OnInit {
+export class SuccessComponent implements OnInit {
 
   orderID!: string;
 
@@ -16,7 +16,7 @@ export class ViewOrderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
+    this.route.queryParams.subscribe(params => {
       if (params && params.hasOwnProperty('oid') && params['oid']) {
         this.orderID = params['oid'];
       } else {

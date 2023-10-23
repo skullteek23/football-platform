@@ -8,7 +8,6 @@ import {
   ACTIONS_MENU_NEW_USER,
   ACTIONS_MENU_EXISTING_USER,
 } from '@app/home/constants/home.constants';
-import { Booking } from '@app/models/order.model';
 import { OrderService } from '@app/services/order.service';
 import { ButtonConfig } from '@app/shared-modules/buttons/models/button.model';
 import {
@@ -156,7 +155,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   openList(item: InteractiveCardData) {
     // Saving slot id in the ID field of the card data
     if (item.id) {
-      this.router.navigate(['/main', 'players-list', item.id]);
+      this.router.navigate(['/m', 'players-list', item.id]);
     } else {
       console.log('Invalid selection!')
     }

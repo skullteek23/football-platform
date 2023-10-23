@@ -10,6 +10,7 @@ import { FormFieldErrorsModule } from '@app/shared-modules/form-field-errors/for
 import { CustomFileUploaderModule } from '@app/shared-modules/custom-file-uploader/custom-file-uploader.module';
 import { ButtonsModule } from '@app/shared-modules/buttons/buttons.module';
 import { ResultBoxModule } from '@app/shared-modules/result-box/result-box.module';
+import { FooterModule } from '@app/footer/footer.module';
 
 @NgModule({
   declarations: [SupportComponent],
@@ -23,7 +24,8 @@ import { ResultBoxModule } from '@app/shared-modules/result-box/result-box.modul
     FormFieldErrorsModule,
     CustomFileUploaderModule,
     ButtonsModule,
-    ResultBoxModule
+    ResultBoxModule,
+    FooterModule
   ],
 })
 export class SupportModule { }

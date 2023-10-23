@@ -1,0 +1,22 @@
+@import 'variables';
+@import 'mixins';
+
+.main-container {
+  @include mainPageContainer;
+
+  mat-list {
+    width: 100%;
+    min-height: 300px;
+  }
+
+  .placeholder {
+    @include flexStartCol(8px);
+    width: 100%;
+    padding: 0px !important;
+
+    .list-item {
+      width: 100%;
+      height: 72px;
+    }
+  }
+}

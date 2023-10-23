@@ -148,7 +148,7 @@ export class GroundSelectionService {
   continue(): void {
     this.sessionStorage.set(SessionStorageProperties.USER_GROUND_SELECTION, this.userSelectionData);
     if (this.userSelectionData.slotId && this.userSelectionData.facilityId) {
-      this.router.navigate(['/main', 'payment']);
+      this.router.navigate(['/m', 'payment']);
     } else {
       console.log('Invalid selection data!');
     }

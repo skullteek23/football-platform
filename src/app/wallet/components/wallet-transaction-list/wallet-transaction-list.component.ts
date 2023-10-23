@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { WalletTransaction } from '@app/models/order.model';
+import { TransactionItemData } from '@app/shared-modules/transaction-item/models/transaction-item.model';
+import { WalletService } from '@app/wallet/services/wallet.service';
 
 @Component({
   selector: 'app-wallet-transaction-list',
@@ -8,9 +10,15 @@ import { WalletTransaction } from '@app/models/order.model';
 })
 export class WalletTransactionListComponent implements OnInit {
 
-  @Input() list: WalletTransaction[] = [];
+  @Input() set list(value: WalletTransaction[]) {
+    this.transactionsListForUi = this.walletService.parseTransactionList(value);
+  }
 
-  constructor() { }
+  transactionsListForUi: TransactionItemData[] = [];
+
+  constructor(
+    private walletService: WalletService
+  ) { }
 
   ngOnInit(): void {
   }

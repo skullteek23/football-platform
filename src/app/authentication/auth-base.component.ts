@@ -116,7 +116,7 @@ export class AuthBaseComponent implements CanComponentDeactivate {
             );
             this.closeSheet(redirectUrl);
           } else {
-            this.closeSheet('/main/book-match');
+            this.closeSheet('/m/book-match');
           }
           this.hideLoader();
         })
@@ -144,7 +144,7 @@ export class AuthBaseComponent implements CanComponentDeactivate {
           if (displayName) {
             this.authService.updateUserProfile({ displayName });
           }
-          this.closeSheet('/main/onboarding');
+          this.closeSheet('/m/onboarding');
           this.hideLoader();
         })
         .catch(this.handleSignInError.bind(this));

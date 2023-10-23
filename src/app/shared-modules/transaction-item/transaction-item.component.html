@@ -1,0 +1,18 @@
+<div class="strip" matRipple (click)="openLink()">
+  <div class="content">
+    <div class="content-text">
+      <div class="content-text-description">
+        {{data.label}}
+      </div>
+      <div class="content-text-date">{{data.subLabel}}</div>
+    </div>
+    <div class="content-highlighted">
+      <span class="content-highlighted-label" [ngClass]="data.viewValueClass">
+        {{data.viewValue }}
+      </span>
+      <mat-icon fontSet="material-icons-round" *ngIf="data.routeLink">
+        chevron_right
+      </mat-icon>
+    </div>
+  </div>
+</div>
