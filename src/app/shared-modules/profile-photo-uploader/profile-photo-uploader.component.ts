@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Constants } from '@app/constant/app-constants';
-import { FileType } from '@app/utils/file-utlity';
+import { FileType } from '@app/utils/file-utility';
 
 @Component({
   selector: 'app-profile-photo-uploader',

@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Storage, getDownloadURL, ref, uploadBytes } from '@angular/fire/storage';
 import { CloudStorageFileScreens } from '@app/constant/api-constants';
 import { Constants } from '@app/constant/app-constants';
-import { sanitizeFileName } from '@app/utils/file-utlity';
+import { sanitizeFileName } from '@app/utils/file-utility';
 
 @Injectable({
   providedIn: 'root'
