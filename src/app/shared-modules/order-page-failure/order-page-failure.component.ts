@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ButtonTheme, ButtonConfig } from '../buttons/models/button.model';
 import { ResultType, ResultBoxData } from '../result-box/models/result-box.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order-page-failure',
@@ -9,13 +10,15 @@ import { ResultType, ResultBoxData } from '../result-box/models/result-box.model
 })
 export class OrderPageFailureComponent implements OnInit {
   readonly ResultType = ResultType;
-  readonly ButtonTheme = ButtonTheme
-  data = new ResultBoxData();
+  readonly ButtonTheme = ButtonTheme;
 
+  data = new ResultBoxData();
   homeBtnDetails = new ButtonConfig();
-  mapsBtnDetails = new ButtonConfig();
-  invoiceBtnDetails = new ButtonConfig();
-  constructor() { }
+  tryAgainBtnDetails = new ButtonConfig();
+
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.data.title = 'Uh-Oh! Booking failed.';
@@ -33,39 +36,22 @@ export class OrderPageFailureComponent implements OnInit {
     this.homeBtnDetails.icon = 'home';
     this.homeBtnDetails.label = 'Go Home';
 
-    this.mapsBtnDetails.icon = 'location_on';
-    this.mapsBtnDetails.label = 'Open Ground Location (In Maps) asjfv jahsvf javjs fvjhk';
+    this.tryAgainBtnDetails.icon = 'restart_alt';
+    this.tryAgainBtnDetails.label = 'Try again';
 
-    this.invoiceBtnDetails.icon = 'insert_drive_file';
-    this.invoiceBtnDetails.label = 'Email Invoice (PDF)';
   }
 
   /**
-   * Shows player's list for the booking
+   * Shows grounds list for try again
    */
-  showList() {
-
+  showGrounds() {
+    this.router.navigate(['/m', 'book-match', 'select-ground']);
   }
 
   /**
    * Navigates to home screen
    */
   navigateHome() {
-
+    this.router.navigate(['/']);
   }
-
-  /**
-   * Open google maps link
-   */
-  openMaps() {
-
-  }
-
-  /**
-   * Emails the invoice to the user
-   */
-  emailInvoice() {
-
-  }
-
 }

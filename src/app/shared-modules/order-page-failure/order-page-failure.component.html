@@ -20,10 +20,8 @@
       </div>
     </div>
   </app-result-box>
-  <app-wide-button [displayDetails]="homeBtnDetails" [theme]='ButtonTheme.primary'
+  <app-wide-button [displayDetails]="tryAgainBtnDetails" [theme]='ButtonTheme.primary'
+    (clickEv)="showGrounds()"></app-wide-button>
+  <app-wide-button [displayDetails]="homeBtnDetails" [theme]='ButtonTheme.secondary'
     (clickEv)="navigateHome()"></app-wide-button>
-  <app-wide-button [displayDetails]="mapsBtnDetails" [theme]='ButtonTheme.secondary'
-    (clickEv)="openMaps()"></app-wide-button>
-  <app-wide-button [displayDetails]="invoiceBtnDetails" [theme]='ButtonTheme.secondary'
-    (clickEv)="emailInvoice()"></app-wide-button>
 </div>

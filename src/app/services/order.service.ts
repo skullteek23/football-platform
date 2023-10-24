@@ -4,6 +4,7 @@ import { Booking, Order, WalletTransaction } from '@app/models/order.model';
 import { convertFirestoreData, convertFirestoreDataArray, convertObjectToFirestoreData } from '@app/utils/objects-utility';
 import { Constants } from '@app/constant/app-constants';
 import { Observable, map, tap } from 'rxjs';
+import { UserSlotSelectionInfo } from '@app/shared-modules/ground-selection/models/ground-selection.model';
 
 @Injectable({
   providedIn: 'root'
@@ -71,7 +72,7 @@ export class OrderService {
    */
   getBookingByOrderId(orderId: string): Observable<Booking> {
     const query = [];
-    query.push(this.apiService.getWhereQuery('orderId', '==', orderId));
+    query.push(this.apiService.getWhereQuery('orderIds', 'array-contains', orderId));
     return this.apiService.queryCollection('bookings', query)
       .pipe(
         map(response => convertFirestoreData(response[0], Booking)),
@@ -107,12 +108,39 @@ export class OrderService {
   }
 
   /**
+   * Returns booking if same booking exists for the user for a slot
+   * @param data
+   * @param uid
+   * @returns
+   */
+  getExistingBookingForUser(data: UserSlotSelectionInfo, uid: string): Observable<Booking> {
+    const query = [];
+    query.push(this.apiService.getWhereQuery('uid', '==', uid));
+    query.push(this.apiService.getWhereQuery('slotId', '==', data.slotId));
+    return this.apiService.queryCollectionSnapshot('bookings', query)
+      .pipe(
+        map(response => convertFirestoreDataArray(response, Booking)),
+        map(resp => resp?.length ? resp[0] : new Booking())
+      )
+  }
+
+  /**
    * Add booking
    * @param data
    * @returns
    */
   addBooking(data: Booking): Promise<any> {
     return this.apiService.addDocument('bookings', convertObjectToFirestoreData(data));
+  }
+
+  /**
+   * Updates existing booking
+   * @param data
+   * @param uid
+   * @returns
+   */
+  updateBooking(data: Partial<Booking> | Booking, docId: string) {
+    return this.apiService.updateDocument('bookings', data, docId);
   }
 
   /**

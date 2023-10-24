@@ -21,7 +21,7 @@ export class Order {
 export class Booking {
   id: string = '';
   uid: string = '';
-  orderId: string = '';
+  orderIds: string[] = [];
   groundId: string = '';
   slotId: string = '';
   timestamp: number = new Date().getTime();

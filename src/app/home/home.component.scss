@@ -76,6 +76,11 @@
       .onboarding-content {
         @include flexStartCol(8px);
       }
+
+      .bookings-content {
+        @include flexSpaceBetween(16px);
+        flex-wrap: wrap;
+      }
     }
   }
 }

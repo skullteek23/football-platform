@@ -18,6 +18,7 @@ import { Constants } from '@app/constant/app-constants';
 export class PlayerListComponent implements OnInit {
 
   readonly timeFormat = Constants.DATE_TIME_FORMATS.format_3;
+  readonly dateFormat = Constants.DATE_TIME_FORMATS.format_5;
 
   slotID: string = '';
   slot!: GroundSlot;

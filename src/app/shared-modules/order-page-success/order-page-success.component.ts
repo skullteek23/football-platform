@@ -61,7 +61,6 @@ export class OrderPageSuccessComponent implements OnInit {
     private authService: AuthService,
     private snackbarService: SnackbarService,
     private emailService: EmailService,
-    private route: ActivatedRoute,
     private orderService: OrderService,
     private groundService: GroundService,
     private bottomSheetService: BottomSheetService

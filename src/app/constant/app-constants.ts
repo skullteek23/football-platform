@@ -15,7 +15,8 @@ export class Constants {
     format_1: 'dd EEE', // 8 Sat
     format_2: 'd MMM, y', // 14 Aug, 2021
     format_3: 'h:mm a', // 8:03 PM
-    format_4: 'd MMM, hh:mm a' // 14 Aug, 08:03 PM
+    format_4: 'd MMM, hh:mm a', // 14 Aug, 08:03 PM
+    format_5: 'EEEE, MMMM d' // Saturday, August 14
   };
   static readonly NUMBER_FORMATS = {
     format_1: '1.0-0', // 3.6 -> 4

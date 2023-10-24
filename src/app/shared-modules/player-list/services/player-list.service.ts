@@ -6,6 +6,7 @@ import { OrderService } from '@app/services/order.service';
 import { UserService } from '@app/services/user.service';
 import { Observable } from 'rxjs';
 import { Constants } from '@app/constant/app-constants';
+import { ArraySorting } from '@app/utils/array-sorting-utility';
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +49,7 @@ export class PlayerListService {
         list.push(this.getListItem(Constants.DELETED_USER_PLACEHOLDER, Constants.NOT_AVAILABLE, ''));
       }
     });
+    list.sort(ArraySorting.sortObjectByKey('name'));
     if (list.length < maxPlayers) {
       for (let i = list.length; i < maxPlayers; i++) {
         list.push(this.getListItem('', '', ''));
