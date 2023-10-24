@@ -140,11 +140,10 @@ export class CurrentSelectionComponent implements OnInit {
   getSlots() {
     this.groundService.getFacilitySlots(this.selectedFacility.value, this.selectedIndex).subscribe({
       next: (response: GroundSlot[]) => {
-        if (response?.length) {
-          this.setSlots(response);
-        } else {
+        if (!response?.length) {
           this.snackbarService.displayError(this.messages.error.noSlots);
         }
+        this.setSlots(response);
         this.groundSelectionService.updateFacility(this.selectedFacility.value);
         this.groundSelectionService.resetSlotSelection();
       },
@@ -162,8 +161,8 @@ export class CurrentSelectionComponent implements OnInit {
    * @param response
    */
   setSlots(response: GroundSlot[]) {
-    this.slots = response;
-    this.slotsViewList = response.map(slot => ({ value: slot.id, viewValue: DateParseUtility.formatTimestampTo12Hour(slot.timestamp) }));;
+    this.slots = response || [];
+    this.slotsViewList = response?.map(slot => ({ value: slot.id, viewValue: DateParseUtility.formatTimestampTo12Hour(slot.timestamp) })) || [];
   }
 
   /**

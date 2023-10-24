@@ -1,23 +1,23 @@
 import { Injectable } from '@angular/core';
 import { InteractiveCardData } from '@app/shared-modules/interactive-card/models/interactive-card.model';
 import { SelectedGroundInfo, TabLabel, UserSlotSelectionInfo } from '../models/ground-selection.model';
-import { Router } from '@angular/router';
 import { SessionStorageService } from '@app/services/session-storage.service';
 import { Constants, SessionStorageProperties } from '@app/constant/app-constants';
 import { Ground, GroundFacility, GroundPrice } from '@app/models/ground.model';
 import { ArraySorting } from '@app/utils/array-sorting-utility';
 import { DatePipe } from '@angular/common';
 import { GroundService } from '@app/services/ground.service';
+import { Subject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class GroundSelectionService {
 
   private userSelectionData: UserSlotSelectionInfo = new UserSlotSelectionInfo();
+  private continueStepChange = new Subject<UserSlotSelectionInfo>();
 
   constructor(
-    private router: Router,
     private sessionStorage: SessionStorageService,
     private datePipe: DatePipe,
     private groundService: GroundService
@@ -134,6 +134,13 @@ export class GroundSelectionService {
   }
 
   /**
+   * Returns observable for continue step change
+   */
+  get _continueStepChange() {
+    return this.continueStepChange.asObservable();
+  }
+
+  /**
    * Gets the tab date
    * @param date
    * @returns
@@ -148,10 +155,10 @@ export class GroundSelectionService {
   continue(): void {
     this.sessionStorage.set(SessionStorageProperties.USER_GROUND_SELECTION, this.userSelectionData);
     if (this.userSelectionData.slotId && this.userSelectionData.facilityId) {
-      this.router.navigate(['/m', 'payment']);
+      this.continueStepChange.next(this.userSelectionData);
+      this.resetGroundSelection();
     } else {
       console.log('Invalid selection data!');
     }
-    this.resetGroundSelection();
   }
 }

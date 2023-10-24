@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { InteractiveCardData } from '../interactive-card/models/interactive-card.model';
 import { SelectedGroundInfo, UserSlotSelectionInfo } from './models/ground-selection.model';
 import { GroundSelectionService } from './services/ground-selection.service';
@@ -19,13 +19,24 @@ import { isEnumKey } from '@app/utils/objects-utility';
 })
 export class GroundSelectionComponent implements OnInit {
 
+  @Input() set position(value: any) {
+    if (value !== undefined && value !== null) {
+      this.userPosition = value;
+      if (this.userPosition && isEnumKey(this.userPosition, Position)) {
+        this.showSpotCount = this.userPosition === Position.manager;
+      }
+      this.payBtnDetails.label = 'Pay & Book';
+      this.getGrounds();
+    }
+  }
+
   readonly SHIMMER_ARRAY = Constants.PLACEHOLDER_ARRAY;
   readonly messages = GroundSelectionMessages;
 
   groundsList: InteractiveCardData[] = [];
+  userPosition = Position.manager;
   selectionData!: SelectedGroundInfo;
   isGroundSelected = false;
-  userPosition = Position.manager;
   payBtnDetails = new ButtonConfig();
   selectedGroundID!: string;
   groundListInit = false;
@@ -39,15 +50,7 @@ export class GroundSelectionComponent implements OnInit {
     private snackbarService: SnackbarService
   ) { }
 
-  ngOnInit(): void {
-    this.userPosition = this.sessionStorageService.get(SessionStorageProperties.USER_POSITION_SELECTION);
-    if (this.userPosition && isEnumKey(this.userPosition, Position)) {
-      this.showSpotCount = this.userPosition === Position.manager;
-
-    }
-    this.payBtnDetails.label = 'Pay & Book';
-    this.getGrounds();
-  }
+  ngOnInit(): void { }
 
   /**
    * Gets the grounds
@@ -98,8 +101,10 @@ export class GroundSelectionComponent implements OnInit {
           this.selectionData = this.groundSelectionService.parseGroundFacilitySlots(response, selection);
         }
         this.isSelectionInit = true;
-        const contextWindow = document.getElementById('primary-content-render');
-        contextWindow?.scrollTo(0, 0);
+        const contextWindow = document.getElementById('main-container-app');
+        if (contextWindow) {
+          contextWindow.scrollTo(0, 0);
+        }
       },
       error: (error) => {
         this.snackbarService.displayError(error);

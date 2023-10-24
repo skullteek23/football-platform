@@ -44,7 +44,7 @@ const routes: Routes = [
       {
         path: 'payment',
         loadChildren: () =>
-          import('@app/payment/payment.module').then((m) => m.PaymentModule),
+          import('@app/shared-modules/payment/payment.module').then((m) => m.PaymentModule),
       },
       {
         path: 'players-list',

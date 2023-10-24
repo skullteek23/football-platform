@@ -14,7 +14,6 @@ import { Constants } from '@app/constant/app-constants';
 export class HomeService {
 
   constructor(
-    private currencyPipe: CurrencyPipe,
     private datePipe: DatePipe
   ) { }
 
@@ -36,8 +35,8 @@ export class HomeService {
       if (ground && slot) {
         const cardData = new InteractiveCardData();
         cardData.title = ground.name;
-        cardData.subtitle = `${this.currencyPipe.transform(booking.spots * slot.price, 'INR', undefined, Constants.NUMBER_FORMATS.format_1)}`;
-        cardData.descriptionHtml = `${this.datePipe.transform(booking.timestamp, Constants.DATE_TIME_FORMATS.format_3)}<br/>${ground.addressLine}`;
+        cardData.subtitle = '';
+        cardData.descriptionHtml = `Match Starts <br/>${this.datePipe.transform(slot.timestamp, Constants.DATE_TIME_FORMATS.format_4)}`;
         cardData.imgSrc = ground.imgLink;
         cardData.id = booking.slotId;
         cardData.actionBtn.label = HomeConstants.confirmed

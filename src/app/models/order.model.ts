@@ -8,7 +8,7 @@ export class Order {
   uid: string = '';
   timestamp: number = new Date().getTime();
 
-  getTotalSlotAmount(count: number, unitPrice: number): number {
+  totalPrice(count: number, unitPrice: number): number {
     return Number(count) * Number(unitPrice);
   }
 }
@@ -25,6 +25,7 @@ export class Booking {
   groundId: string = '';
   slotId: string = '';
   timestamp: number = new Date().getTime();
+  lastUpdated: number = new Date().getTime();
   facilityId: string = '';
   spots: number = 1;
 }

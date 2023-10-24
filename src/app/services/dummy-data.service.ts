@@ -16,44 +16,46 @@ export class DummyDataService {
   }
 
   addData() {
-    const collection = 'wallet-transactions';
+    const collection = 'slots';
     // const data = convertObjectToFirestoreData(this.buildGroundData());
     // const data = convertObjectToFirestoreData(this.buildFacilityData());
     // const data = convertObjectToFirestoreData(this.buildSlotData());
-    const data = convertObjectToFirestoreData(this.buildTransactionData());
-    this.apiService.addDocument(collection, data);
+    // const data = convertObjectToFirestoreData(this.buildTransactionData());
+    // this.apiService.addDocument(collection, data);
   }
 
   buildGroundData() {
     const data = new Ground();
-    data.name = 'Ground Axa';
-    data.addressLine = 'Address Line 3';
-    data.city = 'Delhi';
-    data.price.weekdays = 100;
-    data.price.weekends = 200;
-    data.zip = 123456;
+    data.name = 'KR Mangalam World School';
+    data.addressLine = 'Plot No 11, Sector 6, 209, Emerald Court 2 Rd, near Arogya Hospital, Sector 7, Vaishali Extension, Ramprastha Greens, Vaishali, Ghaziabad, Uttar Pradesh 201012';
+    data.city = 'Ghaziabad';
+    data.state = 'Uttar Pradesh';
+    data.mapLink = '';
+    data.price.weekdays = 150;
+    data.price.weekends = 170;
+    data.zip = 201012;
     data.status = GroundStatus.approved;
-    data.imgLink = 'https://picsum.photos/200/300';
+    data.imgLink = 'https://lh3.googleusercontent.com/p/AF1QipNvZ6tq2SsRuZnf-vlgwDN7gnnsCf3PY_vV7TXD=s1360-w1360-h1020';
     return data;
   }
 
   buildFacilityData() {
     const data = new GroundFacility();
-    data.groundId = 'BUSm4jeSbdxBtpUJFewb';
-    data.name = '7v7 Astro Turf';
-    data.maxPlayers = 14;
-    data.status = FacilityStatus.available;
+    data.groundId = 'p7f86mlu0MR3a1pOysRy';
+    data.name = '5v5 Rooftop';
+    data.maxPlayers = 10;
+    data.status = FacilityStatus.notAvailable;
     return data;
   }
 
   buildSlotData() {
     const data = new GroundSlot();
-    data.facilityId = 'xl4sZoQ7O3oJu9wqrbr6';
-    data.groundId = 'BUSm4jeSbdxBtpUJFewb';
-    data.timestamp = new Date('21 October, 2023 16:00:00').getTime();
+    data.facilityId = 'QoBl7khNFBRXJDbqUWuB';
+    data.groundId = 'p7f86mlu0MR3a1pOysRy';
+    data.timestamp = new Date('25 October, 2023 22:00:00').getTime();
     data.status = SlotStatus.available;
     data.allowedCount = 14;
-    data.price = 200;
+    data.price = 150;
     return data;
   }
 

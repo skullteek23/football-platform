@@ -67,14 +67,20 @@ export function convertObjectToFirestoreData<T>(obj: T): any {
 
 /**
  * Combines the array data with the id
- * @param data
+ * @param response
  * @returns
  */
-export function combineArrayDataWithId(data: QueryDocumentSnapshot[]): any[] {
-  if (!data?.length) {
+export function combineArrayDataWithId(response: QueryDocumentSnapshot[]): any[] {
+  if (!response?.length) {
     return [];
   }
-  return data.map(resp => ({ ...resp.data(), id: resp.id }));
+  return response.map((resp: QueryDocumentSnapshot) => {
+    const data = resp.data();
+    if (resp.exists() && data) {
+      return { ...data, id: resp.id };
+    }
+    return {};
+  })
 }
 
 /**

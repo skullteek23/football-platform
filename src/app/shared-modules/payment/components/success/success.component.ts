@@ -7,7 +7,6 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./success.component.scss']
 })
 export class SuccessComponent implements OnInit {
-
   orderID!: string;
 
   constructor(

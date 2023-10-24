@@ -68,6 +68,8 @@ mat-card {
     .subtitle {
       @include ellipsis(130px);
       text-align: center;
+      font-size: $font-size-xs;
+      font-weight: 300;
       width: 100%;
 
       @include extra-small-screen {
@@ -82,9 +84,9 @@ mat-card {
       max-height: 58px;
       height: 58px;
       overflow-y: auto;
+      font-size: $font-size-s;
+      font-weight: 400;
       padding: 0 8px;
-      font-size: $font-size-xs;
-      font-weight: 300;
       text-align: center;
       color: $light-text;
 

@@ -46,3 +46,15 @@ mat-list {
     padding-top: unset !important;
   }
 }
+
+.home-content-wrapper {
+  app-interactive-card {
+    .title {
+      white-space: unset !important;
+    }
+
+    .description {
+      height: auto !important;
+    }
+  }
+}

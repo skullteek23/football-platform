@@ -159,7 +159,6 @@ export class OrderPageSuccessComponent implements OnInit {
   openMaps() {
     if (this.ground.mapLink) {
       window.open(this.ground.mapLink, '_blank');
-
     }
   }
 

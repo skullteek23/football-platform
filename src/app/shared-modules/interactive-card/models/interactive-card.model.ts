@@ -1,6 +1,8 @@
+import { Constants } from "@app/constant/app-constants";
+
 export class InteractiveCardData {
   id: string = '';
-  imgSrc: string = '';
+  imgSrc: string = Constants.DEFAULT_IMG;
   title: string = 'Title';
   subtitle: string = 'Subtitle';
   descriptionHtml: string = 'Description line 1 <br> line 2';

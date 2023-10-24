@@ -24,6 +24,6 @@ import { InteractiveCardModule } from '@app/shared-modules/interactive-card/inte
     InteractiveCardModule
   ],
   exports: [HomeComponent],
-  providers: [CurrencyPipe, DatePipe]
+  providers: [DatePipe]
 })
 export class HomeModule { }

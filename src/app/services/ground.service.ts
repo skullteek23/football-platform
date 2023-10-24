@@ -52,7 +52,6 @@ export class GroundService {
     query.push(this.apiService.getWhereQuery('groundId', '==', groundId));
     return this.apiService.queryCollectionSnapshot('facilities', query)
       .pipe(
-        map(response => combineArrayDataWithId(response)),
         map(response => convertFirestoreDataArray(response, GroundFacility)),
         map(response => this.filterAvailableFacilities(response)),
       );
@@ -83,7 +82,7 @@ export class GroundService {
    * @returns
    */
   getUpcomingSlots(): Observable<GroundSlot[]> {
-    const startDate = new Date().getTime() - Constants.THREE_DAYS_IN_MILLISECONDS - Constants.THREE_DAYS_IN_MILLISECONDS;
+    const startDate = new Date().getTime();
     const endDate = startDate + Constants.THREE_DAYS_IN_MILLISECONDS;
     const query = [];
     query.push(this.apiService.getWhereQuery('timestamp', '>=', startDate));

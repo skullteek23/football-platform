@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { ButtonsModule } from '../buttons/buttons.module';
 import { PlaceholderModule } from '../placeholder/placeholder.module';
+import { GroundSelectionService } from './services/ground-selection.service';
 
 @NgModule({
   declarations: [GroundSelectionComponent, CurrentSelectionComponent],
@@ -25,5 +26,6 @@ import { PlaceholderModule } from '../placeholder/placeholder.module';
     PlaceholderModule
   ],
   exports: [GroundSelectionComponent],
+  providers: [GroundSelectionService]
 })
 export class GroundSelectionModule { }
