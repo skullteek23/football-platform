@@ -14,5 +14,8 @@ export const environment = {
     admin: 'https://admin.ballzo.in',
     whatsAppGroup: 'https://chat.whatsapp.com/K0EJ1dZfG0d6n4PDhHdmRc',
   },
+  locationApiKey: {
+    countryStateCityApiKey: 'Rjc1ZmpjdGhCbWRrV2JnMHdnUGptaklVZjNhVWFpMlpnRUJFV1VpbQ==', 
+  },
   production: false,
 };

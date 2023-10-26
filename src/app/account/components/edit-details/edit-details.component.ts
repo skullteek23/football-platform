@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { MatSelectChange } from '@angular/material/select';
 import { Router } from '@angular/router';
 import { AccountConstants } from '@app/account/constants/account.constants';
 import { AccountService } from '@app/account/services/account.service';
 import { AuthService } from '@app/authentication/auth.service';
 import { AccountMessages } from '@app/constant/app-messages';
 import { IUser, IUserProperties } from '@app/models/common.model';
-import { ILocationCity, ILocationState } from '@app/models/locationState.model';
+import { ILocationCity, ILocationState } from '@app/models/location.model';
 import { Player } from '@app/models/user.model';
 import { LocationService } from '@app/services/location.service';
 import { SnackbarService } from '@app/services/snackbar.service';
@@ -49,7 +48,6 @@ export class EditDetailsComponent implements OnInit {
       if (user && user.uid) {
         this.user = user;
         this.getUserDetails();
-        
       } else {
         this.router.navigate(['/error']);
       }
@@ -63,26 +61,31 @@ export class EditDetailsComponent implements OnInit {
    * Gets the states of India
    */
   getStates() {
-    this.locationService.getStates().subscribe((states) => {
-      this.states = states;
-      this.setSelectedCity();
+    this.locationService.getStates().subscribe({
+      next:(states) => {
+        this.states = states;
+        this.setSelectedCity();
+      },
+      error:(error) => {
+        if(error.error) {
+          this.snackbarService.displayError(error.error);
+        }
+        this.hideLoader();
+      }
     })
   }
 
   /**
-   * Get the cities if the state already stored on firebase
+   * Get the cities if the state already stored on backend
    */
   setSelectedCity() {
-    if(this.userDetails.locationState){
-      let curState = this.states.find((state: ILocationState) => {
+    if(this.userDetails?.locationState && this.userDetails.locationState.length > 0){
+      let currentState: any;
+      currentState = this.states.find((state: ILocationState) => {
         return (state.name === this.userDetails.locationState)
       })
-      if(curState) {
-        this.getStateCities(curState.iso2);
-      }
-      else {
-        this.hideLoader();
-      }
+      this.getStateCities(currentState.iso2);
+      this.hideLoader(); // this hideloader needed?
     }
     else {
       this.hideLoader();
@@ -95,12 +98,19 @@ export class EditDetailsComponent implements OnInit {
    */
   getStateCities(iso2: string) {
     this.showLoader();
-    this.locationService.getCities(iso2).subscribe((cities) => {
-      this.cities = cities;
-      this.hideLoader();
+    this.locationService.getCities(iso2).subscribe({
+      next: (cities) => {
+        this.cities = cities;
+        this.hideLoader();
+      },
+      error: (error) => {
+        if(error.error) {
+          this.snackbarService.displayError(error.error);
+        }
+        this.hideLoader();
+      }
     })
   }
-
 
   /**
    * Gets the user details
@@ -136,9 +146,7 @@ export class EditDetailsComponent implements OnInit {
       locationCity: new FormControl(this.userDetails?.locationCity, [Validators.required]),
       imgUrl: new FormControl(null, [this.isPhotoMandatory.bind(this)]),
     });
-
     this.email?.disable();
-
   }
 
   /**
@@ -191,18 +199,22 @@ export class EditDetailsComponent implements OnInit {
         this.hideLoader();
         this.snackbarService.displayError(err);
       })
-
   }
 
 
-  compareFunction1(value: ILocationState, option: string) {
-    return value.name === option;
+  compareFunction(value: any, option: any) {
+    if(value.name) {
+      return value.name === option;
+    }
+    return value.name !== option;
   }
 
-
-  compareFunction2(value: ILocationCity, option: string) {
-    return value.name === option;
-  }
+  // compareFunction(value: any, option: any) {
+  //   if(value.name) {
+  //     return value.name === option;
+  //   }
+  //   return value.name !== option;
+  // }
 
   /**
    * Returns the name form control
@@ -226,21 +238,21 @@ export class EditDetailsComponent implements OnInit {
   }
 
   /**
-   * Returns the locationCity form control
+   * Returns the City form control
    */
   get locationCity() {
     return this.userForm.get('locationCity');
   }
 
   /**
-   * Returns the locationState form control
+   * Returns the State form control
    */
   get locationState() {
     return this.userForm.get('locationState');
   }
 
   /**
-   * Returns the imgUrl form control
+   * Returns the image form control
    */
   get imgUrl() {
     return this.userForm.get('imgUrl');
