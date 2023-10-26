@@ -82,6 +82,10 @@ export class GroundSlot {
   get isCancelled(): boolean {
     return this.status === SlotStatus.cancelled;
   }
+
+  get isRecent(): boolean {
+    return this.timestamp > (new Date().getTime() - Constants.ONE_HOUR_IN_MILLISECONDS);
+  }
 }
 
 export class GroundPrice {

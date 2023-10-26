@@ -27,7 +27,7 @@ export class GroundsNearMeService {
       const cardData = new InteractiveCardData();
       cardData.id = ground.id;
       cardData.title = ground.name.trim();
-      cardData.descriptionHtml = `${ground.addressLine}<br/>${this.groundService.getLeastPrice(ground.price)}`;
+      cardData.descriptionHtml = `${this.groundService.getLeastPrice(ground.price)}`;
       cardData.subtitle = ground.city;
       cardData.actionBtn.label = 'Learn more';
       cardData.actionBtn.isSelectable = true;
