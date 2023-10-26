@@ -24,6 +24,7 @@ export class Constants {
   static readonly SEVEN_MINUTES_IN_MILLISECONDS = 420000;
   static readonly THREE_DAYS_IN_MILLISECONDS = 259200000;
   static readonly ONE_HOUR_IN_MILLISECONDS = 3600000;
+  static readonly TWELVE_HOURS_IN_MILLISECONDS = 43200000;
   static readonly ORDER_PREFIX = 'OD';
   static readonly ORDER_PREFIX_UI = 'Order #';
   static readonly DAY_TIMES = {

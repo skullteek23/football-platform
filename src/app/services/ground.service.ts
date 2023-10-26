@@ -82,7 +82,7 @@ export class GroundService {
    * @returns
    */
   getUpcomingSlots(): Observable<GroundSlot[]> {
-    const startDate = new Date().getTime() - Constants.ONE_HOUR_IN_MILLISECONDS;
+    const startDate = new Date().getTime() - Constants.TWELVE_HOURS_IN_MILLISECONDS;
     const endDate = startDate + Constants.THREE_DAYS_IN_MILLISECONDS;
     const query = [];
     query.push(this.apiService.getWhereQuery('timestamp', '>=', startDate));
