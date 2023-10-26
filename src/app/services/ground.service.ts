@@ -29,12 +29,12 @@ export class GroundService {
   }
 
   /**
-   * Gets the grounds
+   * Gets the grounds by state
    * @returns
    */
-  getGroundsByCity(city: string): Observable<Ground[]> {
+  getGroundsByState(state: string): Observable<Ground[]> {
     const query = [];
-    query.push(this.apiService.getWhereQuery('city', '==', city));
+    query.push(this.apiService.getWhereQuery('state', '==', state));
     return this.apiService.queryCollection('grounds', query)
       .pipe(
         map(response => convertFirestoreDataArray(response, Ground)),

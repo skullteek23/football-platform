@@ -60,7 +60,7 @@ export class GroundsNearMeComponent implements OnInit {
         this.userService.getUser(user.uid).subscribe({
           next: async (player) => {
             if (player?.locationCity) {
-              this.groundService.getGroundsByCity(player.locationCity).subscribe({
+              this.groundService.getGroundsByState(player.locationState).subscribe({
                 next: (response) => {
                   this.setData(response);
                 },

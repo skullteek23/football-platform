@@ -4,14 +4,18 @@ import { ContactInfo } from "./contact.model";
 export class Ground {
   id: string = '';
   name: string = '';
-  imgLink: string = '';
   addressLine: string = '';
+  imgLinks: string[] = [];
   mapLink: string = '';
   city: string = '';
   state: string = '';
   zip!: number;
   price: GroundPrice = new GroundPrice();
   status: GroundStatus = GroundStatus.pending;
+
+  get imgLink(): string {
+    return this.imgLinks?.length ? this.imgLinks[0] : Constants.DEFAULT_IMG;
+  }
 }
 
 export class GroundAdditionalInfo {

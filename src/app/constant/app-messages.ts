@@ -104,7 +104,7 @@ export const OrderMessages = {
 export const GroundSelectionMessages = {
   error: {
     noSlots: 'No slots are available!',
-    noGrounds: 'No grounds are available!',
+    noGrounds: 'No grounds are available in your area!',
     slotError: 'Error! Unable to fetch slots.',
   }
 }

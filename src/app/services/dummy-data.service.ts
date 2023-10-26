@@ -35,7 +35,7 @@ export class DummyDataService {
     data.price.weekends = 170;
     data.zip = 201012;
     data.status = GroundStatus.approved;
-    data.imgLink = 'https://lh3.googleusercontent.com/p/AF1QipNvZ6tq2SsRuZnf-vlgwDN7gnnsCf3PY_vV7TXD=s1360-w1360-h1020';
+    data.imgLinks = ['https://lh3.googleusercontent.com/p/AF1QipNvZ6tq2SsRuZnf-vlgwDN7gnnsCf3PY_vV7TXD=s1360-w1360-h1020'];
     return data;
   }
 
