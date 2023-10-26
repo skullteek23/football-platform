@@ -19,9 +19,9 @@ export class DummyDataService {
     const collection = 'slots';
     // const data = convertObjectToFirestoreData(this.buildGroundData());
     // const data = convertObjectToFirestoreData(this.buildFacilityData());
-    // const data = convertObjectToFirestoreData(this.buildSlotData());
+    const data = convertObjectToFirestoreData(this.buildSlotData());
     // const data = convertObjectToFirestoreData(this.buildTransactionData());
-    // this.apiService.addDocument(collection, data);
+    this.apiService.addDocument(collection, data);
   }
 
   buildGroundData() {
@@ -52,7 +52,7 @@ export class DummyDataService {
     const data = new GroundSlot();
     data.facilityId = 'QoBl7khNFBRXJDbqUWuB';
     data.groundId = 'p7f86mlu0MR3a1pOysRy';
-    data.timestamp = new Date('25 October, 2023 22:00:00').getTime();
+    data.timestamp = new Date('26 October, 2023 21:00:00').getTime();
     data.status = SlotStatus.available;
     data.allowedCount = 14;
     data.price = 150;

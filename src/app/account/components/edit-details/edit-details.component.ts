@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { MatSelectChange } from '@angular/material/select';
 import { Router } from '@angular/router';
 import { AccountConstants } from '@app/account/constants/account.constants';
 import { AccountService } from '@app/account/services/account.service';
 import { AuthService } from '@app/authentication/auth.service';
 import { AccountMessages } from '@app/constant/app-messages';
 import { IUser, IUserProperties } from '@app/models/common.model';
+import { ILocationCity, ILocationState } from '@app/models/locationState.model';
 import { Player } from '@app/models/user.model';
+import { LocationService } from '@app/services/location.service';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { UserService } from '@app/services/user.service';
 import { ButtonConfig } from '@app/shared-modules/buttons/models/button.model';
@@ -29,13 +32,16 @@ export class EditDetailsComponent implements OnInit {
   isLoaderShown = false;
   userForm!: FormGroup;
   submitBtnDetails = new ButtonConfig();
+  states: ILocationState[] = [];
+  cities: ILocationCity[] = [];
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private userService: UserService,
     private snackbarService: SnackbarService,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private locationService: LocationService
   ) { }
 
   ngOnInit(): void {
@@ -43,6 +49,7 @@ export class EditDetailsComponent implements OnInit {
       if (user && user.uid) {
         this.user = user;
         this.getUserDetails();
+        
       } else {
         this.router.navigate(['/error']);
       }
@@ -51,6 +58,49 @@ export class EditDetailsComponent implements OnInit {
     this.submitBtnDetails.type = 'submit';
     this.submitBtnDetails.icon = '';
   }
+
+  /**
+   * Gets the states of India
+   */
+  getStates() {
+    this.locationService.getStates().subscribe((states) => {
+      this.states = states;
+      this.setSelectedCity();
+    })
+  }
+
+  /**
+   * Get the cities if the state already stored on firebase
+   */
+  setSelectedCity() {
+    if(this.userDetails.locationState){
+      let curState = this.states.find((state: ILocationState) => {
+        return (state.name === this.userDetails.locationState)
+      })
+      if(curState) {
+        this.getStateCities(curState.iso2);
+      }
+      else {
+        this.hideLoader();
+      }
+    }
+    else {
+      this.hideLoader();
+    }
+  }
+
+
+  /**
+   * Gets the cities of particular state
+   */
+  getStateCities(iso2: string) {
+    this.showLoader();
+    this.locationService.getCities(iso2).subscribe((cities) => {
+      this.cities = cities;
+      this.hideLoader();
+    })
+  }
+
 
   /**
    * Gets the user details
@@ -64,7 +114,7 @@ export class EditDetailsComponent implements OnInit {
             this.userDetails = response;
           }
           this.initForm();
-          this.hideLoader();
+          this.getStates();
         },
         error: (err) => {
           this.hideLoader();
@@ -88,6 +138,7 @@ export class EditDetailsComponent implements OnInit {
     });
 
     this.email?.disable();
+
   }
 
   /**
@@ -143,6 +194,16 @@ export class EditDetailsComponent implements OnInit {
 
   }
 
+
+  compareFunction1(value: ILocationState, option: string) {
+    return value.name === option;
+  }
+
+
+  compareFunction2(value: ILocationCity, option: string) {
+    return value.name === option;
+  }
+
   /**
    * Returns the name form control
    */
@@ -179,7 +240,7 @@ export class EditDetailsComponent implements OnInit {
   }
 
   /**
-   * Returns the locationState form control
+   * Returns the imgUrl form control
    */
   get imgUrl() {
     return this.userForm.get('imgUrl');

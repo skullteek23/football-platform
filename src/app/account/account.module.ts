@@ -20,6 +20,8 @@ import { DateAdapter, MAT_DATE_FORMATS, MatNativeDateModule } from '@angular/mat
 import { MatSelectModule } from '@angular/material/select';
 import { LoaderModule } from '@app/shared-modules/loader/loader.module';
 import { ImageViewerModule } from '@app/shared-modules/image-viewer/image-viewer.module';
+import { HttpClientModule } from '@angular/common/http';
+import { LocationService } from '@app/services/location.service';
 
 const routes: Routes = [
   {
@@ -51,11 +53,13 @@ const routes: Routes = [
     MatNativeDateModule,
     MatSelectModule,
     LoaderModule,
-    ImageViewerModule
+    ImageViewerModule,
+    HttpClientModule
   ],
   providers: [
     { provide: DateAdapter, useClass: CustomDateAdapter },
     { provide: MAT_DATE_FORMATS, useValue: CUSTOM_DATE_FORMATS },
+    LocationService
   ]
 })
 export class AccountModule { }
