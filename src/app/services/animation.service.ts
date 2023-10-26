@@ -46,6 +46,12 @@ export class AnimationsList {
     transition('void => *', animate('0.3s ease-in-out')),
   ]);
 
+  static sliderSidewayVoid = trigger('sliderSidewayVoid', [
+    state('void', style({ opacity: 0 })),
+    state('default', style({ opacity: 1 })),
+    transition('void => *', animate('0.3s ease-in-out')),
+  ]);
+
   static fadeAppearSideways = trigger('fadeAppearSideways', [
     state('void', style({ opacity: 0, transform: 'translateX(-30%)' })),
     state('default', style({ opacity: 1, transform: 'translateX(0%)' })),

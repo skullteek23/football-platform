@@ -71,7 +71,7 @@
   }
 }
 
-.mat-mini-fab.mat-primary {
+.mat-mini-fab.mat-primary:not(:disabled) {
   background-image: $primary-gradient !important;
   color: $white !important;
 }
