@@ -5,6 +5,8 @@ export class HomeConstants {
   static readonly salutation = 'Footballer';
   static readonly confirmed = 'Confirmed';
   static readonly GAME_ON = 'Game ON!';
+  static readonly ONGOING = 'LIVE';
+  static readonly FINISHED = 'Finished!';
   static readonly CANCELLED = 'Cancelled';
 }
 

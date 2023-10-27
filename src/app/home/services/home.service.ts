@@ -47,6 +47,10 @@ export class HomeService {
           cardData.actionBtn.customContent = HomeConstants.CANCELLED;
         } else if (slot.isFull) {
           cardData.actionBtn.customContent = HomeConstants.GAME_ON;
+        } else if (slot.isOngoing) {
+          cardData.actionBtn.customContent = HomeConstants.ONGOING;
+        } else if (slot.isFinished) {
+          cardData.actionBtn.customContent = HomeConstants.FINISHED;
         } else {
           cardData.actionBtn.customContent = `${HomeConstants.confirmed} ${slot.participantCount}/${slot.allowedCount}`;
         }
@@ -70,8 +74,14 @@ export class HomeService {
 
       if (slot.status === SlotStatus.cancelled) {
         bgStyle.background = ColorsUtility.red;
+        bgStyle.color = 'white';
       } else if (currentPercentage >= 100) {
         bgStyle.background = ColorsUtility.green;
+      } else if (slot.isOngoing) {
+        bgStyle.background = ColorsUtility.red;
+        bgStyle.color = 'white';
+      } else if (slot.isFinished) {
+        bgStyle.background = ColorsUtility.grey_bg;
       } else {
         bgStyle.background = ColorsUtility.getFillingGradient(ColorsUtility.yellow, ColorsUtility.white, currentPercentage);
       }

@@ -114,13 +114,13 @@ export class GroundsNearMeComponent implements OnInit {
    * @param selection
    */
   openGround(selection: InteractiveCardData) {
-    const ground = this.cardData.find(ground => ground.id === selection.id);
+    const ground = this.groundsList.find(ground => ground.id === selection.id);
     if (ground) {
       const config = new MatBottomSheetConfig();
       config.disableClose = false;
       config.hasBackdrop = true;
       config.backdropClass = 'sheet-backdrop';
-      config.panelClass = 'sheet-custom';
+      config.panelClass = 'sheet-custom-ground-info';
       config.data = ground;
       this.sheetService.openSheet(GroundInfoComponent, config);
     }

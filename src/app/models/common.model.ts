@@ -21,4 +21,5 @@ export type IUserRole = { user: IUser, role: string };
 
 export class BackgroundCSS {
   background: string = '';
+  color: string = 'black';
 }

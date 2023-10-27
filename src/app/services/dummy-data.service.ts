@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { CoreApiService } from './core-api.service';
 import { convertObjectToFirestoreData } from '@app/utils/objects-utility';
-import { FacilityStatus, Ground, GroundFacility, GroundSlot, GroundStatus, SlotStatus } from '@app/models/ground.model';
+import { FacilityStatus, Ground, GroundAdditionalInfo, GroundFacility, GroundSlot, GroundStatus, SlotStatus } from '@app/models/ground.model';
 import { TransactionType, WalletTransaction } from '@app/models/order.model';
+import { ContactInfo } from '@app/models/contact.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +17,13 @@ export class DummyDataService {
   }
 
   addData() {
-    const collection = 'slots';
+    const collection = 'ground-additional-info';
     // const data = convertObjectToFirestoreData(this.buildGroundData());
     // const data = convertObjectToFirestoreData(this.buildFacilityData());
-    const data = convertObjectToFirestoreData(this.buildSlotData());
+    // const data = convertObjectToFirestoreData(this.buildSlotData());
     // const data = convertObjectToFirestoreData(this.buildTransactionData());
-    this.apiService.addDocument(collection, data);
+    const data = convertObjectToFirestoreData(this.buildGroundAdditionalData());
+    this.apiService.addDocument(collection, data, 'p7f86mlu0MR3a1pOysRy');
   }
 
   buildGroundData() {
@@ -36,6 +38,17 @@ export class DummyDataService {
     data.zip = 201012;
     data.status = GroundStatus.approved;
     data.imgLinks = ['https://lh3.googleusercontent.com/p/AF1QipNvZ6tq2SsRuZnf-vlgwDN7gnnsCf3PY_vV7TXD=s1360-w1360-h1020'];
+    return data;
+  }
+
+  buildGroundAdditionalData() {
+    const data = new GroundAdditionalInfo();
+    data.contactInfo.email = 'admin@ballzo.in';
+    data.contactInfo.name = 'Nitish Kumar';
+    data.contactInfo.phone = '9999999999';
+    data.description = 'The Millennium Soccer Ground is a 100m x 64m natural grass field located at 123 Sports Avenue, featuring floodlights, an electronic scoreboard, and a seating capacity of 500. Open from 8 AM to 11 PM, it offers';
+    data.rules = '';
+    data.website = 'www.gallantplay.com';
     return data;
   }
 

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CoreApiService } from './core-api.service';
 import { Observable, map, tap } from 'rxjs';
 import { combineArrayDataWithId, convertFirestoreData, convertFirestoreDataArray, convertObjectToFirestoreData } from '@app/utils/objects-utility';
-import { FacilityStatus, Ground, GroundFacility, GroundPrice, GroundSlot, GroundStatus, SlotStatus } from '@app/models/ground.model';
+import { FacilityStatus, Ground, GroundAdditionalInfo, GroundFacility, GroundPrice, GroundSlot, GroundStatus, SlotStatus } from '@app/models/ground.model';
 import { TabLabel } from '@app/shared-modules/ground-selection/models/ground-selection.model';
 import { DateParseUtility } from '@app/utils/date-parse-utility';
 import { Constants } from '@app/constant/app-constants';
@@ -35,7 +35,7 @@ export class GroundService {
   getGroundsByState(state: string): Observable<Ground[]> {
     const query = [];
     query.push(this.apiService.getWhereQuery('state', '==', state));
-    return this.apiService.queryCollection('grounds', query)
+    return this.apiService.queryCollectionSnapshot('grounds', query)
       .pipe(
         map(response => convertFirestoreDataArray(response, Ground)),
         map(response => this.filterAvailableGrounds(response)),
@@ -82,7 +82,7 @@ export class GroundService {
    * @returns
    */
   getUpcomingSlots(): Observable<GroundSlot[]> {
-    const startDate = new Date().getTime();
+    const startDate = new Date().getTime() - Constants.TWELVE_HOURS_IN_MILLISECONDS;
     const endDate = startDate + Constants.THREE_DAYS_IN_MILLISECONDS;
     const query = [];
     query.push(this.apiService.getWhereQuery('timestamp', '>=', startDate));
@@ -113,10 +113,21 @@ export class GroundService {
    * @returns
    */
   getGround(groundId: string): Observable<Ground> {
-
     return this.apiService.getDocument('grounds', groundId)
       .pipe(
         map(response => convertFirestoreData(response, Ground)),
+      );
+  }
+
+  /**
+   * Gets the a particular ground additional info by id
+   * @param groundId
+   * @returns
+   */
+  getGroundInfo(groundId: string): Observable<GroundAdditionalInfo> {
+    return this.apiService.getDocument('ground-additional-info', groundId)
+      .pipe(
+        map(response => convertFirestoreData(response, GroundAdditionalInfo)),
       );
   }
 

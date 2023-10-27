@@ -82,6 +82,13 @@ export class GroundSlot {
   get isCancelled(): boolean {
     return this.status === SlotStatus.cancelled;
   }
+
+  get isFinished(): boolean {
+    return !this.isOngoing && this.timestamp > (new Date().getTime() - Constants.TWELVE_HOURS_IN_MILLISECONDS);
+  }
+  get isOngoing(): boolean {
+    return this.timestamp > (new Date().getTime() - Constants.ONE_HOUR_IN_MILLISECONDS);
+  }
 }
 
 export class GroundPrice {
