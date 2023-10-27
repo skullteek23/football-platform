@@ -115,3 +115,18 @@ export function getValueByIndex(enumType: any, index: number): any | undefined {
 
   return undefined;
 }
+
+
+/**
+ * Compares argument value with object key value
+ * @param obj 
+ * @param comparableValue 
+ * @param key 
+ * @returns 
+ */
+export function compareFunction(obj: any, comparableValue: any, key: any) {
+  if(obj.hasOwnProperty(key)) {
+    return obj[key] === comparableValue;
+  }
+  return obj[key] !== comparableValue;
+}

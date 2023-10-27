@@ -1,4 +1,4 @@
-<div class="main-container" *ngIf="!isLoaderShown">
+<div class="main-container">
   <div class="heading">
     <div class="page-sub-label">
       Update personal details:
@@ -29,15 +29,19 @@
 
     <mat-form-field color="primary">
       <mat-label>Select State</mat-label>
-      <mat-select formControlName="locationState">
-        <mat-option value="state">State</mat-option>
+      <mat-select (selectionChange)="getStateCities($event.value?.iso2)" [compareWith]="compareLocation" formControlName="locationState">
+        <mat-option *ngFor="let state of states" [value]="state">
+          {{ state.name }}
+        </mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field color="primary">
       <mat-label>Select City</mat-label>
-      <mat-select formControlName="locationCity">
-        <mat-option value="city">City</mat-option>
+      <mat-select [compareWith]="compareLocation" formControlName="locationCity">
+        <mat-option *ngFor="let city of cities" [value]="city">
+          {{ city.name }}
+        </mat-option>
       </mat-select>
     </mat-form-field>
 

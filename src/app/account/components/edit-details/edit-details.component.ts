@@ -6,12 +6,15 @@ import { AccountService } from '@app/account/services/account.service';
 import { AuthService } from '@app/authentication/auth.service';
 import { AccountMessages } from '@app/constant/app-messages';
 import { IUser, IUserProperties } from '@app/models/common.model';
+import { ILocationCity, ILocationState } from '@app/models/location.model';
 import { Player } from '@app/models/user.model';
+import { LocationService } from '@app/services/location.service';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { UserService } from '@app/services/user.service';
 import { ButtonConfig } from '@app/shared-modules/buttons/models/button.model';
 import { getFirestoreErrorMsg } from '@app/utils/api-error-handling-utility';
 import { FULL_NAME_VALIDATORS } from '@app/utils/form-validators-utility';
+import { compareFunction } from '@app/utils/objects-utility';
 
 @Component({
   selector: 'app-edit-details',
@@ -23,19 +26,23 @@ export class EditDetailsComponent implements OnInit {
   readonly maxDate = AccountConstants.YOUNGEST_DATE_OF_BIRTH;
   readonly minDate = AccountConstants.OLDEST_DATE_OF_BIRTH;
   readonly messages = AccountMessages;
+  readonly compareFunction = compareFunction;
 
   user!: IUser;
   userDetails!: Player;
   isLoaderShown = false;
   userForm!: FormGroup;
   submitBtnDetails = new ButtonConfig();
+  states: ILocationState[] = [];
+  cities: ILocationCity[] = [];
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private userService: UserService,
     private snackbarService: SnackbarService,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private locationService: LocationService
   ) { }
 
   ngOnInit(): void {
@@ -53,6 +60,60 @@ export class EditDetailsComponent implements OnInit {
   }
 
   /**
+   * Gets the states of India
+   */
+  getStates() {
+    this.locationService.getStates().subscribe({
+      next:(states) => {
+        this.states = states;
+        this.setSelectedCity();
+      },
+      error:(error) => {
+        if(error.error) {
+          this.snackbarService.displayError(error.error);
+        }
+        this.hideLoader();
+      }
+    })
+  }
+
+  /**
+   * Get the cities if the state already stored on backend
+   */
+  setSelectedCity() {
+    if(this.userDetails?.locationState && this.userDetails.locationState.length > 0){
+      let currentState: any;
+      currentState = this.states.find((state: ILocationState) => {
+        return (state.name === this.userDetails.locationState)
+      })
+      this.getStateCities(currentState.iso2);
+    }
+    else {
+      this.hideLoader();
+    }
+  }
+
+
+  /**
+   * Gets the cities of particular state
+   */
+  getStateCities(iso2: string) {
+    this.showLoader();
+    this.locationService.getCities(iso2).subscribe({
+      next: (cities) => {
+        this.cities = cities;
+        this.hideLoader();
+      },
+      error: (error) => {
+        if(error.error) {
+          this.snackbarService.displayError(error.error);
+        }
+        this.hideLoader();
+      }
+    })
+  }
+
+  /**
    * Gets the user details
    */
   getUserDetails() {
@@ -64,7 +125,7 @@ export class EditDetailsComponent implements OnInit {
             this.userDetails = response;
           }
           this.initForm();
-          this.hideLoader();
+          this.getStates();
         },
         error: (err) => {
           this.hideLoader();
@@ -86,7 +147,6 @@ export class EditDetailsComponent implements OnInit {
       locationCity: new FormControl(this.userDetails?.locationCity, [Validators.required]),
       imgUrl: new FormControl(null, [this.isPhotoMandatory.bind(this)]),
     });
-
     this.email?.disable();
   }
 
@@ -140,7 +200,14 @@ export class EditDetailsComponent implements OnInit {
         this.hideLoader();
         this.snackbarService.displayError(err);
       })
+  }
 
+
+  /**
+   * Returns the result from compareFunction
+   */
+  compareLocation(value: any, option: any) {
+    return compareFunction(value, option, "name"); 
   }
 
   /**
@@ -165,21 +232,21 @@ export class EditDetailsComponent implements OnInit {
   }
 
   /**
-   * Returns the locationCity form control
+   * Returns the City form control
    */
   get locationCity() {
     return this.userForm.get('locationCity');
   }
 
   /**
-   * Returns the locationState form control
+   * Returns the State form control
    */
   get locationState() {
     return this.userForm.get('locationState');
   }
 
   /**
-   * Returns the locationState form control
+   * Returns the image form control
    */
   get imgUrl() {
     return this.userForm.get('imgUrl');

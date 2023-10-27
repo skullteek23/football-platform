@@ -61,11 +61,11 @@ export class AccountService {
 
     }
     if (value.locationCity !== existingDetails.locationCity) {
-      player.locationCity = value.locationCity;
+      player.locationCity = value.locationCity.name;
     }
 
     if (value.locationState !== existingDetails.locationState) {
-      player.locationState = value.locationState;
+      player.locationState = value.locationState.name;
     }
 
     if (Object.keys(player).length) {
@@ -80,6 +80,4 @@ export class AccountService {
     return Promise.resolve(0);
 
   }
-
-
 }
