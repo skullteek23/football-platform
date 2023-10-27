@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { ILocationCity, ILocationState } from "@app/models/location.model";
 import { Observable } from "rxjs";
 import { environment } from "@environments/environment";
-import { CountryStateCityUrl } from "@app/constant/api-constants";
+import { LOCATION_API_URL } from "@app/constant/api-constants";
 
 @Injectable()
 export class LocationService  {
@@ -17,9 +17,9 @@ export class LocationService  {
      */
     getStates(): Observable<ILocationState[]> {
         return this.http
-        .get<ILocationState[]>(CountryStateCityUrl.commanUrl, {
+        .get<ILocationState[]>(LOCATION_API_URL.commanUrl, {
             headers:new HttpHeaders({
-                "X-CSCAPI-KEY": environment.locationApiKey.countryStateCityApiKey,
+                [LOCATION_API_URL.locationApiHeader] : environment.locationApiKey.countryStateCityApiKey,
             })
         })
     }
@@ -28,9 +28,9 @@ export class LocationService  {
      *  Return a array of objects of cities in a selected State
      */
     getCities(stateIso2: any): Observable<ILocationCity[]> {
-        return this.http.get<ILocationCity[]>(CountryStateCityUrl.commanUrl + stateIso2 +"/cities", {
+        return this.http.get<ILocationCity[]>(LOCATION_API_URL.commanUrl + stateIso2 +"/cities", {
             headers: new HttpHeaders({
-                "X-CSCAPI-KEY": environment.locationApiKey.countryStateCityApiKey,
+                [LOCATION_API_URL.locationApiHeader] : environment.locationApiKey.countryStateCityApiKey,
             })
         })
     }

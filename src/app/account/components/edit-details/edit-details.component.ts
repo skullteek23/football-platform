@@ -209,13 +209,6 @@ export class EditDetailsComponent implements OnInit {
     return value.name !== option;
   }
 
-  // compareFunction(value: any, option: any) {
-  //   if(value.name) {
-  //     return value.name === option;
-  //   }
-  //   return value.name !== option;
-  // }
-
   /**
    * Returns the name form control
    */
