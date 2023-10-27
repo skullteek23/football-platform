@@ -14,6 +14,7 @@ import { UserService } from '@app/services/user.service';
 import { ButtonConfig } from '@app/shared-modules/buttons/models/button.model';
 import { getFirestoreErrorMsg } from '@app/utils/api-error-handling-utility';
 import { FULL_NAME_VALIDATORS } from '@app/utils/form-validators-utility';
+import { compareFunction } from '@app/utils/objects-utility';
 
 @Component({
   selector: 'app-edit-details',
@@ -25,6 +26,7 @@ export class EditDetailsComponent implements OnInit {
   readonly maxDate = AccountConstants.YOUNGEST_DATE_OF_BIRTH;
   readonly minDate = AccountConstants.OLDEST_DATE_OF_BIRTH;
   readonly messages = AccountMessages;
+  readonly compareFunction = compareFunction;
 
   user!: IUser;
   userDetails!: Player;
@@ -85,7 +87,6 @@ export class EditDetailsComponent implements OnInit {
         return (state.name === this.userDetails.locationState)
       })
       this.getStateCities(currentState.iso2);
-      this.hideLoader(); // this hideloader needed?
     }
     else {
       this.hideLoader();
@@ -202,11 +203,11 @@ export class EditDetailsComponent implements OnInit {
   }
 
 
-  compareFunction(value: any, option: any) {
-    if(value.name) {
-      return value.name === option;
-    }
-    return value.name !== option;
+  /**
+   * Returns the result from compareFunction
+   */
+  compareLocation(value: any, option: any) {
+    return compareFunction(value, option, "name"); 
   }
 
   /**

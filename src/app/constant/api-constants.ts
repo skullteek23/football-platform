@@ -10,6 +10,6 @@ export enum CloudStorageFileScreens {
 }
 
 export const LOCATION_API_URL = {
-  commanUrl : 'https://api.countrystatecity.in/v1/countries/IN/states/',
+  countryStateCityCommonUrl : 'https://api.countrystatecity.in/v1/countries/IN/states/',
   locationApiHeader : 'X-CSCAPI-KEY',
 }

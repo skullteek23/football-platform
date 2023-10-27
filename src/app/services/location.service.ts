@@ -17,7 +17,7 @@ export class LocationService  {
      */
     getStates(): Observable<ILocationState[]> {
         return this.http
-        .get<ILocationState[]>(LOCATION_API_URL.commanUrl, {
+        .get<ILocationState[]>(LOCATION_API_URL.countryStateCityCommonUrl, {
             headers:new HttpHeaders({
                 [LOCATION_API_URL.locationApiHeader] : environment.locationApiKey.countryStateCityApiKey,
             })
@@ -28,7 +28,7 @@ export class LocationService  {
      *  Return a array of objects of cities in a selected State
      */
     getCities(stateIso2: any): Observable<ILocationCity[]> {
-        return this.http.get<ILocationCity[]>(LOCATION_API_URL.commanUrl + stateIso2 +"/cities", {
+        return this.http.get<ILocationCity[]>(LOCATION_API_URL.countryStateCityCommonUrl + stateIso2 +"/cities", {
             headers: new HttpHeaders({
                 [LOCATION_API_URL.locationApiHeader] : environment.locationApiKey.countryStateCityApiKey,
             })
