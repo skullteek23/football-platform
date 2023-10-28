@@ -1,4 +1,11 @@
 export class ArraySorting {
+  /**
+   * Sort array of objects by key
+   * @param key
+   * @param order
+   * @param isConvertNA
+   * @returns
+   */
   static sortObjectByKey(key: string, order = 'asc', isConvertNA = true) {
     return function innerSort(a: any, b: any) {
       const isTypescriptProperty = key in a || key in b;
@@ -25,6 +32,13 @@ export class ArraySorting {
     };
   }
 
+  /**
+   * Get sorted element
+   * @param valueA
+   * @param valueB
+   * @param order
+   * @returns
+   */
   static getSortedElement(valueA: any, valueB: any, order: string): number {
     let comparison = 0;
     if (valueB === null) {
