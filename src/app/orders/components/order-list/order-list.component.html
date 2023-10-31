@@ -11,7 +11,8 @@
   <mat-list *ngIf="!isLoaderShown && uiList.length">
     <mat-list-item *ngFor="let data of uiList">
       <app-transaction-item [data]="data">
-        <div class="status-container" *ngIf="data.highlightedCustomData" [innerHtml]="data.highlightedCustomData">
+        <div class="status-container" *ngIf="data.highlightedCustomData"
+          [innerHtml]="data.highlightedCustomData | titlecase">
         </div>
       </app-transaction-item>
     </mat-list-item>
