@@ -3,6 +3,7 @@ import { OrderMessages } from "@app/constant/app-messages";
 
 export class Order {
   id: string = '';
+  status: OrderStatus = OrderStatus.confirmed;
   amount: number = 0;
   ref: any = {};
   uid: string = '';
@@ -11,6 +12,12 @@ export class Order {
   totalPrice(count: number, unitPrice: number): number {
     return Number(count) * Number(unitPrice);
   }
+}
+
+export enum OrderStatus {
+  confirmed = 'confirmed',
+  finished = 'finished',
+  returned = 'returned',
 }
 
 // export enum BookingSide {
@@ -63,4 +70,13 @@ export class WalletTransaction {
     message += this.transactionFor;
     return message;
   }
+}
+
+export class OrderReturn {
+  id: string = '';
+  reason: string = '';
+  oid: string = '';
+  returnCount: number = 0;
+  timestamp: number = new Date().getTime();
+  returnMode = 'ballzo-wallet';
 }

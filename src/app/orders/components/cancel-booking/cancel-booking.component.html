@@ -1,0 +1,30 @@
+<div class="sheet-content-container cancel-button-container">
+  <button mat-icon-button (click)="canDeactivate()" class="floating-button">
+    <mat-icon fontSet="material-icons-round">close</mat-icon>
+  </button>
+
+  <div class="heading">
+    <div class="page-sub-label">
+      Do you want to cancel this slot?
+    </div>
+  </div>
+
+  <mat-form-field color="primary">
+    <mat-select [placeholder]="placeholder" [(value)]="reason" required>
+      <mat-option [value]="reason" *ngFor="let reason of reasonsList;">
+        {{reason}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div class="action">
+    <a (click)="canDeactivate()" class="dont-cancel">Do not cancel</a>
+    <app-next-action-button [disabled]="!reason" (clickEv)="cancelBooking()"
+      [displayDetails]="btnDetails"></app-next-action-button>
+  </div>
+
+  <div class="note-container">
+    <p>Note: {{note}} Read <a [routerLink]="['/terms']">Ballzo's Cancellation Policy.</a></p>
+  </div>
+</div>
+<app-loader *ngIf="isLoaderShown"></app-loader>

@@ -98,6 +98,8 @@ export function getCloudFnErrorMsg(error: any): string {
     switch (code as CloudFnErrorCode) {
       case 'functions/not-found':
         return ApiMessages.error.notFound;
+      case 'functions/invalid-argument':
+        return ApiMessages.error.invalidArgument;
       case 'functions/internal':
         return ApiMessages.error.internal;
       case 'functions/failed-precondition':
