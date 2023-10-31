@@ -71,6 +71,14 @@
   }
 }
 
+.cancel-button-container {
+  app-next-action-button {
+    .custom-short-button {
+      background: $fail !important;
+    }
+  }
+}
+
 .mat-mini-fab.mat-primary:not(:disabled) {
   background-image: $primary-gradient !important;
   color: $white !important;

@@ -7,9 +7,13 @@
   <div class="placeholder" *ngIf="isLoaderShown">
     <div class="list-item shine" *ngFor="let item of SHIMMER_ARRAY"></div>
   </div>
-  <mat-list *ngIf="!isLoaderShown">
+  <app-placeholder *ngIf="!uiList.length && !isLoaderShown" message="No orders to show!"></app-placeholder>
+  <mat-list *ngIf="!isLoaderShown && uiList.length">
     <mat-list-item *ngFor="let data of uiList">
-      <app-transaction-item [data]="data"></app-transaction-item>
+      <app-transaction-item [data]="data">
+        <div class="status-container" *ngIf="data.highlightedCustomData" [innerHtml]="data.highlightedCustomData">
+        </div>
+      </app-transaction-item>
     </mat-list-item>
   </mat-list>
 </div>

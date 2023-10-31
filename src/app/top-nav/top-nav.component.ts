@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@app/authentication/auth.service';
+import { UserService } from '@app/services/user.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -17,14 +18,16 @@ export class TopNavComponent implements OnInit {
   /**
    * Constructor method
    */
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private userService: UserService
+  ) { }
 
   /**
    * Lifecycle method
    */
   ngOnInit(): void {
     this.checkUserLogin();
-    this.getUserBalance();
   }
 
   /**
@@ -33,6 +36,9 @@ export class TopNavComponent implements OnInit {
   checkUserLogin() {
     this.authService._user().subscribe({
       next: (resp) => {
+        if (resp?.uid) {
+          this.getUserBalance(resp.uid);
+        }
         this.isHeaderInitialized = true;
         this.isUserLogged = resp ? true : false;
       },
@@ -49,7 +55,14 @@ export class TopNavComponent implements OnInit {
   /**
    * Gets user balance for wallet money
    */
-  getUserBalance() {
+  getUserBalance(uid: string) {
+    this.userService.subscribeUserWalletBalance(uid).subscribe({
+      next: response => {
+        if (response.hasOwnProperty('amount')) {
+          this.userBalance = Number(response?.amount);
+        }
+      }
+    })
     // API call to get user balance in number format;
   }
 

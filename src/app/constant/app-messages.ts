@@ -46,6 +46,7 @@ export const ApiMessages = {
     deadline: 'Operation timed out! Please try again.',
     alreadyExists: 'Already exists! Please try again.',
     notFound: 'Not found! Please try again.',
+    invalidArgument: 'Invalid details! Please try again.',
     failedPrecondition: 'Condition failed! Please contact admin.',
     aborted: 'Operation aborted by system! Please try again.',
     internal: 'Internal error! Please try again later.',
@@ -84,6 +85,7 @@ export const PositionSelectionMessages = {
 export const OrderMessages = {
   success: {
     invoice: 'Invoice sent successfully to your mail ID!',
+    cancel: 'Booking cancelled successfully!',
   },
   error: {
     invoice: 'Error! Unable to send invoice.',
@@ -91,9 +93,12 @@ export const OrderMessages = {
   },
   booking: {
     thankYou: 'Thank you for your booking!',
+    cancelledBookingTitle: 'Booking Cancelled!',
     thankYouNote: 'Get ready to score goals and make memories on the field - see you at the game!',
     playerSlot: `This slot is only for one person per time slot. To buy more than one slots, Become a 'Manager'.`,
-    managerSlot: `This slot is for more than one person. To buy slot for only yourself, Become a 'Player'.`
+    managerSlot: `This slot is for more than one person. To buy slot for only yourself, Become a 'Player'.`,
+    cancelNote: 'Refund amount will be credited in your ballzo wallet that can be used in future bookings.',
+    cancelledOrderNote: 'This order has been cancelled. Refund amount has been credited in your ballzo wallet.'
   },
   transaction: {
     credit: 'Received refund for',

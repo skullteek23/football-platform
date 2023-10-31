@@ -9,6 +9,15 @@ import { FooterModule } from '@app/footer/footer.module';
 import { MatListModule } from '@angular/material/list';
 import { TransactionItemModule } from '@app/shared-modules/transaction-item/transaction-item.module';
 import { ParseOrderService } from './services/parse-order.service';
+import { CancelBookingComponent } from './components/cancel-booking/cancel-booking.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+import { ButtonsModule } from '@app/shared-modules/buttons/buttons.module';
+import { MatButtonModule } from '@angular/material/button';
+import { CancellationPolicyModule } from '@app/legal-info/cancellation-policy/cancellation-policy.module';
+import { LoaderModule } from '@app/shared-modules/loader/loader.module';
+import { MatChipsModule } from '@angular/material/chips';
+import { PlaceholderModule } from '@app/shared-modules/placeholder/placeholder.module';
 
 const routes: Routes = [
   {
@@ -24,8 +33,28 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [OrdersComponent, OrderListComponent, ViewOrderComponent],
-  imports: [CommonModule, RouterModule.forChild(routes), OrderPageSuccessModule, FooterModule, MatListModule, TransactionItemModule],
+  declarations: [
+    OrdersComponent,
+    OrderListComponent,
+    ViewOrderComponent,
+    CancelBookingComponent
+  ],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    OrderPageSuccessModule,
+    FooterModule,
+    MatListModule,
+    PlaceholderModule,
+    TransactionItemModule,
+    MatIconModule,
+    MatSelectModule,
+    MatChipsModule,
+    ButtonsModule,
+    LoaderModule,
+    MatButtonModule,
+    CancellationPolicyModule
+  ],
   providers: [
     CurrencyPipe,
     DatePipe,

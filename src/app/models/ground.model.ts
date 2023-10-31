@@ -84,10 +84,13 @@ export class GroundSlot {
   }
 
   get isFinished(): boolean {
-    return !this.isOngoing && this.timestamp > (new Date().getTime() - Constants.TWELVE_HOURS_IN_MILLISECONDS);
+    const current = new Date().getTime();
+    return this.timestamp < current && this.timestamp >= (current - Constants.TWELVE_HOURS_IN_MILLISECONDS);
   }
+
   get isOngoing(): boolean {
-    return this.timestamp > (new Date().getTime() - Constants.ONE_HOUR_IN_MILLISECONDS);
+    const current = new Date().getTime();
+    return this.timestamp >= current && this.timestamp <= (current + Constants.ONE_HOUR_IN_MILLISECONDS);
   }
 }
 

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatBottomSheetConfig } from '@angular/material/bottom-sheet';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '@app/authentication/auth.service';
@@ -8,7 +8,7 @@ import { OrderMessages, PlayerListMessages } from '@app/constant/app-messages';
 import { CancellationPolicyComponent } from '@app/legal-info/cancellation-policy/cancellation-policy.component';
 import { IUser } from '@app/models/common.model';
 import { Ground } from '@app/models/ground.model';
-import { Order, Booking } from '@app/models/order.model';
+import { Order, Booking, OrderStatus } from '@app/models/order.model';
 import { BottomSheetService } from '@app/services/bottom-sheet.service';
 import { GroundService } from '@app/services/ground.service';
 import { OrderService } from '@app/services/order.service';
@@ -35,6 +35,9 @@ export class OrderPageSuccessComponent implements OnInit {
       this.getBookingDetails();
     }
   }
+  @Input() showCancelEvent = false;
+
+  @Output() cancelEvent = new EventEmitter<void>();
 
   readonly ResultType = ResultType;
   readonly ButtonTheme = ButtonTheme;
@@ -55,6 +58,7 @@ export class OrderPageSuccessComponent implements OnInit {
   user!: IUser;
   role: string = Position.striker;
   slotMsg = '';
+  isOrderReturned = false;
 
   constructor(
     private router: Router,
@@ -85,6 +89,11 @@ export class OrderPageSuccessComponent implements OnInit {
       next: order => {
         if (order) {
           this.order = order;
+          this.isOrderReturned = order.status === OrderStatus.returned;
+          if (this.isOrderReturned) {
+            this.data.description = OrderMessages.booking.cancelledOrderNote;
+            this.data.title = OrderMessages.booking.cancelledBookingTitle;
+          }
         }
         this.isPageInit = true;
       },
@@ -138,7 +147,7 @@ export class OrderPageSuccessComponent implements OnInit {
    * Shows player's list for the booking
    */
   showList() {
-    if (this.booking.slotId) {
+    if (this.booking.slotId && !this.isOrderReturned) {
       this.router.navigate(['/m', 'players-list', this.booking.slotId]);
     } else {
       this.snackbarService.displayError(PlayerListMessages.error.noBookings)
@@ -176,7 +185,7 @@ export class OrderPageSuccessComponent implements OnInit {
    * Emails the invoice to the user
    */
   emailInvoice() {
-    if (this.user) {
+    if (this.user && !this.isOrderReturned) {
       if (this.user?.email && this.user?.email.trim()) {
         this.isPageInit = false;
         this.emailService.sendEmail(this.user.email).subscribe(res => {
@@ -215,6 +224,15 @@ export class OrderPageSuccessComponent implements OnInit {
             this.slotMsg = 'Note: ' + this.messages.booking.playerSlot;
           }
         })
+    }
+  }
+
+  /**
+   * Emits cancel event
+   */
+  onCancelBooking() {
+    if (this.showCancelEvent) {
+      this.cancelEvent.emit();
     }
   }
 

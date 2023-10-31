@@ -7,12 +7,15 @@
       <div class="content-text-date">{{data.subLabel}}</div>
     </div>
     <div class="content-highlighted">
-      <span class="content-highlighted-label" [ngClass]="data.viewValueClass">
-        {{data.viewValue }}
-      </span>
-      <mat-icon fontSet="material-icons-round" *ngIf="data.routeLink">
-        chevron_right
-      </mat-icon>
+      <div class="content-highlighted-first-row">
+        <span class="content-highlighted-first-row-label" [ngClass]="data.viewValueClass">
+          {{data.viewValue }}
+        </span>
+        <mat-icon fontSet="material-icons-round" *ngIf="data.routeLink">
+          chevron_right
+        </mat-icon>
+      </div>
+      <ng-content></ng-content>
     </div>
   </div>
 </div>

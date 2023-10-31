@@ -79,4 +79,16 @@ export class UserService {
         map(response => convertFirestoreData(response, UserWallet))
       )
   }
+
+  /**
+   * Subscribes to the updates of the user wallet balance
+   * @param uid
+   * @returns
+   */
+  subscribeUserWalletBalance(uid: string): Observable<UserWallet> {
+    return this.apiService.watchDocument('user-wallet', uid)
+      .pipe(
+        map(response => convertFirestoreData(response, UserWallet))
+      )
+  }
 }

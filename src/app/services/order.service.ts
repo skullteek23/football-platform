@@ -5,6 +5,7 @@ import { convertFirestoreData, convertFirestoreDataArray, convertObjectToFiresto
 import { Constants } from '@app/constant/app-constants';
 import { Observable, map, tap } from 'rxjs';
 import { UserSlotSelectionInfo } from '@app/shared-modules/ground-selection/models/ground-selection.model';
+import { cloudFunctionNames } from '@app/constant/api-constants';
 
 @Injectable({
   providedIn: 'root'
@@ -155,6 +156,15 @@ export class OrderService {
       .pipe(
         map(response => convertFirestoreDataArray(response, WalletTransaction)),
       );
+  }
+
+  /**
+   * Cancel order by id via cloud function
+   * @param orderID
+   * @returns
+   */
+  cancelBooking(orderID: string, reason: string): Promise<any> {
+    return this.apiService.callHttpFunction(cloudFunctionNames.returnOrder, { orderID, reason });
   }
 }
 

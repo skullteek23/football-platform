@@ -27,22 +27,24 @@
     </div>
   </app-result-box>
 
-  <app-wide-button [displayDetails]="listBtnDetails" [theme]='ButtonTheme.primary'
-    (clickEv)="showList()"></app-wide-button>
+  <app-wide-button [disabled]='isOrderReturned' [displayDetails]="listBtnDetails"
+    [theme]='isOrderReturned ? ButtonTheme.secondary : ButtonTheme.primary' (clickEv)="showList()"></app-wide-button>
   <app-wide-button [disabled]="ground?.mapLink === ''" [displayDetails]="mapsBtnDetails" [theme]='ButtonTheme.secondary'
     (clickEv)="openMaps()"></app-wide-button>
-  <app-wide-button [displayDetails]="invoiceBtnDetails" [theme]='ButtonTheme.secondary'
-    (clickEv)="emailInvoice()"></app-wide-button>
+  <app-wide-button [displayDetails]="invoiceBtnDetails" [theme]='ButtonTheme.secondary' (clickEv)="emailInvoice()"
+    [disabled]='isOrderReturned'></app-wide-button>
   <app-wide-button [displayDetails]="homeBtnDetails" [theme]='ButtonTheme.secondary'
     (clickEv)="navigateHome()"></app-wide-button>
 
   <div class="cancellations-policy">
-    <a (click)="openCancellationPolicy()" class="read-policy">
+    <a (click)="openCancellationPolicy()" class="read-policy" *ngIf="!showCancelEvent">
       Read Cancellation/Refund Policy
       <mat-icon fontSet="material-icons-round">chevron_right</mat-icon>
     </a>
     <div class='note' [innerText]="slotMsg">
     </div>
-
+  </div>
+  <div *ngIf="showCancelEvent && !isOrderReturned" class='cancel-container'>
+    <a (click)="onCancelBooking()" class="cancel-button"> Cancel Booking</a>
   </div>
 </div>

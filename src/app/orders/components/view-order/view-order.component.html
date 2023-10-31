@@ -1,1 +1,2 @@
-<app-order-page-success [oid]="orderID"></app-order-page-success>
+<app-order-page-success [oid]="orderID" (cancelEvent)="openCancelDialog()"
+  [showCancelEvent]="true"></app-order-page-success>

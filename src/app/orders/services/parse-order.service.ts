@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Constants } from '@app/constant/app-constants';
 import { Order } from '@app/models/order.model';
 import { TransactionItemData } from '@app/shared-modules/transaction-item/models/transaction-item.model';
+import { ArraySorting } from '@app/utils/array-sorting-utility';
 
 @Injectable()
 export class ParseOrderService {
@@ -20,6 +21,7 @@ export class ParseOrderService {
   parseOrderList(orders: Order[]): TransactionItemData[] {
     const list: TransactionItemData[] = [];
     if (orders?.length) {
+      orders.sort(ArraySorting.sortObjectByKey('timestamp', 'desc'));
       orders.forEach(order => {
         const data = new TransactionItemData();
         const amount = this.currencyPipe.transform(order.amount, 'INR', 'symbol', Constants.NUMBER_FORMATS.format_1);
@@ -33,6 +35,7 @@ export class ParseOrderService {
         if (date) {
           data.subLabel = date
         }
+        data.highlightedCustomData = order.status;
         list.push(data);
       })
     }

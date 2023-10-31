@@ -19,4 +19,16 @@
       height: 72px;
     }
   }
+
+  .status-container {
+    height: 20px;
+    font-size: $font-size-s;
+    font-weight: 400;
+    color: $black;
+    width: auto;
+    text-align: end;
+    border: 1px $primary-color solid;
+    padding: 0px 8px;
+    border-radius: $border-radius-primary;
+  }
 }

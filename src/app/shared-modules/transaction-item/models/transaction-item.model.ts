@@ -6,4 +6,5 @@ export class TransactionItemData {
   routeLink: string = '/';
   panelClass: string = '';
   viewValueClass: string = '';
+  highlightedCustomData: string = ''
 }

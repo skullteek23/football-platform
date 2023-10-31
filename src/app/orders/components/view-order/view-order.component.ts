@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BottomSheetService } from '@app/services/bottom-sheet.service';
+import { CancelBookingComponent } from '../cancel-booking/cancel-booking.component';
+import { MatBottomSheetConfig } from '@angular/material/bottom-sheet';
 
 @Component({
   selector: 'app-view-order',
@@ -12,7 +15,8 @@ export class ViewOrderComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private bottomSheetService: BottomSheetService,
   ) { }
 
   ngOnInit(): void {
@@ -22,6 +26,21 @@ export class ViewOrderComponent implements OnInit {
       } else {
         this.router.navigate(['/error']);
       }
+    });
+  }
+
+  /**
+   * Open cancel dialog
+   */
+  openCancelDialog() {
+    const config = new MatBottomSheetConfig();
+    config.data = this.orderID;
+    config.disableClose = true;
+    config.hasBackdrop = true;
+    config.backdropClass = 'sheet-backdrop';
+    config.panelClass = 'sheet-custom';
+    this.bottomSheetService.openSheet(CancelBookingComponent, config).afterDismissed().subscribe((result) => {
+      window.location.reload();
     });
   }
 
