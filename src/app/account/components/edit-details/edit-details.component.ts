@@ -64,12 +64,12 @@ export class EditDetailsComponent implements OnInit {
    */
   getStates() {
     this.locationService.getStates().subscribe({
-      next:(states) => {
+      next: (states) => {
         this.states = states;
         this.setSelectedCity();
       },
-      error:(error) => {
-        if(error.error) {
+      error: (error) => {
+        if (error.error) {
           this.snackbarService.displayError(error.error);
         }
         this.hideLoader();
@@ -81,16 +81,23 @@ export class EditDetailsComponent implements OnInit {
    * Get the cities if the state already stored on backend
    */
   setSelectedCity() {
-    if(this.userDetails?.locationState && this.userDetails.locationState.length > 0){
-      let currentState: any;
-      currentState = this.states.find((state: ILocationState) => {
-        return (state.name === this.userDetails.locationState)
-      })
+    const currentState = this.checkStateNameValidity();
+    if (currentState) {
       this.getStateCities(currentState.iso2);
-    }
-    else {
+    } else {
       this.hideLoader();
     }
+  }
+
+
+  /**
+   * Checks if state already saved in database and return state object
+   * @returns 
+   */
+  checkStateNameValidity(): ILocationState | undefined {
+    return this.states.find((state: ILocationState) => {
+      return (state.name === this.userDetails?.locationState);
+    });
   }
 
 
@@ -105,7 +112,7 @@ export class EditDetailsComponent implements OnInit {
         this.hideLoader();
       },
       error: (error) => {
-        if(error.error) {
+        if (error.error) {
           this.snackbarService.displayError(error.error);
         }
         this.hideLoader();
@@ -207,7 +214,7 @@ export class EditDetailsComponent implements OnInit {
    * Returns the result from compareFunction
    */
   compareLocation(value: any, option: any) {
-    return compareFunction(value, option, "name"); 
+    return compareFunction(value, option, "name");
   }
 
   /**
