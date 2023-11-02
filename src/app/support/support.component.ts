@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Regex } from '@app/constant/regex-constants';
 import { SupportConstants } from './constants/support.constants';
 import { IUploaderOptions } from '@app/shared-modules/custom-file-uploader/models/custom-file-uploader.model';
 import { ButtonConfig } from '@app/shared-modules/buttons/models/button.model';
@@ -9,6 +8,7 @@ import { AuthService } from '@app/authentication/auth.service';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { ResultBoxData, ResultType } from '@app/shared-modules/result-box/models/result-box.model';
 import { AnimationsList } from '@app/services/animation.service';
+import { Regex } from '@ballzo-ui/core/common';
 
 @Component({
   selector: 'app-support',

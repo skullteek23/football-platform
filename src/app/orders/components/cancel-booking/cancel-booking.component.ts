@@ -1,13 +1,12 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
-import { OrderMessages } from '@ballzo-ui/core/common';
+import { OrderConstants, OrderMessages } from '@ballzo-ui/core/common';
 import { CancellationPolicyComponent } from '@app/legal-info/cancellation-policy/cancellation-policy.component';
-import { OrderConstants } from '@app/orders/constants/order.constant';
 import { BottomSheetService } from '@app/services/bottom-sheet.service';
 import { OrderService } from '@app/services/order.service';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { ButtonConfig } from '@app/shared-modules/buttons/models/button.model';
-import { getCloudFnErrorMsg } from '@app/utils/api-error-handling-utility';
+import { getCloudFnErrorMsg } from '@ballzo-ui/core/utils';
 
 @Component({
   selector: 'app-cancel-booking',

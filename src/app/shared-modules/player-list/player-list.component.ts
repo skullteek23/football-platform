@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PlayerListItem } from './models/player-list.model';
-import { Observable, catchError, combineLatest, } from 'rxjs';
+import { Observable, combineLatest, } from 'rxjs';
 import { SnackbarService } from '@app/services/snackbar.service';
-import { getFirestoreErrorMsg } from '@app/utils/api-error-handling-utility';
-import { PlayerListMessages } from '@ballzo-ui/core/common';
 import { PlayerListService } from './services/player-list.service';
 import { GroundService } from '@app/services/ground.service';
 import { Ground, GroundFacility, GroundSlot } from '@ballzo-ui/core/ground';

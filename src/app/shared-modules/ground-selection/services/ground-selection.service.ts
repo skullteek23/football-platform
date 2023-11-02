@@ -3,8 +3,8 @@ import { InteractiveCardData } from '@app/shared-modules/interactive-card/models
 import { SelectedGroundInfo, TabLabel, UserSlotSelectionInfo } from '../models/ground-selection.model';
 import { SessionStorageService } from '@app/services/session-storage.service';
 import { Constants, SessionStorageProperties } from '@ballzo-ui/core/common';
-import { Ground, GroundFacility, GroundPrice } from '@ballzo-ui/core/ground';
-import { ArraySorting } from '@app/utils/array-sorting-utility';
+import { Ground, GroundFacility } from '@ballzo-ui/core/ground';
+import { ArraySorting } from '@ballzo-ui/core/utils';
 import { DatePipe } from '@angular/common';
 import { GroundService } from '@app/services/ground.service';
 import { Subject } from 'rxjs';

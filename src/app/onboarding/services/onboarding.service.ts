@@ -5,7 +5,7 @@ import { SessionStorageProperties } from '@ballzo-ui/core/common';
 import { PaymentService } from '@app/services/payment.service';
 import { SessionStorageService } from '@app/services/session-storage.service';
 import { SnackbarService } from '@app/services/snackbar.service';
-import { getFirestoreErrorMsg } from '@app/utils/api-error-handling-utility';
+import { getFirestoreErrorMsg } from '@ballzo-ui/core/utils';
 import { Subject } from 'rxjs';
 
 @Injectable({

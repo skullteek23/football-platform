@@ -12,7 +12,6 @@ import { UserService } from '@app/services/user.service';
 import { AuthService } from '@app/authentication/auth.service';
 import { Router } from '@angular/router';
 import { SnackbarService } from '@app/services/snackbar.service';
-import { getFirestoreErrorMsg } from '@app/utils/api-error-handling-utility';
 import { GroundSelectionMessages } from '@ballzo-ui/core/common';
 import { Constants } from '@ballzo-ui/core/common';
 

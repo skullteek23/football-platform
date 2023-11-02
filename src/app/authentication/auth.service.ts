@@ -15,16 +15,12 @@ import {
   updatePhoneNumber,
   updateProfile,
 } from '@angular/fire/auth';
-import {
-  IConfirmationResult,
-  IUser
-} from '@app/models/user.model';
 import { IUserProperties } from '@ballzo-ui/core/common';
 import {
   Constants,
   LocalStorageProperties,
 } from '@ballzo-ui/core/common';
-import { AuthConstants } from './constants/auth.constant';
+import { AuthConstants } from '@ballzo-ui/core/common';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { AuthMessages } from '@ballzo-ui/core/common';
 import { LocalStorageService } from '@app/services/local-storage.service';
@@ -32,9 +28,9 @@ import { SessionStorageService } from '@app/services/session-storage.service';
 import { CoreApiService } from '@app/services/core-api.service';
 import { HttpsCallableResult } from 'firebase/functions';
 import { cloudFunctionNames } from '@app/constant/api-constants';
-import { isEnumKey } from '@app/utils/objects-utility';
-import { Position } from '@ballzo-ui/core/user';
-import { getCloudFnErrorMsg } from '@app/utils/api-error-handling-utility';
+import { isEnumKey } from '@ballzo-ui/core/utils';
+import { IConfirmationResult, IUser, Position } from '@ballzo-ui/core/user';
+import { getCloudFnErrorMsg } from '@ballzo-ui/core/utils';
 
 @Injectable({
   providedIn: 'root',

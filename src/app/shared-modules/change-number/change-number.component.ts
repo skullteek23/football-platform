@@ -2,14 +2,14 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from '@app/authentication/auth.service';
 import { AccountMessages, AuthMessages } from '@ballzo-ui/core/common';
-import { IUser } from '@app/models/user.model';
+import { IUser } from '@ballzo-ui/core/user';
 import { BottomSheetService } from '@app/services/bottom-sheet.service';
 import { ShowConfirmationService } from '@app/services/show-confirmation.service';
-import { MOBILE_VALIDATORS, OTP_VALIDATORS, valueNotSameValidator } from '@app/utils/form-validators-utility';
+import { MOBILE_VALIDATORS, OTP_VALIDATORS, valueNotSameValidator } from '@ballzo-ui/core/utils';
 import { ButtonConfig } from '../buttons/models/button.model';
 import { SnackbarService } from '@app/services/snackbar.service';
-import { getAuthErrorMsg, getCloudFnErrorMsg } from '@app/utils/api-error-handling-utility';
-import { AuthConstants } from '@app/authentication/constants/auth.constant';
+import { getAuthErrorMsg, getCloudFnErrorMsg } from '@ballzo-ui/core/utils';
+import { AuthConstants } from '@ballzo-ui/core/common';
 import { MatInput } from '@angular/material/input';
 import { AnimationsList } from '@app/services/animation.service';
 import { PhoneAuthProvider } from '@angular/fire/auth';

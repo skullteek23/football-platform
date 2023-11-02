@@ -4,9 +4,8 @@ import { GroundSelectionService } from '../../services/ground-selection.service'
 import { GroundFacility, GroundSlot } from '@ballzo-ui/core/ground';
 import { IListOption } from '@ballzo-ui/core/common';
 import { GroundService } from '@app/services/ground.service';
-import { MatTabChangeEvent } from '@angular/material/tabs';
 import { common } from '@environments/environment.common';
-import { DateParseUtility } from '@app/utils/date-parse-utility';
+import { DateParseUtility } from '@ballzo-ui/core/utils';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { GroundSelectionMessages } from '@ballzo-ui/core/common';
 import { SessionStorageService } from '@app/services/session-storage.service';

@@ -10,7 +10,7 @@ import { Ground } from '@ballzo-ui/core/ground';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { GroundSelectionMessages } from '@ballzo-ui/core/common';
 import { Position } from '@ballzo-ui/core/user';
-import { isEnumKey } from '@app/utils/objects-utility';
+import { isEnumKey } from '@ballzo-ui/core/utils';
 
 @Component({
   selector: 'app-ground-selection',

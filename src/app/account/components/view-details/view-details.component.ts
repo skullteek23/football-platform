@@ -4,7 +4,7 @@ import { AccountService } from '@app/account/services/account.service';
 import { AuthService } from '@app/authentication/auth.service';
 import { Constants } from '@ballzo-ui/core/common';
 import { AccountMessages } from '@ballzo-ui/core/common';
-import { IUser } from '@app/models/user.model';
+import { IUser } from '@ballzo-ui/core/user';
 import { PlayerStats, Position } from '@ballzo-ui/core/user';
 import { BottomSheetService } from '@app/services/bottom-sheet.service';
 import { ShowConfirmationService } from '@app/services/show-confirmation.service';
@@ -16,8 +16,8 @@ import {
 } from '@app/shared-modules/buttons/models/button.model';
 import { ChangeNumberComponent } from '@app/shared-modules/change-number/change-number.component';
 import { DetailsContainerData } from '@app/shared-modules/details-container/models/details-container.model';
-import { getCloudFnErrorMsg } from '@app/utils/api-error-handling-utility';
-import { isEnumKey } from '@app/utils/objects-utility';
+import { getCloudFnErrorMsg } from '@ballzo-ui/core/utils';
+import { isEnumKey } from '@ballzo-ui/core/utils';
 
 @Component({
   selector: 'app-view-details',

@@ -2,13 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@app/authentication/auth.service';
 import { Constants } from '@ballzo-ui/core/common';
-import { IUser } from '@app/models/user.model';
+import { IUser } from '@ballzo-ui/core/user';
 import { Order } from '@app/models/order.model';
 import { ParseOrderService } from '@app/orders/services/parse-order.service';
 import { OrderService } from '@app/services/order.service';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { TransactionItemData } from '@app/shared-modules/transaction-item/models/transaction-item.model';
-import { getFirestoreErrorMsg } from '@app/utils/api-error-handling-utility';
 
 @Component({
   selector: 'app-order-list',

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Constants } from '@ballzo-ui/core/common';
 import { Order } from '@app/models/order.model';
 import { TransactionItemData } from '@app/shared-modules/transaction-item/models/transaction-item.model';
-import { ArraySorting } from '@app/utils/array-sorting-utility';
+import { ArraySorting } from '@ballzo-ui/core/utils';
 
 @Injectable()
 export class ParseOrderService {

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { CoreApiService } from './core-api.service';
 import { Observable, map, tap } from 'rxjs';
-import { combineArrayDataWithId, convertFirestoreData, convertFirestoreDataArray, convertObjectToFirestoreData } from '@app/utils/objects-utility';
+import { convertFirestoreData, convertFirestoreDataArray } from '@ballzo-ui/core/utils';
 import { FacilityStatus, Ground, GroundAdditionalInfo, GroundFacility, GroundPrice, GroundSlot, GroundStatus, SlotStatus } from '@ballzo-ui/core/ground';
 import { TabLabel } from '@app/shared-modules/ground-selection/models/ground-selection.model';
-import { DateParseUtility } from '@app/utils/date-parse-utility';
+import { DateParseUtility } from '@ballzo-ui/core/utils';
 import { Constants } from '@ballzo-ui/core/common';
 
 @Injectable({

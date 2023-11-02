@@ -6,9 +6,7 @@ import { AnimationsList } from '@app/services/animation.service';
 import { BottomSheetService } from '@app/services/bottom-sheet.service';
 import { GroundService } from '@app/services/ground.service';
 import { SnackbarService } from '@app/services/snackbar.service';
-import { getFirestoreErrorMsg } from '@app/utils/api-error-handling-utility';
-import { getFirestore } from 'firebase/firestore';
-import { combineLatest, forkJoin } from 'rxjs';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-ground-info',

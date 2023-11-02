@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CoreApiService } from './core-api.service';
 import { UserWallet } from '@app/models/user.model';
-import { convertFirestoreData, convertFirestoreDataArray } from '@app/utils/objects-utility';
+import { convertFirestoreData, convertFirestoreDataArray } from '@ballzo-ui/core/utils';
 import { Observable, map } from 'rxjs';
 import { Player, PlayerStats } from '@ballzo-ui/core/user';
 

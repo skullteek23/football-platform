@@ -6,7 +6,7 @@ import { OrderService } from '@app/services/order.service';
 import { UserService } from '@app/services/user.service';
 import { Observable } from 'rxjs';
 import { Constants } from '@ballzo-ui/core/common';
-import { ArraySorting } from '@app/utils/array-sorting-utility';
+import { ArraySorting } from '@ballzo-ui/core/utils';
 
 @Injectable({
   providedIn: 'root'

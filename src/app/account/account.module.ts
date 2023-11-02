@@ -15,7 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormFieldErrorsModule } from '@app/shared-modules/form-field-errors/form-field-errors.module';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { CUSTOM_DATE_FORMATS, CustomDateAdapter } from '@app/utils/custom-date-formats';
+import { CUSTOM_DATE_FORMATS, CustomDateAdapter } from '@ballzo-ui/core/utils';
 import { DateAdapter, MAT_DATE_FORMATS, MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { LoaderModule } from '@app/shared-modules/loader/loader.module';

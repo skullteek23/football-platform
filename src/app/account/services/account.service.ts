@@ -5,7 +5,7 @@ import { CloudStorageFileScreens } from '@app/constant/api-constants';
 import { Constants } from '@ballzo-ui/core/common';
 import { IUserProperties } from '@ballzo-ui/core/common';
 import { CloudStorageService } from '@app/services/cloud-storage.service';
-import { getRandomString } from '@app/utils/string-utility';
+import { getRandomString } from '@ballzo-ui/core/utils';
 import { AccountConstants } from '../constants/account.constants';
 import { Player } from '@ballzo-ui/core/user';
 import { UserService } from '@app/services/user.service';

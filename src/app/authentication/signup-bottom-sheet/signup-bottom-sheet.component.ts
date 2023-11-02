@@ -10,19 +10,19 @@ import { Router } from '@angular/router';
 import { AnimationsList } from '@app/services/animation.service';
 import { AuthBaseComponent } from '../auth-base.component';
 import { FormControl, FormGroup } from '@angular/forms';
-import { AuthConstants } from '../constants/auth.constant';
-import { IApiError, IConfirmationResult } from '@app/models/user.model';
+import { AuthConstants } from '@ballzo-ui/core/common';
 import { SnackbarService } from '@app/services/snackbar.service';
-import { getAuthErrorMsg, getCloudFnErrorMsg } from '@app/utils/api-error-handling-utility';
+import { getAuthErrorMsg, getCloudFnErrorMsg } from '@ballzo-ui/core/utils';
 import {
   FULL_NAME_VALIDATORS,
   MOBILE_VALIDATORS,
   OTP_VALIDATORS,
-} from '@app/utils/form-validators-utility';
+} from '@ballzo-ui/core/utils';
 import { BottomSheetService } from '@app/services/bottom-sheet.service';
 import { MatInput } from '@angular/material/input';
 import { ShowConfirmationService } from '@app/services/show-confirmation.service';
 import { SessionStorageService } from '@app/services/session-storage.service';
+import { IConfirmationResult, IApiError } from '@ballzo-ui/core/user';
 
 @Component({
   selector: 'app-signup-bottom-sheet',

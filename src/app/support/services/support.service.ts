@@ -4,7 +4,7 @@ import { SupportRequest } from '../models/support.model';
 import { CloudStorageFileScreens } from '@app/constant/api-constants';
 import { CoreApiService } from '@app/services/core-api.service';
 import { SupportConstants } from '../constants/support.constants';
-import { getRandomString } from '@app/utils/string-utility';
+import { getRandomString } from '@ballzo-ui/core/utils';
 
 @Injectable({
   providedIn: 'root'

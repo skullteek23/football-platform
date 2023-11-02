@@ -1,18 +1,15 @@
 import { Router } from '@angular/router';
-import { AuthMessages } from '@ballzo-ui/core/common';
 import { ButtonConfig } from '@app/shared-modules/buttons/models/button.model';
 import { AuthService } from './auth.service';
-import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { CanComponentDeactivate } from '@app/guards/confirm-form-closure.guard';
 import { FormGroup } from '@angular/forms';
-import { IApiError, IConfirmationResult } from '@app/models/user.model';
 import { SnackbarService } from '@app/services/snackbar.service';
-import { AuthConstants } from './constants/auth.constant';
 import { BottomSheetService } from '@app/services/bottom-sheet.service';
-import { getAuthErrorMsg } from '@app/utils/api-error-handling-utility';
+import { getAuthErrorMsg } from '@ballzo-ui/core/utils';
 import { ShowConfirmationService } from '@app/services/show-confirmation.service';
 import { SessionStorageService } from '@app/services/session-storage.service';
-import { SessionStorageProperties } from '@ballzo-ui/core/common';
+import { AuthMessages, AuthConstants, SessionStorageProperties } from '@ballzo-ui/core/common';
+import { IApiError, IConfirmationResult } from '@ballzo-ui/core/user';
 
 export class AuthBaseComponent implements CanComponentDeactivate {
   readonly messages = AuthMessages;
