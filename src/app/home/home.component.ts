@@ -19,9 +19,7 @@ import { Subscription, combineLatest } from 'rxjs';
 import { HomeService } from './services/home.service';
 import { GroundService } from '@app/services/ground.service';
 import { SnackbarService } from '@app/services/snackbar.service';
-import { GroundSlot, SlotStatus } from '@app/models/ground.model';
-import { BackgroundCSS } from '@app/models/common.model';
-import { ColorsUtility } from '@app/utils/colors-utility';
+import { GroundSlot } from '@app/models/ground.model';
 import { getFirestoreErrorMsg } from '@app/utils/api-error-handling-utility';
 
 @Component({
@@ -156,7 +154,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
       },
       error: (err) => {
         this.isBookingsInitialized = true;
-        this.snackbarService.displayError(getFirestoreErrorMsg(err));
+        this.snackbarService.displayError(err);
       }
     })
   }

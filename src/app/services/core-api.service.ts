@@ -3,8 +3,7 @@ import { Firestore, QueryFieldFilterConstraint, WhereFilterOp, addDoc, collectio
 import { Functions, httpsCallable } from '@angular/fire/functions';
 import { getFirestoreErrorMsg } from '@app/utils/api-error-handling-utility';
 import { combineArrayDataWithId, convertObjectToFirestoreData } from '@app/utils/objects-utility';
-import { Observable, catchError, map, of, take, tap, throwError } from 'rxjs';
-import { SnackbarService } from './snackbar.service';
+import { Observable, catchError, map, of, take, throwError } from 'rxjs';
 import { environment } from '@environments/environment';
 
 @Injectable({
@@ -14,8 +13,7 @@ export class CoreApiService {
   private firestore: Firestore = inject(Firestore);
 
   constructor(
-    private cloudFn: Functions,
-    private snackbarService: SnackbarService
+    private cloudFn: Functions
   ) { }
 
   /**
@@ -104,12 +102,12 @@ export class CoreApiService {
       return this.observeCollectionMetadata(collectionName).pipe(
         take(1),
         catchError(err => this.handleApiError(err))
-      );;
+      );
     }
     return this.observeCollection(collectionName).pipe(
       take(1),
       catchError(err => this.handleApiError(err))
-    );;
+    );
   }
 
   /**
@@ -122,6 +120,7 @@ export class CoreApiService {
     return this.getCollection(collectionName, true)
       .pipe(
         map(resp => combineArrayDataWithId(resp)),
+        catchError(err => this.handleApiError(err))
       );
   }
 
@@ -145,7 +144,7 @@ export class CoreApiService {
     return this.observeDocument(collectionName, documentId, options).pipe(
       take(1),
       catchError(err => this.handleApiError(err))
-    );;
+    );
   }
 
   /**
@@ -159,10 +158,10 @@ export class CoreApiService {
     const data = convertObjectToFirestoreData(addData);
     if (documentId) {
       return setDoc(doc(this.firestore, `${collectionName}/${documentId}`), data)
-        .catch(err => this.handleApiError(err));;
+        .catch(err => this.handleApiErrorAsPromise(err));
     } else {
       return addDoc(this.getCollectionRef(collectionName), data)
-        .catch(err => this.handleApiError(err));;
+        .catch(err => this.handleApiErrorAsPromise(err));
     }
   }
 
@@ -176,7 +175,7 @@ export class CoreApiService {
   updateDocument(collectionName: string, addData: any, documentId: string): Promise<any> {
     const data = convertObjectToFirestoreData(addData);
     return updateDoc(doc(this.firestore, `${collectionName}/${documentId}`), data)
-      .catch(err => this.handleApiError(err));;
+      .catch(err => this.handleApiErrorAsPromise(err));
   }
 
   /**
@@ -187,7 +186,7 @@ export class CoreApiService {
   */
   deleteDocument(collectionName: string, documentId: string): Promise<any> {
     return deleteDoc(doc(this.firestore, `${collectionName}/${documentId}`))
-      .catch(err => this.handleApiError(err));
+      .catch(err => this.handleApiErrorAsPromise(err));
   }
 
   /**
@@ -237,7 +236,7 @@ export class CoreApiService {
   }
 
   /**
-   * Handles the API error
+   * Handles the API error when observable is used
    * @param err
    */
   handleApiError(err: any): any {
@@ -246,5 +245,17 @@ export class CoreApiService {
     }
     const errorMsg = getFirestoreErrorMsg(err);
     return throwError(() => errorMsg);
+  }
+
+  /**
+   * Handles the API error when promise is used
+   * @param err
+   */
+  handleApiErrorAsPromise(err: any): Promise<any> {
+    if (!environment.production) {
+      console.log(err);
+    }
+    const errorMsg = getFirestoreErrorMsg(err);
+    return Promise.reject(errorMsg);
   }
 }
