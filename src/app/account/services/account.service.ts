@@ -68,16 +68,19 @@ export class AccountService {
       player.locationState = value.locationState.name;
     }
 
+    const allPromises = [];
     if (Object.keys(player).length) {
-      const allPromises = [];
       allPromises.push(this.userService.updateUserDetails(player, userId));
+    }
+    if (Object.keys(properties).length) {
       allPromises.push(this.authService.updateUserProfile(properties));
-
-      return Promise.all(allPromises);
     }
 
-    console.log('No values are changed');
-    return Promise.resolve(0);
-
+    if (allPromises.length) {
+      return Promise.all(allPromises);
+    } else {
+      console.log('No values are changed');
+      return Promise.resolve(0);
+    }
   }
 }

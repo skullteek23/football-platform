@@ -92,7 +92,7 @@ export class EditDetailsComponent implements OnInit {
 
   /**
    * Checks if state already saved in database and return state object
-   * @returns 
+   * @returns
    */
   checkStateNameValidity(): ILocationState | undefined {
     return this.states.find((state: ILocationState) => {
@@ -136,7 +136,7 @@ export class EditDetailsComponent implements OnInit {
         },
         error: (err) => {
           this.hideLoader();
-          this.snackbarService.displayError(getFirestoreErrorMsg(err));
+          this.snackbarService.displayError(err);
         }
       });
     }
