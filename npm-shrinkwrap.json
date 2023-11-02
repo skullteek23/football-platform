@@ -19,7 +19,7 @@
         "@angular/platform-browser": "~13.0.0-next.0",
         "@angular/platform-browser-dynamic": "~13.0.0-next.0",
         "@angular/router": "~13.0.0-next.0",
-        "@ballzo-ui/core": "^0.0.3",
+        "@ballzo-ui/core": "^0.0.7",
         "firebase": "^10.4.0",
         "rxfire": "^6.0.4",
         "rxjs": "~7.4.0",
@@ -2678,9 +2678,9 @@
       }
     },
     "node_modules/@ballzo-ui/core": {
-      "version": "0.0.3",
-      "resolved": "https://registry.npmjs.org/@ballzo-ui/core/-/core-0.0.3.tgz",
-      "integrity": "sha512-0PSXBbKPbGe90vLrWR0dHl7KnHRSGHEewpmUoBTwQUkRoZNfB72GST/RK5xjMgE6jdTX3pyhrbt+RkZ2UGZ4HA==",
+      "version": "0.0.7",
+      "resolved": "https://registry.npmjs.org/@ballzo-ui/core/-/core-0.0.7.tgz",
+      "integrity": "sha512-O2mKQKyQlnjA+kokoluSJVADVz5+Y5Xw1NxW1fdcT3/n5Edy4R5xuDryoMOPvcchol0UtF+6GzWff6sYxd40PA==",
       "dependencies": {
         "tslib": "^2.3.0"
       },
@@ -17281,9 +17281,9 @@
       }
     },
     "@ballzo-ui/core": {
-      "version": "0.0.3",
-      "resolved": "https://registry.npmjs.org/@ballzo-ui/core/-/core-0.0.3.tgz",
-      "integrity": "sha512-0PSXBbKPbGe90vLrWR0dHl7KnHRSGHEewpmUoBTwQUkRoZNfB72GST/RK5xjMgE6jdTX3pyhrbt+RkZ2UGZ4HA==",
+      "version": "0.0.7",
+      "resolved": "https://registry.npmjs.org/@ballzo-ui/core/-/core-0.0.7.tgz",
+      "integrity": "sha512-O2mKQKyQlnjA+kokoluSJVADVz5+Y5Xw1NxW1fdcT3/n5Edy4R5xuDryoMOPvcchol0UtF+6GzWff6sYxd40PA==",
       "requires": {
         "tslib": "^2.3.0"
       }
