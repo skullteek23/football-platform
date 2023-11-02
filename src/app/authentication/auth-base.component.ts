@@ -11,7 +11,6 @@ import { AuthConstants } from './constants/auth.constant';
 import { BottomSheetService } from '@app/services/bottom-sheet.service';
 import { getAuthErrorMsg } from '@app/utils/api-error-handling-utility';
 import { ShowConfirmationService } from '@app/services/show-confirmation.service';
-import { LocalStorageService } from '@app/services/local-storage.service';
 import { SessionStorageService } from '@app/services/session-storage.service';
 import { SessionStorageProperties } from '@ballzo-ui/core/common';
 
