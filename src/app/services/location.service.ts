@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { ILocationCity, ILocationState } from "@app/models/location.model";
+import { ILocationCity, ILocationState } from "@ballzo-ui/core/location";
 import { Observable } from "rxjs";
 import { environment } from "@environments/environment";
 import { LOCATION_API_URL } from "@app/constant/api-constants";

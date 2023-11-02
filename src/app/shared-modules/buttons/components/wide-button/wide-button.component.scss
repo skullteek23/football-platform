@@ -1,4 +1,4 @@
-@import "mixins";
+@import "node_modules/@ballzo-ui/core/common/themes/mixins.scss";
 
 .primary-button-custom {
   @include primary-gradient-background;

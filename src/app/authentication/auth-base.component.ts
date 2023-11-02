@@ -1,11 +1,11 @@
 import { Router } from '@angular/router';
-import { AuthMessages } from '@app/constant/app-messages';
+import { AuthMessages } from '@ballzo-ui/core/common';
 import { ButtonConfig } from '@app/shared-modules/buttons/models/button.model';
 import { AuthService } from './auth.service';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { CanComponentDeactivate } from '@app/guards/confirm-form-closure.guard';
 import { FormGroup } from '@angular/forms';
-import { IApiError, IConfirmationResult } from '@app/models/common.model';
+import { IApiError, IConfirmationResult } from '@app/models/user.model';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { AuthConstants } from './constants/auth.constant';
 import { BottomSheetService } from '@app/services/bottom-sheet.service';
@@ -13,7 +13,7 @@ import { getAuthErrorMsg } from '@app/utils/api-error-handling-utility';
 import { ShowConfirmationService } from '@app/services/show-confirmation.service';
 import { LocalStorageService } from '@app/services/local-storage.service';
 import { SessionStorageService } from '@app/services/session-storage.service';
-import { SessionStorageProperties } from '@app/constant/app-constants';
+import { SessionStorageProperties } from '@ballzo-ui/core/common';
 
 export class AuthBaseComponent implements CanComponentDeactivate {
   readonly messages = AuthMessages;
@@ -142,7 +142,10 @@ export class AuthBaseComponent implements CanComponentDeactivate {
           window.scrollTo(0, 0);
           const displayName = this.getControlValue(formGroup, 'name');
           if (displayName) {
-            this.authService.updateUserProfile({ displayName });
+            this.authService.updateUserProfile({
+              displayName,
+              photoURL: ''
+            });
           }
           this.closeSheet('/m/onboarding');
           this.hideLoader();

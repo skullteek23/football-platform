@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Ground, GroundFacility } from '@app/models/ground.model';
+import { Ground, GroundFacility } from '@ballzo-ui/core/ground';
 import { GroundService } from '@app/services/ground.service';
 import { InteractiveCardData } from '@app/shared-modules/interactive-card/models/interactive-card.model';
 

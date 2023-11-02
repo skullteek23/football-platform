@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Ground, GroundSlot, SlotStatus } from '@app/models/ground.model';
-import { Booking } from '@app/models/order.model';
+import { Ground, GroundSlot, SlotStatus } from '@ballzo-ui/core/ground';
+import { Booking } from '@ballzo-ui/core/transaction';
 import { InteractiveCardData } from '@app/shared-modules/interactive-card/models/interactive-card.model';
 import { HomeConstants } from '../constants/home.constants';
-import { BackgroundCSS } from '@app/models/common.model';
+import { BackgroundCSS } from '@ballzo-ui/core/common';
 import { ColorsUtility } from '@app/utils/colors-utility';
 import { CurrencyPipe, DatePipe } from '@angular/common';
-import { Constants } from '@app/constant/app-constants';
+import { Constants } from '@ballzo-ui/core/common';
 
 @Injectable({
   providedIn: 'root'

@@ -17,23 +17,23 @@ import {
 } from '@angular/fire/auth';
 import {
   IConfirmationResult,
-  IUser,
-  IUserProperties,
-} from '@app/models/common.model';
+  IUser
+} from '@app/models/user.model';
+import { IUserProperties } from '@ballzo-ui/core/common';
 import {
   Constants,
   LocalStorageProperties,
-} from '@app/constant/app-constants';
+} from '@ballzo-ui/core/common';
 import { AuthConstants } from './constants/auth.constant';
 import { SnackbarService } from '@app/services/snackbar.service';
-import { AuthMessages } from '@app/constant/app-messages';
+import { AuthMessages } from '@ballzo-ui/core/common';
 import { LocalStorageService } from '@app/services/local-storage.service';
 import { SessionStorageService } from '@app/services/session-storage.service';
 import { CoreApiService } from '@app/services/core-api.service';
 import { HttpsCallableResult } from 'firebase/functions';
 import { cloudFunctionNames } from '@app/constant/api-constants';
 import { isEnumKey } from '@app/utils/objects-utility';
-import { Position } from '@app/models/user.model';
+import { Position } from '@ballzo-ui/core/user';
 import { getCloudFnErrorMsg } from '@app/utils/api-error-handling-utility';
 
 @Injectable({

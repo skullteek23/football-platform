@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { CoreApiService } from './core-api.service';
-import { Booking, Order, WalletTransaction } from '@app/models/order.model';
+import { Order, WalletTransaction } from '@app/models/order.model';
+import { Booking } from '@ballzo-ui/core/transaction';
 import { convertFirestoreData, convertFirestoreDataArray, convertObjectToFirestoreData } from '@app/utils/objects-utility';
-import { Constants } from '@app/constant/app-constants';
+import { Constants } from '@ballzo-ui/core/common';
 import { Observable, map, tap } from 'rxjs';
 import { UserSlotSelectionInfo } from '@app/shared-modules/ground-selection/models/ground-selection.model';
 import { cloudFunctionNames } from '@app/constant/api-constants';

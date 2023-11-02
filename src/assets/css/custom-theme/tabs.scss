@@ -1,5 +1,5 @@
-@import "mixins";
-@import "variables";
+@import "node_modules/@ballzo-ui/core/common/themes/mixins.scss";
+@import "node_modules/@ballzo-ui/core/common/themes/_variables.scss";
 
 .mat-tab-header {
   border-bottom: none;

@@ -11,7 +11,7 @@ import { AnimationsList } from '@app/services/animation.service';
 import { AuthBaseComponent } from '../auth-base.component';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AuthConstants } from '../constants/auth.constant';
-import { IApiError, IConfirmationResult } from '@app/models/common.model';
+import { IApiError, IConfirmationResult } from '@app/models/user.model';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { getAuthErrorMsg, getCloudFnErrorMsg } from '@app/utils/api-error-handling-utility';
 import {

@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 import { AnimationsList } from '@app/services/animation.service';
 import { AuthService } from '../auth.service';
 import { AuthConstants } from '../constants/auth.constant';
-import { IConfirmationResult } from '@app/models/common.model';
+import { IConfirmationResult } from '@app/models/user.model';
 import { SnackbarService } from '@app/services/snackbar.service';
 import {
   MOBILE_VALIDATORS,

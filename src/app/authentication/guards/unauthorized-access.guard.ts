@@ -10,7 +10,7 @@ import {
   Constants,
   LocalStorageProperties,
   SessionStorageProperties,
-} from '@app/constant/app-constants';
+} from '@ballzo-ui/core/common';
 import { SessionStorageService } from '@app/services/session-storage.service';
 import { LocalStorageService } from '@app/services/local-storage.service';
 

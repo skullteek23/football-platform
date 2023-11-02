@@ -1,4 +1,4 @@
-import { Constants } from "@app/constant/app-constants";
+import { Constants } from '@ballzo-ui/core/common';
 
 export class InteractiveCardData {
   id: string = '';

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { SessionStorageProperties } from '@app/constant/app-constants';
+import { SessionStorageProperties } from '@ballzo-ui/core/common';
 import { OnboardingService } from '@app/onboarding/services/onboarding.service';
 import { SessionStorageService } from '@app/services/session-storage.service';
 import { UserSlotSelectionInfo } from '@app/shared-modules/ground-selection/models/ground-selection.model';
