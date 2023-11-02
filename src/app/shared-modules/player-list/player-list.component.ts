@@ -79,7 +79,6 @@ export class PlayerListComponent implements OnInit {
             this.isPageInit = true;
           },
           error: (error) => {
-            console.log(error)
             this.isPageInit = true;
             this.snackService.displayError(error);
             this.playersListWhite = [];
