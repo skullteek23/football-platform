@@ -2678,9 +2678,15 @@
       }
     },
     "node_modules/@ballzo-ui/core": {
+<<<<<<< HEAD
       "version": "0.0.7",
       "resolved": "https://registry.npmjs.org/@ballzo-ui/core/-/core-0.0.7.tgz",
       "integrity": "sha512-O2mKQKyQlnjA+kokoluSJVADVz5+Y5Xw1NxW1fdcT3/n5Edy4R5xuDryoMOPvcchol0UtF+6GzWff6sYxd40PA==",
+=======
+      "version": "0.0.3",
+      "resolved": "https://registry.npmjs.org/@ballzo-ui/core/-/core-0.0.3.tgz",
+      "integrity": "sha512-0PSXBbKPbGe90vLrWR0dHl7KnHRSGHEewpmUoBTwQUkRoZNfB72GST/RK5xjMgE6jdTX3pyhrbt+RkZ2UGZ4HA==",
+>>>>>>> 2f5a23f (added security changes)
       "dependencies": {
         "tslib": "^2.3.0"
       },
@@ -17281,9 +17287,15 @@
       }
     },
     "@ballzo-ui/core": {
+<<<<<<< HEAD
       "version": "0.0.7",
       "resolved": "https://registry.npmjs.org/@ballzo-ui/core/-/core-0.0.7.tgz",
       "integrity": "sha512-O2mKQKyQlnjA+kokoluSJVADVz5+Y5Xw1NxW1fdcT3/n5Edy4R5xuDryoMOPvcchol0UtF+6GzWff6sYxd40PA==",
+=======
+      "version": "0.0.3",
+      "resolved": "https://registry.npmjs.org/@ballzo-ui/core/-/core-0.0.3.tgz",
+      "integrity": "sha512-0PSXBbKPbGe90vLrWR0dHl7KnHRSGHEewpmUoBTwQUkRoZNfB72GST/RK5xjMgE6jdTX3pyhrbt+RkZ2UGZ4HA==",
+>>>>>>> 2f5a23f (added security changes)
       "requires": {
         "tslib": "^2.3.0"
       }
