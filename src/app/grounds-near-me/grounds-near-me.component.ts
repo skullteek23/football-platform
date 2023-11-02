@@ -88,7 +88,7 @@ export class GroundsNearMeComponent implements OnInit {
    * Handles the error
   */
   handleError(err: any) {
-    this.snackbarService.displayError(getFirestoreErrorMsg(err));
+    this.snackbarService.displayError(err);
     this.setData([]);
   }
 

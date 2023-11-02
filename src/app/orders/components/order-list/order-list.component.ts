@@ -58,7 +58,7 @@ export class OrderListComponent implements OnInit {
         error: err => {
           this.ordersList = [];
           this.uiList = [];
-          this.snackbarService.displayError(getFirestoreErrorMsg(err));
+          this.snackbarService.displayError(err);
           this.hideLoader();
         }
       });

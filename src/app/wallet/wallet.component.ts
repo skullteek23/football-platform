@@ -60,7 +60,7 @@ export class WalletComponent implements OnInit {
         error: (err) => {
           this.balance = 0;
           this.isBalanceInit = true;
-          this.snackbarService.displayError(getFirestoreErrorMsg(err));
+          this.snackbarService.displayError(err);
         }
       });
     }
@@ -91,7 +91,7 @@ export class WalletComponent implements OnInit {
           this.transactionsList = [];
           this.creditTxnList = [];
           this.debitTxnList = [];
-          this.snackbarService.displayError(getFirestoreErrorMsg(err));
+          this.snackbarService.displayError(err);
         }
       })
     }

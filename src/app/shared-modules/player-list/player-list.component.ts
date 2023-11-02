@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PlayerListItem } from './models/player-list.model';
-import { Observable, combineLatest, } from 'rxjs';
+import { Observable, catchError, combineLatest, } from 'rxjs';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { getFirestoreErrorMsg } from '@app/utils/api-error-handling-utility';
 import { PlayerListMessages } from '@ballzo-ui/core/common';
@@ -79,8 +79,9 @@ export class PlayerListComponent implements OnInit {
             this.isPageInit = true;
           },
           error: (error) => {
+            console.log(error)
             this.isPageInit = true;
-            this.snackService.displayError(getFirestoreErrorMsg(error));
+            this.snackService.displayError(error);
             this.playersListWhite = [];
             this.playersListBlack = [];
           },

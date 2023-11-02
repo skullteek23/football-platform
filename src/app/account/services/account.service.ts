@@ -50,10 +50,14 @@ export class AccountService {
     if (value.imgUrl) {
       const fileName = AccountConstants.FILE_NAME + getRandomString(10);
       const filePath = this.storageService.getFilePath(CloudStorageFileScreens.userProfilePhoto, fileName);
-      const imgUrl = await this.storageService.getPublicUrl(value.imgUrl, filePath);
 
-      properties.photoURL = imgUrl;
-      player.imgLink = imgUrl;
+      try {
+        const imgUrl = await this.storageService.getPublicUrl(value.imgUrl, filePath);
+        properties.photoURL = imgUrl;
+        player.imgLink = imgUrl;
+      } catch (error) {
+        return Promise.reject(error);
+      }
     }
 
     if (value.dob && new Date(value.dob).getTime() !== existingDetails.dob) {
@@ -68,16 +72,19 @@ export class AccountService {
       player.locationState = value.locationState.name;
     }
 
+    const allPromises = [];
     if (Object.keys(player).length) {
-      const allPromises = [];
       allPromises.push(this.userService.updateUserDetails(player, userId));
+    }
+    if (Object.keys(properties).length) {
       allPromises.push(this.authService.updateUserProfile(properties));
-
-      return Promise.all(allPromises);
     }
 
-    console.log('No values are changed');
-    return Promise.resolve(0);
-
+    if (allPromises.length) {
+      return Promise.all(allPromises);
+    } else {
+      console.log('No values are changed');
+      return Promise.resolve(0);
+    }
   }
 }

@@ -60,7 +60,7 @@ export class GroundInfoComponent implements OnInit {
       error: (err) => {
         this.groundInfo = new GroundAdditionalInfo();
         this.facilityList = [];
-        this.snackbarService.displayError(getFirestoreErrorMsg(err));
+        this.snackbarService.displayError(err);
         this.hideLoader();
       }
     });

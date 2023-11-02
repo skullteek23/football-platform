@@ -20,9 +20,6 @@ import { HomeService } from './services/home.service';
 import { GroundService } from '@app/services/ground.service';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { GroundSlot } from '@ballzo-ui/core/ground';
-import { BackgroundCSS } from '@ballzo-ui/core/common';
-import { ColorsUtility } from '@app/utils/colors-utility';
-import { getFirestoreErrorMsg } from '@app/utils/api-error-handling-utility';
 
 @Component({
   selector: 'app-home',

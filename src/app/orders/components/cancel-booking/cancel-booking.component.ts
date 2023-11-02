@@ -58,7 +58,6 @@ export class CancelBookingComponent implements OnInit {
           this.canDeactivate();
         })
         .catch((error) => {
-          console.log(error)
           this.snackbarService.displayError(getCloudFnErrorMsg(error));
           this.hideLoader();
           this.reason = '';
