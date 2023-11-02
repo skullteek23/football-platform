@@ -156,7 +156,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
       },
       error: (err) => {
         this.isBookingsInitialized = true;
-        this.snackbarService.displayError(getFirestoreErrorMsg(err));
+        this.snackbarService.displayError(err);
       }
     })
   }
