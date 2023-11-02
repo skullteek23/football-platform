@@ -1,16 +1,16 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SelectedGroundInfo, UserSlotSelectionInfo } from '../../models/ground-selection.model';
 import { GroundSelectionService } from '../../services/ground-selection.service';
-import { GroundFacility, GroundSlot } from '@app/models/ground.model';
-import { IListOption } from '@app/models/common.model';
+import { GroundFacility, GroundSlot } from '@ballzo-ui/core/ground';
+import { IListOption } from '@ballzo-ui/core/common';
 import { GroundService } from '@app/services/ground.service';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { common } from '@environments/environment.common';
 import { DateParseUtility } from '@app/utils/date-parse-utility';
 import { SnackbarService } from '@app/services/snackbar.service';
-import { GroundSelectionMessages } from '@app/constant/app-messages';
+import { GroundSelectionMessages } from '@ballzo-ui/core/common';
 import { SessionStorageService } from '@app/services/session-storage.service';
-import { SessionStorageProperties } from '@app/constant/app-constants';
+import { SessionStorageProperties } from '@ballzo-ui/core/common';
 
 @Component({
   selector: 'app-current-selection',

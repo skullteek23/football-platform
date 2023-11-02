@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Constants } from '@app/constant/app-constants';
+import { Constants } from '@ballzo-ui/core/common';
 import { FileType } from '@app/utils/file-utility';
 
 @Component({

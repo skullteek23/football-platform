@@ -2,12 +2,12 @@ import { DatePipe } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { AuthService } from '@app/authentication/auth.service';
 import { CloudStorageFileScreens } from '@app/constant/api-constants';
-import { Constants } from '@app/constant/app-constants';
-import { IUser, IUserProperties } from '@app/models/common.model';
+import { Constants } from '@ballzo-ui/core/common';
+import { IUserProperties } from '@ballzo-ui/core/common';
 import { CloudStorageService } from '@app/services/cloud-storage.service';
 import { getRandomString } from '@app/utils/string-utility';
 import { AccountConstants } from '../constants/account.constants';
-import { Player } from '@app/models/user.model';
+import { Player } from '@ballzo-ui/core/user';
 import { UserService } from '@app/services/user.service';
 
 @Injectable({
@@ -39,7 +39,7 @@ export class AccountService {
    * Saves the account details
    */
   async saveAccountDetails(value: any, existingDetails: Player, userId: string): Promise<any> {
-    const properties: IUserProperties = {};
+    const properties = new IUserProperties();
     const player: Partial<Player> = {};
 
     if (value?.name !== existingDetails.name) {

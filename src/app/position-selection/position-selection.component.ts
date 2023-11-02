@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { AnimationsList } from '@app/services/animation.service';
 import { PositionData } from './constants/postion-selection.constant';
 import { ButtonConfig } from '@app/shared-modules/buttons/models/button.model';
-import { PositionSelectionMessages } from '@app/constant/app-messages';
+import { PositionSelectionMessages } from '@ballzo-ui/core/common';
 import { Router } from '@angular/router';
 import { SessionStorageService } from '@app/services/session-storage.service';
-import { SessionStorageProperties } from '@app/constant/app-constants';
+import { SessionStorageProperties } from '@ballzo-ui/core/common';
 import { findIndexByValue, getValueByIndex, isEnumKey } from '@app/utils/objects-utility';
-import { Position } from '@app/models/user.model';
+import { Position } from '@ballzo-ui/core/user';
 
 @Component({
   selector: 'app-position-selection',

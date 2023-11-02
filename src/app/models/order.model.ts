@@ -1,5 +1,6 @@
-import { Constants } from "@app/constant/app-constants";
-import { OrderMessages } from "@app/constant/app-messages";
+import { Constants } from '@ballzo-ui/core/common';
+import { OrderMessages } from '@ballzo-ui/core/common';
+import { TransactionType } from '@ballzo-ui/core/transaction';
 
 export class Order {
   id: string = '';
@@ -24,23 +25,6 @@ export enum OrderStatus {
 //   white = 0,
 //   black = 1
 // }
-
-export class Booking {
-  id: string = '';
-  uid: string = '';
-  orderIds: string[] = [];
-  groundId: string = '';
-  slotId: string = '';
-  timestamp: number = new Date().getTime();
-  lastUpdated: number = new Date().getTime();
-  facilityId: string = '';
-  spots: number = 1;
-}
-
-export enum TransactionType {
-  credit = 'credit',
-  debit = 'debit'
-}
 
 export class WalletTransaction {
   amount: number = 0;

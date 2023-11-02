@@ -1,4 +1,4 @@
-import { GroundFacility } from "@app/models/ground.model";
+import { GroundFacility } from '@ballzo-ui/core/ground';
 
 export class SelectedGroundInfo {
   title: string = 'Title';

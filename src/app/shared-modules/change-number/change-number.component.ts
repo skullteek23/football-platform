@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from '@app/authentication/auth.service';
-import { AccountMessages, AuthMessages } from '@app/constant/app-messages';
-import { IUser } from '@app/models/common.model';
+import { AccountMessages, AuthMessages } from '@ballzo-ui/core/common';
+import { IUser } from '@app/models/user.model';
 import { BottomSheetService } from '@app/services/bottom-sheet.service';
 import { ShowConfirmationService } from '@app/services/show-confirmation.service';
 import { MOBILE_VALIDATORS, OTP_VALIDATORS, valueNotSameValidator } from '@app/utils/form-validators-utility';
