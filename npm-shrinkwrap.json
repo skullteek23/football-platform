@@ -2680,6 +2680,7 @@
     "node_modules/@ballzo-ui/core": {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       "version": "0.0.7",
       "resolved": "https://registry.npmjs.org/@ballzo-ui/core/-/core-0.0.7.tgz",
       "integrity": "sha512-O2mKQKyQlnjA+kokoluSJVADVz5+Y5Xw1NxW1fdcT3/n5Edy4R5xuDryoMOPvcchol0UtF+6GzWff6sYxd40PA==",
@@ -2693,6 +2694,11 @@
       "resolved": "https://registry.npmjs.org/@ballzo-ui/core/-/core-0.0.5.tgz",
       "integrity": "sha512-Lkbxvi7JMopjhT+FNVcW8MjodgDh/yB0EDy6PUjwQPHyihoddZsE89MVgloChKAw6aBc0qj/Sk6VNtxVu8Fqmg==",
 >>>>>>> ec103ca (update library)
+=======
+      "version": "0.0.6",
+      "resolved": "https://registry.npmjs.org/@ballzo-ui/core/-/core-0.0.6.tgz",
+      "integrity": "sha512-noI/Bw46P2gZAzo6gjLF1yvzAD5P+hT9Auauvz1rXny2rYzydNlTE/86jsGCFZHeS6/uNnejsqWqqpqniAlJYQ==",
+>>>>>>> a9424e6 (changes versions)
       "dependencies": {
         "tslib": "^2.3.0"
       },
@@ -17295,6 +17301,7 @@
     "@ballzo-ui/core": {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       "version": "0.0.7",
       "resolved": "https://registry.npmjs.org/@ballzo-ui/core/-/core-0.0.7.tgz",
       "integrity": "sha512-O2mKQKyQlnjA+kokoluSJVADVz5+Y5Xw1NxW1fdcT3/n5Edy4R5xuDryoMOPvcchol0UtF+6GzWff6sYxd40PA==",
@@ -17308,6 +17315,11 @@
       "resolved": "https://registry.npmjs.org/@ballzo-ui/core/-/core-0.0.5.tgz",
       "integrity": "sha512-Lkbxvi7JMopjhT+FNVcW8MjodgDh/yB0EDy6PUjwQPHyihoddZsE89MVgloChKAw6aBc0qj/Sk6VNtxVu8Fqmg==",
 >>>>>>> ec103ca (update library)
+=======
+      "version": "0.0.6",
+      "resolved": "https://registry.npmjs.org/@ballzo-ui/core/-/core-0.0.6.tgz",
+      "integrity": "sha512-noI/Bw46P2gZAzo6gjLF1yvzAD5P+hT9Auauvz1rXny2rYzydNlTE/86jsGCFZHeS6/uNnejsqWqqpqniAlJYQ==",
+>>>>>>> a9424e6 (changes versions)
       "requires": {
         "tslib": "^2.3.0"
       }
