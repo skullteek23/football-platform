@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
-import { Constants } from '@app/constant/app-constants';
-import { CommonFormFieldMessages } from '@app/constant/app-messages';
+import { Constants } from '@ballzo-ui/core/common';
+import { CommonFormFieldMessages } from '@ballzo-ui/core/common';
 
 @Component({
   selector: 'app-form-field-errors',

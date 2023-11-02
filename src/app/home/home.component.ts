@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@app/authentication/auth.service';
-import { Constants } from '@app/constant/app-constants';
-import { HomeMessages } from '@app/constant/app-messages';
+import { Constants } from '@ballzo-ui/core/common';
+import { HomeMessages } from '@ballzo-ui/core/common';
 import {
   HomeConstants,
   ACTIONS_MENU_NEW_USER,
@@ -19,7 +19,7 @@ import { Subscription, combineLatest } from 'rxjs';
 import { HomeService } from './services/home.service';
 import { GroundService } from '@app/services/ground.service';
 import { SnackbarService } from '@app/services/snackbar.service';
-import { GroundSlot } from '@app/models/ground.model';
+import { GroundSlot } from '@ballzo-ui/core/ground';
 
 @Component({
   selector: 'app-home',

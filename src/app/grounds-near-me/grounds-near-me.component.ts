@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatBottomSheetConfig } from '@angular/material/bottom-sheet';
-import { Ground } from '@app/models/ground.model';
+import { Ground } from '@ballzo-ui/core/ground';
 import { BottomSheetService } from '@app/services/bottom-sheet.service';
 import { ButtonConfig, ButtonTheme } from '@app/shared-modules/buttons/models/button.model';
 import { InteractiveCardData } from '@app/shared-modules/interactive-card/models/interactive-card.model';
@@ -13,8 +13,8 @@ import { AuthService } from '@app/authentication/auth.service';
 import { Router } from '@angular/router';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { getFirestoreErrorMsg } from '@app/utils/api-error-handling-utility';
-import { GroundSelectionMessages } from '@app/constant/app-messages';
-import { Constants } from '@app/constant/app-constants';
+import { GroundSelectionMessages } from '@ballzo-ui/core/common';
+import { Constants } from '@ballzo-ui/core/common';
 
 @Component({
   selector: 'app-grounds-near-me',

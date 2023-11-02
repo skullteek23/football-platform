@@ -1,5 +1,5 @@
-import { ApiMessages, AuthMessages, CommonMessages } from '@app/constant/app-messages';
-import { CloudFnErrorCode, CloudStorageErrorCode, IApiError } from '@app/models/common.model';
+import { ApiMessages, AuthMessages, CommonMessages } from '@ballzo-ui/core/common';
+import { CloudFnErrorCode, CloudStorageErrorCode, IApiError } from '@ballzo-ui/core/user';
 
 /**
  * Returns the error message from the auth error

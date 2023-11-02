@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
-import { SnackbarConstants } from '@app/constant/app-constants';
-import { CommonMessages } from '@app/constant/app-messages';
+import { SnackbarConstants } from '@ballzo-ui/core/common';
+import { CommonMessages } from '@ballzo-ui/core/common';
 
 @Injectable({
   providedIn: 'root',

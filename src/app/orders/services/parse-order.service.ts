@@ -1,6 +1,6 @@
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { Injectable } from '@angular/core';
-import { Constants } from '@app/constant/app-constants';
+import { Constants } from '@ballzo-ui/core/common';
 import { Order } from '@app/models/order.model';
 import { TransactionItemData } from '@app/shared-modules/transaction-item/models/transaction-item.model';
 import { ArraySorting } from '@app/utils/array-sorting-utility';

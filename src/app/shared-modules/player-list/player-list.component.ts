@@ -4,11 +4,11 @@ import { PlayerListItem } from './models/player-list.model';
 import { Observable, catchError, combineLatest, } from 'rxjs';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { getFirestoreErrorMsg } from '@app/utils/api-error-handling-utility';
-import { PlayerListMessages } from '@app/constant/app-messages';
+import { PlayerListMessages } from '@ballzo-ui/core/common';
 import { PlayerListService } from './services/player-list.service';
 import { GroundService } from '@app/services/ground.service';
-import { Ground, GroundFacility, GroundSlot } from '@app/models/ground.model';
-import { Constants } from '@app/constant/app-constants';
+import { Ground, GroundFacility, GroundSlot } from '@ballzo-ui/core/ground';
+import { Constants } from '@ballzo-ui/core/common';
 
 @Component({
   selector: 'app-player-list',

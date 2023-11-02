@@ -1,10 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { Storage, getDownloadURL, ref, uploadBytes } from '@angular/fire/storage';
 import { CloudStorageFileScreens } from '@app/constant/api-constants';
-import { Constants } from '@app/constant/app-constants';
-import { IApiError } from '@app/models/common.model';
-import { getAuthErrorMsg, getCloudFnErrorMsg, getFirestoreErrorMsg, handleStorageError } from '@app/utils/api-error-handling-utility';
-import { sanitizeFileName } from '@app/utils/file-utility';
+import { Constants } from '@ballzo-ui/core/common';
+import { getStorageError, sanitizeFileName } from '@ballzo-ui/core/utils';
 
 @Injectable({
   providedIn: 'root'
@@ -42,7 +40,7 @@ export class CloudStorageService {
       const urlPromise = getDownloadURL(result.ref);
       return urlPromise;
     } catch (error: any) {
-      return Promise.reject(handleStorageError(error));
+      return Promise.reject(getStorageError(error));
     }
   }
 

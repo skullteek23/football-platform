@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { PlayerListItem } from '../models/player-list.model';
-import { Booking } from '@app/models/order.model';
-import { Player } from '@app/models/user.model';
+import { Booking } from '@ballzo-ui/core/transaction';
+import { Player } from '@ballzo-ui/core/user';
 import { OrderService } from '@app/services/order.service';
 import { UserService } from '@app/services/user.service';
 import { Observable } from 'rxjs';
-import { Constants } from '@app/constant/app-constants';
+import { Constants } from '@ballzo-ui/core/common';
 import { ArraySorting } from '@app/utils/array-sorting-utility';
 
 @Injectable({

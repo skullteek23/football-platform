@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@app/authentication/auth.service';
-import { PaymentMessages } from '@app/constant/app-messages';
-import { IUser } from '@app/models/common.model';
-import { TransactionType, WalletTransaction } from '@app/models/order.model';
+import { PaymentMessages } from '@ballzo-ui/core/common';
+import { IUser } from '@app/models/user.model';
+import { WalletTransaction } from '@app/models/order.model';
+import { TransactionType } from '@ballzo-ui/core/transaction';
 import { OrderService } from '@app/services/order.service';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { UserService } from '@app/services/user.service';
 import { getFirestoreErrorMsg } from '@app/utils/api-error-handling-utility';
-import { ArraySorting } from '@app/utils/array-sorting-utility';
 import { WalletService } from './services/wallet.service';
 import { TransactionItemData } from '@app/shared-modules/transaction-item/models/transaction-item.model';
 

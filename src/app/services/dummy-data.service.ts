@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { CoreApiService } from './core-api.service';
 import { convertObjectToFirestoreData } from '@app/utils/objects-utility';
-import { FacilityStatus, Ground, GroundAdditionalInfo, GroundFacility, GroundSlot, GroundStatus, SlotStatus } from '@app/models/ground.model';
-import { TransactionType, WalletTransaction } from '@app/models/order.model';
-import { ContactInfo } from '@app/models/contact.model';
+import { FacilityStatus, Ground, GroundAdditionalInfo, GroundFacility, GroundSlot, GroundStatus, SlotStatus } from '@ballzo-ui/core/ground';
+import { WalletTransaction } from '@app/models/order.model';
+import { TransactionType } from '@ballzo-ui/core/transaction';
 
 @Injectable({
   providedIn: 'root'
