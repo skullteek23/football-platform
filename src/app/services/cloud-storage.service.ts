@@ -2,6 +2,8 @@ import { Injectable, inject } from '@angular/core';
 import { Storage, getDownloadURL, ref, uploadBytes } from '@angular/fire/storage';
 import { CloudStorageFileScreens } from '@app/constant/api-constants';
 import { Constants } from '@app/constant/app-constants';
+import { IApiError } from '@app/models/common.model';
+import { getAuthErrorMsg, getCloudFnErrorMsg, getFirestoreErrorMsg, handleStorageError } from '@app/utils/api-error-handling-utility';
 import { sanitizeFileName } from '@app/utils/file-utility';
 
 @Injectable({
@@ -39,8 +41,8 @@ export class CloudStorageService {
       const result = (await uploadBytes(storageRef, file))
       const urlPromise = getDownloadURL(result.ref);
       return urlPromise;
-    } catch (error) {
-      return Promise.reject(error);
+    } catch (error: any) {
+      return Promise.reject(handleStorageError(error));
     }
   }
 

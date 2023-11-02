@@ -1,4 +1,5 @@
 import { ConfirmationResult, User } from '@angular/fire/auth';
+import { StorageErrorCode } from '@angular/fire/storage';
 import { FirebaseError } from 'firebase/app';
 import { FunctionsErrorCode } from 'firebase/functions';
 
@@ -17,6 +18,7 @@ export interface IUserProperties {
 }
 export interface IApiError extends FirebaseError { }
 export type CloudFnErrorCode = FunctionsErrorCode;
+export type CloudStorageErrorCode = StorageErrorCode;
 export type IUserRole = { user: IUser, role: string };
 
 export class BackgroundCSS {

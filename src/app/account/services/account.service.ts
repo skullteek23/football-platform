@@ -50,10 +50,14 @@ export class AccountService {
     if (value.imgUrl) {
       const fileName = AccountConstants.FILE_NAME + getRandomString(10);
       const filePath = this.storageService.getFilePath(CloudStorageFileScreens.userProfilePhoto, fileName);
-      const imgUrl = await this.storageService.getPublicUrl(value.imgUrl, filePath);
 
-      properties.photoURL = imgUrl;
-      player.imgLink = imgUrl;
+      try {
+        const imgUrl = await this.storageService.getPublicUrl(value.imgUrl, filePath);
+        properties.photoURL = imgUrl;
+        player.imgLink = imgUrl;
+      } catch (error) {
+        return Promise.reject(error);
+      }
     }
 
     if (value.dob && new Date(value.dob).getTime() !== existingDetails.dob) {

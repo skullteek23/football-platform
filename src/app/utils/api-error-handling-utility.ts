@@ -1,5 +1,5 @@
 import { ApiMessages, AuthMessages, CommonMessages } from '@app/constant/app-messages';
-import { CloudFnErrorCode, IApiError } from '@app/models/common.model';
+import { CloudFnErrorCode, CloudStorageErrorCode, IApiError } from '@app/models/common.model';
 
 /**
  * Returns the error message from the auth error
@@ -123,6 +123,46 @@ export function getCloudFnErrorMsg(error: any): string {
       case 'functions/resource-exhausted':
         return ApiMessages.error.internal;
       case 'functions/unavailable':
+        return ApiMessages.error.unavailable;
+
+      default:
+        return ApiMessages.error.somethingWentWrong;
+    }
+  }
+  return ApiMessages.error.somethingWentWrong;
+}
+
+/**
+ * Returns the error message from the Cloud Storage API error
+ * @param error
+ * @returns
+ */
+export function handleStorageError(error: any) {
+  const { code } = JSON.parse(JSON.stringify(error));
+  if (code) {
+    const stripCode = code.replace('storage/', '');
+    switch (stripCode as CloudStorageErrorCode) {
+      case 'bucket-not-found':
+        return ApiMessages.error.notFound;
+      case 'invalid-argument':
+        return ApiMessages.error.invalidArgument;
+      case 'internal-error':
+        return ApiMessages.error.internal;
+      case 'unauthorized':
+        return ApiMessages.error.permissionDenied;
+      case 'unauthenticated':
+        return ApiMessages.error.unauthenticated;
+      case 'unknown':
+        return ApiMessages.error.unknown;
+      case 'canceled':
+        return ApiMessages.error.cancelled;
+      case 'invalid-root-operation':
+        return ApiMessages.error.notSupported;
+      case 'retry-limit-exceeded':
+        return ApiMessages.error.deadline;
+      case 'quota-exceeded':
+        return ApiMessages.error.internal;
+      case 'unsupported-environment':
         return ApiMessages.error.unavailable;
 
       default:
