@@ -206,7 +206,7 @@ export class AuthService {
    * @param updates
    * @returns
    */
-  updateUserProfile(updates: IUserProperties): Promise<any> {
+  updateUserProfile(updates: Partial<IUserProperties>): Promise<any> {
     if (this.user) {
       return updateProfile(this.user, updates);
     }

@@ -39,12 +39,12 @@ export class AccountService {
    * Saves the account details
    */
   async saveAccountDetails(value: any, existingDetails: Player, userId: string): Promise<any> {
-    const properties = new IUserProperties();
+    const properties: Partial<IUserProperties> = {};
     const player: Partial<Player> = {};
 
     if (value?.name !== existingDetails.name) {
       properties.displayName = value.name;
-      player.name = value.displayName;
+      player.name = value.name;
     }
 
     if (value.imgUrl) {
