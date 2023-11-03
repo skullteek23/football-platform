@@ -15,7 +15,11 @@ export const environment = {
     whatsAppGroup: 'https://chat.whatsapp.com/K0EJ1dZfG0d6n4PDhHdmRc',
   },
   locationApiKey: {
-    countryStateCityApiKey: 'Rjc1ZmpjdGhCbWRrV2JnMHdnUGptaklVZjNhVWFpMlpnRUJFV1VpbQ==', 
+    countryStateCityApiKey: 'Rjc1ZmpjdGhCbWRrV2JnMHdnUGptaklVZjNhVWFpMlpnRUJFV1VpbQ==',
+  },
+  razorpay: {
+    keySecret: 'yHX88BX68KKS7tB5Gb9cMPRH',
+    keyId: 'rzp_test_t9NBSmvfkzKnbe'
   },
   production: false,
 };
