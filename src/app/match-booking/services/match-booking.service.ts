@@ -52,7 +52,7 @@ export class MatchBookingService {
         .catch(error => {
           this.router.navigate(['/m', 'book-match', 'error']);
           if (error) {
-            this.snackbarService.displayError(getFirestoreErrorMsg(error));
+            this.snackbarService.displayError(error);
           }
         });
     })
