@@ -28,6 +28,7 @@ import { NavigationService } from './services/navigation.service';
 import { CoreApiService } from './services/core-api.service';
 import { DummyDataService } from './services/dummy-data.service';
 import { DatePipe } from '@angular/common';
+import { NgxImageCompressService } from 'ngx-image-compress';
 
 @NgModule({
   declarations: [AppComponent, TopNavComponent],
@@ -65,7 +66,8 @@ import { DatePipe } from '@angular/common';
       deps: [NavigationService, CoreApiService, DummyDataService],
       multi: true,
     },
-    DatePipe
+    DatePipe,
+    NgxImageCompressService
   ],
   bootstrap: [AppComponent],
 })
