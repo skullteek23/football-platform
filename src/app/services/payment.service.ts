@@ -198,7 +198,7 @@ export class PaymentService {
         await Promise.all(allPromises);
         return Promise.resolve(oid);
       } catch (error) {
-        return Promise.reject(CommonMessages.error.genericError);
+        return Promise.reject(error);
       }
     }
   }
