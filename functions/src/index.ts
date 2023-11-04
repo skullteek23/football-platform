@@ -3,12 +3,12 @@ import * as functions from "firebase-functions";
 admin.initializeApp();
 
 // import {withErrorHandling} from "./functions-utils";
-import { checkUserExist } from "./checkUserExist";
-import { updateUserRole } from "./updateUserRole";
-import { updateProfile } from "./updateProfile";
-import { walletCreation } from "./createWallet";
-import { orderCancellation } from "./orderCancellation";
-import { createRazorpayOrder } from "./createRazorpayOrder";
+import {checkUserExist} from "./checkUserExist";
+import {updateUserRole} from "./updateUserRole";
+import {updateProfile} from "./updateProfile";
+import {walletCreation} from "./createWallet";
+import {orderCancellation} from "./orderCancellation";
+import {createRazorpayOrder} from "./createRazorpayOrder";
 
 // Start writing Firebase Functions
 // https://firebase.google.com/docs/functions/typescript
@@ -25,4 +25,4 @@ export const createWallet = functions
   .region(REGION).firestore.document("players/{userId}")
   .onCreate(walletCreation);
 export const createOrder = functions
-  .region(REGION).https.onCall(createRazorpayOrder)
+  .region(REGION).https.onCall(createRazorpayOrder);
