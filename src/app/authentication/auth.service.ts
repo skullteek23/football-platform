@@ -221,7 +221,6 @@ export class AuthService {
   setUserRole(role: Position): Promise<any> {
     const data = { role };
     return this.coreApiService.callHttpFunction(cloudFunctionNames.setRole, data)
-      .catch(error => this.snackbarService.displayError(getCloudFnErrorMsg(error)));
   }
 
   /**

@@ -49,7 +49,7 @@ export async function modifySlot(
   }
 
   const newCount = slotChanges.participantCount + Number(spotCount);
-  if (newCount <= slotChanges.allowedCount) {
+  if (newCount <= slotChanges.allowedCount && newCount >= 0) {
     slotChanges.participantCount = newCount;
   }
   if (slotChanges.participantCount >= slotChanges.allowedCount) {

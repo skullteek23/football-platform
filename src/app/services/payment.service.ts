@@ -8,7 +8,7 @@ import { CommonMessages, PaymentMessages } from "@ballzo-ui/core/common";
 import { GroundSlot } from "@ballzo-ui/core/ground";
 import { Booking } from "@ballzo-ui/core/transaction";
 import { Player, Position } from "@ballzo-ui/core/user";
-import { isEnumKey, getRandomString } from "@ballzo-ui/core/utils";
+import { isEnumKey, getRandomString, getCloudFnErrorMsg } from "@ballzo-ui/core/utils";
 import { firstValueFrom, lastValueFrom } from "rxjs";
 import { GroundService } from "./ground.service";
 import { OrderService } from "./order.service";
@@ -25,7 +25,7 @@ export class PaymentService {
     private orderService: OrderService,
     private authService: AuthService,
     private sessionStorage: SessionStorageService,
-    private userService: UserService
+    private userService: UserService,
   ) { }
 
   /**
@@ -42,20 +42,24 @@ export class PaymentService {
       return Promise.reject('Invalid selection data!');
     }
 
-    try {
-      if (user?.displayName) {
-        userDetails.name = user.displayName;
-      }
-      if (String(role) && isEnumKey(role, Position)) {
-        userDetails.position = role;
-      }
-      if (user?.uid) {
+    if (user?.displayName) {
+      userDetails.name = user.displayName;
+    }
+    if (String(role) && isEnumKey(role, Position)) {
+      userDetails.position = role;
+    }
+    if (user?.uid) {
+      try {
         await this.authService.setUserRole(role);
-        await this.userService.addUserDetails(userDetails, user?.uid);
-
+      } catch (error) {
+        return Promise.reject(getCloudFnErrorMsg(error));
       }
-    } catch (error) {
-      return Promise.reject(error);
+
+      try {
+        await this.userService.addUserDetails(userDetails, user?.uid);
+      } catch (error) {
+        return Promise.reject(error);
+      }
     }
 
     return this.addBooking(selectionData, user.uid);
@@ -145,7 +149,6 @@ export class PaymentService {
       return Promise.reject(CommonMessages.error.genericError);
     } else {
       const order = new Order();
-      const updatedSlot = new GroundSlot();
 
       const oid = this.orderService.generateOID(getRandomString(10));
       const allPromises = [];
@@ -160,23 +163,8 @@ export class PaymentService {
       existingBooking.spots += data.spots;
       existingBooking.lastUpdated = new Date().getTime();
 
-      updatedSlot.groundId = slotInfo.groundId;
-      updatedSlot.facilityId = slotInfo.facilityId;
-      updatedSlot.timestamp = slotInfo.timestamp;
-      updatedSlot.price = slotInfo.price;
-      updatedSlot.status = slotInfo.status;
-      updatedSlot.allowedCount = slotInfo.allowedCount;
-      updatedSlot.participantCount = slotInfo.participantCount;
-      if (updatedSlot.addParticipant) {
-        updatedSlot.addParticipant(data.spots);
-      }
-      if (updatedSlot.updateStatus) {
-        updatedSlot.updateStatus();
-      }
-
       allPromises.push(this.orderService.saveOrder(order, oid));
       allPromises.push(this.orderService.updateBooking(existingBooking, existingBooking.id));
-      allPromises.push(this.groundService.updateSlot(data.slotId, updatedSlot));
 
       try {
         await Promise.all(allPromises);
