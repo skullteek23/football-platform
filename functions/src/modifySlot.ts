@@ -12,7 +12,7 @@ import {Change} from "firebase-functions/lib/common/change";
 export async function modifySlot(
   change: Change<DocumentSnapshot>, context: any
 ): Promise<any> {
-  const before = change.after.exists ? change.after.data() : null;
+  const before = change.before.exists ? change.before.data() : null;
   const after = change.after.exists ? change.after.data() : null;
   const slotId = after?.slotId || before?.slotId;
 
