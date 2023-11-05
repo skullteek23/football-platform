@@ -28,7 +28,7 @@ export function checkKeysExist(data: any, parameters: string[]): string {
 }
 
 /**
- * Check if atleast one of the keys exist in the data object
+ * Check if at least one of the keys exist in the data object
  * @param {any} data
  * @param {string[]} parameters
  * @return {string}
@@ -70,13 +70,3 @@ export function isRequestAuthenticated(
   return false;
 }
 
-/**
- * Available roles for a user
- */
-export const Position = [
-  "manager",
-  "striker",
-  "midfielder",
-  "defender",
-  "goalkeeper",
-];

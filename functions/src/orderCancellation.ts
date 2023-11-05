@@ -63,7 +63,9 @@ export async function orderCancellation(data: any, context: any): Promise<any> {
 
   // Check if slot data exists and is valid
   const slotId = bookingData?.slotId || "";
-  const slotData = (await db.collection("slots").doc(slotId).get()).data();
+  const slotData = (
+    await db.collection("slots").doc(slotId).get()
+  ).data();
   if (!slotData || slotData.participantCount <= 0) {
     throw new functions.https.HttpsError(
       "invalid-argument",

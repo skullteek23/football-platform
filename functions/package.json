@@ -15,6 +15,7 @@
   },
   "main": "lib/index.js",
   "dependencies": {
+    "@ballzo-ui/core": "^0.0.16",
     "firebase-admin": "^11.10.1",
     "firebase-functions": "^4.4.1",
     "razorpay": "^2.9.2"

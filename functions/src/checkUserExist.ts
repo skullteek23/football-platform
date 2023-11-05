@@ -28,7 +28,8 @@ export async function checkUserExist(data: any, context: any): Promise<any> {
 
   // Function main logic
   const phoneNumber = data.phoneNumber;
-  if (!phoneNumber.startsWith("+91") || phoneNumber.length !== 13) {
+  if (!phoneNumber.startsWith("+91") ||
+    phoneNumber.length !== 13) {
     throw new functions.https.HttpsError(
       "invalid-argument",
       "Invalid phone number"
