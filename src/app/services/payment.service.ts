@@ -56,7 +56,7 @@ export class PaymentService {
 
       }
     } catch (error) {
-      return Promise.reject(CommonMessages.error.genericError);
+      return Promise.reject(error);
     }
 
     return this.addBooking(selectionData, user.uid);
@@ -141,7 +141,7 @@ export class PaymentService {
         await Promise.all(allPromises);
         return Promise.resolve(oid);
       } catch (error) {
-        return Promise.reject(CommonMessages.error.genericError);
+        return Promise.reject(error);
       }
     }
   }

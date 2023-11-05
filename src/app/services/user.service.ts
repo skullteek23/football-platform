@@ -11,7 +11,8 @@ export class UserService {
 
   constructor(
     private apiService: CoreApiService
-  ) { }
+  ) {
+  }
 
   /**
    * Adds the user details in firestore
