@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@app/authentication/auth.service';
+import { SnackbarService } from '@app/services/snackbar.service';
 import { UserService } from '@app/services/user.service';
 import { environment } from 'src/environments/environment';
 
@@ -20,7 +21,8 @@ export class TopNavComponent implements OnInit {
    */
   constructor(
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private snackbarService: SnackbarService
   ) { }
 
   /**

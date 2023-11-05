@@ -28,7 +28,7 @@ export function checkKeysExist(data: any, parameters: string[]): string {
 }
 
 /**
- * Check if atleast one of the keys exist in the data object
+ * Check if at least one of the keys exist in the data object
  * @param {any} data
  * @param {string[]} parameters
  * @return {string}
@@ -71,12 +71,13 @@ export function isRequestAuthenticated(
 }
 
 /**
- * Available roles for a user
+ * Defines the position of a player.
+ * DO NOT CHANGE THE ORDER OF THE ENUM VALUES.
  */
-export const Position = [
-  "manager",
-  "striker",
-  "midfielder",
-  "defender",
-  "goalkeeper",
-];
+export enum Position {
+  manager = "manager",
+  striker = "striker",
+  midfielder = "midfielder",
+  defender = "defender",
+  goalkeeper = "goalkeeper"
+}

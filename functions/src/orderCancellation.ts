@@ -63,7 +63,9 @@ export async function orderCancellation(data: any, context: any): Promise<any> {
 
   // Check if slot data exists and is valid
   const slotId = bookingData?.slotId || "";
-  const slotData = (await db.collection("slots").doc(slotId).get()).data();
+  const slotData = (
+    await db.collection("slots").doc(slotId).get()
+  ).data();
   if (!slotData || slotData.participantCount <= 0) {
     throw new functions.https.HttpsError(
       "invalid-argument",
@@ -74,10 +76,6 @@ export async function orderCancellation(data: any, context: any): Promise<any> {
   const updateBookingData = {
     spots: Number(bookingData?.spots) - Number(orderData?.ref?.spots),
     lastUpdated: new Date().getTime(),
-  };
-  const updatedSlotData = {
-    participantCount: Number(slotData?.participantCount) -
-      Number(orderData?.ref?.spots),
   };
   const reason = data?.reason?.trim();
   const orderReturn = {
@@ -98,13 +96,6 @@ export async function orderCancellation(data: any, context: any): Promise<any> {
     db.collection("order-returns")
       .doc(orderID)
       .create(orderReturn)
-  );
-  allPromises.push(
-    db.collection("slots")
-      .doc(slotId)
-      .update({
-        ...updatedSlotData,
-      })
   );
   if (updateBookingData.spots <= 0) {
     allPromises.push(

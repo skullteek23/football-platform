@@ -9,10 +9,10 @@ import { AuthService } from '../auth.service';
 import {
   Constants,
   LocalStorageProperties,
-  SessionStorageProperties,
 } from '@ballzo-ui/core/common';
 import { SessionStorageService } from '@app/services/session-storage.service';
 import { LocalStorageService } from '@app/services/local-storage.service';
+import { SessionStorageProperties } from '@app/constant/constants';
 
 @Injectable({
   providedIn: 'root',

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@app/authentication/auth.service';
 import { PaymentMessages } from '@ballzo-ui/core/common';
-import { IUser } from '@ballzo-ui/core/user';
+import { IUser } from '@app/models/user.model';
 import { WalletTransaction } from '@app/models/order.model';
 import { TransactionType } from '@ballzo-ui/core/transaction';
 import { OrderService } from '@app/services/order.service';
