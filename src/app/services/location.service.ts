@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { ILocationCity, ILocationState } from "@ballzo-ui/core/location";
 import { Observable } from "rxjs";
 import { environment } from "@environments/environment";
-import { LOCATION_API_URL } from "@ballzo-ui/core/common";
+import { Constants } from "@ballzo-ui/core/common";
 
 @Injectable()
 export class LocationService {
@@ -17,9 +17,9 @@ export class LocationService {
    */
   getStates(): Observable<ILocationState[]> {
     return this.http
-      .get<ILocationState[]>(LOCATION_API_URL.countryStateCityCommonUrl, {
+      .get<ILocationState[]>(Constants.LOCATION_API_URL.countryStateCityCommonUrl, {
         headers: new HttpHeaders({
-          [LOCATION_API_URL.locationApiHeader]: environment.locationApiKey.countryStateCityApiKey,
+          [Constants.LOCATION_API_URL.locationApiHeader]: environment.locationApiKey.countryStateCityApiKey,
         })
       })
   }
@@ -28,9 +28,9 @@ export class LocationService {
    *  Return a array of objects of cities in a selected State
    */
   getCities(stateIso2: any): Observable<ILocationCity[]> {
-    return this.http.get<ILocationCity[]>(LOCATION_API_URL.countryStateCityCommonUrl + stateIso2 + "/cities", {
+    return this.http.get<ILocationCity[]>(Constants.LOCATION_API_URL.countryStateCityCommonUrl + stateIso2 + "/cities", {
       headers: new HttpHeaders({
-        [LOCATION_API_URL.locationApiHeader]: environment.locationApiKey.countryStateCityApiKey,
+        [Constants.LOCATION_API_URL.locationApiHeader]: environment.locationApiKey.countryStateCityApiKey,
       })
     })
   }

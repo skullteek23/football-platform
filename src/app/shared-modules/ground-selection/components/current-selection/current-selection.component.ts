@@ -9,7 +9,7 @@ import { DateParseUtility } from '@ballzo-ui/core/utils';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { GroundSelectionMessages } from '@ballzo-ui/core/common';
 import { SessionStorageService } from '@app/services/session-storage.service';
-import { SessionStorageProperties } from '@ballzo-ui/core/common';
+import { SessionStorageProperties } from '@app/constant/constants';
 
 @Component({
   selector: 'app-current-selection',

@@ -8,8 +8,9 @@ import { BottomSheetService } from '@app/services/bottom-sheet.service';
 import { getAuthErrorMsg } from '@ballzo-ui/core/utils';
 import { ShowConfirmationService } from '@app/services/show-confirmation.service';
 import { SessionStorageService } from '@app/services/session-storage.service';
-import { AuthMessages, AuthConstants, SessionStorageProperties } from '@ballzo-ui/core/common';
-import { IApiError, IConfirmationResult } from '@ballzo-ui/core/user';
+import { AuthMessages, Constants, IApiError } from '@ballzo-ui/core/common';
+import { SessionStorageProperties } from '@app/constant/constants';
+import { IConfirmationResult } from '@app/models/user.model';
 
 export class AuthBaseComponent implements CanComponentDeactivate {
   readonly messages = AuthMessages;
@@ -66,10 +67,10 @@ export class AuthBaseComponent implements CanComponentDeactivate {
    */
   requestOtp(formGroup: FormGroup): Promise<IConfirmationResult> {
     const number = this.getControlValue(formGroup, 'phoneNumber');
-    if (number.startsWith(AuthConstants.INDIAN_DIAL_CODE)) {
+    if (number.startsWith(Constants.INDIAN_DIAL_CODE)) {
       return this.authService.sendOtp(number);
     } else {
-      return this.authService.sendOtp(AuthConstants.INDIAN_DIAL_CODE + number);
+      return this.authService.sendOtp(Constants.INDIAN_DIAL_CODE + number);
     }
   }
 

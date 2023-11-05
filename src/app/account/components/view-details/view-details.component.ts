@@ -4,7 +4,7 @@ import { AccountService } from '@app/account/services/account.service';
 import { AuthService } from '@app/authentication/auth.service';
 import { Constants } from '@ballzo-ui/core/common';
 import { AccountMessages } from '@ballzo-ui/core/common';
-import { IUser } from '@ballzo-ui/core/user';
+import { IUser } from '@app/models/user.model';
 import { PlayerStats, Position } from '@ballzo-ui/core/user';
 import { BottomSheetService } from '@app/services/bottom-sheet.service';
 import { ShowConfirmationService } from '@app/services/show-confirmation.service';

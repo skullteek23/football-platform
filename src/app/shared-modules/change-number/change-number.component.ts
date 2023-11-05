@@ -2,17 +2,17 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from '@app/authentication/auth.service';
 import { AccountMessages, AuthMessages } from '@ballzo-ui/core/common';
-import { IUser } from '@ballzo-ui/core/user';
+import { IUser } from '@app/models/user.model';
 import { BottomSheetService } from '@app/services/bottom-sheet.service';
 import { ShowConfirmationService } from '@app/services/show-confirmation.service';
-import { MOBILE_VALIDATORS, OTP_VALIDATORS, valueNotSameValidator } from '@ballzo-ui/core/utils';
 import { ButtonConfig } from '../buttons/models/button.model';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { getAuthErrorMsg, getCloudFnErrorMsg } from '@ballzo-ui/core/utils';
-import { AuthConstants } from '@ballzo-ui/core/common';
+import { Constants } from '@ballzo-ui/core/common';
 import { MatInput } from '@angular/material/input';
 import { AnimationsList } from '@app/services/animation.service';
 import { PhoneAuthProvider } from '@angular/fire/auth';
+import { MOBILE_VALIDATORS, valueNotSameValidator, OTP_VALIDATORS } from '@app/utils/form-validators-utility';
 
 @Component({
   selector: 'app-change-number',
@@ -56,7 +56,7 @@ export class ChangeNumberComponent implements OnInit, AfterViewInit {
     if (this.firstInputRef?.nativeElement) {
       this.firstInputRef.nativeElement.focus();
     }
-    this.initCaptcha(AuthConstants.LOGIN_CAPTCHA_PLACEHOLDER);
+    this.initCaptcha(Constants.LOGIN_CAPTCHA_PLACEHOLDER);
     this.authProvider = this.authService.getPhoneAuthProvider();
   }
 
@@ -77,7 +77,7 @@ export class ChangeNumberComponent implements OnInit, AfterViewInit {
    * Initializes form
    */
   initForm() {
-    const currentNumber = this.user?.phoneNumber?.replace(AuthConstants.INDIAN_DIAL_CODE, '');
+    const currentNumber = this.user?.phoneNumber?.replace(Constants.INDIAN_DIAL_CODE, '');
     this.numberForm = new FormGroup({
       phoneNumber: new FormControl(null, [...MOBILE_VALIDATORS, valueNotSameValidator(currentNumber)]),
       otp: new FormControl(null, OTP_VALIDATORS),
@@ -160,7 +160,7 @@ export class ChangeNumberComponent implements OnInit, AfterViewInit {
       return;
     }
     this.showLoader();
-    const number = AuthConstants.INDIAN_DIAL_CODE + String(this.phoneNumber?.value)?.trim();
+    const number = Constants.INDIAN_DIAL_CODE + String(this.phoneNumber?.value)?.trim();
 
     // Checks if the phone number is already registered
     this.authService

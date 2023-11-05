@@ -10,18 +10,15 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AnimationsList } from '@app/services/animation.service';
 import { AuthService } from '../auth.service';
-import { AuthConstants } from '@ballzo-ui/core/common';
+import { Constants } from '@ballzo-ui/core/common';
 import { SnackbarService } from '@app/services/snackbar.service';
-import {
-  MOBILE_VALIDATORS,
-  OTP_VALIDATORS,
-} from '@ballzo-ui/core/utils';
 import { BottomSheetService } from '@app/services/bottom-sheet.service';
 import { MatInput } from '@angular/material/input';
 import { ShowConfirmationService } from '@app/services/show-confirmation.service';
 import { SessionStorageService } from '@app/services/session-storage.service';
 import { getCloudFnErrorMsg } from '@ballzo-ui/core/utils';
-import { IConfirmationResult } from '@ballzo-ui/core/user';
+import { IConfirmationResult } from '@app/models/user.model';
+import { MOBILE_VALIDATORS, OTP_VALIDATORS } from '@app/utils/form-validators-utility';
 
 @Component({
   selector: 'app-login-bottom-sheet',
@@ -32,7 +29,7 @@ import { IConfirmationResult } from '@ballzo-ui/core/user';
 export class LoginBottomSheetComponent
   extends AuthBaseComponent
   implements OnDestroy, AfterViewInit {
-  readonly captchaContainer = AuthConstants.LOGIN_CAPTCHA_PLACEHOLDER;
+  readonly captchaContainer = Constants.LOGIN_CAPTCHA_PLACEHOLDER;
   confirmationResult: IConfirmationResult = null;
 
   formGroup = new FormGroup({
@@ -70,7 +67,7 @@ export class LoginBottomSheetComponent
     if (this.firstInputRef?.nativeElement) {
       this.firstInputRef.nativeElement.focus();
     }
-    this.initCaptcha(AuthConstants.LOGIN_CAPTCHA_PLACEHOLDER);
+    this.initCaptcha(Constants.LOGIN_CAPTCHA_PLACEHOLDER);
   }
 
   /**
@@ -82,7 +79,7 @@ export class LoginBottomSheetComponent
     }
     this.showLoader();
     const number =
-      AuthConstants.INDIAN_DIAL_CODE +
+      Constants.INDIAN_DIAL_CODE +
       this.getControlValue(this.formGroup, 'phoneNumber');
 
     // Checks if the user already exists

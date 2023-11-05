@@ -10,19 +10,15 @@ import { Router } from '@angular/router';
 import { AnimationsList } from '@app/services/animation.service';
 import { AuthBaseComponent } from '../auth-base.component';
 import { FormControl, FormGroup } from '@angular/forms';
-import { AuthConstants } from '@ballzo-ui/core/common';
+import { Constants, IApiError } from '@ballzo-ui/core/common';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { getAuthErrorMsg, getCloudFnErrorMsg } from '@ballzo-ui/core/utils';
-import {
-  FULL_NAME_VALIDATORS,
-  MOBILE_VALIDATORS,
-  OTP_VALIDATORS,
-} from '@ballzo-ui/core/utils';
 import { BottomSheetService } from '@app/services/bottom-sheet.service';
 import { MatInput } from '@angular/material/input';
 import { ShowConfirmationService } from '@app/services/show-confirmation.service';
 import { SessionStorageService } from '@app/services/session-storage.service';
-import { IConfirmationResult, IApiError } from '@ballzo-ui/core/user';
+import { IConfirmationResult } from '@app/models/user.model';
+import { FULL_NAME_VALIDATORS, MOBILE_VALIDATORS, OTP_VALIDATORS } from '@app/utils/form-validators-utility';
 
 @Component({
   selector: 'app-signup-bottom-sheet',
@@ -33,7 +29,7 @@ import { IConfirmationResult, IApiError } from '@ballzo-ui/core/user';
 export class SignupBottomSheetComponent
   extends AuthBaseComponent
   implements OnDestroy, AfterViewInit {
-  readonly captchaContainer = AuthConstants.LOGIN_CAPTCHA_PLACEHOLDER;
+  readonly captchaContainer = Constants.LOGIN_CAPTCHA_PLACEHOLDER;
   confirmationResult: IConfirmationResult = null;
 
   formGroup = new FormGroup({
@@ -72,7 +68,7 @@ export class SignupBottomSheetComponent
     if (this.firstInputRef?.nativeElement) {
       this.firstInputRef.nativeElement.focus();
     }
-    this.initCaptcha(AuthConstants.LOGIN_CAPTCHA_PLACEHOLDER);
+    this.initCaptcha(Constants.LOGIN_CAPTCHA_PLACEHOLDER);
   }
 
   /**
@@ -84,7 +80,7 @@ export class SignupBottomSheetComponent
     }
     this.showLoader();
     const number =
-      AuthConstants.INDIAN_DIAL_CODE +
+      Constants.INDIAN_DIAL_CODE +
       this.getControlValue(this.formGroup, 'phoneNumber');
 
     // Checks if the user already exists

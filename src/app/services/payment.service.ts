@@ -9,11 +9,12 @@ import { OrderService } from './order.service';
 import { UserSlotSelectionInfo } from '@app/shared-modules/ground-selection/models/ground-selection.model';
 import { AuthService } from '@app/authentication/auth.service';
 import { SessionStorageService } from './session-storage.service';
-import { CommonMessages, PaymentMessages, SessionStorageProperties } from '@ballzo-ui/core/common';
+import { CommonMessages, PaymentMessages } from '@ballzo-ui/core/common';
 import { Player, Position } from '@ballzo-ui/core/user';
 import { isEnumKey } from '@ballzo-ui/core/utils';
 import { UserService } from './user.service';
-import { IUser } from '@ballzo-ui/core/user';
+import { IUser } from '@app/models/user.model';
+import { SessionStorageProperties } from '@app/constant/constants';
 
 @Injectable({
   providedIn: 'root'
