@@ -1,5 +1,4 @@
 import * as admin from "firebase-admin";
-import * as functions from "firebase-functions";
 const db = admin.firestore();
 import {UserRecord} from "firebase-admin/auth";
 
@@ -10,7 +9,7 @@ import {UserRecord} from "firebase-admin/auth";
  * @return {Promise<any>}
  */
 export async function walletCreation(
-  user: UserRecord, context: functions.EventContext<Record<string, string>>
+  user: UserRecord, context: any
 ): Promise<any> {
   if (user && !user.disabled && user.phoneNumber && user.uid) {
     const uid: string = user.uid;

@@ -77,10 +77,6 @@ export async function orderCancellation(data: any, context: any): Promise<any> {
     spots: Number(bookingData?.spots) - Number(orderData?.ref?.spots),
     lastUpdated: new Date().getTime(),
   };
-  const updatedSlotData = {
-    participantCount: Number(slotData?.participantCount) -
-      Number(orderData?.ref?.spots),
-  };
   const reason = data?.reason?.trim();
   const orderReturn = {
     reason,
@@ -100,13 +96,6 @@ export async function orderCancellation(data: any, context: any): Promise<any> {
     db.collection("order-returns")
       .doc(orderID)
       .create(orderReturn)
-  );
-  allPromises.push(
-    db.collection("slots")
-      .doc(slotId)
-      .update({
-        ...updatedSlotData,
-      })
   );
   if (updateBookingData.spots <= 0) {
     allPromises.push(

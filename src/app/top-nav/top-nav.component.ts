@@ -63,9 +63,6 @@ export class TopNavComponent implements OnInit {
         if (response.hasOwnProperty('amount')) {
           this.userBalance = Number(response?.amount);
         }
-      },
-      error: (error) => {
-        this.snackbarService.displayError(error);
       }
     })
     // API call to get user balance in number format;

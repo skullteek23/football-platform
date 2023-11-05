@@ -85,9 +85,15 @@ export class CoreApiService {
    */
   watchCollection(collectionName: string, includeMetadata: boolean = false): Observable<any> {
     if (includeMetadata) {
-      return this.observeCollectionMetadata(collectionName);
+      return this.observeCollectionMetadata(collectionName)
+        .pipe(
+          catchError(err => this.handleApiError(err))
+        );;
     }
-    return this.observeCollection(collectionName);
+    return this.observeCollection(collectionName)
+      .pipe(
+        catchError(err => this.handleApiError(err))
+      );;
   }
 
 
@@ -131,7 +137,10 @@ export class CoreApiService {
    * @returns {Observable<any>}
    */
   watchDocument(collectionName: string, documentId: string, options = {}): Observable<any> {
-    return this.observeDocument(collectionName, documentId, options);
+    return this.observeDocument(collectionName, documentId, options)
+      .pipe(
+        catchError(err => this.handleApiError(err))
+      );
   }
 
   /**

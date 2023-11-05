@@ -1,20 +1,19 @@
-import { Injectable } from '@angular/core';
-import { GroundSlot } from '@ballzo-ui/core/ground';
-import { Order } from '@app/models/order.model';
-import { Booking } from '@ballzo-ui/core/transaction';
-import { getRandomString } from '@ballzo-ui/core/utils';
-import { firstValueFrom, lastValueFrom, switchMap } from 'rxjs';
-import { GroundService } from './ground.service';
-import { OrderService } from './order.service';
-import { UserSlotSelectionInfo } from '@app/shared-modules/ground-selection/models/ground-selection.model';
-import { AuthService } from '@app/authentication/auth.service';
-import { SessionStorageService } from './session-storage.service';
-import { CommonMessages, PaymentMessages } from '@ballzo-ui/core/common';
-import { Player, Position } from '@ballzo-ui/core/user';
-import { isEnumKey } from '@ballzo-ui/core/utils';
-import { UserService } from './user.service';
-import { IUser } from '@app/models/user.model';
-import { SessionStorageProperties } from '@app/constant/constants';
+import { Injectable } from "@angular/core";
+import { AuthService } from "@app/authentication/auth.service";
+import { SessionStorageProperties } from "@app/constant/constants";
+import { Order } from "@app/models/order.model";
+import { IUser } from "@app/models/user.model";
+import { UserSlotSelectionInfo } from "@app/shared-modules/ground-selection/models/ground-selection.model";
+import { CommonMessages, PaymentMessages } from "@ballzo-ui/core/common";
+import { GroundSlot } from "@ballzo-ui/core/ground";
+import { Booking } from "@ballzo-ui/core/transaction";
+import { Player, Position } from "@ballzo-ui/core/user";
+import { isEnumKey, getRandomString } from "@ballzo-ui/core/utils";
+import { firstValueFrom, lastValueFrom } from "rxjs";
+import { GroundService } from "./ground.service";
+import { OrderService } from "./order.service";
+import { SessionStorageService } from "./session-storage.service";
+import { UserService } from "./user.service";
 
 @Injectable({
   providedIn: 'root'
@@ -101,7 +100,6 @@ export class PaymentService {
     } else {
       const order = new Order();
       const booking = new Booking();
-      const updatedSlot = new GroundSlot();
 
       const oid = this.orderService.generateOID(getRandomString(10));
       const allPromises = [];
@@ -119,23 +117,8 @@ export class PaymentService {
       booking.slotId = data.slotId;
       booking.spots = data.spots;
 
-      updatedSlot.groundId = slotInfo.groundId;
-      updatedSlot.facilityId = slotInfo.facilityId;
-      updatedSlot.timestamp = slotInfo.timestamp;
-      updatedSlot.price = slotInfo.price;
-      updatedSlot.status = slotInfo.status;
-      updatedSlot.allowedCount = slotInfo.allowedCount;
-      updatedSlot.participantCount = slotInfo.participantCount;
-      if (updatedSlot.addParticipant) {
-        updatedSlot.addParticipant(data.spots);
-      }
-      if (updatedSlot.updateStatus) {
-        updatedSlot.updateStatus();
-      }
-
       allPromises.push(this.orderService.saveOrder(order, oid));
       allPromises.push(this.orderService.addBooking(booking));
-      allPromises.push(this.groundService.updateSlot(data.slotId, updatedSlot));
 
       try {
         await Promise.all(allPromises);
