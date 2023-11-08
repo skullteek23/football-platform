@@ -125,6 +125,16 @@ ol {
   color: $black;
 }
 
+.page-sub-label-alt {
+  font-size: $font-size-m;
+  font-weight: $sub-heading-weight;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 85%;
+  color: $black;
+}
+
 .semi-strong {
   font-weight: 500;
 }

@@ -1,25 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '@app/authentication/auth.service';
 import { SessionStorageProperties } from '@app/constant/constants';
+import { IUser } from '@app/models/user.model';
 import { PaymentService } from '@app/services/payment.service';
 import { SessionStorageService } from '@app/services/session-storage.service';
-import { SnackbarService } from '@app/services/snackbar.service';
-import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MatchBookingService {
 
-  private loaderStatus = new Subject<boolean>();
-
   constructor(
     private sessionStorage: SessionStorageService,
     private router: Router,
-    private paymentService: PaymentService,
-    private authService: AuthService,
-    private snackbarService: SnackbarService,
+    private paymentService: PaymentService
   ) { }
 
   /**
@@ -37,44 +31,7 @@ export class MatchBookingService {
   /**
    * Called after payment capture
    */
-  onPayment() {
-    this.authService._user().subscribe(async user => {
-      this.paymentService.book(user)
-        .then((orderId) => {
-          if (orderId) {
-            this.hideLoader();
-            this.sessionStorage.remove(SessionStorageProperties.USER_GROUND_SELECTION);
-            this.sessionStorage.remove(SessionStorageProperties.USER_POSITION_SELECTION);
-            this.router.navigate(['/m', 'book-match', 'finish'], { queryParams: { oid: orderId } });
-          }
-        })
-        .catch(error => {
-          this.router.navigate(['/m', 'book-match', 'error']);
-          if (error) {
-            this.snackbarService.displayError(error);
-          }
-        });
-    })
-  }
-
-  /**
-   * Gets the loader status
-   */
-  _loaderStatus() {
-    return this.loaderStatus.asObservable();
-  }
-
-  /**
-   * Show loader
-   */
-  showLoader() {
-    this.loaderStatus.next(true);
-  }
-
-  /**
-   * Hide loader
-   */
-  hideLoader() {
-    this.loaderStatus.next(false);
+  onPayment(user: IUser) {
+    return this.paymentService.book(user)
   }
 }
