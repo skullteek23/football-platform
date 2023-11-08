@@ -6,9 +6,11 @@ import { ActivatedRouteSnapshot, Router } from '@angular/router';
 import { SignupBottomSheetComponent } from './signup-bottom-sheet/signup-bottom-sheet.component';
 import {
   Auth,
+  ConfirmationResult,
   PhoneAuthCredential,
   PhoneAuthProvider,
   RecaptchaVerifier,
+  User,
   authState,
   signInWithPhoneNumber,
   signOut,
@@ -20,7 +22,6 @@ import {
   Constants,
   LocalStorageProperties,
 } from '@ballzo-ui/core/common';
-import { AuthConstants } from '@ballzo-ui/core/common';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { AuthMessages } from '@ballzo-ui/core/common';
 import { LocalStorageService } from '@app/services/local-storage.service';
@@ -29,7 +30,7 @@ import { CoreApiService } from '@app/services/core-api.service';
 import { HttpsCallableResult } from 'firebase/functions';
 import { cloudFunctionNames } from '@app/constant/api-constants';
 import { isEnumKey } from '@ballzo-ui/core/utils';
-import { IConfirmationResult, IUser, Position } from '@ballzo-ui/core/user';
+import { Position } from '@ballzo-ui/core/user';
 import { getCloudFnErrorMsg } from '@ballzo-ui/core/utils';
 
 @Injectable({
@@ -40,8 +41,8 @@ export class AuthService {
   private captchaVerifier: any = null;
 
   // User related variables
-  private user: IUser = null;
-  private user$$ = new Subject<IUser>();
+  private user: User | null = null;
+  private user$$ = new Subject<User | null>();
 
   /**
    * Constructor method
@@ -80,7 +81,7 @@ export class AuthService {
   /**
    * Returns user observable
    */
-  _user(): Observable<IUser> {
+  _user(): Observable<User | null> {
     if (this.auth) {
       return authState(this.auth);
     } else if (this.isUserLogin()) {
@@ -139,7 +140,7 @@ export class AuthService {
   /**
    * Send otp to user via SMS
    */
-  sendOtp(phoneNumber: string): Promise<IConfirmationResult> {
+  sendOtp(phoneNumber: string): Promise<ConfirmationResult> {
     if (!this.auth) {
       console.log('Invalid auth instance!');
       return Promise.reject(null);
@@ -148,7 +149,7 @@ export class AuthService {
       return Promise.reject(null);
     } else if (
       typeof phoneNumber !== 'string' ||
-      !phoneNumber?.startsWith(AuthConstants.INDIAN_DIAL_CODE)
+      !phoneNumber?.startsWith(Constants.INDIAN_DIAL_CODE)
     ) {
       console.log('Invalid phone number');
       return Promise.reject(null);
@@ -220,7 +221,6 @@ export class AuthService {
   setUserRole(role: Position): Promise<any> {
     const data = { role };
     return this.coreApiService.callHttpFunction(cloudFunctionNames.setRole, data)
-      .catch(error => this.snackbarService.displayError(getCloudFnErrorMsg(error)));
   }
 
   /**
@@ -257,7 +257,7 @@ export class AuthService {
   /**
    * Returns custom claims of the user
    */
-  getCustomClaims(user: IUser): Promise<any> {
+  getCustomClaims(user: User | null): Promise<any> {
     if (user) {
       return user?.getIdTokenResult(true);
     }
@@ -341,10 +341,10 @@ export class AuthService {
   verifyPhoneNumber(number: string, provider: PhoneAuthProvider): Promise<string> {
     // Initialize captcha if not already initialized
     if (!this.captchaVerifier) {
-      this.initCaptcha(AuthConstants.LOGIN_CAPTCHA_PLACEHOLDER);
+      this.initCaptcha(Constants.LOGIN_CAPTCHA_PLACEHOLDER);
     }
 
-    if (typeof number !== 'string' || !number?.startsWith(AuthConstants.INDIAN_DIAL_CODE)) {
+    if (typeof number !== 'string' || !number?.startsWith(Constants.INDIAN_DIAL_CODE)) {
       return Promise.reject(AuthMessages.error.invalidNumber);
     }
 
@@ -364,7 +364,7 @@ export class AuthService {
   /**
    * Updates user phone number using firebase SDK
    */
-  async updatePhone(user: IUser, credential: PhoneAuthCredential): Promise<string> {
+  async updatePhone(user: User, credential: PhoneAuthCredential): Promise<string> {
     if (user) {
       try {
         await updatePhoneNumber(user, credential);

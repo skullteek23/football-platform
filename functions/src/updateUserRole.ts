@@ -30,15 +30,25 @@ export async function updateUserRole(data: any, context: any): Promise<any> {
     );
   }
 
-  // Function main logic
-  const newRole = data.role.trim();
-  const indexValue = Position.indexOf(newRole);
-  if (indexValue === -1) {
+  try {
+    // Function main logic
+    const newRole = data.role.trim();
+    const positionArray: any[] = Object.values(Position);
+    const indexValue = positionArray.indexOf(newRole);
+    if (indexValue === -1) {
+      throw new functions.https.HttpsError(
+        "invalid-argument",
+        "Invalid role"
+      );
+    }
+
+    return admin.auth()
+      .setCustomUserClaims(context.auth.uid, {role: newRole});
+  } catch (error) {
+    // Handle other errors
     throw new functions.https.HttpsError(
-      "invalid-argument",
-      "Invalid role"
+      "internal",
+      "Error updating user role."
     );
   }
-
-  return admin.auth().setCustomUserClaims(context.auth.uid, {role: newRole});
 }

@@ -5,15 +5,15 @@ import { AccountConstants } from '@app/account/constants/account.constants';
 import { AccountService } from '@app/account/services/account.service';
 import { AuthService } from '@app/authentication/auth.service';
 import { AccountMessages } from '@ballzo-ui/core/common';
-import { IUser } from '@ballzo-ui/core/user';
+import { IUser } from '@app/models/user.model';
 import { ILocationCity, ILocationState } from '@ballzo-ui/core/location';
 import { Player } from '@ballzo-ui/core/user';
 import { LocationService } from '@app/services/location.service';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { UserService } from '@app/services/user.service';
 import { ButtonConfig } from '@app/shared-modules/buttons/models/button.model';
-import { FULL_NAME_VALIDATORS } from '@ballzo-ui/core/utils';
 import { compareFunction } from '@ballzo-ui/core/utils';
+import { FULL_NAME_VALIDATORS } from '@app/utils/form-validators-utility';
 
 @Component({
   selector: 'app-edit-details',
@@ -146,7 +146,6 @@ export class EditDetailsComponent implements OnInit {
    */
   initForm() {
     this.userForm = new FormGroup({
-      name: new FormControl(this.user?.displayName, FULL_NAME_VALIDATORS),
       email: new FormControl(this.user?.email, [Validators.email]),
       dob: new FormControl(this.userDetails?._dateOfBirthString, [Validators.required]),
       locationState: new FormControl(this.userDetails?.locationState, [Validators.required]),

@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@app/authentication/auth.service';
-import { SessionStorageProperties } from '@ballzo-ui/core/common';
+import { SessionStorageProperties } from '@app/constant/constants';
 import { PaymentService } from '@app/services/payment.service';
 import { SessionStorageService } from '@app/services/session-storage.service';
 import { SnackbarService } from '@app/services/snackbar.service';
-import { getFirestoreErrorMsg } from '@ballzo-ui/core/utils';
 import { Subject } from 'rxjs';
 
 @Injectable({

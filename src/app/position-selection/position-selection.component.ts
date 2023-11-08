@@ -4,7 +4,7 @@ import { ButtonConfig } from '@app/shared-modules/buttons/models/button.model';
 import { PositionData, PositionSelectionMessages } from '@ballzo-ui/core/common';
 import { Router } from '@angular/router';
 import { SessionStorageService } from '@app/services/session-storage.service';
-import { SessionStorageProperties } from '@ballzo-ui/core/common';
+import { SessionStorageProperties } from '@app/constant/constants';
 import { findIndexByValue, getValueByIndex, isEnumKey } from '@ballzo-ui/core/utils';
 import { Position } from '@ballzo-ui/core/user';
 

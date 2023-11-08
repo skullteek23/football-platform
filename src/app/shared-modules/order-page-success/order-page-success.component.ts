@@ -15,7 +15,8 @@ import { OrderService } from '@app/services/order.service';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { ButtonTheme, ButtonConfig } from '../buttons/models/button.model';
 import { ResultType, ResultBoxData } from '../result-box/models/result-box.model';
-import { IUser, Position } from '@ballzo-ui/core/user';
+import { Position } from '@ballzo-ui/core/user';
+import { IUser } from '@app/models/user.model';
 
 @Component({
   selector: 'app-order-page-success',

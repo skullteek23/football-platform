@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { InteractiveCardData } from '@app/shared-modules/interactive-card/models/interactive-card.model';
 import { SelectedGroundInfo, TabLabel, UserSlotSelectionInfo } from '../models/ground-selection.model';
 import { SessionStorageService } from '@app/services/session-storage.service';
-import { Constants, SessionStorageProperties } from '@ballzo-ui/core/common';
+import { Constants } from '@ballzo-ui/core/common';
 import { Ground, GroundFacility } from '@ballzo-ui/core/ground';
 import { ArraySorting } from '@ballzo-ui/core/utils';
 import { DatePipe } from '@angular/common';
 import { GroundService } from '@app/services/ground.service';
 import { Subject } from 'rxjs';
+import { SessionStorageProperties } from '@app/constant/constants';
 
 @Injectable({
   providedIn: 'root'

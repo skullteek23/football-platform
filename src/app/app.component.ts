@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AnimationsList } from './services/animation.service';
 import { AuthService } from './authentication/auth.service';
-import { AuthConstants, Constants, LocalStorageProperties } from '@ballzo-ui/core/common';
+import { Constants, LocalStorageProperties } from '@ballzo-ui/core/common';
 import { LocalStorageService } from './services/local-storage.service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
@@ -13,7 +13,7 @@ import { filter } from 'rxjs';
   animations: [AnimationsList.fadeInOutAnimation],
 })
 export class AppComponent {
-  readonly loginCaptcha = AuthConstants.LOGIN_CAPTCHA_PLACEHOLDER;
+  readonly loginCaptcha = Constants.LOGIN_CAPTCHA_PLACEHOLDER;
   title = 'football-platform';
 
   constructor(

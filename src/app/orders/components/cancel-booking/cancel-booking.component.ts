@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
-import { OrderConstants, OrderMessages } from '@ballzo-ui/core/common';
+import { Constants, OrderMessages } from '@ballzo-ui/core/common';
 import { CancellationPolicyComponent } from '@app/legal-info/cancellation-policy/cancellation-policy.component';
 import { BottomSheetService } from '@app/services/bottom-sheet.service';
 import { OrderService } from '@app/services/order.service';
@@ -15,8 +15,8 @@ import { getCloudFnErrorMsg } from '@ballzo-ui/core/utils';
 })
 export class CancelBookingComponent implements OnInit {
 
-  readonly reasonsList = OrderConstants.CANCELLATION_REASONS
-  readonly placeholder = OrderConstants.REASON_PLACEHOLDER;
+  readonly reasonsList = Constants.BOOKING_CANCELLATION_REASONS
+  readonly placeholder = Constants.REASON_PLACEHOLDER;
   readonly note = OrderMessages.booking.cancelNote;
 
   isLoaderShown = false;
