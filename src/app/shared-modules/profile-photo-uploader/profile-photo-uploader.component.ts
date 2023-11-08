@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Constants } from '@ballzo-ui/core/common';
-import { FileType } from '@ballzo-ui/core/utils';
+import { FileType, dataURLtoFile } from '@ballzo-ui/core/utils';
+import { NgxImageCompressService } from 'ngx-image-compress';
+import { PLAYER, maxImageSizeInMb } from '@app/constant/image-compression-constants';
 
 @Component({
   selector: 'app-profile-photo-uploader',
@@ -24,19 +26,7 @@ export class ProfilePhotoUploaderComponent {
   preview: string = '';
   file!: File;
 
-  /**
-   * Browse photo from the local system
-   * @param ev
-   * @param previewEl
-   */
-  onBrowsePhoto(ev: any, previewEl: HTMLElement): void {
-    if (ev && ev.target && ev.target.files && previewEl) {
-      const file = ev.target.files[0];
-      const imageEl = previewEl as HTMLImageElement;
-      imageEl.src = URL.createObjectURL(file);
-      this.emitSelection(file);
-    }
-  }
+  constructor(private imageCompress: NgxImageCompressService) { }
 
   /**
    * Emits the selected file to the parent component
@@ -52,5 +42,33 @@ export class ProfilePhotoUploaderComponent {
   resetImage(): void {
     this.preview = '';
     this.file = new File([], '');
+  }
+
+  /**
+   * Compress image file 
+   */
+  compressFile() {
+    this.imageCompress
+      .uploadAndGetImageWithMaxSize(maxImageSizeInMb)
+      .then((result) => {
+        this.parseCompression(result);
+      },
+        (result: string) => {
+          this.parseCompression(result);
+        });
+  }
+
+  /**
+   * Parse the final file and set preview
+   * @param _result
+   */
+  parseCompression(result: string) {
+    if(result) {
+      const finalFile = dataURLtoFile(result, PLAYER + `${new Date().getTime()}`);
+      if(finalFile) {
+        this.emitSelection(finalFile);
+        this.preview = result;
+      }
+    }
   }
 }
