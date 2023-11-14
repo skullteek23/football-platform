@@ -11,6 +11,7 @@ import { Constants } from '@ballzo-ui/core/common';
 const routes: Routes = [
   {
     path: '',
+    pathMatch: 'full',
     component: HomeComponent,
   },
   {
@@ -52,7 +53,6 @@ const routes: Routes = [
   },
   {
     path: 'error',
-
     data: { animation: 'fadeInOut' },
     loadChildren: () =>
       import('./error/error.module').then((m) => m.ErrorModule),

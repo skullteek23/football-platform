@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Observable, Subject, firstValueFrom, of, switchMap, take } from 'rxjs';
+import { Observable, firstValueFrom, of, switchMap, take } from 'rxjs';
 import { BottomSheetService } from '../services/bottom-sheet.service';
 import { LoginBottomSheetComponent } from '@app/authentication/login-bottom-sheet/login-bottom-sheet.component';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
@@ -41,7 +41,6 @@ export class AuthService {
 
   // User related variables
   private user: User | null = null;
-  private user$$ = new Subject<User | null>();
 
   /**
    * Constructor method
@@ -70,7 +69,6 @@ export class AuthService {
           this.localStorageService.remove(LocalStorageProperties.USER_UID);
           this.user = null;
         }
-        this.user$$.next(this.user);
       });
     } catch (error) {
       console.log(error);
@@ -82,7 +80,7 @@ export class AuthService {
    */
   _user(): Observable<User | null> {
     if (this.auth) {
-      return authState(this.auth);
+      return authState(this.auth).pipe(take(1));
     } else if (this.isUserLogin()) {
       return of(this.user);
     } else {
@@ -111,7 +109,7 @@ export class AuthService {
 
   /**
    * Open signup sheet using mat bottom sheet
-   */
+  */
   openSignup() {
     this.router.navigate([
       { outlets: { [Constants.SHEET_OPEN_OUTLET]: 'signup' } },
@@ -171,7 +169,7 @@ export class AuthService {
     if (this.user) {
       signOut(this.auth)
         .then(() => {
-          this.postLogoutActivity();
+          // this.postLogoutActivity();
           this.snackbarService.displayCustomMsg(AuthMessages.success.logout);
         })
         .catch((error) => {
@@ -191,13 +189,13 @@ export class AuthService {
    * Cleanups and navigation reset after logout
    */
   postLogoutActivity() {
+    // Close any pending open sheet.
+    this.sheetService.closeSheet();
+
     this.user = null;
     this.localStorageService.clear();
     this.sessionStorageService.clear();
     this.router.navigate(['/']);
-
-    // Close any pending open sheet.
-    this.sheetService.closeSheet();
   }
 
   /**
