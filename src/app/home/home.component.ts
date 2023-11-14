@@ -96,6 +96,14 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
           }
           this.isPageInitialized = true;
         },
+        error: (err) => {
+          this.isUserLogged = false;
+          this.isPageInitialized = true;
+          this.data.extraItems = [];
+          this.isBookingsInitialized = true;
+          this.userBookings = [];
+          this.contentList = [];
+        }
       })
     );
   }

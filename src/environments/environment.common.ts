@@ -3,9 +3,9 @@ import { TabLabel } from "@app/shared-modules/ground-selection/models/ground-sel
 export const environmentCommon = {
   socials: {
     instagram: 'https://www.instagram.com/ballzo.india',
-    youtube: 'https://www.instagram.com/ballzo.india',
-    linkedin: 'https://www.instagram.com/ballzo.india',
-    facebook: 'https://www.instagram.com/ballzo.india',
+    youtube: 'https://www.youtube.com',
+    linkedin: 'https://linkedin.com/company/ballzo',
+    facebook: 'https://www.facebook.com',
   },
   support: {
     email: 'admin@ballzo.in',

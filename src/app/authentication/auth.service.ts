@@ -31,7 +31,6 @@ import { HttpsCallableResult } from 'firebase/functions';
 import { cloudFunctionNames } from '@app/constant/api-constants';
 import { isEnumKey } from '@ballzo-ui/core/utils';
 import { Position } from '@ballzo-ui/core/user';
-import { getCloudFnErrorMsg } from '@ballzo-ui/core/utils';
 
 @Injectable({
   providedIn: 'root',
@@ -182,10 +181,9 @@ export class AuthService {
             alert(error);
           }
         });
-      this.postLogoutActivity();
     } else {
       this.snackbarService.displayError(AuthMessages.error.signOutError);
-      this.postLogoutActivity();
+      window.location.reload();
     }
   }
 
@@ -207,8 +205,8 @@ export class AuthService {
    * @param updates
    * @returns
    */
-  updateUserProfile(updates: IUserProperties): Promise<any> {
-    if (this.user) {
+  updateUserProfile(updates: Partial<IUserProperties>): Promise<any> {
+    if (this.user && (updates.displayName || updates.photoURL)) {
       return updateProfile(this.user, updates);
     }
     return Promise.reject(null);

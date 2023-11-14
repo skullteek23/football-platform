@@ -12,7 +12,7 @@ import { LocationService } from '@app/services/location.service';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { UserService } from '@app/services/user.service';
 import { ButtonConfig } from '@app/shared-modules/buttons/models/button.model';
-import { compareFunction } from '@ballzo-ui/core/utils';
+import { ArraySorting, compareFunction } from '@ballzo-ui/core/utils';
 import { FULL_NAME_VALIDATORS } from '@app/utils/form-validators-utility';
 
 @Component({
@@ -64,7 +64,7 @@ export class EditDetailsComponent implements OnInit {
   getStates() {
     this.locationService.getStates().subscribe({
       next: (states) => {
-        this.states = states;
+        this.states = states.sort(ArraySorting.sortObjectByKey('name'));
         this.setSelectedCity();
       },
       error: (error) => {
@@ -107,7 +107,7 @@ export class EditDetailsComponent implements OnInit {
     this.showLoader();
     this.locationService.getCities(iso2).subscribe({
       next: (cities) => {
-        this.cities = cities;
+        this.cities = cities.sort(ArraySorting.sortObjectByKey('name'));;
         this.hideLoader();
       },
       error: (error) => {
@@ -146,6 +146,7 @@ export class EditDetailsComponent implements OnInit {
    */
   initForm() {
     this.userForm = new FormGroup({
+      name: new FormControl(this.user?.displayName, FULL_NAME_VALIDATORS),
       email: new FormControl(this.user?.email, [Validators.email]),
       dob: new FormControl(this.userDetails?._dateOfBirthString, [Validators.required]),
       locationState: new FormControl(this.userDetails?.locationState, [Validators.required]),
