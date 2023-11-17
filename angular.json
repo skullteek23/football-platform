@@ -57,10 +57,14 @@
               "src/apple-touch-icon.png",
               "src/assets"
             ],
-            "styles": ["src/styles.scss"],
+            "styles": [
+              "src/styles.scss"
+            ],
             "scripts": [],
             "stylePreprocessorOptions": {
-              "includePaths": ["src/assets/css"]
+              "includePaths": [
+                "src/assets/css"
+              ]
             }
           },
           "configurations": {
@@ -89,7 +93,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumError": "2mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -133,8 +137,13 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "inlineStyleLanguage": "scss",
-            "assets": ["src/favicon.svg", "src/assets"],
-            "styles": ["src/styles.scss"],
+            "assets": [
+              "src/favicon.svg",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.scss"
+            ],
             "scripts": []
           }
         },
@@ -156,7 +165,10 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
           }
         }
       }
