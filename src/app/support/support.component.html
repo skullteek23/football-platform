@@ -1,0 +1,63 @@
+<div class="main-container" *ngIf="!isLoaderShown">
+  <div class="request-submit-status" *ngIf="referenceId" @fadeAppear>
+    <app-result-box [type]="result" [data]="resultData"></app-result-box>
+  </div>
+  <div class="head">
+    <div class="heading">
+      <span class="page-sub-label"> Help & Support </span>
+    </div>
+    <div class="description">
+      <p class="description-main">
+        Welcome to our Help & Support Center!
+        We value your input. Whether it's a suggestion, a problem, or an idea you want to share with us, we're here to
+        listen. Your feedback helps us improve.
+        Thanks for being a part of our community!
+      </p>
+      <p class="note">
+        Note: Your mobile number and name are automatically captured and attached with this feedback
+      </p>
+    </div>
+  </div>
+  <form [formGroup]="supportForm">
+    <mat-form-field color="primary">
+      <mat-label>Subject/Heading</mat-label>
+      <input matInput type="text" name="subject" formControlName="subject" id="subject">
+      <mat-error *ngIf="subject?.errors">
+        <app-form-field-errors [control]="subject" inputName="subject line"></app-form-field-errors>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field color="primary">
+      <mat-label>Description</mat-label>
+      <textarea matInput type="text" name="description" rows='3' formControlName="description" id="description"
+        placeholder='Brief description of the matter'></textarea>
+      <mat-error *ngIf="description?.errors">
+        <app-form-field-errors [control]="description" inputName="description"></app-form-field-errors>
+      </mat-error>
+    </mat-form-field>
+
+    <div class="upload-files">
+      <div class="upload-files-label">
+        Upload Screenshots (optional):
+      </div>
+      <div class="upload-files-wrapper">
+        <app-custom-file-uploader (fileSelect)="selectFile($event)" [options]="options"></app-custom-file-uploader>
+      </div>
+    </div>
+
+    <p class="note">
+      Submit this form to register your feedback.
+    </p>
+
+    <app-wide-button (clickEv)="submit()" [displayDetails]="submitBtnDetails"
+      [disabled]="supportForm.invalid"></app-wide-button>
+
+    <p class="note note-darker">
+      For further inquiries or assistance, please reach to us at admin@ballzo.in
+    </p>
+
+  </form>
+</div>
+
+<app-footer></app-footer>
+
+<app-loader *ngIf="isLoaderShown"></app-loader>

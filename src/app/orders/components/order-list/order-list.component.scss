@@ -1,0 +1,34 @@
+@import "node_modules/@ballzo-ui/core/common/themes/mixins.scss";
+@import "node_modules/@ballzo-ui/core/common/themes/_variables.scss";
+
+.main-container {
+  @include mainPageContainer;
+
+  mat-list {
+    width: 100%;
+    min-height: 300px;
+  }
+
+  .placeholder {
+    @include flexStartCol(8px);
+    width: 100%;
+    padding: 0px !important;
+
+    .list-item {
+      width: 100%;
+      height: 72px;
+    }
+  }
+
+  .status-container {
+    height: 20px;
+    font-size: $font-size-s;
+    font-weight: 400;
+    color: $black;
+    width: auto;
+    text-align: end;
+    border: 1px $primary-color solid;
+    padding: 0px 8px;
+    border-radius: $border-radius-primary;
+  }
+}

@@ -1,0 +1,27 @@
+<div class="main-container">
+  <div class="heading">
+    <span class="page-sub-label">
+      Order Overview:
+    </span>
+  </div>
+  <app-result-box [type]="ResultType.failure" [data]="data">
+    <div class="info">
+      <div class="metric">
+        <div class="metric-label">-</div>
+        <div class="metric-value">Amount</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label"> - </div>
+        <div class="metric-value">Date</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">-</div>
+        <div class="metric-value">Spot</div>
+      </div>
+    </div>
+  </app-result-box>
+  <app-wide-button [displayDetails]="tryAgainBtnDetails" [theme]='ButtonTheme.primary'
+    (clickEv)="showGrounds()"></app-wide-button>
+  <app-wide-button [displayDetails]="homeBtnDetails" [theme]='ButtonTheme.secondary'
+    (clickEv)="navigateHome()"></app-wide-button>
+</div>

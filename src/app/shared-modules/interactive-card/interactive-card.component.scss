@@ -1,0 +1,129 @@
+@import "node_modules/@ballzo-ui/core/common/themes/mixins.scss";
+@import "node_modules/@ballzo-ui/core/common/themes/_variables.scss";
+
+mat-card {
+  max-height: 280px;
+  max-width: 150px;
+  height: 280px;
+  width: 150px;
+
+  @include extra-small-screen {
+    max-width: 130px;
+    width: 130px;
+  }
+
+  .image-container {
+    background-color: $grey-3;
+    transition: all 0.2s ease-in;
+    @include flexCenter(row);
+
+    @include extra-small-screen {
+      transition: all 0.1s ease-in;
+    }
+
+    img {
+      height: 120px;
+      max-height: 120px;
+      width: auto;
+      object-fit: fill;
+    }
+  }
+
+  .content-container {
+    box-sizing: border-box;
+  }
+
+  .custom-card-title-group {
+    width: 150px;
+    margin-top: 8px;
+
+    &:first-child {
+      width: 100%;
+    }
+
+    div {
+      width: 100%;
+    }
+  }
+
+  mat-card-title {
+    width: 100%;
+    text-align: center;
+
+    .title {
+      @include ellipsis(130px);
+      text-align: center;
+      width: 100%;
+
+      @include extra-small-screen {
+        max-width: 110px;
+      }
+    }
+  }
+
+  mat-card-subtitle {
+    width: 100%;
+    text-align: center;
+
+    .subtitle {
+      @include ellipsis(130px);
+      text-align: center;
+      font-size: $font-size-xs;
+      font-weight: 300;
+      width: 100%;
+
+      @include extra-small-screen {
+        max-width: 110px;
+      }
+    }
+  }
+
+  mat-card-content {
+    p.description {
+      @include ellipsis(135px, break-spaces);
+      max-height: 58px;
+      height: 58px;
+      overflow-y: auto;
+      font-size: $font-size-s;
+      font-weight: 400;
+      padding: 0 8px;
+      text-align: center;
+      color: $light-text;
+
+      @include extra-small-screen {
+        font-size: $font-size-xs;
+        max-width: 110px;
+      }
+    }
+  }
+
+  .mat-chip {
+    font-size: $font-size-s;
+    min-height: 26px !important;
+  }
+
+  .primary-chip {
+    background-image: $primary-gradient;
+    font-size: $font-size-m;
+    color: white;
+    font-weight: 600;
+    transition: all 0.2s ease-in;
+
+    @include extra-small-screen {
+      transition: all 0.1s ease-in;
+    }
+  }
+
+  .mat-card-footer {
+    margin-top: 8px;
+  }
+
+  .custom-footer-content {
+    width: 100%;
+    font-size: $font-size-s !important;
+  }
+}
+
+.active {
+  border-top: 4px solid $primary-color;
+}

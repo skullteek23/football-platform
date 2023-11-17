@@ -1,0 +1,6 @@
+<mat-list>
+  <mat-list-item *ngFor="let item of transactionsListForUi">
+    <app-transaction-item [data]='item'></app-transaction-item>
+  </mat-list-item>
+</mat-list>
+<app-placeholder message="No transactions to show!" *ngIf="!transactionsListForUi?.length"></app-placeholder>

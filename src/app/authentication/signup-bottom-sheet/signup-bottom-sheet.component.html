@@ -1,0 +1,106 @@
+<div class="sheet-content-container">
+  <button mat-icon-button (click)="canDeactivate()" class="floating-button">
+    <mat-icon fontSet="material-icons-round">close</mat-icon>
+  </button>
+  <div class="heading">
+    <app-logo></app-logo>
+    <div><strong class="semi-strong">Discover, Book, and Play!</strong></div>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="content-form">
+    <div class="page-sub-label">Create an Account:</div>
+    <form [formGroup]="formGroup">
+      <mat-form-field color="primary">
+        <mat-label>Full Name</mat-label>
+        <input
+          matInput
+          type="text"
+          name="name"
+          id="name"
+          formControlName="name"
+          #firstInputRef
+          placeholder="Enter Your Name"
+        />
+        <mat-error *ngIf="name?.errors">
+          <app-form-field-errors [control]="name"></app-form-field-errors>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field color="primary">
+        <mat-label>Phone Number</mat-label>
+        <input
+          matInput
+          type="tel"
+          name="phone-number"
+          id="contact-number"
+          formControlName="phoneNumber"
+          placeholder="Enter Your 10-digit Mobile Number"
+        />
+        <mat-hint [@fadeInOut]="otpSent" class="custom-hints" *ngIf="otpSent">
+          {{ messages.hints.otpSent }}
+        </mat-hint>
+        <mat-error *ngIf="phoneNumber?.errors">
+          <app-form-field-errors
+            [control]="phoneNumber"
+            inputName="phone number"
+          ></app-form-field-errors>
+        </mat-error>
+      </mat-form-field>
+      <ng-container *ngIf="otpSent">
+        <mat-form-field color="primary">
+          <mat-label>Enter OTP</mat-label>
+          <input
+            matInput
+            type="tel"
+            autocomplete="one-time-code"
+            name="otp"
+            id="otp"
+            formControlName="otp"
+            placeholder="Enter 6-digit OTP"
+          />
+
+          <mat-error *ngIf="otp?.errors">
+            <app-form-field-errors
+              [control]="otp"
+              inputName="OTP"
+            ></app-form-field-errors>
+          </mat-error>
+        </mat-form-field>
+        <div class="actions">
+          <app-next-action-button
+            [disabled]="isDisableFinalBtn(formGroup)"
+            (clickEv)="signup(formGroup, confirmationResult)"
+            [displayDetails]="continueBtnDetails"
+          ></app-next-action-button>
+          <button mat-icon-button (click)="editNumber()">
+            <mat-icon fontSet="material-icons-round">edit</mat-icon>
+          </button>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="!otpSent">
+        <app-next-action-button
+          [disabled]="isDisableSendOtpBtn(formGroup)"
+          (clickEv)="requestSignupOtp()"
+          [displayDetails]="requestOtpBtnDetails"
+        ></app-next-action-button>
+      </ng-container>
+    </form>
+    <div class="footer-text" *ngIf="!otpSent; else terms">
+      <span class="or-text">OR</span>
+      <span class="login-segway">
+        <a (click)="openLogin()" class="links">Login</a>
+        to Existing Account
+      </span>
+    </div>
+    <ng-template #terms>
+      <div class="footer-text">
+        <span class="terms-segway">
+          <span> By continuing, you agree to </span>
+          <a (click)="canDeactivate('/terms')" class="links"
+            >Ballzo's Terms & Conditions and Privacy Policy.</a
+          >
+        </span>
+      </div>
+    </ng-template>
+  </div>
+</div>
+<app-loader *ngIf="isLoaderShown"></app-loader>

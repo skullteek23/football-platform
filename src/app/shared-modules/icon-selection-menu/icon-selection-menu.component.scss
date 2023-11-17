@@ -1,0 +1,75 @@
+@import "node_modules/@ballzo-ui/core/common/themes/mixins.scss";
+@import "node_modules/@ballzo-ui/core/common/themes/_variables.scss";
+
+.selection-menu {
+  @include flexSpaceBetween(0px);
+  padding: 16px 8px;
+  border-radius: $border-radius-primary;
+  overflow: hidden;
+  transition: height 0.25s ease-out;
+  .icon-content {
+    width: 100%;
+    @include flexCenter(column, 16px);
+    .route-icons {
+      height: auto;
+      width: 100%;
+      @include extra-small-screen {
+        flex-wrap: wrap;
+      }
+      .menu-item-wrapper:last-child {
+        margin-right: 8px;
+      }
+      .menu-item-wrapper {
+        @include flexStartCol(4px, center);
+        width: 54px;
+        .icon-button {
+          @include flexCenter(row);
+          border: 1px solid $primary-color;
+          border-radius: 100%;
+          .mat-button-wrapper {
+            @include flexCenter(row);
+          }
+        }
+        .label {
+          width: 100%;
+          text-align: center;
+          height: auto;
+          max-width: 54px;
+          font-size: $font-size-s;
+          font-weight: 400;
+          line-height: 16px;
+        }
+      }
+    }
+  }
+}
+
+.additional-height {
+  height: 170px;
+  @include extra-small-screen {
+    height: auto;
+  }
+}
+
+.normal-height {
+  height: 80px;
+  @include extra-small-screen {
+    height: auto;
+  }
+}
+
+.no-expand-view {
+  @include flexSpaceEvenly(8px, flex-start);
+}
+
+.expandable-view {
+  @include flexSpaceBetween(8px, flex-start);
+}
+
+.primary-bg {
+  @include primary-gradient-background;
+  .icon-button {
+    background-color: white;
+    color: $black;
+  }
+}

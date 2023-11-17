@@ -1,0 +1,20 @@
+<div class="main-container user-orders-page">
+  <div class="heading">
+    <div class="page-sub-label">
+      My Orders
+    </div>
+  </div>
+  <div class="placeholder" *ngIf="isLoaderShown">
+    <div class="list-item shine" *ngFor="let item of SHIMMER_ARRAY"></div>
+  </div>
+  <app-placeholder *ngIf="!uiList.length && !isLoaderShown" message="No orders to show!"></app-placeholder>
+  <mat-list *ngIf="!isLoaderShown && uiList.length">
+    <mat-list-item *ngFor="let data of uiList">
+      <app-transaction-item [data]="data">
+        <div class="status-container" *ngIf="data.highlightedCustomData"
+          [innerHtml]="data.highlightedCustomData | titlecase">
+        </div>
+      </app-transaction-item>
+    </mat-list-item>
+  </mat-list>
+</div>

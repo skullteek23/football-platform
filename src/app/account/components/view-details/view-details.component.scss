@@ -1,0 +1,118 @@
+@import "node_modules/@ballzo-ui/core/common/themes/mixins.scss";
+@import "node_modules/@ballzo-ui/core/common/themes/_variables.scss";
+
+.main-container {
+  @include mainPageContainer;
+
+  .placeholder {
+    @include mainPageContainer;
+    padding: 0 !important;
+    width: 100%;
+
+    .heading {
+      @include flexStartCol(4px);
+
+      .strip {
+        height: 20px
+      }
+    }
+
+    .detail-placeholder {
+      width: 100%;
+      height: 200px;
+    }
+
+    .button-placeholder {
+      .button {
+        width: 100%;
+        height: 50px
+      }
+    }
+  }
+
+  .custom-heading {
+    @include flexSpaceBetween;
+
+    .name-text {
+      .name {
+        font-size: $font-size-primary;
+      }
+
+      .phone-number {
+        .phone-number-text {
+          font-size: $font-size-s;
+          color: $grey-1;
+        }
+
+        a {
+          font-size: $font-size-s;
+        }
+      }
+    }
+
+    .account-photo {
+      height: 40px;
+      width: 40px;
+      overflow: hidden;
+      box-sizing: border-box;
+      border-radius: 50%;
+      border: 1px solid $grey-3;
+
+      img {
+        height: 100%;
+        width: 100%;
+        max-height: 40px;
+        object-fit: contain;
+      }
+
+    }
+
+    mat-icon {
+      font-size: 40px;
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  .stats-container {
+    .heading {
+      @include flexStartRow;
+    }
+
+    .title-text {
+      @include flexCenter(row);
+      color: $grey-1;
+      font-size: $font-size-s;
+      height: 40px;
+    }
+
+    .stats-box {
+      @include primary-gradient-background;
+      @include flexStartCol(8px);
+      padding: 10px;
+      border-radius: $border-radius-primary;
+
+      .role {
+        font-size: $font-size-s;
+        font-weight: 300;
+      }
+
+      .stat-line {
+        @include flexSpaceBetween(20px);
+
+        .value {
+          font-size: $font-size-l;
+          font-weight: 500;
+          min-width: 40px;
+          display: inline-flex;
+        }
+
+        .label {
+          font-weight: 300;
+          font-size: $font-size-s;
+        }
+      }
+
+    }
+  }
+}

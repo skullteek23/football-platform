@@ -1,0 +1,16 @@
+@import "node_modules/@ballzo-ui/core/common/themes/_variables.scss";
+@import "node_modules/@ballzo-ui/core/common/themes/mixins.scss";
+
+.main-container {
+  @include mainPageContainer;
+
+  .heading {
+    @include flexCenter(row);
+    width: 100%;
+  }
+
+  form {
+    @include flexStartCol(8px);
+  }
+
+}

@@ -1,0 +1,30 @@
+@import "node_modules/@ballzo-ui/core/common/themes/mixins.scss";
+@import "node_modules/@ballzo-ui/core/common/themes/_variables.scss";
+
+.error-container {
+  @include flexCenter(row);
+  padding: 16px;
+  height: calc(100vh - 90px);
+  background-color: $white;
+}
+
+.error-content {
+  text-align: center;
+  padding: 20px;
+  background-color: $grey-bg;
+  border-radius: $border-radius-primary;
+}
+
+.error-heading {
+  font-size: $font-size-l;
+  font-weight: 500;
+  color: $black;
+  margin-bottom: 10px;
+}
+
+.error-message {
+  font-size: $font-size-m;
+  color: $grey-text;
+  font-weight: 400;
+  margin-bottom: 20px;
+}

@@ -1,0 +1,36 @@
+<mat-card class="mat-elevation-z4 interactive-card" (click)="select()">
+  <div class="image-container" *ngIf="data.imgSrc">
+    <img [src]="data.imgSrc" [alt]="data.title" />
+  </div>
+  <div class="content-container" [ngClass]="{ active: isSelected }">
+    <div class=custom-card-title-group>
+      <mat-card-title *ngIf="data.title">
+        <span class="title">
+          {{ data.title }}
+        </span>
+      </mat-card-title>
+      <mat-card-subtitle *ngIf="data.subtitle">
+        <span class="subtitle" [innerHtml]="data.subtitle"> </span>
+      </mat-card-subtitle>
+    </div>
+    <mat-card-content *ngIf="data.descriptionHtml">
+      <p class="description" [innerHtml]="data.descriptionHtml"></p>
+    </mat-card-content>
+    <mat-card-footer *ngIf="data.actionBtn">
+      <mat-chip-list [selectable]="data.actionBtn.isSelectable"
+        *ngIf="data.actionBtn.type === 'chip'; else customFooter">
+        <mat-chip [ngClass]="{ 'primary-chip': isSelected }" class="custom-btn-chip">
+          <span *ngIf="isSelected"> Selected </span>
+          <span *ngIf="!isSelected">
+            {{ data.actionBtn.label }}
+          </span>
+        </mat-chip>
+      </mat-chip-list>
+      <ng-template #customFooter>
+        <div class="custom-footer-content">
+          <ng-content></ng-content>
+        </div>
+      </ng-template>
+    </mat-card-footer>
+  </div>
+</mat-card>

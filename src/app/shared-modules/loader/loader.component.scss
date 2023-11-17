@@ -1,0 +1,29 @@
+@import "node_modules/@ballzo-ui/core/common/themes/mixins.scss";
+@import "node_modules/@ballzo-ui/core/common/themes/_variables.scss";
+
+.ball-color {
+  fill: url(#myGradient);
+}
+.main-stop {
+  stop-color: $primary-color;
+}
+
+.alt-stop {
+  stop-color: $secondary-color;
+}
+
+.loader-container {
+  @include flexCenter(row);
+  background-color: $white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 999;
+  position: fixed;
+  pointer-events: none;
+  cursor: not-allowed;
+  max-height: 100vh;
+  max-width: 100vw;
+}

@@ -1,0 +1,13 @@
+<div class="error-container">
+  <div class="error-content">
+    <h1 class="error-heading">Oops! Something went wrong.</h1>
+    <p class="error-message">
+      We apologize for the inconvenience. An error occurred while processing
+      your request.
+    </p>
+    <app-next-action-button
+      (clickEv)="goBack()"
+      [displayDetails]="displayDets"
+    ></app-next-action-button>
+  </div>
+</div>

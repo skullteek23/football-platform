@@ -1,0 +1,23 @@
+<div class="main-container">
+  <div class="before-heading">
+    <app-wide-button (clickEv)="openAdminApp()" [displayDetails]="addGroundBtnDetails"
+      [theme]="ButtonTheme.secondary"></app-wide-button>
+  </div>
+  <div class="heading">
+    <div class="page-sub-label">
+      Grounds in your area:
+    </div>
+  </div>
+
+  <div class="placeholder" *ngIf="isLoaderShown">
+    <div class="card shine" *ngFor="let item of SHIMMER_ARRAY"></div>
+  </div>
+
+  <app-placeholder [message]="messages.error.noGrounds" *ngIf="!cardData.length"></app-placeholder>
+
+  <div class="content-container">
+    <ng-container *ngFor="let data of cardData">
+      <app-interactive-card [data]="data" (actionBtnClick)="openGround($event)"></app-interactive-card>
+    </ng-container>
+  </div>
+</div>

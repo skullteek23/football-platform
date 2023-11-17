@@ -1,0 +1,17 @@
+.error-class-snackbar {
+  background-color: $fail;
+  border-radius: $border-radius-primary !important;
+  .mat-simple-snackbar,
+  .mat-simple-snackbar-action {
+    color: $white;
+  }
+}
+
+.success-class-snackbar {
+  background-color: $success;
+  border-radius: $border-radius-primary !important;
+  .mat-simple-snackbar,
+  .mat-simple-snackbar-action {
+    color: $black;
+  }
+}

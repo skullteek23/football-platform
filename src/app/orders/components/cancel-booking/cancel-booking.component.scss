@@ -1,0 +1,41 @@
+@import "node_modules/@ballzo-ui/core/common/themes/mixins.scss";
+@import "node_modules/@ballzo-ui/core/common/themes/_variables.scss";
+
+.sheet-content-container {
+  padding-top: 14px;
+  @include flexStartCol(20px, stretch);
+
+  .heading {
+    @include flexStartCol(4px, center);
+    width: 100%;
+  }
+
+  mat-form-field {
+    margin-bottom: 0 !important;
+  }
+
+  .action {
+    @include flexStartCol(8px, center);
+
+    .dont-cancel {
+      @include flexCenter(row);
+      color: $grey-text;
+      height: $heading-height;
+    }
+  }
+
+  .note-container {
+    p {
+      text-align: center;
+      font-size: $font-size-s;
+      color: $grey-1;
+      margin-bottom: 20px;
+    }
+  }
+}
+
+.floating-button {
+  position: absolute;
+  right: 4px;
+  top: 12px;
+}

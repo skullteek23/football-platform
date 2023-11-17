@@ -1,0 +1,10 @@
+@import "node_modules/@ballzo-ui/core/common/themes/mixins.scss";
+
+.primary-button-custom {
+  @include primary-gradient-background;
+}
+
+.secondary-button-custom {
+  @include secondary-border-background;
+  box-shadow: none !important;
+}

@@ -1,0 +1,60 @@
+@import "node_modules/@ballzo-ui/core/common/themes/_variables.scss";
+
+.icon-button-large.mat-icon-button {
+  height: 48px;
+  width: 48px;
+}
+
+.mat-typography p {
+  margin-bottom: 0;
+}
+
+app-cancellation-policy {
+  app-plain-text-viewer {
+    .main-container {
+      .content-container {
+        max-height: 400px;
+        overflow-y: auto;
+      }
+
+      margin-bottom: 20px;
+    }
+  }
+}
+
+.mat-calendar-body-selected {
+  color: $white;
+  background-image: $primary-gradient;
+}
+
+mat-list {
+  mat-list-item {
+    height: unset !important;
+    margin-bottom: 12px;
+
+    .mat-list-item-content {
+      padding: unset !important;
+      flex-direction: column !important;
+      align-items: unset !important;
+      justify-content: stretch;
+    }
+  }
+}
+
+.user-orders-page {
+  .mat-list-base {
+    padding-top: unset !important;
+  }
+}
+
+.home-content-wrapper {
+  app-interactive-card {
+    .title {
+      white-space: unset !important;
+    }
+
+    .description {
+      height: auto !important;
+    }
+  }
+}

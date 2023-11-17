@@ -1,0 +1,13 @@
+@import '../order-page-success/order-page-success.component.scss';
+
+.info {
+  .metric {
+    &-label {
+      color: $white !important;
+    }
+
+    &-value {
+      color: $white !important;
+    }
+  }
+}

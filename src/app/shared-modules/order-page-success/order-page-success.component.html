@@ -1,0 +1,50 @@
+<div class="placeholder" *ngIf="!isPageInit">
+  <div class="shine heading"></div>
+  <div class="shine box"></div>
+  <div class="button shine"></div>
+  <div class="button shine"></div>
+</div>
+<div class="main-container" *ngIf="isPageInit">
+  <div class="heading">
+    <span class="page-sub-label">
+      Order Overview:
+    </span>
+  </div>
+  <app-result-box [type]="ResultType.success" [data]="data">
+    <div class="info">
+      <div class="metric">
+        <div class="metric-label">{{order?.amount | currency: "INR":undefined:numberFormat}}</div>
+        <div class="metric-value">Amount</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label"> {{order?.timestamp | date: dateFormat}} </div>
+        <div class="metric-value">Booked On</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">{{order?.ref?.spots || booking?.spots}}</div>
+        <div class="metric-value">Spot (s)</div>
+      </div>
+    </div>
+  </app-result-box>
+
+  <app-wide-button [disabled]='isOrderReturned' [displayDetails]="listBtnDetails"
+    [theme]='isOrderReturned ? ButtonTheme.secondary : ButtonTheme.primary' (clickEv)="showList()"></app-wide-button>
+  <app-wide-button [disabled]="ground?.mapLink === ''" [displayDetails]="mapsBtnDetails" [theme]='ButtonTheme.secondary'
+    (clickEv)="openMaps()"></app-wide-button>
+  <app-wide-button [displayDetails]="invoiceBtnDetails" [theme]='ButtonTheme.secondary' (clickEv)="emailInvoice()"
+    [disabled]='isOrderReturned'></app-wide-button>
+  <app-wide-button [displayDetails]="homeBtnDetails" [theme]='ButtonTheme.secondary'
+    (clickEv)="navigateHome()"></app-wide-button>
+
+  <div class="cancellations-policy">
+    <a (click)="openCancellationPolicy()" class="read-policy" *ngIf="!showCancelEvent">
+      Read Cancellation/Refund Policy
+      <mat-icon fontSet="material-icons-round">chevron_right</mat-icon>
+    </a>
+    <div class='note' [innerText]="slotMsg">
+    </div>
+  </div>
+  <div *ngIf="showCancelEvent && !isOrderReturned" class='cancel-container'>
+    <a (click)="onCancelBooking()" class="cancel-button"> Cancel Booking</a>
+  </div>
+</div>

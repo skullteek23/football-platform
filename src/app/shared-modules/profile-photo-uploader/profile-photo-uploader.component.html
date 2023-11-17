@@ -1,0 +1,12 @@
+<div class="photo-uploader-container">
+  <input hidden type="file" name="photoInput" [accept]="ACCEPTED_EXTENSIONS" #photoInput
+ id="file" />
+  <div class="image-container" (click)="compressFile(); $event.stopPropagation()">
+    <img #imageEl [src]="preview" alt='image-preview'>
+  </div>
+</div>
+<div class="helper-text" (click)="compressFile(); $event.stopPropagation()">
+  <a class="helper-text-label">
+    Add Photo
+  </a>
+</div>

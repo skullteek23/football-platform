@@ -1,0 +1,39 @@
+@import "node_modules/@ballzo-ui/core/common/themes/mixins.scss";
+@import "node_modules/@ballzo-ui/core/common/themes/_variables.scss";
+
+.main-container {
+  @include mainPageContainer;
+
+  .heading {
+    @include flexCenter(row);
+    text-align: center;
+    width: 100%;
+    height: $heading-height;
+  }
+
+  .book-confirm {
+    @include flexCenter(row);
+  }
+
+  .card-container {
+    flex-wrap: wrap;
+    @include flexSpaceBetween(16px);
+  }
+}
+
+.placeholder {
+  flex-wrap: wrap;
+  @include flexSpaceEvenly(16px);
+
+  .card {
+    height: 280px;
+    width: 150px;
+  }
+}
+
+.selection-placeholder {
+  .card {
+    height: 150px;
+    width: 100%;
+  }
+}

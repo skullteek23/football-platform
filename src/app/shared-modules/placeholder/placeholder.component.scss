@@ -1,0 +1,16 @@
+@import "node_modules/@ballzo-ui/core/common/themes/mixins.scss";
+
+.placeholder-container {
+  height: 100%;
+  height: 110px;
+  width: auto;
+  padding: 20px;
+  border-radius: $border-radius-primary;
+  background-color: $grey-bg;
+  color: $light-text;
+  font-size: $font-size-s;
+  @include flexCenter(row);
+  @include extra-small-screen {
+    height: 150px;
+  }
+}

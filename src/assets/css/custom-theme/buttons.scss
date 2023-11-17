@@ -1,0 +1,89 @@
+@import "node_modules/@ballzo-ui/core/common/themes/mixins.scss";
+@import "node_modules/@ballzo-ui/core/common/themes/_variables.scss";
+
+.mat-icon-button i,
+.mat-icon-button .mat-icon {
+  line-height: 22px !important;
+}
+
+.custom-short-button {
+  @include flexCenter(row, 4px);
+  @include commonBtnUI;
+  height: 54px;
+  max-width: 200px;
+  width: 200px;
+  border-radius: $border-radius-secondary !important;
+
+  .mat-button-wrapper {
+    @include flexCenter(row, 4px);
+  }
+
+  &:disabled {
+    .mat-button-wrapper {
+      color: $white;
+    }
+  }
+}
+
+.custom-wide-button {
+  @include flexSpaceBetween(0px);
+  @include commonBtnUI;
+  height: $button-height;
+  width: 100%;
+  font-size: $font-size-m;
+  border-radius: $border-radius-primary !important;
+
+  .start-content {
+    width: 100%;
+    max-width: 90%;
+    @include flexStartRow(8px);
+
+    .label {
+      @include ellipsis;
+      max-width: 90%;
+    }
+  }
+
+  .mat-button-wrapper {
+    @include flexSpaceBetween(0px);
+    width: 100%;
+  }
+}
+
+.custom-button.primary-button-custom:disabled {
+  .mat-button-wrapper {
+    color: $white;
+  }
+}
+
+.custom-button.secondary-button-custom:disabled {
+  .mat-button-wrapper {
+    color: $grey-1;
+  }
+}
+
+.main-container.view-account-details {
+  app-wide-button:last-child {
+    .custom-button {
+      border-color: $logout;
+      color: $logout;
+    }
+  }
+}
+
+.cancel-button-container {
+  app-next-action-button {
+    .custom-short-button {
+      background: $fail !important;
+    }
+  }
+}
+
+.mat-mini-fab.mat-primary:not(:disabled) {
+  background-image: $primary-gradient !important;
+  color: $white !important;
+}
+
+.mat-mini-fab .mat-button-wrapper {
+  line-height: 22px !important;
+}

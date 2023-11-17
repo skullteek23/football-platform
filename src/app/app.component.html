@@ -1,0 +1,13 @@
+<header>
+  <app-top-nav></app-top-nav>
+</header>
+<section id='main-container-app'>
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</section>
+
+<!-- To render the recaptcha for captcha verifier for firebase phone authentication -->
+<div class="hidden-part">
+  <div [id]="loginCaptcha"></div>
+</div>

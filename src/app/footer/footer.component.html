@@ -1,0 +1,31 @@
+<footer>
+  <div class="social-links-strip">
+    <span class="sub-heading">Follow Us!</span>
+    <div class="icons-list">
+      <a *ngFor="let item of list" mat-icon-button target="_blank" [href]="item.link">
+        <img [src]="item.src" alt="{{ item.name }}" />
+      </a>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="footer-notes">
+    <app-logo></app-logo>
+    <p class="description">
+      <strong class="semi-strong">Discover, Book, and Play:</strong> Your
+      all-in-one solution for football players to easily find and secure local
+      matches and pickup games, with instant online bookings and venue details.
+    </p>
+    <p>
+      Email: {{ support.email }} <br />
+      Office Address: {{ support.address }}
+    </p>
+    <p class="terms">
+      <a class="links" routerLink="/terms">Terms & Conditions.&nbsp;</a>
+      <a class="links" routerLink="/privacy-policy">Privacy Policy.</a>
+      <br />
+      <span> 2023 Ballzo India Pvt Ltd. All Rights Reserved. </span>
+      <br />
+      <span> App version: v{{version}} </span>
+    </p>
+  </div>
+</footer>

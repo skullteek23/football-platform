@@ -1,0 +1,9 @@
+<div class="main-container">
+  <div class="heading" *ngIf="heading">
+    <span class="page-sub-label"> {{heading}} </span>
+
+  </div>
+  <div class="content-container mat-elevation-z4" *ngIf="HTMLText">
+    <div [innerHtml]="HTMLText"></div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="main-container">
+  <div class="heading" *ngIf="!isGroundSelected">
+    <span class="page-sub-label">Select Ground to book:</span>
+  </div>
+  <div class="selection-placeholder" *ngIf="!isSelectionInit">
+    <div class="card shine"></div>
+  </div>
+  <div class="selected-ground" *ngIf="isGroundSelected && isSelectionInit">
+    <app-current-selection [isFocused]="!isSlotSelected" [data]="selectionData" (panelClosed)="closePanel()"
+      [showSpotCount]="showSpotCount"></app-current-selection>
+  </div>
+
+  <div class="book-confirm" *ngIf="isSlotSelected">
+    <app-next-action-button [displayDetails]="payBtnDetails" (clickEv)="continueWithPay()"></app-next-action-button>
+  </div>
+
+  <div class="placeholder" *ngIf="!groundListInit">
+    <div class="card shine" *ngFor="let item of SHIMMER_ARRAY"></div>
+  </div>
+
+  <app-placeholder [message]="messages.error.noGrounds" *ngIf="!groundsList.length"></app-placeholder>
+
+  <div class="card-container">
+    <ng-container *ngFor="let ground of groundsList">
+      <app-interactive-card [data]="ground" [selected]="selectedGroundID === ground.id"
+        (actionBtnClick)="selectGround($event)"></app-interactive-card>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,5 @@
+@import "node_modules/@ballzo-ui/core/common/themes/mixins.scss";
+
+.close-button-container {
+  @include flexEndRow;
+}

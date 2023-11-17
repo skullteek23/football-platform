@@ -1,0 +1,54 @@
+<div class="sheet-content-container">
+  <button mat-icon-button (click)="canDeactivate()" class="floating-button">
+    <mat-icon fontSet="material-icons-round">close</mat-icon>
+  </button>
+
+  <div class="image-carousel">
+    <div class="ground-image-container">
+      <button [disabled]="!imagesCount || index <= 0 " mat-mini-fab (click)="previousImage()" color="primary"
+        class="floating-buttons button-left">
+        <mat-icon fontSet="material-icons-round">arrow_back_ios</mat-icon>
+      </button>
+      <div class="ground-image">
+        <img [src]="selectedAsset" [@sliderSidewayVoid] alt="manager" *ngIf="selectedAsset" />
+      </div>
+      <button [disabled]="!imagesCount || index  >= (imagesCount - 1)" mat-mini-fab color="primary"
+        (click)="nextImage()" class="floating-buttons button-right">
+        <mat-icon fontSet="material-icons-round">arrow_forward_ios</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="heading">
+    <div class="page-sub-label">
+      {{ground?.name}}
+    </div>
+  </div>
+
+  <mat-chip-list class="facility-list">
+    <mat-chip *ngFor="let facility of facilityList">
+      {{facility}}
+    </mat-chip>
+  </mat-chip-list>
+
+  <div class="ground-info ground-info-bg" matRipple (click)="openMaps()">
+    <span class="ground-info-bg-text">
+      {{ground?.addressLine}}
+    </span>
+    <span class="ground-info-link">
+      <mat-icon fontSet="material-icons-round">chevron_right</mat-icon>
+    </span>
+  </div>
+
+  <div class="ground-info ground-info-alt-bg">
+    <span class="ground-info-alt-bg-text">
+      {{groundInfo?.description}}
+    </span>
+  </div>
+
+  <div class="contact-info ground-info">
+    Ground Representative:
+    {{groundInfo?.contactInfo?.name}}
+  </div>
+</div>
+<app-loader *ngIf="isLoaderShown"></app-loader>

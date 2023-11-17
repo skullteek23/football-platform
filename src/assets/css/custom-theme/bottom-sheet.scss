@@ -1,0 +1,12 @@
+.sheet-backdrop {
+  background-color: $black-75;
+}
+
+.sheet-custom {
+  border-radius: $border-radius-secondary $border-radius-secondary 0 0;
+}
+
+.sheet-custom-ground-info {
+  border-radius: $border-radius-secondary $border-radius-secondary 0 0;
+  max-height: 90vh !important;
+}

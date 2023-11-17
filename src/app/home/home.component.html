@@ -1,0 +1,62 @@
+<div class="placeholder-shimmer" *ngIf="!isPageInitialized">
+  <div class="header-placeholder">
+    <div class="shine strip"></div>
+    <div class="shine header"></div>
+  </div>
+</div>
+<div class="main-container home-content-wrapper">
+  <div class="header-content-container" *ngIf="isPageInitialized">
+    <div class="salutation-strip">
+      <span class="page-sub-label" *ngIf="name">
+        Hi, {{ name | titlecase }}!
+      </span>
+      <ng-container *ngIf="isUserLogged">
+        <button mat-icon-button (click)="navigateTo('/m/user/account')" *ngIf="!photoUrl">
+          <mat-icon fontSet='material-icons-round'>account_circle</mat-icon>
+        </button>
+        <a class="account-photo" (click)="navigateTo('/m/user/account')" *ngIf="photoUrl">
+          <img [src]="photoUrl" alt="User photo">
+        </a>
+      </ng-container>
+    </div>
+    <app-icon-selection-menu [data]="data" (selectionChange)="onSelectOption($event)"></app-icon-selection-menu>
+  </div>
+
+  <div class="content-container" *ngIf="isBookingsInitialized">
+    <div class="salutation-strip">
+      <div class="page-sub-label">Recent Games:</div>
+      <button mat-icon-button (click)="refreshContent()" *ngIf="isUserLogged">
+        <mat-icon fontSet="material-icons-round">refresh</mat-icon>
+      </button>
+    </div>
+    <div class="content">
+      <div class="onboarding-content" *ngIf="!contentList.length">
+        <app-wide-button *ngIf="!isUserLogged" (clickEv)="getStarted()"
+          [displayDetails]="buttonDetails"></app-wide-button>
+        <app-placeholder [message]="messages.error.noBooking"></app-placeholder>
+      </div>
+      <div class="bookings-content" *ngIf="contentList.length">
+        <ng-container *ngFor="let content of contentList">
+          <app-interactive-card [data]="content" [selected]="false" (actionBtnClick)="openList($event)">
+            <mat-chip-list>
+              <mat-chip class="custom-footer-chip" [ngStyle]="content.actionBtn.customStyle"
+                [innerHtml]='content?.actionBtn?.customContent'>
+              </mat-chip>
+            </mat-chip-list>
+          </app-interactive-card>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="placeholder-shimmer" *ngIf="!isBookingsInitialized">
+  <div class="content-placeholder">
+    <div class="shine heading"></div>
+    <div class="shine content"></div>
+  </div>
+</div>
+
+<app-footer></app-footer>
+
+<app-loader *ngIf="isLoaderShown"></app-loader>

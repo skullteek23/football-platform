@@ -1,0 +1,74 @@
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '@app/authentication/auth.service';
+import { SessionStorageProperties } from '@app/constant/constants';
+import { OnboardingService } from '@app/onboarding/services/onboarding.service';
+import { SessionStorageService } from '@app/services/session-storage.service';
+import { SnackbarService } from '@app/services/snackbar.service';
+
+@Component({
+  selector: 'app-onboarding-payment',
+  templateUrl: './onboarding-payment.component.html',
+  styleUrls: ['./onboarding-payment.component.scss']
+})
+export class OnboardingPaymentComponent implements OnInit {
+
+  isLoaderShown = false;
+
+  constructor(
+    private onboardingService: OnboardingService,
+    private authService: AuthService,
+    private snackbarService: SnackbarService,
+    private router: Router,
+    private sessionStorage: SessionStorageService
+  ) { }
+
+  ngOnInit(): void {
+    this.onboardingService._loaderStatus().subscribe(response => this.isLoaderShown = response);
+  }
+
+  /**
+   * Continue with success/failure
+   */
+  continue(status: boolean) {
+    if (status) {
+      this.showLoader();
+      this.authService._user().subscribe(async user => {
+        if (user) {
+          this.onboardingService.onPayment(user)
+            .then((orderId) => {
+              if (orderId) {
+                this.sessionStorage.remove(SessionStorageProperties.USER_GROUND_SELECTION);
+                this.sessionStorage.remove(SessionStorageProperties.USER_POSITION_SELECTION);
+                this.router.navigate(['/m', 'onboarding', 'finish'], { queryParams: { oid: orderId } });
+              }
+              this.hideLoader();
+            })
+            .catch(error => {
+              this.router.navigate(['/m', 'onboarding', 'error']);
+              if (error) {
+                this.snackbarService.displayError(error);
+              }
+              this.hideLoader();
+            });
+        } else {
+          this.hideLoader();
+        }
+      })
+    }
+  }
+
+  /**
+   * Hide loader
+   */
+  hideLoader() {
+    this.isLoaderShown = false;
+  }
+
+  /**
+   * Show loader
+   */
+  showLoader() {
+    this.isLoaderShown = true;
+  }
+}

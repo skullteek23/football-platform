@@ -1,0 +1,58 @@
+@import "node_modules/@ballzo-ui/core/common/themes/mixins.scss";
+@import "node_modules/@ballzo-ui/core/common/themes/_variables.scss";
+
+.sheet-content-container {
+  @include flexStartCol(32px, center);
+
+  .heading {
+    @include flexStartCol(4px, center);
+  }
+
+  mat-divider {
+    width: 100%;
+  }
+
+  .content-form {
+    width: 100%;
+    @include flexStartCol(16px);
+
+    form {
+      @include flexStartCol(16px);
+      text-align: center;
+
+      .actions {
+        @include flexCenter(row, 16px);
+      }
+    }
+
+    .footer-text {
+      width: 100%;
+      text-align: center;
+      padding: 4px 0 40px;
+
+      .or-text {
+        font-size: $font-size-s;
+        color: $light-text;
+        display: block;
+        margin-bottom: 12px;
+      }
+
+      .login-segway {
+        font-size: $font-size-m;
+        color: $grey-text;
+      }
+    }
+  }
+}
+
+.terms-segway {
+  font-size: $font-size-s;
+  font-weight: 300;
+  text-align: center;
+}
+
+.floating-button {
+  position: absolute;
+  right: 4px;
+  top: 12px;
+}

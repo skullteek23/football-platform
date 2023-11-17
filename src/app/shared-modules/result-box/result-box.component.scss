@@ -1,0 +1,108 @@
+@import "node_modules/@ballzo-ui/core/common/themes/mixins.scss";
+@import "node_modules/@ballzo-ui/core/common/themes/_variables.scss";
+
+.result-box {
+  height: auto;
+  max-height: 300px;
+  border-radius: $border-radius-secondary;
+
+  .icon-circle {
+    height: $button-height;
+    width: 50px;
+    box-sizing: border-box;
+    border-radius: 50%;
+    border: 5px solid $white;
+    position: relative;
+    top: -25px;
+    margin: 0 auto;
+    @include flexCenter(row);
+
+    mat-icon {
+      font-size: 35px !important;
+      height: auto;
+      font-weight: 700;
+      width: auto;
+    }
+  }
+
+  .content {
+    position: relative;
+    top: -15px;
+    padding: 20px;
+    @include flexCenter(column, 20px);
+    text-align: center;
+
+    .title {
+      @include flexCenter(column, 4px);
+
+      .heading {
+        font-size: $font-size-primary;
+        font-weight: 500;
+      }
+
+      .description {
+        font-size: $font-size-s;
+        font-weight: 400;
+      }
+    }
+
+    .custom-content {
+      min-height: 40px;
+    }
+
+  }
+
+  .footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    padding: 8px;
+    box-sizing: border-box;
+    text-align: center;
+    border-radius: 0 0 $border-radius-secondary $border-radius-secondary;
+    font-size: $font-size-m;
+    font-weight: 400;
+    @include flexCenter(row)
+  }
+}
+
+
+.success {
+  background-color: $success-light;
+  color: $black;
+
+  .icon-circle {
+    background: $success-light;
+    color: $white;
+  }
+
+  .description {
+    color: $grey-1;
+  }
+
+  .footer {
+    background: $success;
+    color: $grey-text;
+  }
+}
+
+.failure {
+  background-color: $fail-light;
+  color: $white;
+
+  .icon-circle {
+    background: $fail-light;
+    color: $white;
+
+  }
+
+  .description {
+    color: $white;
+  }
+
+  .footer {
+    background: $fail;
+    color: $white;
+  }
+}
