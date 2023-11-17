@@ -24,37 +24,40 @@ export class BookingPaymentComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if(this.sessionStorage.get(SessionStorageProperties.USER_GROUND_SELECTION)) {
+      this.continue();
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 
   /**
    * Continue with success/failure
    */
-  continue(status: boolean) {
-    if (status) {
-      this.showLoader();
-      this.authService._user().subscribe(async user => {
-        if (user) {
-          this.matchBookingService.onPayment(user)
-            .then((orderId) => {
-              if (orderId) {
-                this.sessionStorage.remove(SessionStorageProperties.USER_GROUND_SELECTION);
-                this.sessionStorage.remove(SessionStorageProperties.USER_POSITION_SELECTION);
-                this.router.navigate(['/m', 'book-match', 'finish'], { queryParams: { oid: orderId } });
-              }
-              this.hideLoader();
-            })
-            .catch(error => {
-              this.router.navigate(['/m', 'book-match', 'error']);
-              if (error) {
-                this.snackbarService.displayError(error);
-              }
-              this.hideLoader();
-            });
-        } else {
-          this.hideLoader();
-        }
-      })
-    }
+  continue() {
+    this.showLoader();
+    this.authService._user().subscribe(async user => {
+      if (user) {
+        this.matchBookingService.onPayment(user)
+          .then((orderId) => {
+            if (orderId) {
+              this.sessionStorage.remove(SessionStorageProperties.USER_GROUND_SELECTION);
+              this.sessionStorage.remove(SessionStorageProperties.USER_POSITION_SELECTION);
+              this.router.navigate(['/m', 'book-match', 'finish'], { queryParams: { oid: orderId } });
+            }
+            this.hideLoader();
+          })
+          .catch(error => {
+            this.router.navigate(['/m', 'book-match', 'error']);
+            if (error) {
+              this.snackbarService.displayError(error);
+            }
+            this.hideLoader();
+          });
+      } else {
+        this.hideLoader();
+      }
+    })
   }
 
   /**

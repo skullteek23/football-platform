@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@app/authentication/auth.service';
 import { MatchBookingService } from '@app/match-booking/services/match-booking.service';
-import { Position } from '@ballzo-ui/core/user';
-import { OnboardingService } from '@app/onboarding/services/onboarding.service';
 import { UserSlotSelectionInfo } from '@app/shared-modules/ground-selection/models/ground-selection.model';
 import { GroundSelectionService } from '@app/shared-modules/ground-selection/services/ground-selection.service';
 import { Subscription } from 'rxjs';
@@ -44,5 +42,4 @@ export class BookingGroundSelectionComponent implements OnInit {
       .then(role => this.pos = role)
       .catch(role => this.pos = null);
   }
-
 }
