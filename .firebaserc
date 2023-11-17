@@ -1,7 +1,7 @@
 {
   "projects": {
     "default": "football-platform-dev",
-    "production": "futball-platform-prod"
+    "production": "football-platform-production"
   },
   "targets": {},
   "etags": {}

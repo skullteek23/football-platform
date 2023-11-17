@@ -158,7 +158,7 @@
             "production": {
               "buildTarget": "football-platform:build:production",
               "firebaseConfig": "src/environments/environment.prod.ts",
-              "firebaseProject": "futball-platform-prod"
+              "firebaseProject": "football-platform-production"
             }
           }
         },
