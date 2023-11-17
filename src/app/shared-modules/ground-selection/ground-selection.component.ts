@@ -26,7 +26,7 @@ export class GroundSelectionComponent implements OnInit {
       if (this.userPosition && isEnumKey(this.userPosition, Position)) {
         this.showSpotCount = this.userPosition === Position.manager;
       }
-      this.payBtnDetails.label = 'Pay & Book';
+      this.payBtnDetails.label = 'Confirm Slot';
       this.getGrounds();
     }
   }
@@ -42,7 +42,7 @@ export class GroundSelectionComponent implements OnInit {
   selectedGroundID!: string;
   groundListInit = false;
   isSelectionInit = true;
-  showSpotCount = false
+  showSpotCount = false;
 
   constructor(
     private sessionStorageService: SessionStorageService,
