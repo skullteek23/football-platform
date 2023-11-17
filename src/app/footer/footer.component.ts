@@ -10,8 +10,9 @@ import { environmentCommon } from 'src/environments/environment.common';
 export class FooterComponent implements OnInit {
   readonly list = FOOTER_SOCIAL_LIST;
   readonly support = environmentCommon.support;
+  readonly version = environmentCommon.version;
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }
