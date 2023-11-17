@@ -29,7 +29,8 @@
 
     <mat-form-field color="primary">
       <mat-label>Select State</mat-label>
-      <mat-select (selectionChange)="getStateCities($event.value?.iso2)" [compareWith]="compareLocation" formControlName="locationState">
+      <mat-select (selectionChange)="getStateCities($event.value?.iso2); locationCity?.reset()"
+        [compareWith]="compareLocation" formControlName="locationState">
         <mat-option *ngFor="let state of states" [value]="state">
           {{ state.name }}
         </mat-option>

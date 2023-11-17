@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PlayerListItem } from './models/player-list.model';
-import { Observable, combineLatest, } from 'rxjs';
+import { Observable, Subscription, combineLatest, } from 'rxjs';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { PlayerListService } from './services/player-list.service';
 import { GroundService } from '@app/services/ground.service';
@@ -13,7 +13,7 @@ import { Constants } from '@ballzo-ui/core/common';
   templateUrl: './player-list.component.html',
   styleUrls: ['./player-list.component.scss']
 })
-export class PlayerListComponent implements OnInit {
+export class PlayerListComponent implements OnInit, OnDestroy {
 
   readonly timeFormat = Constants.DATE_TIME_FORMATS.format_3;
   readonly dateFormat = Constants.DATE_TIME_FORMATS.format_5;
@@ -26,6 +26,7 @@ export class PlayerListComponent implements OnInit {
   playersListBlack: PlayerListItem[] = [];
   isPageInit = false;
   dayTime: string = '';
+  subscriptions = new Subscription();
 
   constructor(
     private route: ActivatedRoute,
@@ -35,12 +36,18 @@ export class PlayerListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      if (params?.hasOwnProperty('slotid')) {
-        this.slotID = params['slotid'];
-        this.getSlotInfo();
-      }
-    });
+    this.subscriptions.add(
+      this.route.params.subscribe(params => {
+        if (params?.hasOwnProperty('slotid')) {
+          this.slotID = params['slotid'];
+          this.getSlotInfo();
+        }
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
   /**

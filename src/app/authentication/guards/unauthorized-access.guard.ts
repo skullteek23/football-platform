@@ -34,14 +34,14 @@ export class UnauthorizedAccessGuard implements CanActivate {
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    if (this.authService.isUserLogin()) {
+      return true;
+    }
     if (state?.url && !this.NON_REDIRECT_URLS.includes(state.url)) {
       this.sessionStorageService.set(
         SessionStorageProperties.REDIRECT_URL,
         state.url
       );
-    }
-    if (this.authService.isUserLogin()) {
-      return true;
     }
     this.localStorageService.set(LocalStorageProperties.BOTTOM_SHEET, true);
     this.router.navigate([

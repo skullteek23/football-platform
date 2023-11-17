@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '@app/authentication/auth.service';
 import { SessionStorageProperties } from '@app/constant/constants';
+import { IUser } from '@app/models/user.model';
 import { PaymentService } from '@app/services/payment.service';
 import { SessionStorageService } from '@app/services/session-storage.service';
-import { SnackbarService } from '@app/services/snackbar.service';
 import { Subject } from 'rxjs';
 
 @Injectable({
@@ -18,8 +17,6 @@ export class OnboardingService {
     private sessionStorage: SessionStorageService,
     private router: Router,
     private paymentService: PaymentService,
-    private authService: AuthService,
-    private snackbarService: SnackbarService,
   ) { }
 
   /**
@@ -37,24 +34,8 @@ export class OnboardingService {
   /**
    * Called after payment capture
    */
-  onPayment() {
-    this.authService._user().subscribe(async user => {
-      this.paymentService.onboard(user)
-        .then((orderId) => {
-          if (orderId) {
-            this.hideLoader();
-            this.sessionStorage.remove(SessionStorageProperties.USER_GROUND_SELECTION);
-            this.sessionStorage.remove(SessionStorageProperties.USER_POSITION_SELECTION);
-            this.router.navigate(['/m', 'onboarding', 'finish'], { queryParams: { oid: orderId } });
-          }
-        })
-        .catch(error => {
-          this.router.navigate(['/m', 'onboarding', 'error']);
-          if (error) {
-            this.snackbarService.displayError(error);
-          }
-        });
-    })
+  onPayment(user: IUser) {
+    return this.paymentService.onboard(user);
   }
 
   /**

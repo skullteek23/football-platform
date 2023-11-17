@@ -66,7 +66,7 @@ export class DummyDataService {
     const data = new GroundSlot();
     data.facilityId = 'QoBl7khNFBRXJDbqUWuB';
     data.groundId = 'p7f86mlu0MR3a1pOysRy';
-    data.timestamp = new Date('31 October, 2023 21:00:00').getTime();
+    data.timestamp = new Date('26 November, 2023 20:00:00').getTime();
     data.status = SlotStatus.available;
     data.allowedCount = 14;
     data.price = 150;

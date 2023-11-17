@@ -42,7 +42,7 @@ export class AccountService {
     const properties: Partial<IUserProperties> = {};
     const player: Partial<Player> = {};
 
-    if (value?.name !== existingDetails.name) {
+    if (!existingDetails?.name || value?.name !== existingDetails?.name) {
       properties.displayName = value.name;
       player.name = value.name;
     }
