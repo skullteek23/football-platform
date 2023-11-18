@@ -4,8 +4,11 @@ import { CancellationPolicyComponent } from './cancellation-policy.component';
 import { PlainTextViewerModule } from '@app/shared-modules/plain-text-viewer/plain-text-viewer.module';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { RouterModule } from '@angular/router';
 
-
+const routes = [
+  { path: '', component: CancellationPolicyComponent }
+]
 
 @NgModule({
   declarations: [
@@ -15,7 +18,8 @@ import { MatButtonModule } from '@angular/material/button';
     CommonModule,
     PlainTextViewerModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    RouterModule.forChild(routes)
   ],
   exports: [
     CancellationPolicyComponent

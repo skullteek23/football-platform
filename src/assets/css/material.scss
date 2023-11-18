@@ -9,19 +9,6 @@
   margin-bottom: 0;
 }
 
-app-cancellation-policy {
-  app-plain-text-viewer {
-    .main-container {
-      .content-container {
-        max-height: 400px;
-        overflow-y: auto;
-      }
-
-      margin-bottom: 20px;
-    }
-  }
-}
-
 .mat-calendar-body-selected {
   color: $white;
   background-image: $primary-gradient;

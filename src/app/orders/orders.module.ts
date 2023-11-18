@@ -14,7 +14,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { ButtonsModule } from '@app/shared-modules/buttons/buttons.module';
 import { MatButtonModule } from '@angular/material/button';
-import { CancellationPolicyModule } from '@app/legal-info/cancellation-policy/cancellation-policy.module';
 import { LoaderModule } from '@app/shared-modules/loader/loader.module';
 import { MatChipsModule } from '@angular/material/chips';
 import { PlaceholderModule } from '@app/shared-modules/placeholder/placeholder.module';
@@ -53,7 +52,6 @@ const routes: Routes = [
     ButtonsModule,
     LoaderModule,
     MatButtonModule,
-    CancellationPolicyModule
   ],
   providers: [
     CurrencyPipe,

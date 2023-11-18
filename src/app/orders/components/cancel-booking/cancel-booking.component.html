@@ -24,7 +24,7 @@
   </div>
 
   <div class="note-container">
-    <p>Note: {{note}} Read <a [routerLink]="['/terms']">Ballzo's Cancellation Policy.</a></p>
+    <p>Note: {{note}} Read <a (click)="readCancelPolicy()">Ballzo's Cancellation Policy.</a></p>
   </div>
 </div>
 <app-loader *ngIf="isLoaderShown"></app-loader>

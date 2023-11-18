@@ -7,6 +7,7 @@ import { OrderService } from '@app/services/order.service';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { ButtonConfig } from '@app/shared-modules/buttons/models/button.model';
 import { getCloudFnErrorMsg } from '@ballzo-ui/core/utils';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cancel-booking',
@@ -28,6 +29,7 @@ export class CancelBookingComponent implements OnInit {
     private sheetService: BottomSheetService,
     private orderService: OrderService,
     private snackbarService: SnackbarService,
+    private router: Router,
     @Inject(MAT_BOTTOM_SHEET_DATA) public orderID: string
   ) { }
 
@@ -41,6 +43,7 @@ export class CancelBookingComponent implements OnInit {
   */
   canDeactivate() {
     this.sheetService.closeSheet();
+    window.location.reload();
   }
 
   /**
@@ -84,7 +87,8 @@ export class CancelBookingComponent implements OnInit {
    * Open another sheet to display cancellation policy
    */
   readCancelPolicy() {
-    this.sheetService.openSheet(CancellationPolicyComponent)
+    this.sheetService.closeSheet();
+    this.router.navigate(['/cancellation-and-refund-policy']);
   }
 
 }
