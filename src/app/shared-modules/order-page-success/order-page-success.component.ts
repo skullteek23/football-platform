@@ -203,12 +203,7 @@ export class OrderPageSuccessComponent implements OnInit {
    * Open cancellation policy
    */
   openCancellationPolicy() {
-    const config = new MatBottomSheetConfig();
-    config.disableClose = false;
-    config.hasBackdrop = true;
-    config.backdropClass = 'sheet-backdrop';
-    config.panelClass = 'sheet-custom';
-    this.bottomSheetService.openSheet(CancellationPolicyComponent, config);
+    this.router.navigate(['/cancellation-and-refund-policy']);
   }
 
   /**

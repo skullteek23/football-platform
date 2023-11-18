@@ -48,9 +48,7 @@ export class ViewOrderComponent implements OnInit, OnDestroy {
     config.hasBackdrop = true;
     config.backdropClass = 'sheet-backdrop';
     config.panelClass = 'sheet-custom';
-    this.bottomSheetService.openSheet(CancelBookingComponent, config).afterDismissed().subscribe((result) => {
-      window.location.reload();
-    });
+    this.bottomSheetService.openSheet(CancelBookingComponent, config);
   }
 
 }

@@ -52,6 +52,11 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'cancellation-and-refund-policy',
+    loadChildren: () =>
+      import('./legal-info/cancellation-policy/cancellation-policy.module').then((m) => m.CancellationPolicyModule),
+  },
+  {
     path: 'error',
     data: { animation: 'fadeInOut' },
     loadChildren: () =>
