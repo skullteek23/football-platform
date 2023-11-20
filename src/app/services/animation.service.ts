@@ -31,11 +31,11 @@ export class AnimationsList {
   ]);
 
   static sliderSidewayAnimation = trigger('slideSideways', [
-    state('0', style({ transform: 'translateX(50%)' })),
-    state('1', style({ transform: 'translateX(-50%)' })),
-    state('2', style({ transform: 'translateX(-150%)' })),
-    state('3', style({ transform: 'translateX(-250%)' })),
-    state('4', style({ transform: 'translateX(-350%)' })),
+    state('0', style({ transform: 'translateX(10%)' })),
+    state('1', style({ transform: 'translateX(-20%)' })),
+    state('2', style({ transform: 'translateX(-30%)' })),
+    state('3', style({ transform: 'translateX(-40%)' })),
+    state('4', style({ transform: 'translateX(-50%)' })),
     state('5', style({ transform: 'translateX(0)' })),
     transition('* => *', animate('0.5s ease-in-out')),
   ]);
