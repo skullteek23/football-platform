@@ -18,9 +18,9 @@ export class GroundInfoComponent implements OnInit {
 
   isLoaderShown = false;
   selectedAsset = '';
+  index = 0;
   groundInfo = new GroundAdditionalInfo();
   facilityList: string[] = [];
-  index = 0;
 
   constructor(
     private sheetService: BottomSheetService,
