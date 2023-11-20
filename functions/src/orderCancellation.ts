@@ -115,17 +115,17 @@ export async function orderCancellation(data: any, context: any): Promise<any> {
 
   try {
     await Promise.all(allPromises);
-    await db.collection("user-wallet").doc(context.auth.uid).update({
-      amount: admin.firestore.FieldValue.increment(orderData?.amount),
-    });
-    await db.collection("wallet-transactions").doc().create({
-      amount: orderData.amount,
-      type: "credit",
-      createdOn: new Date().getTime(),
-      orderId: orderID,
-      uid: bookingData.uid,
-      transactionFor: "booking cancellation",
-    });
+    // await db.collection("user-wallet").doc(context.auth.uid).update({
+    //   amount: admin.firestore.FieldValue.increment(orderData?.amount),
+    // });
+    // await db.collection("wallet-transactions").doc().create({
+    //   amount: orderData.amount,
+    //   type: "credit",
+    //   createdOn: new Date().getTime(),
+    //   orderId: orderID,
+    //   uid: bookingData.uid,
+    //   transactionFor: "booking cancellation",
+    // });
   } catch (error) {
     throw new functions.https.HttpsError(
       "internal",
