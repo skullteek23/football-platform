@@ -36,11 +36,11 @@ export class PositionSelectionComponent implements OnInit {
       const index = findIndexByValue(prevSelection, Position);
       if (index || index === 0) {
         this.index = index;
-        this.selectedAsset = this.data[this.index].imgUrl;
+        this.selectedAsset = this.data[this.index];
         this.setTip();
       }
     } else {
-      this.selectedAsset = this.data[1]?.imgUrl;
+      this.selectedAsset = this.data[1];
       this.index = 1;
     }
     this.selectBtnDetails = new ButtonConfig();
@@ -87,7 +87,7 @@ export class PositionSelectionComponent implements OnInit {
     this.selectedAsset = '';
     setTimeout(() => {
       this.index--;
-      this.selectedAsset = this.data[this.index].imgUrl;
+      this.selectedAsset = this.data[this.index];
       this.setTip();
     });
   }
@@ -103,7 +103,7 @@ export class PositionSelectionComponent implements OnInit {
     this.selectedAsset = '';
     setTimeout(() => {
       this.index++;
-      this.selectedAsset = this.data[this.index].imgUrl;
+      this.selectedAsset = this.data[this.index];
       this.setTip();
     });
   }
