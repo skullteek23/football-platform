@@ -5,11 +5,14 @@ mat-card {
   padding: 0 !important;
   overflow: hidden;
   border-radius: $border-radius-primary !important;
+
   mat-card-title-group {
     width: 100% !important;
   }
+
   mat-card-title {
     margin-bottom: 0 !important;
+
     .title {
       padding: 0 8px;
       display: inline-block;
@@ -17,13 +20,16 @@ mat-card {
       font-size: $font-size-m;
       font-weight: 500;
       color: $black;
+
       @include extra-small-screen {
         font-size: $font-size-s;
       }
     }
   }
+
   mat-card-subtitle {
     margin-bottom: 0 !important;
+
     .subtitle {
       padding: 0 8px;
       display: inline-block;
@@ -31,16 +37,30 @@ mat-card {
       font-size: $font-size-s;
       font-weight: 400;
       color: $light-text;
+
       @include extra-small-screen {
         font-size: $font-size-xs;
       }
     }
   }
+
   mat-card-content {
     margin: 0;
     width: 100%;
   }
+
   .mat-card-footer {
     margin-top: 8px;
+    position: relative;
+    bottom: 0px;
+  }
+}
+
+.interactive-card {
+  mat-card-title {
+    .title {
+      padding: 0px !important;
+      height: 40px;
+    }
   }
 }
