@@ -50,79 +50,80 @@ export class DummyDataService {
           price: 99,
           maxPlayers: 14,
           slots: [
-            // 1st December Friday
-            { facilityId: facility1Id, time: new Date('1st December, 2023 19:00:00').getTime() },
-            { facilityId: facility1Id, time: new Date('1st December, 2023 20:00:00').getTime() },
-            { facilityId: facility1Id, time: new Date('1st December, 2023 21:00:00').getTime() },
+            // 1 December Friday
+            { facilityId: facility1Id, time: new Date('1 December, 2023 19:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('1 December, 2023 20:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('1 December, 2023 21:00:00').getTime() },
 
-            // 2nd December Saturday
-            { facilityId: facility1Id, time: new Date('2nd December, 2023 19:00:00').getTime() },
-            { facilityId: facility1Id, time: new Date('2nd December, 2023 20:00:00').getTime() },
-            { facilityId: facility1Id, time: new Date('2nd December, 2023 21:00:00').getTime() },
+            // 2 December Saturday
+            { facilityId: facility1Id, time: new Date('2 December, 2023 19:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('2 December, 2023 20:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('2 December, 2023 21:00:00').getTime() },
 
-            // 3rd December Sunday
-            { facilityId: facility1Id, time: new Date('3rd December, 2023 19:00:00').getTime() },
-            { facilityId: facility1Id, time: new Date('3rd December, 2023 20:00:00').getTime() },
-            { facilityId: facility1Id, time: new Date('3rd December, 2023 21:00:00').getTime() },
+            // 3 December Sunday
+            { facilityId: facility1Id, time: new Date('3 December, 2023 19:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('3 December, 2023 20:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('3 December, 2023 21:00:00').getTime() },
 
-            // 4th December Monday
-            { facilityId: facility1Id, time: new Date('4th December, 2023 19:00:00').getTime() },
-            { facilityId: facility1Id, time: new Date('4th December, 2023 20:00:00').getTime() },
-            { facilityId: facility1Id, time: new Date('4th December, 2023 21:00:00').getTime() },
+            // 4 December Monday
+            { facilityId: facility1Id, time: new Date('4 December, 2023 19:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('4 December, 2023 20:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('4 December, 2023 21:00:00').getTime() },
 
-            // 5th December Tuesday
-            { facilityId: facility1Id, time: new Date('5th December, 2023 19:00:00').getTime() },
-            { facilityId: facility1Id, time: new Date('5th December, 2023 20:00:00').getTime() },
-            { facilityId: facility1Id, time: new Date('5th December, 2023 21:00:00').getTime() },
+            // 5 December Tuesday
+            { facilityId: facility1Id, time: new Date('5 December, 2023 19:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('5 December, 2023 20:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('5 December, 2023 21:00:00').getTime() },
 
-            // 6th December Wednesday
-            { facilityId: facility1Id, time: new Date('6th December, 2023 19:00:00').getTime() },
-            { facilityId: facility1Id, time: new Date('6th December, 2023 20:00:00').getTime() },
-            { facilityId: facility1Id, time: new Date('6th December, 2023 21:00:00').getTime() },
+            // 6 December Wednesday
+            { facilityId: facility1Id, time: new Date('6 December, 2023 19:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('6 December, 2023 20:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('6 December, 2023 21:00:00').getTime() },
 
-            // 7th December Thursday
-            { facilityId: facility1Id, time: new Date('7th December, 2023 19:00:00').getTime() },
-            { facilityId: facility1Id, time: new Date('7th December, 2023 20:00:00').getTime() },
-            { facilityId: facility1Id, time: new Date('7th December, 2023 21:00:00').getTime() },
+            // 7 December Thursday
+            { facilityId: facility1Id, time: new Date('7 December, 2023 19:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('7 December, 2023 20:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('7 December, 2023 21:00:00').getTime() },
           ],
         },
         {
           id: facility2Id,
           name: '7v7 B',
           maxPlayers: 14,
-          status: 'available',
+          status: FacilityStatus.available,
           price: 99,
           slots: [
-            // 1st December Friday
-            { facilityId: facility1Id, time: new Date('1st December, 2023 19:00:00').getTime() },
-            { facilityId: facility1Id, time: new Date('1st December, 2023 20:00:00').getTime() },
-            { facilityId: facility1Id, time: new Date('1st December, 2023 21:00:00').getTime() },
+            // 1 December Friday
+            { facilityId: facility1Id, time: new Date('1 December, 2023 19:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('1 December, 2023 20:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('1 December, 2023 21:00:00').getTime() },
 
-            // 2nd December Saturday
-            { facilityId: facility1Id, time: new Date('2nd December, 2023 19:00:00').getTime() },
-            { facilityId: facility1Id, time: new Date('2nd December, 2023 20:00:00').getTime() },
-            { facilityId: facility1Id, time: new Date('2nd December, 2023 21:00:00').getTime() },
+            // 2 December Saturday
+            { facilityId: facility1Id, time: new Date('2 December, 2023 19:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('2 December, 2023 20:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('2 December, 2023 21:00:00').getTime() },
 
-            // 3rd December Sunday
-            { facilityId: facility1Id, time: new Date('3rd December, 2023 19:00:00').getTime() },
-            { facilityId: facility1Id, time: new Date('3rd December, 2023 20:00:00').getTime() },
-            { facilityId: facility1Id, time: new Date('3rd December, 2023 21:00:00').getTime() },
+            // 3 December Sunday
+            { facilityId: facility1Id, time: new Date('3 December, 2023 19:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('3 December, 2023 20:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('3 December, 2023 21:00:00').getTime() },
 
             // 4th December Monday
-            { facilityId: facility1Id, time: new Date('3rd December, 2023 19:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('4 December, 2023 19:00:00').getTime() },
 
-            // 5th December Tuesday
-            { facilityId: facility1Id, time: new Date('5th December, 2023 19:00:00').getTime() },
+            // 5 December Tuesday
+            { facilityId: facility1Id, time: new Date('5 December, 2023 19:00:00').getTime() },
 
-            // 6th December Wednesday
-            { facilityId: facility1Id, time: new Date('6th December, 2023 19:00:00').getTime() },
+            // 6 December Wednesday
+            { facilityId: facility1Id, time: new Date('6 December, 2023 19:00:00').getTime() },
 
-            // 7th December Thursday
-            { facilityId: facility1Id, time: new Date('7th December, 2023 19:00:00').getTime() },
+            // 7 December Thursday
+            { facilityId: facility1Id, time: new Date('7 December, 2023 19:00:00').getTime() },
           ],
         },
       ],
     };
+
 
     this.apiService.callHttpFunction('createGround', data)
       .then((res) => {
