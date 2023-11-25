@@ -1,8 +1,4 @@
 <div class="main-container">
-  <div class="before-heading">
-    <app-wide-button (clickEv)="openAdminApp()" [displayDetails]="addGroundBtnDetails"
-      [theme]="ButtonTheme.secondary"></app-wide-button>
-  </div>
   <div class="heading">
     <div class="page-sub-label">
       Grounds in your area:
@@ -19,5 +15,9 @@
     <ng-container *ngFor="let data of cardData">
       <app-interactive-card [data]="data" (actionBtnClick)="openGround($event)"></app-interactive-card>
     </ng-container>
+  </div>
+  <div class="before-heading">
+    <app-wide-button (clickEv)="openAdminApp()" [displayDetails]="addGroundBtnDetails"
+      [theme]="ButtonTheme.secondary"></app-wide-button>
   </div>
 </div>
