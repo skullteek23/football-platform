@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { GroundSelectionMessages } from '@ballzo-ui/core/common';
 import { Constants } from '@ballzo-ui/core/common';
+import { SupportService } from '@app/support/services/support.service';
 
 @Component({
   selector: 'app-grounds-near-me',
@@ -39,12 +40,13 @@ export class GroundsNearMeComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private snackbarService: SnackbarService,
+    private supportService: SupportService
 
   ) { }
 
   ngOnInit(): void {
-    this.addGroundBtnDetails.label = 'Add Ground';
-    this.addGroundBtnDetails.icon = 'add';
+    this.addGroundBtnDetails.label = 'Own a Ground? Get in touch!';
+    this.addGroundBtnDetails.icon = '';
 
     this.getGrounds();
   }
@@ -105,7 +107,25 @@ export class GroundsNearMeComponent implements OnInit {
    * Opens the admin app in a new tab
    */
   openAdminApp() {
-    window.open(environment.urls.admin, '_blank');
+    const value = {
+      subject: 'Ground Request',
+      description: 'I would like to add my ground to Ballzo',
+    }
+    this.authService._user().subscribe(user => {
+      if (user?.uid) {
+        this.showLoader();
+        this.supportService.submitRequest(value, user.uid, this.supportService.getReferenceId())
+          .then(() => {
+            this.hideLoader();
+            this.snackbarService.displayCustomMsg('Your request has been submitted. We will get back to you soon.');
+          })
+          .catch((err) => {
+            this.hideLoader();
+            this.snackbarService.displayError(err);
+          });
+      }
+    })
+    // window.open(environment.urls.admin, '_blank');
   }
 
   /**

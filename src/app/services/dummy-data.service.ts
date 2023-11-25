@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CoreApiService } from './core-api.service';
-import { convertObjectToFirestoreData } from '@ballzo-ui/core/utils';
+import { convertObjectToFirestoreData, getRandomString } from '@ballzo-ui/core/utils';
 import { FacilityStatus, Ground, GroundAdditionalInfo, GroundFacility, GroundSlot, GroundStatus, SlotStatus } from '@ballzo-ui/core/ground';
 import { WalletTransaction } from '@app/models/order.model';
 import { TransactionType } from '@ballzo-ui/core/transaction';
@@ -14,6 +14,153 @@ export class DummyDataService {
     private apiService: CoreApiService
   ) {
     // this.addData();
+    // this.addGround();
+    // this.addSlot();
+  }
+
+  addGround() {
+    const id = getRandomString(28);
+    const facility1Id = getRandomString(28);
+    const facility2Id = getRandomString(28);
+
+    const data = {
+      groundId: id,
+      name: 'Gallant Play Arena Vaishali',
+      addressLine: 'Sector 6, Plot No 11, Naale Wali Gali, near Arogya Hospital, Vaishali Extension, Ramprastha Greens, Vaishali, Ghaziabad, Uttar Pradesh 201012',
+      city: 'Ghaziabad',
+      state: 'Uttar Pradesh',
+      mapLink: 'https://maps.app.goo.gl/EH5qKqURYdBekYvJ7',
+      price: 99,
+      zip: 201012,
+      status: GroundStatus.approved,
+      imgLinks: ['https://firebasestorage.googleapis.com/v0/b/football-platform-production.appspot.com/o/grounds%2Fgallant-vaishali-image-1.jpeg?alt=media&token=479312fb-0880-4199-840f-a279d220bc3a'],
+      contactInfo: {
+        email: 'admin@ballzo.in',
+        name: 'Neetish Ranjan',
+        phone: '7979731898'
+      },
+      description: 'Gallant Play brings you an amazing opportunity to play on top-notch turfs that are safe from injuries and approved internationally. With a design that caters to various sports all in one place, Gallant Play lets you pick from a range of sports that are easy to access. Come and be part of an incredible sports experience like no other. The turf is all set and waiting for you to dive in!',
+      rules: 'N/A',
+      website: 'www.gallantplay.com',
+      facilities: [
+        {
+          id: facility1Id,
+          name: '7v7 A',
+          status: FacilityStatus.available,
+          price: 99,
+          maxPlayers: 14,
+          slots: [
+            // 1 December Friday
+            { facilityId: facility1Id, time: new Date('1 December, 2023 19:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('1 December, 2023 20:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('1 December, 2023 21:00:00').getTime() },
+
+            // 2 December Saturday
+            { facilityId: facility1Id, time: new Date('2 December, 2023 19:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('2 December, 2023 20:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('2 December, 2023 21:00:00').getTime() },
+
+            // 3 December Sunday
+            { facilityId: facility1Id, time: new Date('3 December, 2023 19:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('3 December, 2023 20:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('3 December, 2023 21:00:00').getTime() },
+
+            // 4 December Monday
+            { facilityId: facility1Id, time: new Date('4 December, 2023 19:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('4 December, 2023 20:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('4 December, 2023 21:00:00').getTime() },
+
+            // 5 December Tuesday
+            { facilityId: facility1Id, time: new Date('5 December, 2023 19:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('5 December, 2023 20:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('5 December, 2023 21:00:00').getTime() },
+
+            // 6 December Wednesday
+            { facilityId: facility1Id, time: new Date('6 December, 2023 19:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('6 December, 2023 20:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('6 December, 2023 21:00:00').getTime() },
+
+            // 7 December Thursday
+            { facilityId: facility1Id, time: new Date('7 December, 2023 19:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('7 December, 2023 20:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('7 December, 2023 21:00:00').getTime() },
+          ],
+        },
+        {
+          id: facility2Id,
+          name: '7v7 B',
+          maxPlayers: 14,
+          status: FacilityStatus.available,
+          price: 99,
+          slots: [
+            // 1 December Friday
+            { facilityId: facility1Id, time: new Date('1 December, 2023 19:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('1 December, 2023 20:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('1 December, 2023 21:00:00').getTime() },
+
+            // 2 December Saturday
+            { facilityId: facility1Id, time: new Date('2 December, 2023 19:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('2 December, 2023 20:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('2 December, 2023 21:00:00').getTime() },
+
+            // 3 December Sunday
+            { facilityId: facility1Id, time: new Date('3 December, 2023 19:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('3 December, 2023 20:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('3 December, 2023 21:00:00').getTime() },
+
+            // 4th December Monday
+            { facilityId: facility1Id, time: new Date('4 December, 2023 19:00:00').getTime() },
+
+            // 5 December Tuesday
+            { facilityId: facility1Id, time: new Date('5 December, 2023 19:00:00').getTime() },
+
+            // 6 December Wednesday
+            { facilityId: facility1Id, time: new Date('6 December, 2023 19:00:00').getTime() },
+
+            // 7 December Thursday
+            { facilityId: facility1Id, time: new Date('7 December, 2023 19:00:00').getTime() },
+          ],
+        },
+      ],
+    };
+
+
+    this.apiService.callHttpFunction('createGround', data)
+      .then((res) => {
+        console.log(res);
+        console.log('ground added')
+      })
+      .catch((err) => {
+        console.log(err)
+        console.log('ground add error')
+      });
+  }
+
+  addSlot() {
+    const groundId = 'p7f86mlu0MR3a1pOysRy';
+    const facilityId = 'abcd7khNFBRXJDbqUWuB';
+    const facility = {
+      price: 150,
+      maxPlayers: 14,
+      slots: [
+        { facilityId, time: new Date('26 November, 2023 20:00:00').getTime() },
+        { facilityId, time: new Date('26 November, 2023 21:00:00').getTime() },
+        { facilityId, time: new Date('26 November, 2023 22:00:00').getTime() },
+      ],
+    }
+    const data = {
+      facility,
+      groundId
+    }
+    this.apiService.callHttpFunction('addNewSlot', data)
+      .then((res) => {
+        console.log(res);
+        console.log('slot added');
+      })
+      .catch((err) => {
+        console.log(err)
+        console.log('slot add error');
+      });
   }
 
   addData() {

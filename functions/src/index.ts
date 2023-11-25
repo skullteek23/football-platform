@@ -9,6 +9,8 @@ import {walletCreation} from "./createWallet";
 import {orderCancellation} from "./orderCancellation";
 import {createRazorpayOrder} from "./createRazorpayOrder";
 import {modifySlot} from "./modifySlot";
+import {groundCreation} from "./createGround";
+import {addSlot} from "./addSlot";
 
 // Start writing Firebase Functions
 // https://firebase.google.com/docs/functions/typescript
@@ -25,6 +27,11 @@ export const updateUserProfile = functions
   .region(REGION).https.onCall(updateProfile);
 export const createOrder = functions
   .region(REGION).https.onCall(createRazorpayOrder);
+export const createGround = functions
+  .region(REGION).https.onCall(groundCreation);
+export const addNewSlot = functions
+  .region(REGION).https.onCall(addSlot);
+
 
 // Background Triggered functions
 export const updateSlot = functions
