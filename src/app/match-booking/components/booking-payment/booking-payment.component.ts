@@ -24,7 +24,7 @@ export class BookingPaymentComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if(this.sessionStorage.get(SessionStorageProperties.USER_GROUND_SELECTION)) {
+    if (this.sessionStorage.get(SessionStorageProperties.USER_GROUND_SELECTION)) {
       this.continue();
     } else {
       this.router.navigate(['/']);
@@ -43,12 +43,12 @@ export class BookingPaymentComponent implements OnInit {
             if (orderId) {
               this.sessionStorage.remove(SessionStorageProperties.USER_GROUND_SELECTION);
               this.sessionStorage.remove(SessionStorageProperties.USER_POSITION_SELECTION);
-              this.router.navigate(['/m', 'book-match', 'finish'], { queryParams: { oid: orderId } });
+              this.router.navigate(['/m', 'finish'], { queryParams: { oid: orderId } });
             }
             this.hideLoader();
           })
           .catch(error => {
-            this.router.navigate(['/m', 'book-match', 'error']);
+            this.router.navigate(['/m', 'error']);
             if (error) {
               this.snackbarService.displayError(error);
             }

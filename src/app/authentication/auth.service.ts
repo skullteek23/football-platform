@@ -17,20 +17,20 @@ import {
   updatePhoneNumber,
   updateProfile,
 } from '@angular/fire/auth';
-import { IUserProperties } from '@ballzo-ui/core/common';
+import { IUserProperties } from '@ballzo-ui/core';
 import {
   Constants,
   LocalStorageProperties,
-} from '@ballzo-ui/core/common';
+} from '@ballzo-ui/core';
 import { SnackbarService } from '@app/services/snackbar.service';
-import { AuthMessages } from '@ballzo-ui/core/common';
+import { AuthMessages } from '@app/constant/common-messages';
 import { LocalStorageService } from '@app/services/local-storage.service';
 import { SessionStorageService } from '@app/services/session-storage.service';
 import { CoreApiService } from '@app/services/core-api.service';
 import { HttpsCallableResult } from 'firebase/functions';
 import { cloudFunctionNames } from '@app/constant/api-constants';
-import { isEnumKey } from '@ballzo-ui/core/utils';
-import { Position } from '@ballzo-ui/core/user';
+import { isEnumKey } from '@ballzo-ui/core';
+import { Position } from '@ballzo-ui/core';
 
 @Injectable({
   providedIn: 'root',

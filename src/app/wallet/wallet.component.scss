@@ -1,5 +1,6 @@
-@import "node_modules/@ballzo-ui/core/common/themes/mixins.scss";
-@import "node_modules/@ballzo-ui/core/common/themes/_variables.scss";
+@import "mixins";
+@import "variables";
+
 .main-container {
   @include mainPageContainer;
 

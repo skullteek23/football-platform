@@ -1,4 +1,4 @@
-@import "node_modules/@ballzo-ui/core/common/themes/mixins.scss";
+@import "mixins";
 
 .placeholder-container {
   height: 100%;
@@ -10,6 +10,7 @@
   color: $light-text;
   font-size: $font-size-s;
   @include flexCenter(row);
+
   @include extra-small-screen {
     height: 150px;
   }

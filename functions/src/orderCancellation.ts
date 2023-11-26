@@ -2,6 +2,15 @@ import * as admin from "firebase-admin";
 import * as functions from "firebase-functions";
 const db = admin.firestore();
 import {checkKeysExist, isRequestAuthenticated} from "./functions-utils";
+import {
+  Booking,
+  Constants,
+  GroundSlot,
+  Order,
+  OrderReturn,
+  OrderStatus,
+  convertObjectToFirestoreData,
+} from "@ballzo-ui/core";
 
 /**
  * Refunds order and free associated slots
@@ -30,7 +39,7 @@ export async function orderCancellation(data: any, context: any): Promise<any> {
   }
 
   // Check if Order ID is valid
-  if (!orderID?.startsWith("OD")) {
+  if (!orderID?.startsWith(Constants.ORDER_PREFIX)) {
     throw new functions.https.HttpsError(
       "invalid-argument",
       "Invalid Order Id."
@@ -38,8 +47,9 @@ export async function orderCancellation(data: any, context: any): Promise<any> {
   }
 
   // Check if order data exists and is not already returned
-  const orderData = (await db.collection("orders").doc(orderID).get()).data();
-  if (!orderData || orderData?.status === "returned") {
+  const orderData = (await db.collection("orders").doc(orderID).get())
+    .data() as Order;
+  if (!orderData || orderData?.status === OrderStatus.returned) {
     throw new functions.https.HttpsError(
       "invalid-argument",
       "Order is already cancelled."
@@ -51,21 +61,21 @@ export async function orderCancellation(data: any, context: any): Promise<any> {
     .where("orderIds", "array-contains", orderID).get();
   if (!bookingQueryResult ||
     bookingQueryResult?.empty ||
-    !Object.prototype.hasOwnProperty.call(orderData?.ref, "spots") ||
+    !Object.prototype.hasOwnProperty.call(orderData.ref, "spots") ||
     orderData?.ref?.spots <= 0) {
     throw new functions.https.HttpsError(
       "invalid-argument",
       "Order is non-cancellable."
     );
   }
-  const bookingData = bookingQueryResult.docs[0].data();
+  const bookingData = bookingQueryResult.docs[0].data() as Booking;
   const bookingId = bookingQueryResult.docs[0].id;
 
   // Check if slot data exists and is valid
   const slotId = bookingData?.slotId || "";
   const slotData = (
     await db.collection("slots").doc(slotId).get()
-  ).data();
+  ).data() as GroundSlot;
   if (!slotData || slotData.participantCount <= 0) {
     throw new functions.https.HttpsError(
       "invalid-argument",
@@ -73,31 +83,29 @@ export async function orderCancellation(data: any, context: any): Promise<any> {
     );
   }
 
-  const updateBookingData = {
+  const updateBookingData: Partial<Booking> = {
     spots: Number(bookingData?.spots) - Number(orderData?.ref?.spots),
     lastUpdated: new Date().getTime(),
   };
   const reason = data?.reason?.trim();
-  const orderReturn = {
-    reason,
-    oid: orderID,
-    returnCount: Number(orderData?.ref?.spots),
-    timestamp: new Date().getTime(),
-    returnMode: "ballzo-wallet",
-  };
+  const orderReturn = new OrderReturn();
+
+  orderReturn.reason = reason;
+  orderReturn.oid = orderID;
+  orderReturn.returnCount = Number(orderData?.ref?.spots);
 
   const allPromises = [];
   allPromises.push(
     db.collection("orders")
       .doc(orderID)
-      .update({status: "returned"})
+      .update({status: OrderStatus.returned})
   );
   allPromises.push(
     db.collection("order-returns")
       .doc(orderID)
-      .create(orderReturn)
+      .create(convertObjectToFirestoreData(orderReturn))
   );
-  if (updateBookingData.spots <= 0) {
+  if (updateBookingData?.spots && updateBookingData.spots <= 0) {
     allPromises.push(
       db.collection("bookings")
         .doc(bookingId)
@@ -114,7 +122,7 @@ export async function orderCancellation(data: any, context: any): Promise<any> {
   }
 
   try {
-    await Promise.all(allPromises);
+    Promise.all(allPromises);
     // await db.collection("user-wallet").doc(context.auth.uid).update({
     //   amount: admin.firestore.FieldValue.increment(orderData?.amount),
     // });
@@ -126,6 +134,7 @@ export async function orderCancellation(data: any, context: any): Promise<any> {
     //   uid: bookingData.uid,
     //   transactionFor: "booking cancellation",
     // });
+    return true;
   } catch (error) {
     throw new functions.https.HttpsError(
       "internal",

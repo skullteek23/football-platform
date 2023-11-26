@@ -5,7 +5,7 @@ import {
   MatBottomSheetRef,
 } from '@angular/material/bottom-sheet';
 import { LocalStorageService } from './local-storage.service';
-import { LocalStorageProperties } from '@ballzo-ui/core/common';
+import { LocalStorageProperties } from '@ballzo-ui/core';
 
 @Injectable({
   providedIn: 'root',

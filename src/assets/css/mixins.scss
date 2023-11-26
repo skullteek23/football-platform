@@ -1,0 +1,118 @@
+@import "variables";
+
+@mixin flexSpaceBetween($gap: 16px, $sameAxis: center) {
+  display: flex;
+  flex-direction: row;
+  align-items: $sameAxis;
+  justify-content: space-between;
+  gap: $gap;
+}
+
+@mixin flexSpaceEvenly($gap: 16px, $sameAxis: center) {
+  display: flex;
+  flex-direction: row;
+  align-items: $sameAxis;
+  justify-content: space-evenly;
+  gap: $gap;
+}
+
+@mixin flexCenter($direction, $gap: 16px) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: center;
+  justify-content: center;
+  gap: $gap;
+}
+
+@mixin flexStartCol($gap: 16px, $alignment: stretch) {
+  display: flex;
+  flex-direction: column;
+  align-items: $alignment;
+  justify-content: flex-start;
+  gap: $gap;
+}
+
+@mixin flexStartRow($gap: 16px) {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: $gap;
+}
+
+@mixin flexEndRow($gap: 16px) {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  gap: $gap;
+}
+
+@mixin mainPageContainer($gap: 20px) {
+  padding: 12px 12px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+
+  .heading {
+    @include flexCenter(row);
+    text-align: center;
+    width: 100%;
+    // height: $heading-height;
+  }
+}
+
+@mixin extra-small-screen {
+  @media only screen and (max-width: 305px) {
+    @content;
+  }
+}
+
+@mixin medium-screen {
+  @media only screen and (min-width: 306px) and (max-width: 420px) {
+    @content;
+  }
+}
+
+@mixin large-screen {
+  @media only screen and (min-width: 421px) and (max-width: 650px) {
+    @content;
+  }
+}
+
+@mixin extra-large-screen {
+  @media only screen and (min-width: 651px) {
+    @content;
+  }
+}
+
+@mixin primary-gradient-background {
+  background-image: $primary-gradient;
+  color: $white;
+}
+
+@mixin secondary-border-background {
+  background: $white;
+  border: 1px solid $primary-color;
+  color: $black;
+}
+
+@mixin commonBtnUI {
+  font-size: $font-size-m;
+  @include primary-gradient-background();
+
+  &:disabled {
+    opacity: $disable-opacity;
+    cursor: not-allowed;
+    pointer-events: none;
+    border: none !important;
+    filter: grayscale(100%);
+  }
+}
+
+@mixin ellipsis($max-width: 100%, $white-space: nowrap) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: $white-space;
+  max-width: $max-width;
+}

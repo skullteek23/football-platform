@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { CoreApiService } from './core-api.service';
 import { Observable, map, tap } from 'rxjs';
-import { convertFirestoreData, convertFirestoreDataArray } from '@ballzo-ui/core/utils';
-import { FacilityStatus, Ground, GroundAdditionalInfo, GroundFacility, GroundPrice, GroundSlot, GroundStatus, SlotStatus } from '@ballzo-ui/core/ground';
+import { convertFirestoreData, convertFirestoreDataArray } from '@ballzo-ui/core';
+import { FacilityStatus, Ground, GroundAdditionalInfo, GroundFacility, GroundPrice, GroundSlot, GroundStatus, SlotStatus } from '@ballzo-ui/core';
 import { TabLabel } from '@app/shared-modules/ground-selection/models/ground-selection.model';
-import { DateParseUtility } from '@ballzo-ui/core/utils';
-import { Constants } from '@ballzo-ui/core/common';
+import { DateParseUtility } from '@ballzo-ui/core';
+import { Constants } from '@ballzo-ui/core';
 
 @Injectable({
   providedIn: 'root'

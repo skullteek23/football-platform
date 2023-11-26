@@ -1,5 +1,5 @@
-@import "node_modules/@ballzo-ui/core/common/themes/mixins.scss";
-@import "node_modules/@ballzo-ui/core/common/themes/_variables.scss";
+@import "mixins";
+@import "variables";
 
 .selection-menu {
   @include flexSpaceBetween(0px);
@@ -7,29 +7,37 @@
   border-radius: $border-radius-primary;
   overflow: hidden;
   transition: height 0.25s ease-out;
+
   .icon-content {
     width: 100%;
     @include flexCenter(column, 16px);
+
     .route-icons {
       height: auto;
       width: 100%;
+
       @include extra-small-screen {
         flex-wrap: wrap;
       }
+
       .menu-item-wrapper:last-child {
         margin-right: 8px;
       }
+
       .menu-item-wrapper {
         @include flexStartCol(4px, center);
         width: 54px;
+
         .icon-button {
           @include flexCenter(row);
           border: 1px solid $primary-color;
           border-radius: 100%;
+
           .mat-button-wrapper {
             @include flexCenter(row);
           }
         }
+
         .label {
           width: 100%;
           text-align: center;
@@ -46,6 +54,7 @@
 
 .additional-height {
   height: 170px;
+
   @include extra-small-screen {
     height: auto;
   }
@@ -53,6 +62,7 @@
 
 .normal-height {
   height: 80px;
+
   @include extra-small-screen {
     height: auto;
   }
@@ -68,6 +78,7 @@
 
 .primary-bg {
   @include primary-gradient-background;
+
   .icon-button {
     background-color: white;
     color: $black;

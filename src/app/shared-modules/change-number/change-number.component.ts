@@ -1,18 +1,18 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from '@app/authentication/auth.service';
-import { AccountMessages, AuthMessages } from '@ballzo-ui/core/common';
+import { AccountMessages, AuthMessages } from '@app/constant/common-messages';
 import { IUser } from '@app/models/user.model';
 import { BottomSheetService } from '@app/services/bottom-sheet.service';
 import { ShowConfirmationService } from '@app/services/show-confirmation.service';
 import { ButtonConfig } from '../buttons/models/button.model';
 import { SnackbarService } from '@app/services/snackbar.service';
-import { getAuthErrorMsg, getCloudFnErrorMsg } from '@ballzo-ui/core/utils';
-import { Constants } from '@ballzo-ui/core/common';
+import { Constants } from '@ballzo-ui/core';
 import { MatInput } from '@angular/material/input';
 import { AnimationsList } from '@app/services/animation.service';
 import { PhoneAuthProvider } from '@angular/fire/auth';
 import { MOBILE_VALIDATORS, valueNotSameValidator, OTP_VALIDATORS } from '@app/utils/form-validators-utility';
+import { getAuthErrorMsg, getCloudFnErrorMsg } from '@app/utils/api-error-handling-utility';
 
 @Component({
   selector: 'app-change-number',

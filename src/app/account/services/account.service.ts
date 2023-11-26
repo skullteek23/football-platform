@@ -2,12 +2,12 @@ import { DatePipe } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { AuthService } from '@app/authentication/auth.service';
 import { CloudStorageFileScreens } from '@app/constant/api-constants';
-import { Constants } from '@ballzo-ui/core/common';
-import { IUserProperties } from '@ballzo-ui/core/common';
+import { Constants } from '@ballzo-ui/core';
+import { IUserProperties } from '@ballzo-ui/core';
 import { CloudStorageService } from '@app/services/cloud-storage.service';
-import { getRandomString } from '@ballzo-ui/core/utils';
+import { getRandomString } from '@ballzo-ui/core';
 import { AccountConstants } from '../constants/account.constants';
-import { Player } from '@ballzo-ui/core/user';
+import { Player } from '@ballzo-ui/core';
 import { UserService } from '@app/services/user.service';
 
 @Injectable({

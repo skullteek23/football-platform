@@ -24,38 +24,40 @@ export class OnboardingPaymentComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.onboardingService._loaderStatus().subscribe(response => this.isLoaderShown = response);
+    if (this.sessionStorage.get(SessionStorageProperties.USER_GROUND_SELECTION)) {
+      this.continue();
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 
   /**
    * Continue with success/failure
    */
-  continue(status: boolean) {
-    if (status) {
-      this.showLoader();
-      this.authService._user().subscribe(async user => {
-        if (user) {
-          this.onboardingService.onPayment(user)
-            .then((orderId) => {
-              if (orderId) {
-                this.sessionStorage.remove(SessionStorageProperties.USER_GROUND_SELECTION);
-                this.sessionStorage.remove(SessionStorageProperties.USER_POSITION_SELECTION);
-                this.router.navigate(['/m', 'onboarding', 'finish'], { queryParams: { oid: orderId } });
-              }
-              this.hideLoader();
-            })
-            .catch(error => {
-              this.router.navigate(['/m', 'onboarding', 'error']);
-              if (error) {
-                this.snackbarService.displayError(error);
-              }
-              this.hideLoader();
-            });
-        } else {
-          this.hideLoader();
-        }
-      })
-    }
+  continue() {
+    this.showLoader();
+    this.authService._user().subscribe(async user => {
+      if (user) {
+        this.onboardingService.onPayment(user)
+          .then((orderId) => {
+            if (orderId) {
+              this.sessionStorage.remove(SessionStorageProperties.USER_GROUND_SELECTION);
+              this.sessionStorage.remove(SessionStorageProperties.USER_POSITION_SELECTION);
+              this.router.navigate(['/m', 'finish'], { queryParams: { oid: orderId } });
+            }
+            this.hideLoader();
+          })
+          .catch(error => {
+            this.router.navigate(['/m', 'error']);
+            if (error) {
+              this.snackbarService.displayError(error);
+            }
+            this.hideLoader();
+          });
+      } else {
+        this.hideLoader();
+      }
+    })
   }
 
   /**

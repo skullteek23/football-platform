@@ -69,15 +69,3 @@ export function isRequestAuthenticated(
   }
   return false;
 }
-
-/**
- * Defines the position of a player.
- * DO NOT CHANGE THE ORDER OF THE ENUM VALUES.
- */
-export enum Position {
-  manager = "manager",
-  striker = "striker",
-  midfielder = "midfielder",
-  defender = "defender",
-  goalkeeper = "goalkeeper"
-}

@@ -4,16 +4,16 @@ import { Router } from '@angular/router';
 import { AccountConstants } from '@app/account/constants/account.constants';
 import { AccountService } from '@app/account/services/account.service';
 import { AuthService } from '@app/authentication/auth.service';
-import { AccountMessages } from '@ballzo-ui/core/common';
 import { IUser } from '@app/models/user.model';
-import { ILocationCity, ILocationState } from '@ballzo-ui/core/location';
-import { Player } from '@ballzo-ui/core/user';
+import { ILocationCity, ILocationState } from '@ballzo-ui/core';
+import { Player } from '@ballzo-ui/core';
 import { LocationService } from '@app/services/location.service';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { UserService } from '@app/services/user.service';
 import { ButtonConfig } from '@app/shared-modules/buttons/models/button.model';
-import { ArraySorting, compareFunction } from '@ballzo-ui/core/utils';
+import { ArraySorting, compareFunction } from '@ballzo-ui/core';
 import { FULL_NAME_VALIDATORS } from '@app/utils/form-validators-utility';
+import { AccountMessages } from '@app/constant/common-messages';
 
 @Component({
   selector: 'app-edit-details',

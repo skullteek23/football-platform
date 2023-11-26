@@ -1,7 +1,7 @@
 import { TabLabel } from "@app/shared-modules/ground-selection/models/ground-selection.model";
 
 export const environmentCommon = {
-  version: '1.0.4',
+  version: '1.0.5',
   socials: {
     instagram: 'https://www.instagram.com/ballzo.india',
     youtube: 'https://www.youtube.com',

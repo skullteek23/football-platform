@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@app/authentication/auth.service';
-import { PaymentMessages } from '@ballzo-ui/core/common';
+import { PaymentMessages } from '@app/constant/common-messages';
 import { IUser } from '@app/models/user.model';
-import { WalletTransaction } from '@app/models/order.model';
-import { TransactionType } from '@ballzo-ui/core/transaction';
+import { WalletTransaction } from '@ballzo-ui/core';
+import { TransactionType } from '@ballzo-ui/core';
 import { OrderService } from '@app/services/order.service';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { UserService } from '@app/services/user.service';

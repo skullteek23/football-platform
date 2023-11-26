@@ -1,6 +1,7 @@
 import * as admin from "firebase-admin";
 const db = admin.firestore();
 import {UserRecord} from "firebase-admin/auth";
+import {UserWallet, convertObjectToFirestoreData} from "@ballzo-ui/core";
 
 /**
  * Creates the wallet for the user
@@ -13,12 +14,10 @@ export async function walletCreation(
 ): Promise<any> {
   if (user && !user.disabled && user.phoneNumber && user.uid) {
     const uid: string = user.uid;
-    const wallet: any = {
-      amount: 0,
-      disabled: false,
-    };
+    const wallet = new UserWallet();
 
-    return db.collection("user-wallet").doc(uid).set(wallet);
+    return db.collection("user-wallet")
+      .doc(uid).set(convertObjectToFirestoreData(wallet));
   }
   return;
 }

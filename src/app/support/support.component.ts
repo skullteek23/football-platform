@@ -8,7 +8,7 @@ import { AuthService } from '@app/authentication/auth.service';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { ResultBoxData, ResultType } from '@app/shared-modules/result-box/models/result-box.model';
 import { AnimationsList } from '@app/services/animation.service';
-import { Regex } from '@ballzo-ui/core/common';
+import { Regex } from '@ballzo-ui/core';
 
 @Component({
   selector: 'app-support',

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { CoreApiService } from './core-api.service';
-import { convertFirestoreData, convertFirestoreDataArray } from '@ballzo-ui/core/utils';
+import { convertFirestoreData, convertFirestoreDataArray } from '@ballzo-ui/core';
 import { Observable, map } from 'rxjs';
-import { Player, PlayerStats, UserWallet } from '@ballzo-ui/core/user';
+import { Player, PlayerStats, UserWallet } from '@ballzo-ui/core';
 
 @Injectable({
   providedIn: 'root'

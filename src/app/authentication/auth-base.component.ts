@@ -5,12 +5,14 @@ import { CanComponentDeactivate } from '@app/guards/confirm-form-closure.guard';
 import { FormGroup } from '@angular/forms';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { BottomSheetService } from '@app/services/bottom-sheet.service';
-import { getAuthErrorMsg } from '@ballzo-ui/core/utils';
+import { getAuthErrorMsg } from '@app/utils/api-error-handling-utility';;
 import { ShowConfirmationService } from '@app/services/show-confirmation.service';
 import { SessionStorageService } from '@app/services/session-storage.service';
-import { AuthMessages, Constants, IApiError } from '@ballzo-ui/core/common';
 import { SessionStorageProperties } from '@app/constant/constants';
 import { IConfirmationResult } from '@app/models/user.model';
+import { AuthMessages } from '@app/constant/common-messages';
+import { IApiError } from '@app/models/firebase-error.model';
+import { Constants } from '@ballzo-ui/core';
 
 export class AuthBaseComponent implements CanComponentDeactivate {
   readonly messages = AuthMessages;
@@ -144,6 +146,9 @@ export class AuthBaseComponent implements CanComponentDeactivate {
               photoURL: ''
             });
           }
+          this.sessionStorageService.remove(
+            SessionStorageProperties.REDIRECT_URL
+          );
           this.closeSheet('/m/onboarding');
           this.hideLoader();
         })

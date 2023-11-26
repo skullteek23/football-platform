@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatBottomSheetConfig } from '@angular/material/bottom-sheet';
-import { Ground } from '@ballzo-ui/core/ground';
+import { Ground } from '@ballzo-ui/core';
 import { BottomSheetService } from '@app/services/bottom-sheet.service';
 import { ButtonConfig, ButtonTheme } from '@app/shared-modules/buttons/models/button.model';
 import { InteractiveCardData } from '@app/shared-modules/interactive-card/models/interactive-card.model';
@@ -12,8 +12,8 @@ import { UserService } from '@app/services/user.service';
 import { AuthService } from '@app/authentication/auth.service';
 import { Router } from '@angular/router';
 import { SnackbarService } from '@app/services/snackbar.service';
-import { GroundSelectionMessages } from '@ballzo-ui/core/common';
-import { Constants } from '@ballzo-ui/core/common';
+import { GroundSelectionMessages } from '@app/constant/common-messages';
+import { Constants } from '@ballzo-ui/core';
 import { SupportService } from '@app/support/services/support.service';
 
 @Component({

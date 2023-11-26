@@ -2,6 +2,7 @@ import * as admin from "firebase-admin";
 const db = admin.firestore();
 import {DocumentSnapshot} from "firebase-admin/firestore";
 import {Change} from "firebase-functions/lib/common/change";
+import {Booking, GroundSlot, SlotStatus} from "@ballzo-ui/core";
 
 /**
  * Modifies the slot document when a booking is created, updated or deleted
@@ -12,16 +13,17 @@ import {Change} from "firebase-functions/lib/common/change";
 export async function modifySlot(
   change: Change<DocumentSnapshot>, context: any
 ): Promise<any> {
-  const before = change.before.exists ? change.before.data() : null;
-  const after = change.after.exists ? change.after.data() : null;
+  const before = change.before.exists ? change.before.data() as Booking : null;
+  const after = change.after.exists ? change.after.data() as Booking : null;
   const slotId = after?.slotId || before?.slotId;
 
   if (!slotId) {
     return true;
   }
 
-  const slot = (await db.collection("slots").doc(slotId).get()).data();
-  const slotChanges: any = {};
+  const slot = (await db.collection("slots").doc(slotId).get())
+    .data() as GroundSlot;
+  const slotChanges: Partial<GroundSlot> = {};
   let spotCount = 0;
 
   if (!slot) {
@@ -53,7 +55,7 @@ export async function modifySlot(
     slotChanges.participantCount = newCount;
   }
   if (slotChanges.participantCount >= slotChanges.allowedCount) {
-    slotChanges.status = "booked";
+    slotChanges.status = SlotStatus.booked;
   }
 
   return db.collection("slots").doc(slotId).update({

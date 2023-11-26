@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
-import { SnackbarConstants } from '@ballzo-ui/core/common';
-import { CommonMessages } from '@ballzo-ui/core/common';
+import { SnackbarConstants } from '@ballzo-ui/core';
+import { CommonMessages } from '@app/constant/common-messages';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SnackbarService {
-  constructor(private matSnack: MatSnackBar) {}
+  constructor(private matSnack: MatSnackBar) { }
 
   /**
    * Display custom message

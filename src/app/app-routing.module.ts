@@ -6,7 +6,7 @@ import { ConfirmFormClosureGuard } from './guards/confirm-form-closure.guard';
 import { RedirectLoggedUserGuard } from './authentication/guards/redirect-logged-user.guard';
 import { HomeComponent } from './home/home.component';
 import { UnauthorizedAccessGuard } from './authentication/guards/unauthorized-access.guard';
-import { Constants } from '@ballzo-ui/core/common';
+import { Constants } from '@ballzo-ui/core';
 
 const routes: Routes = [
   {
