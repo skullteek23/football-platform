@@ -1,9 +1,9 @@
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { Injectable } from '@angular/core';
-import { Constants } from '@ballzo-ui/core/common';
-import { Order } from '@app/models/order.model';
+import { Constants } from '@ballzo-ui/core';
+import { Order } from '@ballzo-ui/core';
 import { TransactionItemData } from '@app/shared-modules/transaction-item/models/transaction-item.model';
-import { ArraySorting } from '@ballzo-ui/core/utils';
+import { ArraySorting } from '@ballzo-ui/core';
 
 @Injectable()
 export class ParseOrderService {

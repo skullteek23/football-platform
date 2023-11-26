@@ -1,10 +1,10 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
 import {
-  Position,
   checkKeysExist,
   isRequestAuthenticated,
 } from "./functions-utils";
+import {Position} from "@ballzo-ui/core";
 
 /**
  * Update the user role

@@ -3,19 +3,18 @@ import { MatBottomSheetConfig } from '@angular/material/bottom-sheet';
 import { Router } from '@angular/router';
 import { AuthService } from '@app/authentication/auth.service';
 import { EmailService } from '@app/authentication/email.service';
-import { Constants } from '@ballzo-ui/core/common';
-import { OrderMessages, PlayerListMessages } from '@ballzo-ui/core/common';
-import { CancellationPolicyComponent } from '@app/legal-info/cancellation-policy/cancellation-policy.component';
-import { Ground } from '@ballzo-ui/core/ground';
-import { Order, OrderStatus } from '@app/models/order.model';
-import { Booking } from '@ballzo-ui/core/transaction';
+import { Constants } from '@ballzo-ui/core';
+import { OrderMessages, PlayerListMessages } from '@app/constant/common-messages';
+import { Ground } from '@ballzo-ui/core';
+import { Order, OrderStatus } from '@ballzo-ui/core';
+import { Booking } from '@ballzo-ui/core';
 import { BottomSheetService } from '@app/services/bottom-sheet.service';
 import { GroundService } from '@app/services/ground.service';
 import { OrderService } from '@app/services/order.service';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { ButtonTheme, ButtonConfig } from '../buttons/models/button.model';
 import { ResultType, ResultBoxData } from '../result-box/models/result-box.model';
-import { Position } from '@ballzo-ui/core/user';
+import { Position } from '@ballzo-ui/core';
 import { IUser } from '@app/models/user.model';
 
 @Component({

@@ -17,7 +17,6 @@ import { LoaderModule } from '@app/shared-modules/loader/loader.module';
     OnboardingRoutingModule,
     PositionSelectionModule,
     GroundSelectionModule,
-    PaymentModule,
     LoaderModule
   ],
 })

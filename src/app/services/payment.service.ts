@@ -1,19 +1,20 @@
 import { Injectable } from "@angular/core";
 import { AuthService } from "@app/authentication/auth.service";
 import { SessionStorageProperties } from "@app/constant/constants";
-import { Order } from "@app/models/order.model";
+import { Order } from "@ballzo-ui/core";
 import { IUser } from "@app/models/user.model";
 import { UserSlotSelectionInfo } from "@app/shared-modules/ground-selection/models/ground-selection.model";
-import { CommonMessages, PaymentMessages } from "@ballzo-ui/core/common";
-import { GroundSlot } from "@ballzo-ui/core/ground";
-import { Booking } from "@ballzo-ui/core/transaction";
-import { Player, Position } from "@ballzo-ui/core/user";
-import { isEnumKey, getRandomString, getCloudFnErrorMsg } from "@ballzo-ui/core/utils";
+import { GroundSlot } from "@ballzo-ui/core";
+import { Booking } from "@ballzo-ui/core";
+import { Player, Position } from "@ballzo-ui/core";
+import { isEnumKey, getRandomString } from "@ballzo-ui/core";
 import { firstValueFrom, lastValueFrom } from "rxjs";
 import { GroundService } from "./ground.service";
 import { OrderService } from "./order.service";
 import { SessionStorageService } from "./session-storage.service";
 import { UserService } from "./user.service";
+import { getCloudFnErrorMsg } from "@app/utils/api-error-handling-utility";
+import { CommonMessages, PaymentMessages } from "@app/constant/common-messages";
 
 @Injectable({
   providedIn: 'root'

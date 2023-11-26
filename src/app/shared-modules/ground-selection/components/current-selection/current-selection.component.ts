@@ -1,13 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SelectedGroundInfo, UserSlotSelectionInfo } from '../../models/ground-selection.model';
 import { GroundSelectionService } from '../../services/ground-selection.service';
-import { GroundFacility, GroundSlot } from '@ballzo-ui/core/ground';
-import { IListOption } from '@ballzo-ui/core/common';
+import { GroundFacility, GroundSlot, IListOption } from '@ballzo-ui/core';
 import { GroundService } from '@app/services/ground.service';
 import { common } from '@environments/environment.common';
-import { DateParseUtility } from '@ballzo-ui/core/utils';
+import { DateParseUtility } from '@ballzo-ui/core';
 import { SnackbarService } from '@app/services/snackbar.service';
-import { GroundSelectionMessages } from '@ballzo-ui/core/common';
+import { GroundSelectionMessages } from '@app/constant/common-messages';
 import { SessionStorageService } from '@app/services/session-storage.service';
 import { SessionStorageProperties } from '@app/constant/constants';
 

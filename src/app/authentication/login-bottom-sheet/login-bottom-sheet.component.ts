@@ -10,13 +10,13 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AnimationsList } from '@app/services/animation.service';
 import { AuthService } from '../auth.service';
-import { Constants } from '@ballzo-ui/core/common';
+import { Constants } from '@ballzo-ui/core';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { BottomSheetService } from '@app/services/bottom-sheet.service';
 import { MatInput } from '@angular/material/input';
 import { ShowConfirmationService } from '@app/services/show-confirmation.service';
 import { SessionStorageService } from '@app/services/session-storage.service';
-import { getCloudFnErrorMsg } from '@ballzo-ui/core/utils';
+import { getCloudFnErrorMsg } from '@app/utils/api-error-handling-utility';;
 import { IConfirmationResult } from '@app/models/user.model';
 import { MOBILE_VALIDATORS, OTP_VALIDATORS } from '@app/utils/form-validators-utility';
 

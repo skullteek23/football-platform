@@ -1,5 +1,5 @@
 import { AbstractControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { Regex } from '@ballzo-ui/core/common';
+import { Regex } from '@ballzo-ui/core';
 
 export class FormValidations {
   static readonly displayName = {

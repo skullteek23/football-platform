@@ -10,15 +10,16 @@ import { Router } from '@angular/router';
 import { AnimationsList } from '@app/services/animation.service';
 import { AuthBaseComponent } from '../auth-base.component';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Constants, IApiError } from '@ballzo-ui/core/common';
+import { Constants } from '@ballzo-ui/core';
 import { SnackbarService } from '@app/services/snackbar.service';
-import { getAuthErrorMsg, getCloudFnErrorMsg } from '@ballzo-ui/core/utils';
 import { BottomSheetService } from '@app/services/bottom-sheet.service';
 import { MatInput } from '@angular/material/input';
 import { ShowConfirmationService } from '@app/services/show-confirmation.service';
 import { SessionStorageService } from '@app/services/session-storage.service';
 import { IConfirmationResult } from '@app/models/user.model';
 import { FULL_NAME_VALIDATORS, MOBILE_VALIDATORS, OTP_VALIDATORS } from '@app/utils/form-validators-utility';
+import { IApiError } from '@app/models/firebase-error.model';
+import { getAuthErrorMsg, getCloudFnErrorMsg } from '@app/utils/api-error-handling-utility';
 
 @Component({
   selector: 'app-signup-bottom-sheet',

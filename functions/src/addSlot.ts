@@ -1,5 +1,6 @@
 import * as admin from "firebase-admin";
 const db = admin.firestore();
+import {GroundSlot, convertObjectToFirestoreData} from "@ballzo-ui/core";
 
 /**
  * Adds multiple slot in one facility at a time
@@ -13,7 +14,7 @@ export function addSlot(data: any, context: any): any {
   const facility = data.facility;
   const groundId = data.groundId;
   facility.slots.forEach((facilitySlot: any) => {
-    const slot: any = {};
+    const slot = new GroundSlot();
     slot.facilityId = facilitySlot.facilityId;
     slot.groundId = groundId;
     slot.status = 1;
@@ -24,7 +25,9 @@ export function addSlot(data: any, context: any): any {
     slots.push(slot);
   });
   slots.forEach((slot: any) => {
-    batch.create(db.collection("slots").doc(), slot);
+    batch.create(
+      db.collection("slots").doc(), convertObjectToFirestoreData(slot)
+    );
   });
   return batch.commit();
 }

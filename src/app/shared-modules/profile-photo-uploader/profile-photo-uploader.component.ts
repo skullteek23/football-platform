@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Constants } from '@ballzo-ui/core/common';
-import { FileType, dataURLtoFile } from '@ballzo-ui/core/utils';
+import { Constants } from '@ballzo-ui/core';
+import { FileType, dataURLtoFile } from '@ballzo-ui/core';
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { PLAYER, maxImageSizeInMb } from '@app/constant/image-compression-constants';
 
@@ -45,7 +45,7 @@ export class ProfilePhotoUploaderComponent {
   }
 
   /**
-   * Compress image file 
+   * Compress image file
    */
   compressFile() {
     this.imageCompress
@@ -63,9 +63,9 @@ export class ProfilePhotoUploaderComponent {
    * @param _result
    */
   parseCompression(result: string) {
-    if(result) {
+    if (result) {
       const finalFile = dataURLtoFile(result, PLAYER + `${new Date().getTime()}`);
-      if(finalFile) {
+      if (finalFile) {
         this.emitSelection(finalFile);
         this.preview = result;
       }

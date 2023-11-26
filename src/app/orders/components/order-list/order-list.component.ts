@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@app/authentication/auth.service';
-import { Constants } from '@ballzo-ui/core/common';
+import { Constants } from '@ballzo-ui/core';
 import { IUser } from '@app/models/user.model';
-import { Order } from '@app/models/order.model';
+import { Order } from '@ballzo-ui/core';
 import { ParseOrderService } from '@app/orders/services/parse-order.service';
 import { OrderService } from '@app/services/order.service';
 import { SnackbarService } from '@app/services/snackbar.service';

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { WalletTransaction } from '@app/models/order.model';
+import { WalletTransaction } from '@ballzo-ui/core';
 import { TransactionItemData } from '@app/shared-modules/transaction-item/models/transaction-item.model';
 import { WalletService } from '@app/wallet/services/wallet.service';
 

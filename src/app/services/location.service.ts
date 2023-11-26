@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { ILocationCity, ILocationState } from "@ballzo-ui/core/location";
+import { ILocationCity, ILocationState } from "@ballzo-ui/core";
 import { Observable } from "rxjs";
 import { environment } from "@environments/environment";
-import { Constants } from "@ballzo-ui/core/common";
+import { Constants } from "@ballzo-ui/core";
 
 @Injectable()
 export class LocationService {

@@ -9,7 +9,7 @@ import { AuthService } from '../auth.service';
 import {
   Constants,
   LocalStorageProperties,
-} from '@ballzo-ui/core/common';
+} from '@ballzo-ui/core';
 import { SessionStorageService } from '@app/services/session-storage.service';
 import { LocalStorageService } from '@app/services/local-storage.service';
 import { SessionStorageProperties } from '@app/constant/constants';

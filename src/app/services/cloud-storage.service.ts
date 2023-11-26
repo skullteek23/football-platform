@@ -1,8 +1,9 @@
 import { Injectable, inject } from '@angular/core';
 import { Storage, getDownloadURL, ref, uploadBytes } from '@angular/fire/storage';
 import { CloudStorageFileScreens } from '@app/constant/api-constants';
-import { Constants } from '@ballzo-ui/core/common';
-import { getStorageError, sanitizeFileName } from '@ballzo-ui/core/utils';
+import { Constants } from '@ballzo-ui/core';
+import { sanitizeFileName } from '@ballzo-ui/core';
+import { getStorageError } from '@app/utils/api-error-handling-utility';
 
 @Injectable({
   providedIn: 'root'

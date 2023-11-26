@@ -5,8 +5,8 @@ import { Observable, Subscription, combineLatest, } from 'rxjs';
 import { SnackbarService } from '@app/services/snackbar.service';
 import { PlayerListService } from './services/player-list.service';
 import { GroundService } from '@app/services/ground.service';
-import { Ground, GroundFacility, GroundSlot } from '@ballzo-ui/core/ground';
-import { Constants } from '@ballzo-ui/core/common';
+import { Ground, GroundFacility, GroundSlot } from '@ballzo-ui/core';
+import { Constants } from '@ballzo-ui/core';
 
 @Component({
   selector: 'app-player-list',

@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainShellComponent } from './main-shell.component';
 import { PlayerListComponent } from '../shared-modules/player-list/player-list.component';
 import { OnboardingGuard } from '@app/guards/onboarding.guard';
+import { FailureComponent } from '@app/shared-modules/payment/components/failure/failure.component';
+import { SuccessComponent } from '@app/shared-modules/payment/components/success/success.component';
 
 const routes: Routes = [
   {
@@ -41,6 +43,8 @@ const routes: Routes = [
             (m) => m.MatchBookingModule
           ),
       },
+      { path: 'finish', component: SuccessComponent },
+      { path: 'error', component: FailureComponent, pathMatch: 'full' },
       {
         path: 'payment',
         loadChildren: () =>

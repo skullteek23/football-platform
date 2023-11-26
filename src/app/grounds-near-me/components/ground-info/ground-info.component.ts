@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { GroundsNearMeService } from '@app/grounds-near-me/services/grounds-near-me.service';
-import { Ground, GroundAdditionalInfo } from '@ballzo-ui/core/ground';
+import { Ground, GroundAdditionalInfo } from '@ballzo-ui/core';
 import { AnimationsList } from '@app/services/animation.service';
 import { BottomSheetService } from '@app/services/bottom-sheet.service';
 import { GroundService } from '@app/services/ground.service';

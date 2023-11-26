@@ -18,8 +18,6 @@ const routes: Routes = [
       { path: '', redirectTo: 'select-ground', pathMatch: 'full' },
       { path: 'select-ground', component: BookingGroundSelectionComponent },
       { path: 'pay', component: BookingPaymentComponent },
-      { path: 'finish', component: SuccessComponent},
-      { path: 'error', component: FailureComponent, pathMatch: 'full' },
     ],
   },
 ];
@@ -30,7 +28,6 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     GroundSelectionModule,
-    PaymentModule,
     LoaderModule,
   ]
 })

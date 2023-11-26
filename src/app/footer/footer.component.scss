@@ -1,5 +1,5 @@
-@import "node_modules/@ballzo-ui/core/common/themes/mixins.scss";
-@import "node_modules/@ballzo-ui/core/common/themes/_variables.scss";
+@import "mixins";
+@import "variables";
 
 footer {
   padding: 8px 16px 24px;
@@ -7,18 +7,22 @@ footer {
 
   .social-links-strip {
     @include flexStartCol(8px);
+
     .sub-heading {
       font-size: $font-size-primary;
       width: 100%;
       font-weight: $sub-heading-weight;
       text-align: center;
     }
+
     .icons-list {
       @include flexCenter(row, 16px);
       width: 100%;
+
       a {
         height: 32px;
         width: 32px;
+
         img {
           width: 32px;
           height: 32px;
@@ -26,6 +30,7 @@ footer {
       }
     }
   }
+
   .footer-notes {
     @include flexStartCol(8px);
 
@@ -33,6 +38,7 @@ footer {
       font-size: $font-size-m;
       font-weight: 300;
     }
+
     p.terms {
       font-size: $font-size-s;
     }

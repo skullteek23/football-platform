@@ -1,20 +1,23 @@
-@import "node_modules/@ballzo-ui/core/common/themes/mixins.scss";
-@import "node_modules/@ballzo-ui/core/common/themes/_variables.scss";
+@import "mixins";
+@import "variables";
 
 .mat-tab-header {
   border-bottom: none;
 }
+
 .mat-tab-label-container {
   .mat-tab-labels {
     .mat-tab-label {
       .custom-tab-label {
         @include flexCenter(column, 0px);
+
         .label {
           font-size: $font-size-s;
           font-weight: 400;
           color: $black;
           white-space: normal;
         }
+
         .sub-label {
           line-height: 10px;
           font-size: $font-size-xs;
@@ -23,14 +26,17 @@
         }
       }
     }
+
     .mat-tab-label.mat-tab-label-active {
       opacity: 1 !important;
+
       .label {
         font-size: $font-size-s;
         font-weight: 500;
         color: $primary-color;
         opacity: 1 !important;
       }
+
       .sub-label {
         font-size: $font-size-xs;
         font-weight: 400;
@@ -40,6 +46,7 @@
     }
   }
 }
-.mat-tab-group[mat-stretch-tabs] > .mat-tab-header .mat-tab-label {
+
+.mat-tab-group[mat-stretch-tabs]>.mat-tab-header .mat-tab-label {
   flex-basis: unset !important;
 }

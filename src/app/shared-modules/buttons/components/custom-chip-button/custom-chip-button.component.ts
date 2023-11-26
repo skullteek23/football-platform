@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { IListOption } from '@ballzo-ui/core/common';
+import { IListOption } from '@ballzo-ui/core';
 import { AnimationsList } from '@app/services/animation.service';
 
 @Component({

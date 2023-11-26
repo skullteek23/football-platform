@@ -3,14 +3,14 @@ import { InteractiveCardData } from '../interactive-card/models/interactive-card
 import { SelectedGroundInfo, UserSlotSelectionInfo } from './models/ground-selection.model';
 import { GroundSelectionService } from './services/ground-selection.service';
 import { SessionStorageService } from '@app/services/session-storage.service';
-import { Constants } from '@ballzo-ui/core/common';
+import { Constants } from '@ballzo-ui/core';
 import { ButtonConfig } from '../buttons/models/button.model';
 import { GroundService } from '@app/services/ground.service';
-import { Ground } from '@ballzo-ui/core/ground';
+import { Ground } from '@ballzo-ui/core';
 import { SnackbarService } from '@app/services/snackbar.service';
-import { GroundSelectionMessages } from '@ballzo-ui/core/common';
-import { Position } from '@ballzo-ui/core/user';
-import { isEnumKey } from '@ballzo-ui/core/utils';
+import { GroundSelectionMessages } from '@app/constant/common-messages';
+import { Position } from '@ballzo-ui/core';
+import { isEnumKey } from '@ballzo-ui/core';
 import { SessionStorageProperties } from '@app/constant/constants';
 
 @Component({
