@@ -3,9 +3,10 @@ import { CoreApiService } from './core-api.service';
 import { Observable, map, tap } from 'rxjs';
 import { convertFirestoreData, convertFirestoreDataArray } from '@ballzo-ui/core';
 import { FacilityStatus, Ground, GroundAdditionalInfo, GroundFacility, GroundPrice, GroundSlot, GroundStatus, SlotStatus } from '@ballzo-ui/core';
-import { TabLabel } from '@app/shared-modules/ground-selection/models/ground-selection.model';
+import { TabLabel, UserSlotSelectionInfo } from '@app/shared-modules/ground-selection/models/ground-selection.model';
 import { DateParseUtility } from '@ballzo-ui/core';
 import { Constants } from '@ballzo-ui/core';
+import { cloudFunctionNames } from '@app/constant/api-constants';
 
 @Injectable({
   providedIn: 'root'
@@ -205,6 +206,18 @@ export class GroundService {
     } else {
       return Constants.RUPEE_SYMBOL + price.weekdays + ' onwards <br> (per person)';
     }
+  }
+
+  /**
+   * Books a slot
+   * @param {UserSlotSelectionInfo} data
+   * @returns {Promise<any>}
+   */
+  bookSlot(data: UserSlotSelectionInfo): Promise<any> {
+    if (data.facilityId && data.groundId && data.slotId) {
+      return this.apiService.callHttpFunction(cloudFunctionNames.createBooking, data);
+    }
+    return Promise.reject('Invalid selection data');
   }
 
 }

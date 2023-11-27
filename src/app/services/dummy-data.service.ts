@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { CoreApiService } from './core-api.service';
-import { convertObjectToFirestoreData, getRandomString } from '@ballzo-ui/core';
-import { FacilityStatus, Ground, GroundAdditionalInfo, GroundFacility, GroundSlot, GroundStatus, SlotStatus } from '@ballzo-ui/core';
-import { WalletTransaction } from '@ballzo-ui/core';
-import { TransactionType } from '@ballzo-ui/core';
+import { FacilityStatus, Ground, GroundAdditionalInfo, GroundFacility, GroundSlot, GroundStatus, SlotStatus, TransactionType, WalletTransaction, convertObjectToFirestoreData, getRandomString } from '@ballzo-ui/core';
+import { UserSlotSelectionInfo } from '@app/shared-modules/ground-selection/models/ground-selection.model';
+import { cloudFunctionNames } from '@app/constant/api-constants';
+import { getCloudFnErrorMsg } from '@app/utils/api-error-handling-utility';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +16,7 @@ export class DummyDataService {
     // this.addData();
     // this.addGround();
     // this.addSlot();
+    // this.addBooking();
   }
 
   addGround() {
@@ -143,16 +144,14 @@ export class DummyDataService {
       price: 150,
       maxPlayers: 14,
       slots: [
-        { facilityId, time: new Date('26 November, 2023 20:00:00').getTime() },
-        { facilityId, time: new Date('26 November, 2023 21:00:00').getTime() },
-        { facilityId, time: new Date('26 November, 2023 22:00:00').getTime() },
+        { facilityId, time: new Date('27 November, 2023 20:00:00').getTime() },
       ],
     }
     const data = {
       facility,
       groundId
     }
-    this.apiService.callHttpFunction('addNewSlot', data)
+    this.apiService.callHttpFunction(cloudFunctionNames.addNewSlot, data)
       .then((res) => {
         console.log(res);
         console.log('slot added');
@@ -161,6 +160,25 @@ export class DummyDataService {
         console.log(err)
         console.log('slot add error');
       });
+  }
+
+  addBooking() {
+    const value: UserSlotSelectionInfo = {
+      groundId: 'p7f86mlu0MR3a1pOysRy',
+      facilityId: 'abcd7khNFBRXJDbqUWuB',
+      slotId: 'dSu5mDYiqPkxwCZYK3Q5',
+      spots: 1
+    }
+    this.apiService.callHttpFunction(cloudFunctionNames.createBooking, value)
+      .then((res) => {
+        console.log(res);
+        console.log('booking succeed')
+      })
+      .catch((err) => {
+        console.log('booking failed')
+        console.log(err);
+        console.log(getCloudFnErrorMsg(err));
+      })
   }
 
   addData() {

@@ -5,6 +5,7 @@ import { SessionStorageProperties } from '@app/constant/constants';
 import { OnboardingService } from '@app/onboarding/services/onboarding.service';
 import { SessionStorageService } from '@app/services/session-storage.service';
 import { SnackbarService } from '@app/services/snackbar.service';
+import { getCloudFnErrorMsg } from '@app/utils/api-error-handling-utility';
 
 @Component({
   selector: 'app-onboarding-payment',
@@ -37,20 +38,20 @@ export class OnboardingPaymentComponent implements OnInit {
   continue() {
     this.showLoader();
     this.authService._user().subscribe(async user => {
-      if (user) {
+      if (user?.uid) {
         this.onboardingService.onPayment(user)
-          .then((orderId) => {
-            if (orderId) {
+          .then((response) => {
+            if (response?.data) {
               this.sessionStorage.remove(SessionStorageProperties.USER_GROUND_SELECTION);
               this.sessionStorage.remove(SessionStorageProperties.USER_POSITION_SELECTION);
-              this.router.navigate(['/m', 'finish'], { queryParams: { oid: orderId } });
+              this.router.navigate(['/m', 'finish'], { queryParams: { oid: response.data } });
             }
             this.hideLoader();
           })
           .catch(error => {
             this.router.navigate(['/m', 'error']);
             if (error) {
-              this.snackbarService.displayError(error);
+              this.snackbarService.displayError(getCloudFnErrorMsg(error));
             }
             this.hideLoader();
           });

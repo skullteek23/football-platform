@@ -11,6 +11,7 @@ import {createRazorpayOrder} from "./createRazorpayOrder";
 import {modifySlot} from "./modifySlot";
 import {groundCreation} from "./createGround";
 import {addSlot} from "./addSlot";
+import {bookingCreation} from "./bookingCreation";
 
 // Start writing Firebase Functions
 // https://firebase.google.com/docs/functions/typescript
@@ -31,6 +32,8 @@ export const createGround = functions
   .region(REGION).https.onCall(groundCreation);
 export const addNewSlot = functions
   .region(REGION).https.onCall(addSlot);
+export const createBooking = functions
+  .region(REGION).https.onCall(bookingCreation);
 
 
 // Background Triggered functions

@@ -5,6 +5,7 @@ import { SessionStorageProperties } from '@app/constant/constants';
 import { MatchBookingService } from '@app/match-booking/services/match-booking.service';
 import { SessionStorageService } from '@app/services/session-storage.service';
 import { SnackbarService } from '@app/services/snackbar.service';
+import { getCloudFnErrorMsg } from '@app/utils/api-error-handling-utility';
 
 @Component({
   selector: 'app-booking-payment',
@@ -37,20 +38,20 @@ export class BookingPaymentComponent implements OnInit {
   continue() {
     this.showLoader();
     this.authService._user().subscribe(async user => {
-      if (user) {
-        this.matchBookingService.onPayment(user)
-          .then((orderId) => {
-            if (orderId) {
+      if (user?.uid) {
+        this.matchBookingService.onPayment()
+          .then((response) => {
+            if (response?.data) {
               this.sessionStorage.remove(SessionStorageProperties.USER_GROUND_SELECTION);
               this.sessionStorage.remove(SessionStorageProperties.USER_POSITION_SELECTION);
-              this.router.navigate(['/m', 'finish'], { queryParams: { oid: orderId } });
+              this.router.navigate(['/m', 'finish'], { queryParams: { oid: response.data } });
             }
             this.hideLoader();
           })
           .catch(error => {
             this.router.navigate(['/m', 'error']);
             if (error) {
-              this.snackbarService.displayError(error);
+              this.snackbarService.displayError(getCloudFnErrorMsg(error));
             }
             this.hideLoader();
           });

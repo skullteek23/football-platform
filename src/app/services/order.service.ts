@@ -127,25 +127,6 @@ export class OrderService {
   }
 
   /**
-   * Add booking
-   * @param data
-   * @returns
-   */
-  addBooking(data: Booking): Promise<any> {
-    return this.apiService.addDocument('bookings', convertObjectToFirestoreData(data));
-  }
-
-  /**
-   * Updates existing booking
-   * @param data
-   * @param uid
-   * @returns
-   */
-  updateBooking(data: Partial<Booking> | Booking, docId: string) {
-    return this.apiService.updateDocument('bookings', data, docId);
-  }
-
-  /**
    * Gets the wallet transactions by user id
    * @param userId
    * @returns

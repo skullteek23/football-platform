@@ -47,7 +47,7 @@ export const ApiMessages = {
     alreadyExists: 'Already exists! Please try again.',
     notFound: 'Not found! Please try again.',
     invalidArgument: 'Invalid details! Please try again.',
-    failedPrecondition: 'Condition failed! Please contact admin.',
+    failedPrecondition: 'Not allowed! Please contact admin.',
     aborted: 'Operation aborted by system! Please try again.',
     internal: 'Internal error! Please try again later.',
     permissionDenied: 'Permission denied! Please try again.',
