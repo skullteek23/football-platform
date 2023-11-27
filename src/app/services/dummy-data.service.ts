@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { CoreApiService } from './core-api.service';
-import { convertObjectToFirestoreData, getRandomString } from '@ballzo-ui/core';
-import { FacilityStatus, Ground, GroundAdditionalInfo, GroundFacility, GroundSlot, GroundStatus, SlotStatus } from '@ballzo-ui/core';
-import { WalletTransaction } from '@ballzo-ui/core';
-import { TransactionType } from '@ballzo-ui/core';
+import { FacilityStatus, Ground, GroundAdditionalInfo, GroundFacility, GroundSlot, GroundStatus, SlotStatus, TransactionType, WalletTransaction, convertObjectToFirestoreData, getRandomString } from '@ballzo-ui/core';
+import { UserSlotSelectionInfo } from '@app/shared-modules/ground-selection/models/ground-selection.model';
+import { cloudFunctionNames } from '@app/constant/api-constants';
+import { getCloudFnErrorMsg } from '@app/utils/api-error-handling-utility';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +16,7 @@ export class DummyDataService {
     // this.addData();
     // this.addGround();
     // this.addSlot();
+    // this.addBooking();
   }
 
   addGround() {
@@ -25,105 +26,106 @@ export class DummyDataService {
 
     const data = {
       groundId: id,
-      name: 'Gallant Play Arena Vaishali',
-      addressLine: 'Sector 6, Plot No 11, Naale Wali Gali, near Arogya Hospital, Vaishali Extension, Ramprastha Greens, Vaishali, Ghaziabad, Uttar Pradesh 201012',
+      name: 'Test Ground 1',
+      addressLine: 'Test address',
       city: 'Ghaziabad',
       state: 'Uttar Pradesh',
       mapLink: 'https://maps.app.goo.gl/EH5qKqURYdBekYvJ7',
-      price: 99,
+      price: 149,
       zip: 201012,
       status: GroundStatus.approved,
       imgLinks: ['https://firebasestorage.googleapis.com/v0/b/football-platform-production.appspot.com/o/grounds%2Fgallant-vaishali-image-1.jpeg?alt=media&token=479312fb-0880-4199-840f-a279d220bc3a'],
       contactInfo: {
         email: 'admin@ballzo.in',
-        name: 'Neetish Ranjan',
-        phone: '7979731898'
+        name: 'Test',
+        phone: '999'
       },
-      description: 'Gallant Play brings you an amazing opportunity to play on top-notch turfs that are safe from injuries and approved internationally. With a design that caters to various sports all in one place, Gallant Play lets you pick from a range of sports that are easy to access. Come and be part of an incredible sports experience like no other. The turf is all set and waiting for you to dive in!',
+      description: 'test description',
       rules: 'N/A',
-      website: 'www.gallantplay.com',
+      website: 'www.abc.com',
       facilities: [
         {
           id: facility1Id,
-          name: '7v7 A',
+          name: 'Main Turf',
           status: FacilityStatus.available,
-          price: 99,
-          maxPlayers: 14,
+          price: 149,
+          maxPlayers: 16,
           slots: [
-            // 1 December Friday
+            { facilityId: facility1Id, time: new Date('28 November, 2023 19:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('28 November, 2023 20:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('28 November, 2023 21:00:00').getTime() },
+
+            { facilityId: facility1Id, time: new Date('29 November, 2023 19:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('29 November, 2023 20:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('29 November, 2023 21:00:00').getTime() },
+
+            { facilityId: facility1Id, time: new Date('30 November, 2023 19:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('30 November, 2023 20:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('30 November, 2023 21:00:00').getTime() },
+
             { facilityId: facility1Id, time: new Date('1 December, 2023 19:00:00').getTime() },
             { facilityId: facility1Id, time: new Date('1 December, 2023 20:00:00').getTime() },
             { facilityId: facility1Id, time: new Date('1 December, 2023 21:00:00').getTime() },
 
-            // 2 December Saturday
-            { facilityId: facility1Id, time: new Date('2 December, 2023 19:00:00').getTime() },
-            { facilityId: facility1Id, time: new Date('2 December, 2023 20:00:00').getTime() },
-            { facilityId: facility1Id, time: new Date('2 December, 2023 21:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('28 November, 2023 19:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('28 November, 2023 20:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('28 November, 2023 21:00:00').getTime() },
 
-            // 3 December Sunday
-            { facilityId: facility1Id, time: new Date('3 December, 2023 19:00:00').getTime() },
-            { facilityId: facility1Id, time: new Date('3 December, 2023 20:00:00').getTime() },
-            { facilityId: facility1Id, time: new Date('3 December, 2023 21:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('29 November, 2023 19:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('29 November, 2023 20:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('29 November, 2023 21:00:00').getTime() },
 
-            // 4 December Monday
-            { facilityId: facility1Id, time: new Date('4 December, 2023 19:00:00').getTime() },
-            { facilityId: facility1Id, time: new Date('4 December, 2023 20:00:00').getTime() },
-            { facilityId: facility1Id, time: new Date('4 December, 2023 21:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('30 November, 2023 19:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('30 November, 2023 20:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('30 November, 2023 21:00:00').getTime() },
 
-            // 5 December Tuesday
-            { facilityId: facility1Id, time: new Date('5 December, 2023 19:00:00').getTime() },
-            { facilityId: facility1Id, time: new Date('5 December, 2023 20:00:00').getTime() },
-            { facilityId: facility1Id, time: new Date('5 December, 2023 21:00:00').getTime() },
-
-            // 6 December Wednesday
-            { facilityId: facility1Id, time: new Date('6 December, 2023 19:00:00').getTime() },
-            { facilityId: facility1Id, time: new Date('6 December, 2023 20:00:00').getTime() },
-            { facilityId: facility1Id, time: new Date('6 December, 2023 21:00:00').getTime() },
-
-            // 7 December Thursday
-            { facilityId: facility1Id, time: new Date('7 December, 2023 19:00:00').getTime() },
-            { facilityId: facility1Id, time: new Date('7 December, 2023 20:00:00').getTime() },
-            { facilityId: facility1Id, time: new Date('7 December, 2023 21:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('1 December, 2023 19:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('1 December, 2023 20:00:00').getTime() },
+            { facilityId: facility1Id, time: new Date('1 December, 2023 21:00:00').getTime() },
           ],
         },
         {
           id: facility2Id,
-          name: '7v7 B',
-          maxPlayers: 14,
+          name: 'Astrofield',
+          maxPlayers: 16,
           status: FacilityStatus.available,
-          price: 99,
+          price: 149,
           slots: [
-            // 1 December Friday
-            { facilityId: facility1Id, time: new Date('1 December, 2023 19:00:00').getTime() },
-            { facilityId: facility1Id, time: new Date('1 December, 2023 20:00:00').getTime() },
-            { facilityId: facility1Id, time: new Date('1 December, 2023 21:00:00').getTime() },
+            { facilityId: facility2Id, time: new Date('28 November, 2023 19:00:00').getTime() },
+            { facilityId: facility2Id, time: new Date('28 November, 2023 20:00:00').getTime() },
+            { facilityId: facility2Id, time: new Date('28 November, 2023 21:00:00').getTime() },
 
-            // 2 December Saturday
-            { facilityId: facility1Id, time: new Date('2 December, 2023 19:00:00').getTime() },
-            { facilityId: facility1Id, time: new Date('2 December, 2023 20:00:00').getTime() },
-            { facilityId: facility1Id, time: new Date('2 December, 2023 21:00:00').getTime() },
+            { facilityId: facility2Id, time: new Date('29 November, 2023 19:00:00').getTime() },
+            { facilityId: facility2Id, time: new Date('29 November, 2023 20:00:00').getTime() },
+            { facilityId: facility2Id, time: new Date('29 November, 2023 21:00:00').getTime() },
 
-            // 3 December Sunday
-            { facilityId: facility1Id, time: new Date('3 December, 2023 19:00:00').getTime() },
-            { facilityId: facility1Id, time: new Date('3 December, 2023 20:00:00').getTime() },
-            { facilityId: facility1Id, time: new Date('3 December, 2023 21:00:00').getTime() },
+            { facilityId: facility2Id, time: new Date('30 November, 2023 19:00:00').getTime() },
+            { facilityId: facility2Id, time: new Date('30 November, 2023 20:00:00').getTime() },
+            { facilityId: facility2Id, time: new Date('30 November, 2023 21:00:00').getTime() },
 
-            // 4th December Monday
-            { facilityId: facility1Id, time: new Date('4 December, 2023 19:00:00').getTime() },
+            { facilityId: facility2Id, time: new Date('1 December, 2023 19:00:00').getTime() },
+            { facilityId: facility2Id, time: new Date('1 December, 2023 20:00:00').getTime() },
+            { facilityId: facility2Id, time: new Date('1 December, 2023 21:00:00').getTime() },
 
-            // 5 December Tuesday
-            { facilityId: facility1Id, time: new Date('5 December, 2023 19:00:00').getTime() },
+            { facilityId: facility2Id, time: new Date('28 November, 2023 19:00:00').getTime() },
+            { facilityId: facility2Id, time: new Date('28 November, 2023 20:00:00').getTime() },
+            { facilityId: facility2Id, time: new Date('28 November, 2023 21:00:00').getTime() },
 
-            // 6 December Wednesday
-            { facilityId: facility1Id, time: new Date('6 December, 2023 19:00:00').getTime() },
+            { facilityId: facility2Id, time: new Date('29 November, 2023 19:00:00').getTime() },
+            { facilityId: facility2Id, time: new Date('29 November, 2023 20:00:00').getTime() },
+            { facilityId: facility2Id, time: new Date('29 November, 2023 21:00:00').getTime() },
 
-            // 7 December Thursday
-            { facilityId: facility1Id, time: new Date('7 December, 2023 19:00:00').getTime() },
+            { facilityId: facility2Id, time: new Date('30 November, 2023 19:00:00').getTime() },
+            { facilityId: facility2Id, time: new Date('30 November, 2023 20:00:00').getTime() },
+            { facilityId: facility2Id, time: new Date('30 November, 2023 21:00:00').getTime() },
+
+            { facilityId: facility2Id, time: new Date('1 December, 2023 19:00:00').getTime() },
+            { facilityId: facility2Id, time: new Date('1 December, 2023 20:00:00').getTime() },
+            { facilityId: facility2Id, time: new Date('1 December, 2023 21:00:00').getTime() },
           ],
         },
       ],
     };
-
 
     this.apiService.callHttpFunction('createGround', data)
       .then((res) => {
@@ -143,16 +145,14 @@ export class DummyDataService {
       price: 150,
       maxPlayers: 14,
       slots: [
-        { facilityId, time: new Date('26 November, 2023 20:00:00').getTime() },
-        { facilityId, time: new Date('26 November, 2023 21:00:00').getTime() },
-        { facilityId, time: new Date('26 November, 2023 22:00:00').getTime() },
+        { facilityId, time: new Date('27 November, 2023 20:00:00').getTime() },
       ],
     }
     const data = {
       facility,
       groundId
     }
-    this.apiService.callHttpFunction('addNewSlot', data)
+    this.apiService.callHttpFunction(cloudFunctionNames.addNewSlot, data)
       .then((res) => {
         console.log(res);
         console.log('slot added');
@@ -161,6 +161,25 @@ export class DummyDataService {
         console.log(err)
         console.log('slot add error');
       });
+  }
+
+  addBooking() {
+    const value: UserSlotSelectionInfo = {
+      groundId: 'p7f86mlu0MR3a1pOysRy',
+      facilityId: 'abcd7khNFBRXJDbqUWuB',
+      slotId: 'dSu5mDYiqPkxwCZYK3Q5',
+      spots: 1
+    }
+    this.apiService.callHttpFunction(cloudFunctionNames.createBooking, value)
+      .then((res) => {
+        console.log(res);
+        console.log('booking succeed')
+      })
+      .catch((err) => {
+        console.log('booking failed')
+        console.log(err);
+        console.log(getCloudFnErrorMsg(err));
+      })
   }
 
   addData() {

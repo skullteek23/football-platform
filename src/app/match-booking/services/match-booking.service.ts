@@ -31,7 +31,7 @@ export class MatchBookingService {
   /**
    * Called after payment capture
    */
-  onPayment(user: IUser) {
-    return this.paymentService.book(user)
+  onPayment() {
+    return this.paymentService.book()
   }
 }

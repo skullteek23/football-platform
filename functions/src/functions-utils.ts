@@ -1,3 +1,4 @@
+import {Constants} from "@ballzo-ui/core";
 import * as functions from "firebase-functions";
 
 /**
@@ -68,4 +69,18 @@ export function isRequestAuthenticated(
     return true;
   }
   return false;
+}
+
+/**
+ * Generates the order id
+ * @param {string} tempID
+ * @return {string}
+ */
+export function generateOID(tempID: string): string {
+  if (tempID && !tempID.startsWith(Constants.ORDER_PREFIX)) {
+    return `${Constants.ORDER_PREFIX}${tempID.toUpperCase()}`;
+  } else if (tempID) {
+    return tempID.toUpperCase();
+  }
+  return "";
 }
