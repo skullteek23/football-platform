@@ -139,13 +139,27 @@ export class DummyDataService {
   }
 
   addSlot() {
-    const groundId = 'p7f86mlu0MR3a1pOysRy';
-    const facilityId = 'abcd7khNFBRXJDbqUWuB';
+    const groundId = 'a1LdWbGXAwvHyyVY49dJsZrSg5RR';
+    const facilityId = 'x2GlhEc53UxXowrtYgQh8jwOS19m'; // facility B
     const facility = {
-      price: 150,
+      price: 99,
       maxPlayers: 14,
       slots: [
-        { facilityId, time: new Date('27 November, 2023 20:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('1 December, 2023 19:00:00').getTime() },
+
+        { facilityId: facilityId, time: new Date('2 December, 2023 19:00:00').getTime() },
+
+        { facilityId: facilityId, time: new Date('3 December, 2023 19:00:00').getTime() },
+
+        { facilityId: facilityId, time: new Date('3 December, 2023 19:00:00').getTime() },
+
+        { facilityId: facilityId, time: new Date('4 December, 2023 19:00:00').getTime() },
+
+        { facilityId: facilityId, time: new Date('5 December, 2023 19:00:00').getTime() },
+
+        { facilityId: facilityId, time: new Date('6 December, 2023 19:00:00').getTime() },
+
+        { facilityId: facilityId, time: new Date('7 December, 2023 19:00:00').getTime() },
       ],
     }
     const data = {
