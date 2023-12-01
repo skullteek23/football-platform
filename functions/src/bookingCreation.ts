@@ -66,7 +66,7 @@ export async function bookingCreation(data: any, context: any): Promise<any> {
     );
   }
 
-  if (!userInfo || !userInfo.hasOwnProperty("position")) {
+  if (!userInfo || !Object.prototype.hasOwnProperty.call(userInfo, 'position')) {
     throw new functions.https.HttpsError(
       "failed-precondition",
       "Player account does not exist."
