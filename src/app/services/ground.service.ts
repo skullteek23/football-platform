@@ -201,10 +201,10 @@ export class GroundService {
  * @returns
  */
   getLeastPrice(price: GroundPrice): string {
-    if (price.weekdays > price.weekends) {
-      return Constants.RUPEE_SYMBOL + price.weekends + ' onwards <br> (per person)';
+    if (price.single > price.bulk) {
+      return Constants.RUPEE_SYMBOL + price.bulk + ' onwards <br> (per person)';
     } else {
-      return Constants.RUPEE_SYMBOL + price.weekdays + ' onwards <br> (per person)';
+      return Constants.RUPEE_SYMBOL + price.single + ' onwards <br> (per person)';
     }
   }
 
