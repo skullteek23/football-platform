@@ -31,7 +31,8 @@ export class DummyDataService {
       city: 'Ghaziabad',
       state: 'Uttar Pradesh',
       mapLink: 'https://maps.app.goo.gl/EH5qKqURYdBekYvJ7',
-      price: 149,
+      price: 99,
+      bulkPrice: 149,
       zip: 201012,
       status: GroundStatus.approved,
       imgLinks: ['https://firebasestorage.googleapis.com/v0/b/football-platform-production.appspot.com/o/grounds%2Fgallant-vaishali-image-1.jpeg?alt=media&token=479312fb-0880-4199-840f-a279d220bc3a'],
@@ -139,13 +140,27 @@ export class DummyDataService {
   }
 
   addSlot() {
-    const groundId = 'p7f86mlu0MR3a1pOysRy';
-    const facilityId = 'abcd7khNFBRXJDbqUWuB';
+    const groundId = 'a1LdWbGXAwvHyyVY49dJsZrSg5RR';
+    const facilityId = 'x2GlhEc53UxXowrtYgQh8jwOS19m'; // facility B
     const facility = {
-      price: 150,
+      price: 99,
       maxPlayers: 14,
       slots: [
-        { facilityId, time: new Date('27 November, 2023 20:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('1 December, 2023 19:00:00').getTime() },
+
+        { facilityId: facilityId, time: new Date('2 December, 2023 19:00:00').getTime() },
+
+        { facilityId: facilityId, time: new Date('3 December, 2023 19:00:00').getTime() },
+
+        { facilityId: facilityId, time: new Date('3 December, 2023 19:00:00').getTime() },
+
+        { facilityId: facilityId, time: new Date('4 December, 2023 19:00:00').getTime() },
+
+        { facilityId: facilityId, time: new Date('5 December, 2023 19:00:00').getTime() },
+
+        { facilityId: facilityId, time: new Date('6 December, 2023 19:00:00').getTime() },
+
+        { facilityId: facilityId, time: new Date('7 December, 2023 19:00:00').getTime() },
       ],
     }
     const data = {
@@ -200,8 +215,8 @@ export class DummyDataService {
     data.city = 'Ghaziabad';
     data.state = 'Uttar Pradesh';
     data.mapLink = '';
-    data.price.weekdays = 150;
-    data.price.weekends = 170;
+    data.price.single = 150;
+    data.price.bulk = 170;
     data.zip = 201012;
     data.status = GroundStatus.approved;
     data.imgLinks = ['https://lh3.googleusercontent.com/p/AF1QipNvZ6tq2SsRuZnf-vlgwDN7gnnsCf3PY_vV7TXD=s1360-w1360-h1020'];

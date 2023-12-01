@@ -23,8 +23,8 @@ export async function groundCreation(data: any, context: any): Promise<any> {
   ground.city = data.city;
   ground.state = data.state;
   ground.mapLink = data.mapLink;
-  ground.price.weekdays = data.price;
-  ground.price.weekends = data.price;
+  ground.price.single = data.price;
+  ground.price.bulk = data.bulkPrice;
   ground.zip = data.zip;
   ground.status = data.status;
   ground.imgLinks = data.imgLinks;

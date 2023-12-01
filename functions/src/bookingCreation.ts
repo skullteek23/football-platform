@@ -10,6 +10,9 @@ import {
   Booking,
   GroundSlot,
   Order,
+  Player,
+  Ground,
+  Position,
   convertObjectToFirestoreData,
   getRandomString,
 } from "@ballzo-ui/core";
@@ -45,10 +48,15 @@ export async function bookingCreation(data: any, context: any): Promise<any> {
   const userID = context?.auth?.uid;
   const slotID = data.slotId;
   const spotsCount = Number(data.spots);
+  let slotPrice = 0;
   const slotInfo: GroundSlot = (await db
     .collection("slots")
     .doc(slotID)
     .get()).data() as GroundSlot;
+  const userInfo: Player = (await db
+    .collection("players")
+    .doc(userID)
+    .get()).data() as Player;
 
   // Check if slot exists or not
   if (!slotInfo) {
@@ -56,6 +64,27 @@ export async function bookingCreation(data: any, context: any): Promise<any> {
       "failed-precondition",
       "Slot doesn't exist! Please try another one."
     );
+  }
+
+  if (
+    !userInfo ||
+    !Object.prototype.hasOwnProperty.call(userInfo, "position")
+  ) {
+    throw new functions.https.HttpsError(
+      "failed-precondition",
+      "Player account does not exist."
+    );
+  }
+
+  if (userInfo?.position === Position.manager) {
+    // Bulk price will be per player
+    const result = (await db
+      .collection("grounds")
+      .doc(groundID)
+      .get())?.data() as Ground;
+    slotPrice = result?.price?.bulk || slotInfo.price;
+  } else {
+    slotPrice = slotInfo.price;
   }
 
   // Check if slot is full or not
@@ -126,7 +155,8 @@ export async function bookingCreation(data: any, context: any): Promise<any> {
 
   // create order
   const order = new Order();
-  order.amount = order.totalPrice(spotsCount, slotInfo.price);
+  // order.amount = order.totalPrice(spotsCount, slotInfo.price);
+  order.amount = order.totalPrice(spotsCount, slotPrice);
   order.ref = {
     spots: spotsCount,
   };
