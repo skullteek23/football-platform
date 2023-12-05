@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { CoreApiService } from './core-api.service';
-import { FacilityStatus, Ground, GroundAdditionalInfo, GroundFacility, GroundSlot, GroundStatus, SlotStatus, TransactionType, WalletTransaction, convertObjectToFirestoreData, getRandomString } from '@ballzo-ui/core';
+import { ArraySorting, Booking, FacilityStatus, Ground, GroundAdditionalInfo, GroundFacility, GroundSlot, GroundStatus, SlotStatus, TransactionType, WalletTransaction, convertObjectToFirestoreData, getRandomString } from '@ballzo-ui/core';
 import { UserSlotSelectionInfo } from '@app/shared-modules/ground-selection/models/ground-selection.model';
 import { cloudFunctionNames } from '@app/constant/api-constants';
 import { getCloudFnErrorMsg } from '@app/utils/api-error-handling-utility';
+import { CsvServiceService } from './csv-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +12,34 @@ import { getCloudFnErrorMsg } from '@app/utils/api-error-handling-utility';
 export class DummyDataService {
 
   constructor(
-    private apiService: CoreApiService
+    private apiService: CoreApiService,
+    private csvService: CsvServiceService
   ) {
     // this.addData();
     // this.addGround();
     // this.addSlot();
     // this.addBooking();
+    this.getUsers();
+  }
+
+  getUsers() {
+    this.apiService.callHttpFunction('getUsers')
+      .then(res => {
+        const players = res.data.users.map((b: any) => ({ uid: b.uid, name: b.displayName, phone: b.phoneNumber }));
+        this.apiService.getCollectionWithIds('bookings').subscribe((res: Booking[]) => {
+          const final: any[] = [];
+          const bookings = res.sort(ArraySorting.sortObjectByKey('slotTimestamp')).filter(el => el.slotTimestamp > new Date().getTime()).map(b => ({ uid: b.uid, slot: new Date(b.slotTimestamp) }));
+          bookings.forEach(element => {
+            final.push({
+              name: players.find((p: any) => p.uid === element.uid)?.name,
+              slot: element.slot.toLocaleString(),
+              phoneNumber: players.find((p: any) => p.uid === element.uid)?.phone.toString().replace('+91', '')
+            });
+          });
+          this.csvService.download(final);
+        });
+      })
+
   }
 
   addGround() {

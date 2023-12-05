@@ -12,6 +12,7 @@ import {modifySlot} from "./modifySlot";
 import {groundCreation} from "./createGround";
 import {addSlot} from "./addSlot";
 import {bookingCreation} from "./bookingCreation";
+import {retrieveUsers} from "./retrieveUsers";
 
 // Start writing Firebase Functions
 // https://firebase.google.com/docs/functions/typescript
@@ -34,6 +35,8 @@ export const addNewSlot = functions
   .region(REGION).https.onCall(addSlot);
 export const createBooking = functions
   .region(REGION).https.onCall(bookingCreation);
+export const getUsers = functions
+  .region(REGION).https.onCall(retrieveUsers);
 
 
 // Background Triggered functions
