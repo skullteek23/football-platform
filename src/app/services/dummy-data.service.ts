@@ -19,7 +19,7 @@ export class DummyDataService {
     // this.addGround();
     // this.addSlot();
     // this.addBooking();
-    this.getUsers();
+    // this.getUsers();
   }
 
   getUsers() {
