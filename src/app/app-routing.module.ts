@@ -8,7 +8,14 @@ import { HomeComponent } from './home/home.component';
 import { UnauthorizedAccessGuard } from './authentication/guards/unauthorized-access.guard';
 import { Constants } from '@ballzo-ui/core';
 
+
 const routes: Routes = [
+  {
+    path: 'discover',
+    loadChildren: () =>
+      import('./discover-games/discover-games.module').then((m) => m.DiscoverGamesModule),
+
+  },
   {
     path: '',
     pathMatch: 'full',
@@ -67,6 +74,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+exports: [RouterModule],
 })
 export class AppRoutingModule { }

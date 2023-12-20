@@ -64,3 +64,11 @@ mat-card {
     }
   }
 }
+
+.card-border {
+  mat-card {
+   box-shadow: none !important;
+  }
+
+}
+

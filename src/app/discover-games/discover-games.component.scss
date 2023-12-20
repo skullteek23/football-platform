@@ -1,0 +1,94 @@
+@import "mixins";
+@import "variables";
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #E9E9E9;
+  height: 1180px
+  ;
+
+  .heading {
+    display: flex;
+    align-items: center;
+    margin: 20px;
+    font-size: 16px;
+
+  }
+
+  .arrow-button {
+    margin: 0 20px;
+
+  }
+
+  .content-container {
+    display: flex;
+    justify-content: space-between;
+    width: 323px;
+    margin-top: 10px;
+  }
+
+
+  .left-content {
+    margin-right: auto;
+  }
+
+  .right-content {
+    margin-left: auto;
+    text-align: right;
+
+  }
+
+  .content-title {
+    font-size: 24px;
+
+  }
+
+  .content-subtitle {
+    font-size: 14px;
+  }
+  .cards {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    width: 323px;
+
+  }
+
+  .card {
+    flex: 1;
+    height: 242px;
+    width: 154.49px;
+    padding: 16px 8px;
+    border-radius: 8px;
+  }
+
+  .white-card,
+  .black-card {
+    p {
+      margin: 15px 5px 18px 10px;
+    }
+    li {
+      margin: 2px 0px 3px 15px;
+    }
+  }
+
+  .white-card {
+    background-color: white;
+  }
+
+  .black-card {
+    background-color: black;
+    color: white;
+  }
+
+  .button {
+    width: 323px;
+    height: 50px;
+    margin-top: 15px;
+    border-radius: 8px;
+  }
+
+
+}

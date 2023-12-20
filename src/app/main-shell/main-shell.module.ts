@@ -6,9 +6,15 @@ import { MainShellComponent } from './main-shell.component';
 import { LoaderModule } from '@app/shared-modules/loader/loader.module';
 import { PlayerListModule } from '@app/shared-modules/player-list/player-list.module';
 import { PaymentModule } from '@app/shared-modules/payment/payment.module';
+import { RouterModule } from '@angular/router';
+
+
+const routes =[ {
+  ''
+}]
 
 @NgModule({
   declarations: [MainShellComponent],
-  imports: [CommonModule, MainShellRoutingModule, LoaderModule, PlayerListModule, PaymentModule],
+  imports: [CommonModule, RouterModule.forChild[routes], LoaderModule, PlayerListModule, PaymentModule],
 })
 export class MainShellModule { }

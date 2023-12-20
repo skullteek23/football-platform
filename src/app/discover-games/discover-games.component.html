@@ -1,0 +1,47 @@
+<div class="main-container">
+  <div class="heading">
+    <button mat-icon-button class="arrow-button">
+      <mat-icon fontSet="material-icons-round">arrow_back_ios</mat-icon>
+    </button>
+    <span>Discover Nearby Games</span>
+    <button mat-icon-button class="arrow-button">
+      <mat-icon fontSet="material-icons-round">arrow_forward_ios</mat-icon>
+    </button>
+  </div>
+
+  <div class="content-container">
+    <div class="left-content">
+      <div class="content-title">Turf A</div>
+      <div class="content-subtitle">Gallant Play Arena</div>
+    </div>
+
+    <div class="right-content">
+      <div class="content-title">7:00 PM</div>
+      <div class="content-subtitle">Today</div>
+    </div>
+  </div>
+
+  <div class="cards card-border">
+    <mat-card class="card white-card">
+      <p>Team White</p>
+      <mat-card-content>
+        <ol>
+          <li *ngFor="let name of whiteCardNames">{{ name }}</li>
+        </ol>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="card black-card">
+      <mat-card-content>
+        <p>Team Black</p>
+        <ol>
+          <li *ngFor="let name of blackCardNames">{{ name }}</li>
+        </ol>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <app-wide-button [theme]="buttonTheme.primary" [displayDetails]="joinGameBtn"></app-wide-button>
+  <app-wide-button [theme]="buttonTheme.secondary" [displayDetails]="joinTeamBtn"></app-wide-button>
+  <app-wide-button [theme]="buttonTheme.secondary" [displayDetails]="groundBtn" ></app-wide-button> -->
+</div>

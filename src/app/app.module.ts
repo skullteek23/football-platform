@@ -30,6 +30,8 @@ import { DummyDataService } from './services/dummy-data.service';
 import { DatePipe } from '@angular/common';
 import { NgxImageCompressService } from 'ngx-image-compress';
 
+
+
 @NgModule({
   declarations: [AppComponent, TopNavComponent],
   imports: [
