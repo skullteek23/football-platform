@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { MatBottomSheetConfig } from '@angular/material/bottom-sheet';
 import { Ground } from '@ballzo-ui/core';
-import { BottomSheetService } from '@app/services/bottom-sheet.service';
+import { BottomSheetService } from '@app/utils/services/bottom-sheet.service';
 import { ButtonConfig, ButtonTheme } from '@app/shared-modules/buttons/models/button.model';
 import { InteractiveCardData } from '@app/shared-modules/interactive-card/models/interactive-card.model';
 import { environment } from '@environments/environment';
 import { GroundInfoComponent } from './components/ground-info/ground-info.component';
-import { GroundService } from '@app/services/ground.service';
+import { GroundService } from '@app/utils/services/ground.service';
 import { GroundsNearMeService } from './services/grounds-near-me.service';
-import { UserService } from '@app/services/user.service';
+import { UserService } from '@app/utils/services/user.service';
 import { AuthService } from '@app/authentication/auth.service';
 import { Router } from '@angular/router';
-import { SnackbarService } from '@app/services/snackbar.service';
-import { GroundSelectionMessages } from '@app/constant/common-messages';
+import { SnackbarService } from '@app/utils/services/snackbar.service';
+import { GroundSelectionMessages } from '@app/utils/constant/common-messages';
 import { Constants } from '@ballzo-ui/core';
 import { SupportService } from '@app/support/services/support.service';
 

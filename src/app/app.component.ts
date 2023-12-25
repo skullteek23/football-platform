@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { AnimationsList } from './services/animation.service';
+import { AnimationsList } from './utils/services/animation.service';
 import { AuthService } from './authentication/auth.service';
 import { Constants, LocalStorageProperties } from '@ballzo-ui/core';
-import { LocalStorageService } from './services/local-storage.service';
+import { LocalStorageService } from './utils/services/local-storage.service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 

@@ -2,13 +2,13 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SelectedGroundInfo, UserSlotSelectionInfo } from '../../models/ground-selection.model';
 import { GroundSelectionService } from '../../services/ground-selection.service';
 import { GroundFacility, GroundSlot, IListOption } from '@ballzo-ui/core';
-import { GroundService } from '@app/services/ground.service';
+import { GroundService } from '@app/utils/services/ground.service';
 import { common } from '@environments/environment.common';
 import { DateParseUtility } from '@ballzo-ui/core';
-import { SnackbarService } from '@app/services/snackbar.service';
-import { GroundSelectionMessages } from '@app/constant/common-messages';
-import { SessionStorageService } from '@app/services/session-storage.service';
-import { SessionStorageProperties } from '@app/constant/constants';
+import { SnackbarService } from '@app/utils/services/snackbar.service';
+import { GroundSelectionMessages } from '@app/utils/constant/common-messages';
+import { SessionStorageService } from '@app/utils/services/session-storage.service';
+import { SessionStorageProperties } from '@app/utils/constant/constants';
 
 @Component({
   selector: 'app-current-selection',
@@ -69,14 +69,14 @@ export class CurrentSelectionComponent implements OnInit {
    * Loads the saved data from storage
    */
   loadSavedData() {
-    const groundSelectionData: UserSlotSelectionInfo = this.sessionStorageService.get(SessionStorageProperties.USER_GROUND_SELECTION);
-    if (groundSelectionData?.facilityId) {
-      const facility = this.facilityList.find(facility => facility.id === groundSelectionData.facilityId);
-      if (facility) {
-        const selection: IListOption = { viewValue: facility.name, value: facility.id };
-        this.selectFacility(selection);
-      }
-    }
+    // const groundSelectionData: UserSlotSelectionInfo = this.sessionStorageService.get(SessionStorageProperties.USER_GROUND_SELECTION);
+    // if (groundSelectionData?.facilityId) {
+    //   const facility = this.facilityList.find(facility => facility.id === groundSelectionData.facilityId);
+    //   if (facility) {
+    //     const selection: IListOption = { viewValue: facility.name, value: facility.id };
+    //     this.selectFacility(selection);
+    //   }
+    // }
   }
 
   /**

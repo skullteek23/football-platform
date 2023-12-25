@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { CloudStorageService } from '@app/services/cloud-storage.service';
+import { CloudStorageService } from '@app/utils/services/cloud-storage.service';
 import { SupportRequest } from '../models/support.model';
-import { CloudStorageFileScreens } from '@app/constant/api-constants';
-import { CoreApiService } from '@app/services/core-api.service';
+import { CloudStorageFileScreens } from '@app/utils/constant/api-constants';
+import { CoreApiService } from '@app/utils/services/core-api.service';
 import { SupportConstants } from '../constants/support.constants';
 import { getRandomString } from '@ballzo-ui/core';
 

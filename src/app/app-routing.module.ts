@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginBottomSheetComponent } from './authentication/login-bottom-sheet/login-bottom-sheet.component';
 import { SignupBottomSheetComponent } from './authentication/signup-bottom-sheet/signup-bottom-sheet.component';
-import { ConfirmFormClosureGuard } from './guards/confirm-form-closure.guard';
+import { ConfirmFormClosureGuard } from './utils/guards/confirm-form-closure.guard';
 import { RedirectLoggedUserGuard } from './authentication/guards/redirect-logged-user.guard';
+import { Constants } from '@ballzo-ui/core';
 import { HomeComponent } from './home/home.component';
 import { UnauthorizedAccessGuard } from './authentication/guards/unauthorized-access.guard';
-import { Constants } from '@ballzo-ui/core';
 
 const routes: Routes = [
   {
@@ -15,10 +15,56 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'm',
+    path: 'games',
     canActivate: [UnauthorizedAccessGuard],
     loadChildren: () =>
-      import('./main-shell/main-shell.module').then((m) => m.MainShellModule),
+      import('@app/discover-games/discover-games.module').then(
+        (m) => m.DiscoverGamesModule
+      ),
+  },
+  {
+    path: 'payment',
+    canActivate: [UnauthorizedAccessGuard],
+    loadChildren: () =>
+      import('@app/slot-payment/slot-payment.module').then(
+        (m) => m.SlotPaymentModule
+      ),
+  },
+  {
+    path: 'grounds-near-me',
+    loadChildren: () =>
+      import('@app/grounds-near-me/grounds-near-me.module').then(
+        (m) => m.GroundsNearMeModule
+      ),
+  },
+  {
+    path: 'challenges',
+    loadChildren: () =>
+      import('@app/challenges/challenges.module').then(
+        (m) => m.ChallengesModule
+      ),
+  },
+  {
+    path: 'rankings',
+    loadChildren: () =>
+      import('@app/rankings/rankings.module').then((m) => m.RankingsModule),
+  },
+  {
+    path: 'rewards',
+    loadChildren: () =>
+      import('@app/rewards/rewards.module').then((m) => m.RewardsModule),
+  },
+  {
+    path: 'support',
+    canActivate: [UnauthorizedAccessGuard],
+    loadChildren: () =>
+      import('@app/support/support.module').then((m) => m.SupportModule),
+  },
+  {
+    path: 'user',
+    canActivate: [UnauthorizedAccessGuard],
+    loadChildren: () =>
+      import('@app/user/user.module').then((m) => m.UserModule),
   },
   {
     path: 'login',
@@ -40,7 +86,6 @@ const routes: Routes = [
   },
   {
     path: 'terms',
-    data: { animation: 'fadeInOut' },
     loadChildren: () =>
       import('./legal-info/terms/terms.module').then((m) => m.TermsModule),
   },
@@ -58,7 +103,6 @@ const routes: Routes = [
   },
   {
     path: 'error',
-    data: { animation: 'fadeInOut' },
     loadChildren: () =>
       import('./error/error.module').then((m) => m.ErrorModule),
   },

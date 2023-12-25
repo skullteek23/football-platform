@@ -8,17 +8,17 @@ import {
 import { AuthBaseComponent } from '../auth-base.component';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AnimationsList } from '@app/services/animation.service';
+import { AnimationsList } from '@app/utils/services/animation.service';
 import { AuthService } from '../auth.service';
 import { Constants } from '@ballzo-ui/core';
-import { SnackbarService } from '@app/services/snackbar.service';
-import { BottomSheetService } from '@app/services/bottom-sheet.service';
+import { SnackbarService } from '@app/utils/services/snackbar.service';
+import { BottomSheetService } from '@app/utils/services/bottom-sheet.service';
 import { MatInput } from '@angular/material/input';
-import { ShowConfirmationService } from '@app/services/show-confirmation.service';
-import { SessionStorageService } from '@app/services/session-storage.service';
-import { getCloudFnErrorMsg } from '@app/utils/api-error-handling-utility';;
-import { IConfirmationResult } from '@app/models/user.model';
-import { MOBILE_VALIDATORS, OTP_VALIDATORS } from '@app/utils/form-validators-utility';
+import { ShowConfirmationService } from '@app/utils/services/show-confirmation.service';
+import { SessionStorageService } from '@app/utils/services/session-storage.service';
+import { getCloudFnErrorMsg } from '@app/utils/main-utilities/api-error-handling-utility';;
+import { IConfirmationResult } from '@app/utils/models/user.model';
+import { MOBILE_VALIDATORS, OTP_VALIDATORS } from '@app/utils/main-utilities/form-validators-utility';
 
 @Component({
   selector: 'app-login-bottom-sheet',

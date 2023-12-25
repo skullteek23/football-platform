@@ -2,9 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PlayerListItem } from './models/player-list.model';
 import { Observable, Subscription, combineLatest, } from 'rxjs';
-import { SnackbarService } from '@app/services/snackbar.service';
+import { SnackbarService } from '@app/utils/services/snackbar.service';
 import { PlayerListService } from './services/player-list.service';
-import { GroundService } from '@app/services/ground.service';
+import { GroundService } from '@app/utils/services/ground.service';
 import { Ground, GroundFacility, GroundSlot } from '@ballzo-ui/core';
 import { Constants } from '@ballzo-ui/core';
 

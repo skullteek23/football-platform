@@ -7,8 +7,7 @@
     <mat-icon *ngIf="displayDetails.icon" fontSet="material-icons-round">{{
       displayDetails.icon
       }}</mat-icon>
-    <span class="label">
-      {{ displayDetails.label }}
+    <span class="label" [innerHtml]="displayDetails.label">
     </span>
   </span>
   <mat-icon fontSet="material-icons-round" *ngIf="displayDetails.secondaryIcon">{{

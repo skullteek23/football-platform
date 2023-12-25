@@ -2,13 +2,13 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@app/authentication/auth.service';
 import { Constants } from '@ballzo-ui/core';
-import { HomeMessages } from '@app/constant/common-messages';
+import { HomeMessages } from '@app/utils/constant/common-messages';
 import {
   HomeConstants,
   ACTIONS_MENU_NEW_USER,
   ACTIONS_MENU_EXISTING_USER,
 } from '@app/home/constants/home.constants';
-import { OrderService } from '@app/services/order.service';
+import { OrderService } from '@app/utils/services/order.service';
 import { ButtonConfig } from '@app/shared-modules/buttons/models/button.model';
 import {
   IconSelectionData,
@@ -17,8 +17,8 @@ import {
 import { InteractiveCardData } from '@app/shared-modules/interactive-card/models/interactive-card.model';
 import { Subscription, combineLatest } from 'rxjs';
 import { HomeService } from './services/home.service';
-import { GroundService } from '@app/services/ground.service';
-import { SnackbarService } from '@app/services/snackbar.service';
+import { GroundService } from '@app/utils/services/ground.service';
+import { SnackbarService } from '@app/utils/services/snackbar.service';
 import { GroundSlot } from '@ballzo-ui/core';
 
 @Component({
@@ -144,10 +144,12 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
    */
   getBookings() {
     this.isBookingsInitialized = false;
+    const startTime = new Date().getTime() - Constants.TWELVE_HOURS_IN_MILLISECONDS;
+    const endTime = startTime + Constants.THREE_DAYS_IN_MILLISECONDS;
     combineLatest([
       this.orderService.getBookingByUserId(this.uid),
       this.groundService.getGrounds(),
-      this.groundService.getUpcomingSlots()
+      this.groundService.getSlotsByRange(startTime, endTime)
     ]).subscribe({
       next: response => {
         if (response?.length === 3 && response[0] && response[1] && response[2] && this.isUserLogged) {
@@ -173,7 +175,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   openList(item: InteractiveCardData) {
     // Saving slot id in the ID field of the card data
     if (item.id) {
-      this.router.navigate(['/m', 'players-list', item.id]);
+      this.router.navigate(['/games', 'bookings'], { queryParams: { slot: item.id } });
     } else {
       console.log('Invalid selection!')
     }

@@ -1,17 +1,17 @@
 import { Router } from '@angular/router';
 import { ButtonConfig } from '@app/shared-modules/buttons/models/button.model';
 import { AuthService } from './auth.service';
-import { CanComponentDeactivate } from '@app/guards/confirm-form-closure.guard';
+import { CanComponentDeactivate } from '@app/utils/guards/confirm-form-closure.guard';
 import { FormGroup } from '@angular/forms';
-import { SnackbarService } from '@app/services/snackbar.service';
-import { BottomSheetService } from '@app/services/bottom-sheet.service';
-import { getAuthErrorMsg } from '@app/utils/api-error-handling-utility';;
-import { ShowConfirmationService } from '@app/services/show-confirmation.service';
-import { SessionStorageService } from '@app/services/session-storage.service';
-import { SessionStorageProperties } from '@app/constant/constants';
-import { IConfirmationResult } from '@app/models/user.model';
-import { AuthMessages } from '@app/constant/common-messages';
-import { IApiError } from '@app/models/firebase-error.model';
+import { SnackbarService } from '@app/utils/services/snackbar.service';
+import { BottomSheetService } from '@app/utils/services/bottom-sheet.service';
+import { getAuthErrorMsg } from '@app/utils/main-utilities/api-error-handling-utility';;
+import { ShowConfirmationService } from '@app/utils/services/show-confirmation.service';
+import { SessionStorageService } from '@app/utils/services/session-storage.service';
+import { SessionStorageProperties } from '@app/utils/constant/constants';
+import { IConfirmationResult } from '@app/utils/models/user.model';
+import { AuthMessages } from '@app/utils/constant/common-messages';
+import { IApiError } from '@app/utils/models/firebase-error.model';
 import { Constants } from '@ballzo-ui/core';
 
 export class AuthBaseComponent implements CanComponentDeactivate {
@@ -115,7 +115,7 @@ export class AuthBaseComponent implements CanComponentDeactivate {
             );
             this.closeSheet(redirectUrl);
           } else {
-            this.closeSheet('/m/book-match');
+            this.closeSheet('/');
           }
           this.hideLoader();
         })
@@ -149,7 +149,7 @@ export class AuthBaseComponent implements CanComponentDeactivate {
           this.sessionStorageService.remove(
             SessionStorageProperties.REDIRECT_URL
           );
-          this.closeSheet('/m/onboarding');
+          this.closeSheet('/games/discover');
           this.hideLoader();
         })
         .catch(this.handleSignInError.bind(this));

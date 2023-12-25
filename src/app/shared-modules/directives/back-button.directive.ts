@@ -1,5 +1,5 @@
 import { Directive, HostListener } from '@angular/core';
-import { NavigationService } from '@app/services/navigation.service';
+import { NavigationService } from '@app/utils/services/navigation.service';
 
 @Directive({
   selector: '[appBackButton]'

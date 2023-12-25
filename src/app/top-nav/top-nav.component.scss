@@ -29,8 +29,10 @@
     }
 
     .mat-chip-list {
-      @include extra-small-screen {
-        display: none;
+      mat-chip>span {
+        @include extra-small-screen {
+          display: none;
+        }
       }
     }
   }

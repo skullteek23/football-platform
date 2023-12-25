@@ -1,0 +1,68 @@
+<div class="main-container">
+  <div class="game-info">
+    <div class="game-info-container game-info-container-right">
+      <div class="label">{{ data?.facilityName}}</div>
+      <div class="value">{{ data?.groundName}}</div>
+    </div>
+    <div class="game-info-container game-info-container-left">
+      <div class="label">{{ data?.timestamp | date: CUSTOM_DATE_FORMAT}}</div>
+      <div class="value">{{ formatter[data._day] }}</div>
+    </div>
+  </div>
+
+  <div class="team-container">
+    <div class="team team-one">
+      <div class="sub-heading">
+        Home
+      </div>
+      <ol>
+        <li *ngFor="let item of data?.teamOneList">
+          <span class="name-label">
+            {{item}}
+          </span>
+        </li>
+      </ol>
+    </div>
+    <div class="team team-two">
+      <div class="sub-heading">
+        Away
+      </div>
+      <ol>
+        <li *ngFor="let item of data?.teamTwoList">
+          <span class="name-label">
+            {{item}}
+          </span>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="game-on-strip" *ngIf="!data?.availableSpots">
+    <p>Game is ON! 🔥🔥🔥</p>
+  </div>
+  <ng-container *ngIf="!isSelfBookings">
+    <app-wide-button [displayDetails]="joinBtnDetails" (clickEv)="joinGame()"
+      [theme]="!data?.availableSpots ? buttonTheme.secondary : buttonTheme.primary"
+      [disabled]="!data?.availableSpots"></app-wide-button>
+    <app-wide-button [disabled]="data && data.availableSpots <= 0" [theme]="buttonTheme.secondary"
+      (clickEv)="joinGameAsTeam()" [disabled]="data.availableSpots < data._totalSpots / 2"
+      [displayDetails]="joinAsTeamBtnDetails"></app-wide-button>
+  </ng-container>
+  <app-wide-button [theme]="buttonTheme.secondary" (clickEv)="openGround()"
+    [displayDetails]="viewGroundBtnDetails"></app-wide-button>
+
+  <div class="notes">
+    <div class="sub-heading">
+      Booking/Game Rules:
+    </div>
+    <ol>
+      <li>You can pay at the field with cash or online after you're done playing.</li>
+      <li>Cancelling within the last hour of the match will incur a 100% cancellation fee.</li>
+      <li>Any disruptions or fights during games will lead to a temporary ban for involved players. No refunds will be
+        issued, and
+        the ground partner's rules will apply.
+      </li>
+      <li>For complete list of rules, visit <a [routerLink]="['/rules']">here.</a></li>
+    </ol>
+  </div>
+</div>

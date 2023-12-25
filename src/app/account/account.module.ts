@@ -15,13 +15,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormFieldErrorsModule } from '@app/shared-modules/form-field-errors/form-field-errors.module';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { CUSTOM_DATE_FORMATS, CustomDateAdapter } from '@app/utils/custom-date-formats';
+import { CUSTOM_DATE_FORMATS, CustomDateAdapter } from '@app/utils/main-utilities/custom-date-formats';
 import { DateAdapter, MAT_DATE_FORMATS, MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { LoaderModule } from '@app/shared-modules/loader/loader.module';
 import { ImageViewerModule } from '@app/shared-modules/image-viewer/image-viewer.module';
 import { HttpClientModule } from '@angular/common/http';
-import { LocationService } from '@app/services/location.service';
+import { LocationService } from '@app/utils/services/location.service';
 
 const routes: Routes = [
   {

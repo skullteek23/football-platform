@@ -5,9 +5,9 @@ import { IUploaderOptions } from '@app/shared-modules/custom-file-uploader/model
 import { ButtonConfig } from '@app/shared-modules/buttons/models/button.model';
 import { SupportService } from './services/support.service';
 import { AuthService } from '@app/authentication/auth.service';
-import { SnackbarService } from '@app/services/snackbar.service';
+import { SnackbarService } from '@app/utils/services/snackbar.service';
 import { ResultBoxData, ResultType } from '@app/shared-modules/result-box/models/result-box.model';
-import { AnimationsList } from '@app/services/animation.service';
+import { AnimationsList } from '@app/utils/services/animation.service';
 import { Regex } from '@ballzo-ui/core';
 
 @Component({

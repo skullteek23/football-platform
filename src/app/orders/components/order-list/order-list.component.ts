@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@app/authentication/auth.service';
 import { Constants } from '@ballzo-ui/core';
-import { IUser } from '@app/models/user.model';
-import { Order } from '@ballzo-ui/core';
+import { IUser } from '@app/utils/models/user.model';
+import { OrderRz } from '@ballzo-ui/core';
 import { ParseOrderService } from '@app/orders/services/parse-order.service';
-import { OrderService } from '@app/services/order.service';
-import { SnackbarService } from '@app/services/snackbar.service';
+import { OrderService } from '@app/utils/services/order.service';
+import { SnackbarService } from '@app/utils/services/snackbar.service';
 import { TransactionItemData } from '@app/shared-modules/transaction-item/models/transaction-item.model';
 
 @Component({
@@ -18,7 +18,7 @@ export class OrderListComponent implements OnInit {
 
   readonly SHIMMER_ARRAY = Constants.PLACEHOLDER_ARRAY;
 
-  ordersList: Order[] = [];
+  ordersList: OrderRz[] = [];
   uiList: TransactionItemData[] = [];
   user!: IUser;
   isLoaderShown = false;

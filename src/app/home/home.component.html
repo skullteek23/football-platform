@@ -11,10 +11,10 @@
         Hi, {{ name | titlecase }}!
       </span>
       <ng-container *ngIf="isUserLogged">
-        <button mat-icon-button (click)="navigateTo('/m/user/account')" *ngIf="!photoUrl">
+        <button mat-icon-button (click)="navigateTo('/user/account')" *ngIf="!photoUrl">
           <mat-icon fontSet='material-icons-round'>account_circle</mat-icon>
         </button>
-        <a class="account-photo" (click)="navigateTo('/m/user/account')" *ngIf="photoUrl">
+        <a class="account-photo" (click)="navigateTo('/user/account')" *ngIf="photoUrl">
           <img [src]="photoUrl" alt="User photo">
         </a>
       </ng-container>
@@ -24,7 +24,7 @@
 
   <div class="content-container" *ngIf="isBookingsInitialized">
     <div class="salutation-strip">
-      <div class="page-sub-label">Recent Games:</div>
+      <div class="page-sub-label">My Bookings:</div>
       <button mat-icon-button (click)="refreshContent()" *ngIf="isUserLogged">
         <mat-icon fontSet="material-icons-round">refresh</mat-icon>
       </button>

@@ -10,9 +10,9 @@ import {
   Constants,
   LocalStorageProperties,
 } from '@ballzo-ui/core';
-import { SessionStorageService } from '@app/services/session-storage.service';
-import { LocalStorageService } from '@app/services/local-storage.service';
-import { SessionStorageProperties } from '@app/constant/constants';
+import { SessionStorageService } from '@app/utils/services/session-storage.service';
+import { LocalStorageService } from '@app/utils/services/local-storage.service';
+import { SessionStorageProperties } from '@app/utils/constant/constants';
 
 @Injectable({
   providedIn: 'root',

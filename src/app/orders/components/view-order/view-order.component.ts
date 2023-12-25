@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BottomSheetService } from '@app/services/bottom-sheet.service';
-import { CancelBookingComponent } from '../cancel-booking/cancel-booking.component';
+import { BottomSheetService } from '@app/utils/services/bottom-sheet.service';
+import { CancelBookingComponent, ICancellationData } from '../cancel-booking/cancel-booking.component';
 import { MatBottomSheetConfig } from '@angular/material/bottom-sheet';
 import { Subscription } from 'rxjs';
 
@@ -38,17 +38,6 @@ export class ViewOrderComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  /**
-   * Open cancel dialog
-   */
-  openCancelDialog() {
-    const config = new MatBottomSheetConfig();
-    config.data = this.orderID;
-    config.disableClose = true;
-    config.hasBackdrop = true;
-    config.backdropClass = 'sheet-backdrop';
-    config.panelClass = 'sheet-custom';
-    this.bottomSheetService.openSheet(CancelBookingComponent, config);
-  }
+
 
 }

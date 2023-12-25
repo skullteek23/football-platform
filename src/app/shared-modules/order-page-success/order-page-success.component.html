@@ -13,15 +13,15 @@
   <app-result-box [type]="ResultType.success" [data]="data">
     <div class="info">
       <div class="metric">
-        <div class="metric-label">{{order?.amount | currency: "INR":undefined:numberFormat}}</div>
+        <div class="metric-label">{{order?._amount | currency: "INR":undefined:numberFormat}}</div>
         <div class="metric-value">Amount</div>
       </div>
       <div class="metric">
-        <div class="metric-label"> {{order?.timestamp | date: dateFormat}} </div>
-        <div class="metric-value">Booked On</div>
+        <div class="metric-label"> {{order?._created_at | date: dateFormat}} </div>
+        <div class="metric-value">Order Date</div>
       </div>
       <div class="metric">
-        <div class="metric-label">{{order?.ref?.spots || booking?.spots}}</div>
+        <div class="metric-label">{{ booking?.spots }}</div>
         <div class="metric-value">Spot (s)</div>
       </div>
     </div>
@@ -44,7 +44,7 @@
     <div class='note' [innerText]="slotMsg">
     </div>
   </div>
-  <div *ngIf="showCancelEvent && !isOrderReturned" class='cancel-container'>
+  <div *ngIf="allowCancellation && !isOrderReturned" class='cancel-container'>
     <a (click)="onCancelBooking()" class="cancel-button"> Cancel Booking</a>
   </div>
 </div>

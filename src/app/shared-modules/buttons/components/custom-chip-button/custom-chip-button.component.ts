@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IListOption } from '@ballzo-ui/core';
-import { AnimationsList } from '@app/services/animation.service';
+import { AnimationsList } from '@app/utils/services/animation.service';
 
 @Component({
   selector: 'app-custom-chip-button',

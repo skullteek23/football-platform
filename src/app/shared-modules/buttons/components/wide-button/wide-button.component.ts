@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ButtonConfig, ButtonTheme } from '../../models/button.model';
-import { AnimationsList } from '@app/services/animation.service';
+import { AnimationsList } from '@app/utils/services/animation.service';
 
 @Component({
   selector: 'app-wide-button',

@@ -1,4 +1,4 @@
-import { GroundFacility } from '@ballzo-ui/core';
+import { GroundFacility, TabLabel } from '@ballzo-ui/core';
 
 export class SelectedGroundInfo {
   title: string = 'Title';
@@ -8,21 +8,16 @@ export class SelectedGroundInfo {
 }
 
 export class UserSlotSelectionInfo {
-  groundId: string = '';
-  facilityId: string = '';
-  slotId: string = '';
-  spots: number = 1;
+  slot: string = '';
+  ground: string = '';
+  facility: string = '';
+  spots: number = 0;
+  amount: number = 0;
 }
 
 export class TabData {
   label: TabLabel = TabLabel.today;
   subLabel: string = 'Sub';
-}
-
-export enum TabLabel {
-  today = 0,
-  tomorrow = 1,
-  dayAfter = 2,
 }
 
 export class SpotData {

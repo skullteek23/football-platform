@@ -45,7 +45,7 @@ export class OrderPageFailureComponent implements OnInit {
    * Shows grounds list for try again
    */
   showGrounds() {
-    this.router.navigate(['/m', 'book-match', 'select-ground']);
+    this.router.navigate(['/games', 'discover']);
   }
 
   /**

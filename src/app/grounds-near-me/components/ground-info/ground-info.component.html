@@ -7,14 +7,14 @@
     <div class="ground-image-container">
       <button [disabled]="!imagesCount || index <= 0 " mat-mini-fab (click)="previousImage()" color="primary"
         class="floating-buttons button-left">
-        <mat-icon fontSet="material-icons-round">arrow_back_ios</mat-icon>
+        <mat-icon fontSet="material-icons-round">chevron_left</mat-icon>
       </button>
       <div class="ground-image">
         <img [src]="selectedAsset" [@sliderSidewayVoid] alt="manager" *ngIf="selectedAsset" />
       </div>
       <button [disabled]="!imagesCount || index  >= (imagesCount - 1)" mat-mini-fab color="primary"
         (click)="nextImage()" class="floating-buttons button-right">
-        <mat-icon fontSet="material-icons-round">arrow_forward_ios</mat-icon>
+        <mat-icon fontSet="material-icons-round">chevron_right</mat-icon>
       </button>
     </div>
   </div>

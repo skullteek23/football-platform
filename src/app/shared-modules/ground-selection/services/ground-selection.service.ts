@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { InteractiveCardData } from '@app/shared-modules/interactive-card/models/interactive-card.model';
-import { SelectedGroundInfo, TabLabel, UserSlotSelectionInfo } from '../models/ground-selection.model';
-import { SessionStorageService } from '@app/services/session-storage.service';
-import { Constants } from '@ballzo-ui/core';
+import { SelectedGroundInfo, UserSlotSelectionInfo } from '../models/ground-selection.model';
+import { SessionStorageService } from '@app/utils/services/session-storage.service';
+import { Constants, TabLabel } from '@ballzo-ui/core';
 import { Ground, GroundFacility } from '@ballzo-ui/core';
 import { ArraySorting } from '@ballzo-ui/core';
 import { DatePipe } from '@angular/common';
-import { GroundService } from '@app/services/ground.service';
+import { GroundService } from '@app/utils/services/ground.service';
 import { Subject } from 'rxjs';
-import { SessionStorageProperties } from '@app/constant/constants';
+import { SessionStorageProperties } from '@app/utils/constant/constants';
 
 @Injectable({
   providedIn: 'root'
@@ -79,7 +79,7 @@ export class GroundSelectionService {
    * @param updatedValue
    */
   updateGround(updatedValue: string) {
-    this.userSelectionData.groundId = updatedValue;
+    // this.userSelectionData.groundId = updatedValue;
   }
 
   /**
@@ -95,7 +95,7 @@ export class GroundSelectionService {
    * @param facility
    */
   updateFacility(facility: string) {
-    this.userSelectionData.facilityId = facility;
+    // this.userSelectionData.facilityId = facility;
   }
 
   /**
@@ -103,7 +103,7 @@ export class GroundSelectionService {
    * @param slot
    */
   updateSlotSelection(slot: string) {
-    this.userSelectionData.slotId = slot;
+    // this.userSelectionData.slotId = slot;
   }
 
   /**
@@ -117,21 +117,21 @@ export class GroundSelectionService {
    * Resets the facility selection
    */
   resetFacilitySelection() {
-    this.userSelectionData.facilityId = '';
+    // this.userSelectionData.facilityId = '';
   }
 
   /**
    * Resets the slot selection
    */
   resetSlotSelection() {
-    this.userSelectionData.slotId = '';
+    // this.userSelectionData.slotId = '';
   }
 
   /**
    * Returns true if the slot is selected
    */
   get isSlotSelected(): boolean {
-    return this.userSelectionData.slotId !== '' && this.userSelectionData.facilityId !== '';
+    return true
   }
 
   /**
@@ -155,11 +155,11 @@ export class GroundSelectionService {
    */
   continue(): void {
     this.sessionStorage.set(SessionStorageProperties.USER_GROUND_SELECTION, this.userSelectionData);
-    if (this.userSelectionData.slotId && this.userSelectionData.facilityId) {
-      this.continueStepChange.next(this.userSelectionData);
-      this.resetGroundSelection();
-    } else {
-      console.log('Invalid selection data!');
-    }
+    // if (this.userSelectionData.slotId && this.userSelectionData.facilityId) {
+    //   this.continueStepChange.next(this.userSelectionData);
+    //   this.resetGroundSelection();
+    // } else {
+    //   console.log('Invalid selection data!');
+    // }
   }
 }

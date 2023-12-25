@@ -1,0 +1,113 @@
+@import "variables";
+@import "mixins";
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .game-info {
+    @include flexSpaceBetween;
+    width: 100%;
+
+    &-container {
+      @include flexCenter(column, 0px);
+
+      .label {
+        font-size: $font-size-l;
+        font-weight: 400;
+        max-width: 200px;
+      }
+
+      .value {
+        font-size: $font-size-m;
+        font-weight: 400;
+        color: $grey-text;
+        max-width: 200px;
+      }
+    }
+
+    &-container-right {
+      @include flexStartCol(4px, flex-start);
+    }
+
+    &-container-left {
+      @include flexStartCol(4px, flex-end);
+    }
+  }
+
+  .game-on-strip {
+    @include flexCenter(row);
+    height: 30px;
+    width: 100%;
+    background-color: $success;
+    color: $black;
+    font-size: $font-size-primary;
+    font-weight: 400;
+    border-radius: $border-radius-primary;
+  }
+
+  .team-container {
+    @include flexSpaceBetween(16px);
+
+    .team {
+      width: 50%;
+      // min-height: 250px;
+      border-radius: $border-radius-primary;
+      overflow: hidden;
+      overflow-y: auto;
+      padding: 8px;
+
+      ol {
+        margin-left: 4px;
+        font-size: $font-size-s;
+        font-weight: 400;
+
+        li {
+          margin-bottom: 4px;
+
+          .name-label {
+            display: block;
+            @include ellipsis();
+          }
+        }
+      }
+    }
+
+    .team-one {
+      background-color: $white;
+      color: $black;
+
+      ol {
+        color: $grey-text;
+      }
+    }
+
+    .team-two {
+      background-color: $black;
+      color: $white;
+    }
+  }
+
+  .sub-heading {
+    margin-bottom: 4px;
+    font-size: $font-size-s;
+  }
+
+  .notes {
+    .sub-heading {
+      color: $grey-text;
+    }
+
+    ol {
+      margin-left: 4px;
+      color: $light-text;
+
+      li {
+        font-weight: 400;
+        font-size: $font-size-s;
+        color: $light-text;
+      }
+    }
+  }
+}

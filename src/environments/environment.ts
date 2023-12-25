@@ -11,11 +11,16 @@ export const environment = {
     messagingSenderId: '386420685008',
   },
   urls: {
-    admin: 'https://admin.ballzo.in',
+    admin: 'https://dev.admin.ballzo.in',
     whatsAppGroup: 'https://chat.whatsapp.com/K0EJ1dZfG0d6n4PDhHdmRc',
+    player: 'https://localhost:4200'
   },
   locationApiKey: {
-    countryStateCityApiKey: 'Rjc1ZmpjdGhCbWRrV2JnMHdnUGptaklVZjNhVWFpMlpnRUJFV1VpbQ==', 
+    countryStateCityApiKey: 'Rjc1ZmpjdGhCbWRrV2JnMHdnUGptaklVZjNhVWFpMlpnRUJFV1VpbQ==',
+  },
+  razorpay: {
+    keySecret: 'yHX88BX68KKS7tB5Gb9cMPRH',
+    keyId: 'rzp_test_t9NBSmvfkzKnbe'
   },
   production: false,
 };

@@ -2,16 +2,16 @@ import { Component, Input, OnInit } from '@angular/core';
 import { InteractiveCardData } from '../interactive-card/models/interactive-card.model';
 import { SelectedGroundInfo, UserSlotSelectionInfo } from './models/ground-selection.model';
 import { GroundSelectionService } from './services/ground-selection.service';
-import { SessionStorageService } from '@app/services/session-storage.service';
+import { SessionStorageService } from '@app/utils/services/session-storage.service';
 import { Constants } from '@ballzo-ui/core';
 import { ButtonConfig } from '../buttons/models/button.model';
-import { GroundService } from '@app/services/ground.service';
+import { GroundService } from '@app/utils/services/ground.service';
 import { Ground } from '@ballzo-ui/core';
-import { SnackbarService } from '@app/services/snackbar.service';
-import { GroundSelectionMessages } from '@app/constant/common-messages';
+import { SnackbarService } from '@app/utils/services/snackbar.service';
+import { GroundSelectionMessages } from '@app/utils/constant/common-messages';
 import { Position } from '@ballzo-ui/core';
 import { isEnumKey } from '@ballzo-ui/core';
-import { SessionStorageProperties } from '@app/constant/constants';
+import { SessionStorageProperties } from '@app/utils/constant/constants';
 
 @Component({
   selector: 'app-ground-selection',
@@ -61,13 +61,13 @@ export class GroundSelectionComponent implements OnInit {
       next: (response: Ground[]) => {
         this.groundsList = this.groundSelectionService.parseGroundResponse(response);
         const groundSelectionData: UserSlotSelectionInfo = this.sessionStorageService.get(SessionStorageProperties.USER_GROUND_SELECTION);
-        if (groundSelectionData?.groundId && groundSelectionData?.facilityId) {
-          this.selectedGroundID = groundSelectionData.groundId;
-          const ground = this.groundsList.find((ground) => ground.id === this.selectedGroundID);
-          if (ground) {
-            this.selectGround(ground);
-          }
-        }
+        // if (groundSelectionData?.groundId && groundSelectionData?.facilityId) {
+        //   this.selectedGroundID = groundSelectionData.groundId;
+        //   const ground = this.groundsList.find((ground) => ground.id === this.selectedGroundID);
+        //   if (ground) {
+        //     this.selectGround(ground);
+        //   }
+        // }
         this.groundListInit = true;
       },
       error: (error) => {

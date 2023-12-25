@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable, firstValueFrom, of, switchMap, take } from 'rxjs';
-import { BottomSheetService } from '../services/bottom-sheet.service';
+import { BottomSheetService } from '../utils/services/bottom-sheet.service';
 import { LoginBottomSheetComponent } from '@app/authentication/login-bottom-sheet/login-bottom-sheet.component';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
 import { SignupBottomSheetComponent } from './signup-bottom-sheet/signup-bottom-sheet.component';
@@ -22,13 +22,13 @@ import {
   Constants,
   LocalStorageProperties,
 } from '@ballzo-ui/core';
-import { SnackbarService } from '@app/services/snackbar.service';
-import { AuthMessages } from '@app/constant/common-messages';
-import { LocalStorageService } from '@app/services/local-storage.service';
-import { SessionStorageService } from '@app/services/session-storage.service';
-import { CoreApiService } from '@app/services/core-api.service';
+import { SnackbarService } from '@app/utils/services/snackbar.service';
+import { AuthMessages } from '@app/utils/constant/common-messages';
+import { LocalStorageService } from '@app/utils/services/local-storage.service';
+import { SessionStorageService } from '@app/utils/services/session-storage.service';
+import { CoreApiService } from '@app/utils/services/core-api.service';
 import { HttpsCallableResult } from 'firebase/functions';
-import { cloudFunctionNames } from '@app/constant/api-constants';
+import { cloudFunctionNames } from '@app/utils/constant/api-constants';
 import { isEnumKey } from '@ballzo-ui/core';
 import { Position } from '@ballzo-ui/core';
 
@@ -86,6 +86,14 @@ export class AuthService {
     } else {
       return of(null);
     }
+  }
+
+  /**
+   * Returns user observable
+   * @returns
+   */
+  _authState(): Observable<User | null> {
+    return authState(this.auth);
   }
 
   /**

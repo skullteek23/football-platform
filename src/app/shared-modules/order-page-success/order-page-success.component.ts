@@ -1,21 +1,15 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { MatBottomSheetConfig } from '@angular/material/bottom-sheet';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@app/authentication/auth.service';
 import { EmailService } from '@app/authentication/email.service';
-import { Constants } from '@ballzo-ui/core';
-import { OrderMessages, PlayerListMessages } from '@app/constant/common-messages';
-import { Ground } from '@ballzo-ui/core';
-import { Order, OrderStatus } from '@ballzo-ui/core';
-import { Booking } from '@ballzo-ui/core';
-import { BottomSheetService } from '@app/services/bottom-sheet.service';
-import { GroundService } from '@app/services/ground.service';
-import { OrderService } from '@app/services/order.service';
-import { SnackbarService } from '@app/services/snackbar.service';
+import { OrderMessages, PlayerListMessages } from '@app/utils/constant/common-messages';
+import { GroundService } from '@app/utils/services/ground.service';
+import { OrderService } from '@app/utils/services/order.service';
+import { SnackbarService } from '@app/utils/services/snackbar.service';
 import { ButtonTheme, ButtonConfig } from '../buttons/models/button.model';
 import { ResultType, ResultBoxData } from '../result-box/models/result-box.model';
-import { Position } from '@ballzo-ui/core';
-import { IUser } from '@app/models/user.model';
+import { IUser } from '@app/utils/models/user.model';
+import { OrderRz, Booking, Ground, Position, Constants } from '@ballzo-ui/core';
 
 @Component({
   selector: 'app-order-page-success',
@@ -35,9 +29,7 @@ export class OrderPageSuccessComponent implements OnInit {
       this.getBookingDetails();
     }
   }
-  @Input() showCancelEvent = false;
-
-  @Output() cancelEvent = new EventEmitter<void>();
+  @Input() allowCancellation = false;
 
   readonly ResultType = ResultType;
   readonly ButtonTheme = ButtonTheme;
@@ -47,7 +39,7 @@ export class OrderPageSuccessComponent implements OnInit {
 
   data = new ResultBoxData();
   orderID: string = '';
-  order!: Order;
+  order!: OrderRz;
   listBtnDetails = new ButtonConfig();
   homeBtnDetails = new ButtonConfig();
   mapsBtnDetails = new ButtonConfig();
@@ -66,15 +58,14 @@ export class OrderPageSuccessComponent implements OnInit {
     private snackbarService: SnackbarService,
     private emailService: EmailService,
     private orderService: OrderService,
-    private groundService: GroundService,
-    private bottomSheetService: BottomSheetService
+    private groundService: GroundService
   ) { }
 
   ngOnInit(): void {
     this.authService._user().subscribe(user => {
       if (user?.uid) {
         this.user = user;
-        this.getRole();
+        this.setMessage();
       } else {
         this.router.navigate(['/error']);
       }
@@ -89,7 +80,7 @@ export class OrderPageSuccessComponent implements OnInit {
       next: order => {
         if (order) {
           this.order = order;
-          this.isOrderReturned = order.status === OrderStatus.returned;
+          this.isOrderReturned = order.notes?.cancelled === true;
           if (this.isOrderReturned) {
             this.data.description = OrderMessages.booking.cancelledOrderNote;
             this.data.title = OrderMessages.booking.cancelledBookingTitle;
@@ -116,6 +107,7 @@ export class OrderPageSuccessComponent implements OnInit {
             this.getGroundDetails();
           }
         }
+        this.setMessage();
         this.isPageInit = true;
       },
       error: err => {
@@ -148,7 +140,7 @@ export class OrderPageSuccessComponent implements OnInit {
    */
   showList() {
     if (this.booking.slotId && !this.isOrderReturned) {
-      this.router.navigate(['/m', 'players-list', this.booking.slotId]);
+      this.router.navigate(['/games', 'bookings'], { queryParams: { slot: this.booking.slotId } });
     } else {
       this.snackbarService.displayError(PlayerListMessages.error.noBookings)
     }
@@ -206,29 +198,22 @@ export class OrderPageSuccessComponent implements OnInit {
   }
 
   /**
-   * Get user role
+   * Sets the message based on the booking type
    */
-  getRole() {
-    if (this.user) {
-      this.authService.getCustomClaims(this.user)
-        .then(value => {
-          this.role = this.authService.parseRole(value);
-          if (this.role === Position.manager) {
-            this.slotMsg = 'Note: ' + this.messages.booking.managerSlot;
-          } else {
-            this.slotMsg = 'Note: ' + this.messages.booking.playerSlot;
-          }
-        })
+  setMessage() {
+    if (this.booking?.spots > 1) {
+      this.slotMsg = 'Note: ' + this.messages.booking.managerSlot;
+    } else {
+      this.slotMsg = 'Note: ' + this.messages.booking.playerSlot;
     }
   }
 
   /**
-   * Emits cancel event
+   * Open cancel dialog
    */
   onCancelBooking() {
-    if (this.showCancelEvent) {
-      this.cancelEvent.emit();
+    if (this.allowCancellation) {
+      this.orderService.openCancelDialog(this.orderID, this.order.bookingId);
     }
   }
-
 }

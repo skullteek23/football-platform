@@ -24,11 +24,13 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { LoaderModule } from './shared-modules/loader/loader.module';
 import { HomeModule } from './home/home.module';
 import { SignupBottomSheetModule } from './authentication/signup-bottom-sheet/signup-bottom-sheet.module';
-import { NavigationService } from './services/navigation.service';
-import { CoreApiService } from './services/core-api.service';
-import { DummyDataService } from './services/dummy-data.service';
+import { NavigationService } from './utils/services/navigation.service';
+import { CoreApiService } from './utils/services/core-api.service';
+import { DummyDataService } from './utils/services/dummy-data.service';
 import { DatePipe } from '@angular/common';
 import { NgxImageCompressService } from 'ngx-image-compress';
+import { PaymentModule } from './shared-modules/payment/payment.module';
+import { DiscoverGamesModule } from './discover-games/discover-games.module';
 
 @NgModule({
   declarations: [AppComponent, TopNavComponent],
