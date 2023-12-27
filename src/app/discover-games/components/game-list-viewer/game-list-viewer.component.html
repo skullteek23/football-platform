@@ -10,7 +10,11 @@
     </div>
   </div>
 
-  <div class="team-container">
+  <div class="game-on-strip" *ngIf="!data?.availableSpots">
+    <p>Game is ON!</p>
+  </div>
+
+  <div class="team-container" [ngClass]="{'primary-bg': !data?.availableSpots}">
     <div class="team team-one">
       <div class="sub-heading">
         Home
@@ -37,9 +41,6 @@
     </div>
   </div>
 
-  <div class="game-on-strip" *ngIf="!data?.availableSpots">
-    <p>Game is ON! 🔥🔥🔥</p>
-  </div>
   <ng-container *ngIf="!isSelfBookings">
     <app-wide-button [displayDetails]="joinBtnDetails" (clickEv)="joinGame()"
       [theme]="!data?.availableSpots ? buttonTheme.secondary : buttonTheme.primary"

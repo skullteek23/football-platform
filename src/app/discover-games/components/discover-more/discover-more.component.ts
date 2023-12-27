@@ -53,7 +53,7 @@ export class DiscoverMoreComponent implements OnInit {
    */
   initPageDetails() {
     const startTime = new Date().getTime();
-    const endTime = startTime + Constants.ONE_DAY_IN_MILLISECONDS;
+    const endTime = startTime + Constants.THREE_DAYS_IN_MILLISECONDS;
     this.selectedIndex = 0;
     forkJoin([
       this.groundService.getSlotsByRange(startTime, endTime),

@@ -18,20 +18,6 @@ export class OrderService {
   ) { }
 
   /**
-   * Generates the order id
-   * @param tempID
-   * @returns
-   */
-  generateOID(tempID: string): string {
-    if (tempID && !tempID.startsWith(Constants.ORDER_PREFIX)) {
-      return `${Constants.ORDER_PREFIX}${tempID.toUpperCase()}`;
-    } else if (tempID) {
-      return tempID.toUpperCase();
-    }
-    return '';
-  }
-
-  /**
    * Save order
    * @param data
    * @param orderID

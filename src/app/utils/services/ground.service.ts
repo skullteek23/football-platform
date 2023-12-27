@@ -100,7 +100,7 @@ export class GroundService {
     return this.apiService.queryCollectionSnapshot('slots', query)
       .pipe(
         map(response => convertFirestoreDataArray(response, GroundSlot)),
-        map(response => this.filterAvailableSlots(response)),
+        map(response => this.filterValidSlots(response)),
         // To be useful when viewing already booked slots
         // All slots such as cancelled, booked, available will be shown
       );
@@ -202,6 +202,19 @@ export class GroundService {
       (slot.status === SlotStatus.available) &&
       (slot.participantCount < slot.allowedCount)
       // (!slot.hasOwnProperty('lockedAt') || ((slot.lockedAt + Constants.SEVEN_MINUTES_IN_MILLISECONDS) < new Date().getTime()))
+    );
+  }
+
+  /**
+   * Filters all slots that are available or booked
+   * @param response
+   * @returns
+   */
+  filterValidSlots(response: GroundSlot[]): GroundSlot[] {
+    return response.filter(slot =>
+      (slot.status === SlotStatus.available) ||
+      (slot.status === SlotStatus.booked) ||
+      (slot.status === SlotStatus.cancelled)
     );
   }
 

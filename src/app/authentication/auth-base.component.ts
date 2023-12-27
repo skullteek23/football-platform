@@ -5,7 +5,7 @@ import { CanComponentDeactivate } from '@app/utils/guards/confirm-form-closure.g
 import { FormGroup } from '@angular/forms';
 import { SnackbarService } from '@app/utils/services/snackbar.service';
 import { BottomSheetService } from '@app/utils/services/bottom-sheet.service';
-import { getAuthErrorMsg } from '@app/utils/main-utilities/api-error-handling-utility';;
+import { getAuthErrorMsg } from '@app/utils/main-utilities/api-error-handling-utility';
 import { ShowConfirmationService } from '@app/utils/services/show-confirmation.service';
 import { SessionStorageService } from '@app/utils/services/session-storage.service';
 import { SessionStorageProperties } from '@app/utils/constant/constants';
@@ -140,12 +140,7 @@ export class AuthBaseComponent implements CanComponentDeactivate {
         .then((user) => {
           window.scrollTo(0, 0);
           const displayName = this.getControlValue(formGroup, 'name');
-          if (displayName) {
-            this.authService.updateUserProfile({
-              displayName,
-              photoURL: ''
-            });
-          }
+          this.authService.createProfile(displayName);
           this.sessionStorageService.remove(
             SessionStorageProperties.REDIRECT_URL
           );

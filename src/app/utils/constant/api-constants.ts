@@ -4,6 +4,7 @@ export enum cloudFunctionNames {
   returnOrder = 'returnOrder',
   updateUserProfile = 'updateUserProfile',
   createOrder = 'createOrder',
+  createProfile = 'createProfile',
   verifyPayment = 'verifyPayment',
   createGround = 'createGround',
   addNewSlot = 'addNewSlot',

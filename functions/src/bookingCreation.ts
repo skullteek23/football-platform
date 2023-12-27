@@ -4,19 +4,19 @@ const db = admin.firestore();
 import {
   checkKeysExist,
   isRequestAuthenticated,
+  runSlotValidityCheck,
 } from "./functions-utils";
 import {
   Booking,
   GroundSlot,
   OrderRz,
-  SlotStatus,
   convertObjectToFirestoreData,
   getRandomString,
 } from "@ballzo-ui/core";
 import {RAZORPAY} from "./rz";
-import Razorpay = require("razorpay");
 import {refundOrder} from "./refundOrder";
 
+import Razorpay = require("razorpay");
 /**
  * Creates booking for a valid user and returns an order ID
  * @param {any} data
@@ -62,21 +62,10 @@ export async function bookingCreation(data: any, context: any): Promise<any> {
     .doc(slotID)
     .get()).data() as GroundSlot;
 
-  // Check if slot exists or not
-  if (!slotInfo || slotInfo.status !== SlotStatus.available) {
-    throw new functions.https.HttpsError(
-      "failed-precondition",
-      "Slot is not available! Please contact support."
-    );
-  }
-
-  // Check if slot is full or not
-  if (slotInfo?.allowedCount &&
-    slotInfo.allowedCount <= slotInfo.participantCount) {
-    throw new functions.https.HttpsError(
-      "failed-precondition",
-      "Slot is full! Please try another slot."
-    );
+  try {
+    await runSlotValidityCheck(slotInfo, context);
+  } catch (error: any) {
+    throw new functions.https.HttpsError("failed-precondition", error);
   }
 
   // create batch
@@ -84,33 +73,20 @@ export async function bookingCreation(data: any, context: any): Promise<any> {
   const oid = data.orderID;
   const bookingID = "booking_" + getRandomString(15);
 
-  const queryResult = (await db
-    .collection("bookings")
-    .where("uid", "==", userID)
-    .where("slotTimestamp", "==", slotInfo.timestamp)
-    .get()).docs;
-  if (queryResult?.length) {
-    throw new functions.https.HttpsError(
-      "failed-precondition",
-      "Multiple bookings not allowed for same time."
-    );
-  } else {
-    // Add new booking
-    const booking = new Booking();
-    booking.uid = userID;
-    booking.orderId = oid;
-    booking.facilityId = facilityID;
-    booking.groundId = groundID;
-    booking.slotId = slotID;
-    booking.spots = spotsCount;
-    booking.slotTimestamp = slotInfo.timestamp;
+  // Add new booking
+  const booking = new Booking();
+  booking.uid = userID;
+  booking.orderId = oid;
+  booking.facilityId = facilityID;
+  booking.groundId = groundID;
+  booking.slotId = slotID;
+  booking.spots = spotsCount;
+  booking.slotTimestamp = slotInfo.timestamp;
 
-    // ADD TO BATCH
-    batch.create(
-      db.collection("bookings").doc(bookingID),
-      convertObjectToFirestoreData(booking)
-    );
-  }
+  batch.create(
+    db.collection("bookings").doc(bookingID),
+    convertObjectToFirestoreData(booking)
+  );
 
   // create order
   try {

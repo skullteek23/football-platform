@@ -9,6 +9,7 @@ import { UserSlotSelectionInfo } from '../ground-selection/models/ground-selecti
 import { AuthService } from '@app/authentication/auth.service';
 import { IUser } from '@app/utils/models/user.model';
 import { getCloudFnErrorMsg } from '@app/utils/main-utilities/api-error-handling-utility';
+import { OrderMessages, PaymentMessages } from '@app/utils/constant/common-messages';
 
 @Component({
   selector: 'app-payment',
@@ -67,7 +68,7 @@ export class PaymentComponent implements OnInit {
    * Initiate order
    */
   async initOrder() {
-    this.paymentService.generateOrder(String(this.selectionInfo.amount))
+    this.paymentService.generateOrder(String(this.selectionInfo.amount), this.selectionInfo.slot)
       .then((result) => {
         if (result?.data?.id) {
           const options: Partial<CheckoutRz> = {};
@@ -120,8 +121,7 @@ export class PaymentComponent implements OnInit {
               })
               .catch(this.handlePaymentFailure.bind(this));
           } else {
-            this.hideLoader();
-            this.router.navigate(['/payment', 'failure']);
+            this.redirectToFailure(PaymentMessages.error.verificationFailed);
           }
         })
         .catch(this.handlePaymentFailure.bind(this));
@@ -129,13 +129,20 @@ export class PaymentComponent implements OnInit {
   }
 
   /**
-   * Called when payment is failed
+   * Handle payment failure
    * @param error
    */
-  handlePaymentFailure(error: any): void {
+  handlePaymentFailure(error: any) {
+    this.redirectToFailure(getCloudFnErrorMsg(error));
+  }
+
+  /**
+   * Redirect to failure
+   * @param message
+  */
+  redirectToFailure(message: string): void {
     this.hideLoader();
-    this.snackbarService.displayError(getCloudFnErrorMsg(error));
-    this.router.navigate(['/payment', 'failure']);
+    this.router.navigate(['/payment', 'failure'], { queryParams: { slot: this.selectionInfo.slot, message } });
   }
 
   /**

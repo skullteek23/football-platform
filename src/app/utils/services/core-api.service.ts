@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Firestore, QueryFieldFilterConstraint, WhereFilterOp, addDoc, collection, collectionData, collectionSnapshots, deleteDoc, doc, docData, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
 import { Functions, httpsCallable } from '@angular/fire/functions';
-import { getFirestoreErrorMsg } from '@app/utils/main-utilities/api-error-handling-utility';;
+import { getFirestoreErrorMsg } from '@app/utils/main-utilities/api-error-handling-utility';
 import { combineArrayDataWithId, convertObjectToFirestoreData } from '@ballzo-ui/core';
 import { Observable, catchError, map, of, take, throwError } from 'rxjs';
 import { environment } from '@environments/environment';

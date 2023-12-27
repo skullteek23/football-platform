@@ -46,12 +46,24 @@
   .ground-info-bg {
     @include primary-gradient-background;
 
-    &-text {
-      color: $white;
-      font-size: $font-size-s;
-      font-weight: 300;
+    .text-container {
+      @include flexStartCol(4px);
+
+      .ground-info-bg-text {
+        color: $white;
+        font-size: $font-size-s;
+        font-weight: 400;
+      }
+
+      .ground-info-bg-text-alt {
+        color: $white;
+        font-size: $font-size-s;
+        font-weight: 300;
+      }
     }
   }
+
+
 
   .ground-info-alt-bg {
     background-color: $grey-3;

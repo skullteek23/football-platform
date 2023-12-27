@@ -104,7 +104,7 @@ export function getCloudFnErrorMsg(error: any): string {
       case 'functions/internal':
         return ApiMessages.error.internal;
       case 'functions/failed-precondition':
-        return ApiMessages.error.failedPrecondition;
+        return ApiMessages.error.permissionDenied;
       case 'functions/permission-denied':
         return ApiMessages.error.permissionDenied;
       case 'functions/unauthenticated':

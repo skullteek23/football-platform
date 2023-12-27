@@ -3,7 +3,7 @@ import { Storage, getDownloadURL, ref, uploadBytes } from '@angular/fire/storage
 import { CloudStorageFileScreens } from '@app/utils/constant/api-constants';
 import { Constants } from '@ballzo-ui/core';
 import { sanitizeFileName } from '@ballzo-ui/core';
-import { getStorageError } from '@app/utils/main-utilities/api-error-handling-utility';
+import { getStorageError } from '../main-utilities/api-error-handling-utility';
 
 @Injectable({
   providedIn: 'root'

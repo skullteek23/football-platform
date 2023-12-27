@@ -32,8 +32,13 @@
   </mat-chip-list>
 
   <div class="ground-info ground-info-bg" matRipple (click)="openMaps()">
-    <span class="ground-info-bg-text">
-      {{ground?.addressLine}}
+    <span class="text-container">
+      <span class="ground-info-bg-text">
+        {{ground?.addressLine}}
+      </span>
+      <span class="ground-info-bg-text-alt">
+        Click to open in maps
+      </span>
     </span>
     <span class="ground-info-link">
       <mat-icon fontSet="material-icons-round">chevron_right</mat-icon>

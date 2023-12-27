@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CoreApiService } from './core-api.service';
 import { FacilityStatus, Ground, GroundAdditionalInfo, GroundFacility, GroundSlot, GroundStatus, SlotStatus, TransactionType, WalletTransaction, convertObjectToFirestoreData, getRandomString } from '@ballzo-ui/core';
-import { UserSlotSelectionInfo } from '@app/shared-modules/ground-selection/models/ground-selection.model';
 import { cloudFunctionNames } from '@app/utils/constant/api-constants';
 import { getCloudFnErrorMsg } from '../main-utilities/api-error-handling-utility';
 
@@ -146,41 +145,62 @@ export class DummyDataService {
       price: 99,
       maxPlayers: 14,
       slots: [
-        // { facilityId: facilityId, time: new Date('21 December, 2023 19:00:00').getTime() },
 
-        // { facilityId: facilityId, time: new Date('21 December, 2023 20:00:00').getTime() },
-        // { facilityId: facilityId, time: new Date('21 December, 2023 19:00:00').getTime() },
+        // { facilityId: facilityId, time: new Date('27 December, 2023 16:00:00').getTime() },
+        // { facilityId: facilityId, time: new Date('27 December, 2023 17:00:00').getTime() },
+        // { facilityId: facilityId, time: new Date('27 December, 2023 18:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('27 December, 2023 19:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('27 December, 2023 20:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('27 December, 2023 21:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('27 December, 2023 22:00:00').getTime() },
 
-        // { facilityId: facilityId, time: new Date('23 December, 2023 19:00:00').getTime() },
-        // { facilityId: facilityId, time: new Date('23 December, 2023 20:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('28 December, 2023 16:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('28 December, 2023 17:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('28 December, 2023 18:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('28 December, 2023 19:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('28 December, 2023 20:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('28 December, 2023 21:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('28 December, 2023 22:00:00').getTime() },
 
-        // { facilityId: facilityId, time: new Date('24 December, 2023 16:00:00').getTime() },
-        // { facilityId: facilityId, time: new Date('24 December, 2023 18:00:00').getTime() },
-        // { facilityId: facilityId, time: new Date('24 December, 2023 20:00:00').getTime() },
-        // { facilityId: facilityId, time: new Date('24 December, 2023 22:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('29 December, 2023 16:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('29 December, 2023 17:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('29 December, 2023 18:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('29 December, 2023 19:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('29 December, 2023 20:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('29 December, 2023 21:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('29 December, 2023 22:00:00').getTime() },
 
-        { facilityId: facilityId, time: new Date('25 December, 2023 16:00:00').getTime() },
-        { facilityId: facilityId, time: new Date('25 December, 2023 17:00:00').getTime() },
-        { facilityId: facilityId, time: new Date('25 December, 2023 18:00:00').getTime() },
-        { facilityId: facilityId, time: new Date('25 December, 2023 19:00:00').getTime() },
-        { facilityId: facilityId, time: new Date('25 December, 2023 20:00:00').getTime() },
-        { facilityId: facilityId, time: new Date('25 December, 2023 21:00:00').getTime() },
-        { facilityId: facilityId, time: new Date('25 December, 2023 22:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('30 December, 2023 16:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('30 December, 2023 17:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('30 December, 2023 18:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('30 December, 2023 19:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('30 December, 2023 20:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('30 December, 2023 21:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('30 December, 2023 22:00:00').getTime() },
 
-        { facilityId: facilityId, time: new Date('26 December, 2023 16:00:00').getTime() },
-        { facilityId: facilityId, time: new Date('26 December, 2023 17:00:00').getTime() },
-        { facilityId: facilityId, time: new Date('26 December, 2023 18:00:00').getTime() },
-        { facilityId: facilityId, time: new Date('26 December, 2023 19:00:00').getTime() },
-        { facilityId: facilityId, time: new Date('26 December, 2023 20:00:00').getTime() },
-        { facilityId: facilityId, time: new Date('26 December, 2023 21:00:00').getTime() },
-        { facilityId: facilityId, time: new Date('26 December, 2023 22:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('31 December, 2023 16:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('31 December, 2023 17:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('31 December, 2023 18:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('31 December, 2023 19:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('31 December, 2023 20:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('31 December, 2023 21:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('31 December, 2023 22:00:00').getTime() },
 
-        // { facilityId: facilityId, time: new Date('24 December, 2023 19:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('1 January, 2024 16:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('1 January, 2024 17:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('1 January, 2024 18:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('1 January, 2024 19:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('1 January, 2024 20:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('1 January, 2024 21:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('1 January, 2024 22:00:00').getTime() },
 
-        // { facilityId: facilityId, time: new Date('25 December, 2023 19:00:00').getTime() },
-
-        // { facilityId: facilityId, time: new Date('26 December, 2023 19:00:00').getTime() },
-
+        { facilityId: facilityId, time: new Date('2 January, 2024 16:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('2 January, 2024 17:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('2 January, 2024 18:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('2 January, 2024 19:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('2 January, 2024 20:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('2 January, 2024 21:00:00').getTime() },
+        { facilityId: facilityId, time: new Date('2 January, 2024 22:00:00').getTime() },
       ],
     }
     const data = {

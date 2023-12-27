@@ -164,6 +164,14 @@ export class AuthService {
   }
 
   /**
+   * Create profile for the user
+   * @param displayName
+   */
+  createProfile(displayName: string): Promise<any> {
+    return this.coreApiService.callHttpFunction(cloudFunctionNames.createProfile, { displayName });
+  }
+
+  /**
    * Create user API call to backend
    */
   signup(phoneNumber: string) {
@@ -204,18 +212,6 @@ export class AuthService {
     this.localStorageService.clear();
     this.sessionStorageService.clear();
     this.router.navigate(['/']);
-  }
-
-  /**
-   * Updates user profile
-   * @param updates
-   * @returns
-   */
-  updateUserProfile(updates: Partial<IUserProperties>): Promise<any> {
-    if (this.user && (updates.displayName || updates.photoURL)) {
-      return updateProfile(this.user, updates);
-    }
-    return Promise.reject(null);
   }
 
   /**

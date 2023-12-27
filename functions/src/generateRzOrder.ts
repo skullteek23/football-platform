@@ -1,8 +1,16 @@
+import * as admin from "firebase-admin";
 import * as functions from "firebase-functions";
 import {RAZORPAY} from "./rz";
-import {checkKeysExist, isRequestAuthenticated} from "./functions-utils";
+import {
+  checkKeysExist,
+  isRequestAuthenticated,
+  runSlotValidityCheck,
+} from "./functions-utils";
+
+const db = admin.firestore();
 
 import Razorpay = require("razorpay");
+import {GroundSlot} from "@ballzo-ui/core";
 
 /**
  * Generates Razorpay Order and returns Order ID
@@ -11,7 +19,7 @@ import Razorpay = require("razorpay");
  * @return {Promise<any>}
  */
 export async function generateRzOrder(data: any, context: any): Promise<any> {
-  const missingParameter = checkKeysExist(data, ["amount"]);
+  const missingParameter = checkKeysExist(data, ["amount", "slot"]);
   if (missingParameter) {
     // Throwing an HttpsError so that the client gets the error details.
     throw new functions.https.HttpsError(
@@ -28,16 +36,30 @@ export async function generateRzOrder(data: any, context: any): Promise<any> {
     );
   }
 
-  if (data.amount <= 0) {
+  const amount = Number(data.amount);
+
+  if (amount <= 0) {
     throw new functions.https.HttpsError(
       "invalid-argument",
       "Minimum order value required."
     );
   }
 
+  const slotID = data.slot;
+  const slotInfo: GroundSlot = (await db
+    .collection("slots")
+    .doc(slotID)
+    .get()).data() as GroundSlot;
+
+  try {
+    await runSlotValidityCheck(slotInfo, context);
+  } catch (error: any) {
+    throw new functions.https.HttpsError("failed-precondition", error);
+  }
+
   const options: any = {
     currency: "INR",
-    amount: Number(data.amount) * 100, // amount in paise
+    amount: amount * 100, // amount in paise
     receipt: data.uid,
     partial_payment: false,
   };

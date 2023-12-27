@@ -78,8 +78,8 @@ export class PaymentService {
    * @param amount
    * @returns
    */
-  generateOrder(amount: string): Promise<any> {
-    return this.apiService.callHttpFunction(cloudFunctionNames.createOrder, { amount });
+  generateOrder(amount: string, slot: string): Promise<any> {
+    return this.apiService.callHttpFunction(cloudFunctionNames.createOrder, { amount, slot });
   }
 
   /**

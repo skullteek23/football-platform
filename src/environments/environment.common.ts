@@ -52,6 +52,7 @@ export const common = {
       [TabLabel.tomorrow]: 'Tomorrow',
       [TabLabel.dayAfter]: 'Day After',
       [TabLabel.farAway]: 'Later',
+      [TabLabel.past]: 'Finished',
     }
   }
 }

@@ -127,6 +127,26 @@ export class DiscoverGamesService {
   }
 
   /**
+   * Filters the user bookings
+   * @param allSlots
+   * @param bookings
+   * @param currentUserID
+   * @returns
+   */
+  filterUserBookings(allSlots: DiscoverGameSlot[], bookings: Booking[], currentUserID: string) {
+    // Create a Set of slotIDs from array A where userID matches currentUserID
+    const slotIDsSet = new Set(bookings
+      .filter(item => item.uid === currentUserID)
+      .map(item => item.slotId)
+    );
+
+    // Filter array B based on slotIDs present in slotIDsSet
+    const filteredB = allSlots.filter(item => slotIDsSet.has(item.slotId));
+
+    return filteredB;
+  }
+
+  /**
    * Opens the ground info bottom sheet
    */
   openGround(ground: Ground | undefined) {

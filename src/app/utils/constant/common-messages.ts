@@ -45,14 +45,14 @@ export const ApiMessages = {
     cancelled: 'Operation cancelled! Please try again.',
     unknown: 'Unknown error occurred! Please try again.',
     deadline: 'Operation timed out! Please try again.',
-    alreadyExists: 'Already exists! Please try again.',
+    alreadyExists: 'Entity already exists! Please try again.',
     notFound: 'Not found! Please try again.',
     invalidArgument: 'Invalid details! Please try again.',
-    failedPrecondition: 'Not allowed! Please contact admin.',
+    failedPrecondition: 'Condition failed! Please try again.',
     aborted: 'Operation aborted by system! Please try again.',
     internal: 'Internal error! Please try again later.',
-    permissionDenied: 'Permission denied! Please try again.',
-    notSupported: 'Operation not supported! Please try again.',
+    permissionDenied: 'You are not allowed to perform this action.',
+    notSupported: 'Service not supported! Please try again.',
     unavailable: 'Service unavailable! Please try again.',
     unauthenticated: 'Invalid credentials! Please try again.',
     somethingWentWrong: 'Something went wrong! Please try again.',
@@ -116,6 +116,7 @@ export const PaymentMessages = {
   success: 'Payment successful!',
   error: {
     slotFull: 'Slot is full! Please try another one.',
+    verificationFailed: 'Payment not verified! Please try again.',
   },
   note: {
     walletMoney: 'Ballzo money can be used to pay for all your ground bookings. Max Balance cannot be more than ₹10,000.'

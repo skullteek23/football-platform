@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ButtonTheme, ButtonConfig } from '../buttons/models/button.model';
 import { ResultType, ResultBoxData } from '../result-box/models/result-box.model';
 import { Router } from '@angular/router';
+import { OrderFailureResponse } from './models/order-failure.model';
 
 @Component({
   selector: 'app-order-page-failure',
@@ -9,6 +10,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./order-page-failure.component.scss']
 })
 export class OrderPageFailureComponent implements OnInit {
+
+  @Input() set responseData(value: OrderFailureResponse) {
+    this.data.title = 'Uh-Oh! Booking failed.';
+    this.data.description = 'Oops, something went wrong. Please try again later.'
+    this.data.footer = 'Order ID not available!';
+
+    if (value?.description) {
+      this.data.description = value.description;
+    }
+  }
+
   readonly ResultType = ResultType;
   readonly ButtonTheme = ButtonTheme;
 
@@ -16,14 +28,12 @@ export class OrderPageFailureComponent implements OnInit {
   homeBtnDetails = new ButtonConfig();
   tryAgainBtnDetails = new ButtonConfig();
 
+
   constructor(
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.data.title = 'Uh-Oh! Booking failed.';
-    this.data.description = 'Oops, something went wrong. Please try again later.'
-    this.data.footer = 'Order ID not available!';
     this.setBtnDetails();
   }
 
@@ -45,7 +55,9 @@ export class OrderPageFailureComponent implements OnInit {
    * Shows grounds list for try again
    */
   showGrounds() {
-    this.router.navigate(['/games', 'discover']);
+    if (this.responseData?.value) {
+      this.router.navigate(['/games', 'discover'], { queryParams: { slot: this.responseData.value } });
+    }
   }
 
   /**

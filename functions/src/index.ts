@@ -5,7 +5,7 @@ admin.initializeApp();
 import {checkUserExist} from "./checkUserExist";
 import {updateUserRole} from "./updateUserRole";
 import {updateProfile} from "./updateProfile";
-import {walletCreation} from "./createWallet";
+import {profileCreation} from "./createProfile";
 import {refundOrder} from "./refundOrder";
 import {modifySlot} from "./modifySlot";
 import {groundCreation} from "./createGround";
@@ -13,6 +13,8 @@ import {addSlot} from "./addSlot";
 import {bookingCreation} from "./bookingCreation";
 import {generateRzOrder} from "./generateRzOrder";
 import {paymentVerification} from "./paymentVerification";
+import {updateAuthProfile} from "./updateAuthProfile";
+import {deleteAuthProfile} from "./deleteAuthProfile";
 
 // Start writing Firebase Functions
 // https://firebase.google.com/docs/functions/typescript
@@ -33,14 +35,19 @@ export const verifyPayment = functions
   .region(REGION).https.onCall(paymentVerification);
 export const createBooking = functions
   .region(REGION).https.onCall(bookingCreation);
+export const createProfile = functions
+  .region(REGION).https.onCall(profileCreation);
 
 // Background Triggered functions
 export const updateSlot = functions
   .region(REGION).firestore.document("bookings/{bookingId}")
   .onWrite(modifySlot);
-export const createWallet = functions
-  .region(REGION).auth.user()
-  .onCreate(walletCreation);
+export const updateName = functions
+  .region(REGION).firestore.document("players/{playerId}")
+  .onUpdate(updateAuthProfile);
+export const deleteUser = functions
+  .region(REGION).firestore.document("players/{playerId}")
+  .onDelete(deleteAuthProfile);
 
 // Helper functions for Admin
 export const createGround = functions

@@ -52,14 +52,14 @@ export class MyGamesComponent implements OnInit {
    * Initializes page details
    */
   initPageDetails() {
-    const startTime = new Date().getTime();
+    const startTime = new Date().getTime() - Constants.ONE_DAY_IN_MILLISECONDS;
     const endTime = startTime + Constants.ONE_DAY_IN_MILLISECONDS;
     forkJoin([
-      this.groundService.getSlotsByRange(0, endTime),
+      this.groundService.getSlotsByRange(startTime, endTime),
       this.groundService.getGrounds(),
       this.groundService.getAllFacilities(),
       this.userService.getUsers(),
-      this.orderService.getBookingByUserId(this.user?.uid)
+      this.orderService.getBookingsByRange(startTime, endTime)
     ])
       .subscribe({
         next: (response) => {
@@ -67,8 +67,8 @@ export class MyGamesComponent implements OnInit {
           this.facilitiesList = response[2] || [];
           this.playersList = response[3] || [];
           this.bookingsList = response[4];
-          const allSlots = this.discoverGamesService.parseData(response);
-          this.data = allSlots.filter((slot) => this.bookingsList.find((booking) => booking.slotId === slot.slotId));
+          const alLSlots = this.discoverGamesService.parseData(response);
+          this.data = this.discoverGamesService.filterUserBookings(alLSlots, this.bookingsList, this.user.uid);
           this.selectedIndex = this.selectData();
           this.hideLoader();
         },
