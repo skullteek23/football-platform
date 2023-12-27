@@ -1,8 +1,8 @@
 import * as admin from "firebase-admin";
-import { DocumentSnapshot } from "firebase-admin/firestore";
-import { Change } from "firebase-functions/lib/common/change";
-import { Player } from "@ballzo-ui/core";
-import { UpdateRequest } from "firebase-admin/auth";
+import {DocumentSnapshot} from "firebase-admin/firestore";
+import {Change} from "firebase-functions/lib/common/change";
+import {Player} from "@ballzo-ui/core";
+import {UpdateRequest} from "firebase-admin/auth";
 
 /**
  * Modifies the display name of the user when the player name is updated
@@ -35,7 +35,7 @@ export async function updateAuthProfile(
 
     if (update.displayName || update.photoURL) {
       return admin.auth()
-        .updateUser(context.playerId, { ...update });
+        .updateUser(context.playerId, {...update});
     }
   } catch (error) {
     // Handle other errors
