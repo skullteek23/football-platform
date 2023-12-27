@@ -5,7 +5,7 @@ import { ColorsUtility } from "@app/utils/main-utilities/colors-utility";
 const logo = 'https://firebasestorage.googleapis.com/v0/b/football-platform-production.appspot.com/o/ballzoCustom%20Artbaord%202.png?alt=media&token=9b1d78d6-388b-46a5-ab84-debfa21b4c81';
 
 export const environmentCommon = {
-  version: '2.0.1',
+  version: '2.0.2',
   socials: {
     instagram: 'https://www.instagram.com/ballzo.india',
     youtube: 'https://www.youtube.com',
@@ -51,7 +51,7 @@ export const common = {
       [TabLabel.today]: 'Today',
       [TabLabel.tomorrow]: 'Tomorrow',
       [TabLabel.dayAfter]: 'Day After',
-      [TabLabel.farAway]: 'Later',
+      [TabLabel.farAway]: TabLabel.farAway,
       [TabLabel.past]: 'Finished',
     }
   }

@@ -5,8 +5,9 @@
       <div class="value">{{ data?.groundName}}</div>
     </div>
     <div class="game-info-container game-info-container-left">
-      <div class="label">{{ data?.timestamp | date: CUSTOM_DATE_FORMAT}}</div>
-      <div class="value">{{ formatter[data._day] }}</div>
+      <div class="label">{{ data?.timestamp | date: CUSTOM_DATE_FORMAT_3}}</div>
+      <div class="value">{{ formatter[data._day] > 3 ? (data?.timestamp | date: CUSTOM_DATE_FORMAT_6) :
+        formatter[data._day] }}</div>
     </div>
   </div>
 

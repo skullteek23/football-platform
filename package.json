@@ -32,7 +32,7 @@
     "@angular/platform-browser": "~13.0.0-next.0",
     "@angular/platform-browser-dynamic": "~13.0.0-next.0",
     "@angular/router": "~13.0.0-next.0",
-    "@ballzo-ui/core": "^1.0.26",
+    "@ballzo-ui/core": "^1.0.27",
     "firebase": "^10.4.0",
     "ngx-image-compress": "^13.1.16",
     "rxfire": "^6.0.4",

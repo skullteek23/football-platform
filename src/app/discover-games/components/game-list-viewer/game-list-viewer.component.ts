@@ -13,7 +13,8 @@ import { Subject } from 'rxjs';
 export class GameListViewerComponent implements OnInit {
 
   readonly buttonTheme = ButtonTheme;
-  readonly CUSTOM_DATE_FORMAT = Constants.DATE_TIME_FORMATS.format_3;
+  readonly CUSTOM_DATE_FORMAT_3 = Constants.DATE_TIME_FORMATS.format_3;
+  readonly CUSTOM_DATE_FORMAT_6 = Constants.DATE_TIME_FORMATS.format_6;
 
   @Input() data = new DiscoverGameSlot();
   @Input() isSelfBookings = false;
