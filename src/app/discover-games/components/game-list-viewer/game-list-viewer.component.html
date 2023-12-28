@@ -1,4 +1,4 @@
-<div class="main-container">
+<div class="main-container" [ngClass]="{'grayscale': isGameFinished}">
   <div class="game-info">
     <div class="game-info-container game-info-container-right">
       <div class="label">{{ data?.facilityName}}</div>
@@ -6,12 +6,12 @@
     </div>
     <div class="game-info-container game-info-container-left">
       <div class="label">{{ data?.timestamp | date: CUSTOM_DATE_FORMAT_3}}</div>
-      <div class="value">{{ formatter[data._day] > 3 ? (data?.timestamp | date: CUSTOM_DATE_FORMAT_6) :
+      <div class="value">{{ formatter?.data?._day > 3 ? (data?.timestamp | date: CUSTOM_DATE_FORMAT_6) :
         formatter[data._day] }}</div>
     </div>
   </div>
 
-  <div class="game-on-strip" *ngIf="!data?.availableSpots">
+  <div class="game-on-strip" *ngIf="!data?.availableSpots && !isGameFinished">
     <p>Game is ON!</p>
   </div>
 
@@ -53,7 +53,7 @@
   <app-wide-button [theme]="buttonTheme.secondary" (clickEv)="openGround()"
     [displayDetails]="viewGroundBtnDetails"></app-wide-button>
 
-  <div class="notes">
+  <div class="notes" *ngIf="showRules">
     <div class="sub-heading">
       Booking/Game Rules:
     </div>

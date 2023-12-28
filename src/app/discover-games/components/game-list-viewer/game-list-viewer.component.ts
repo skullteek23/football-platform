@@ -18,6 +18,7 @@ export class GameListViewerComponent implements OnInit {
 
   @Input() data = new DiscoverGameSlot();
   @Input() isSelfBookings = false;
+  @Input() showRules = false;
   @Output() groundOpen = new Subject<void>();
   @Output() playerJoinRequest = new Subject<void>();
   @Output() teamJoinRequest = new Subject<void>();
@@ -74,5 +75,12 @@ export class GameListViewerComponent implements OnInit {
       return;
     }
     this.teamJoinRequest.next();
+  }
+
+  /**
+   * Returns true if the game is finished
+   */
+  get isGameFinished() {
+    return this.data?._day < 0;
   }
 }

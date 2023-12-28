@@ -93,7 +93,7 @@ export class GroundService {
    * Returns the slots for the next three days
    * @returns
   */
-  getSlotsByRange(startTime: number = 0, endTime: number = 0): Observable<GroundSlot[]> {
+  getSlotsByRange(startTime: number = 0, endTime: number = new Date().getTime() + Constants.THREE_DAYS_IN_MILLISECONDS): Observable<GroundSlot[]> {
     const query = [];
     query.push(this.apiService.getWhereQuery('timestamp', '>=', startTime));
     query.push(this.apiService.getWhereQuery('timestamp', '<=', endTime));

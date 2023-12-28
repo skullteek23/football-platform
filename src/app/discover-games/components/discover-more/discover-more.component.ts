@@ -69,12 +69,18 @@ export class DiscoverMoreComponent implements OnInit {
           this.playersList = response[3] || [];
           this.bookingsList = response[4];
 
-          this.data = this.discoverGamesService.parseData(response);
+          this.data = this.discoverGamesService.parseData(
+            response[0],
+            this.groundsList,
+            this.facilitiesList,
+            this.playersList,
+            this.bookingsList
+          );
           this.selectedIndex = this.selectData();
           this.hideLoader();
         },
         error: (error) => {
-          this.data = this.discoverGamesService.parseData([]);
+          this.data = this.discoverGamesService.parseData([], [], [], [], []);
           this.selectedIndex = 0;
           this.snackbarService.displayError(error);
           this.hideLoader();
@@ -88,9 +94,12 @@ export class DiscoverMoreComponent implements OnInit {
    */
   selectData() {
     const qParams = this.route.snapshot.queryParams;
-    if (qParams && this.data?.length) {
+    if (qParams && qParams['slot'] && this.data?.length) {
       const index = this.data.findIndex(data => data.slotId === qParams['slot']);
-      return index > -1 ? index : 0;
+      if (index < 0) {
+        this.router.navigate(['/error']);
+      }
+      return index;
     }
     return 0;
   }

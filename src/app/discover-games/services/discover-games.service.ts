@@ -30,14 +30,17 @@ export class DiscoverGamesService {
    * @param response
    * @returns
    */
-  parseData(response: any[]): DiscoverGameSlot[] {
+  parseData(
+    slots: GroundSlot[],
+    grounds: Ground[],
+    facilities: GroundFacility[],
+    players: Player[],
+    bookings: Booking[]
+  ): DiscoverGameSlot[] {
+    if (!slots?.length || !grounds?.length || !grounds?.length || !facilities?.length || !players?.length) {
+      return [];
+    }
     const data: DiscoverGameSlot[] = [];
-
-    const slots: GroundSlot[] = response[0] || [];
-    const grounds: Ground[] = response[1] || [];
-    const facilities: GroundFacility[] = response[2] || [];
-    const players: Player[] = response[3] || [];
-    const bookings: Booking[] = response[4] || [];
 
     slots.forEach((slot) => {
       const gameSlot = new DiscoverGameSlot();
@@ -124,26 +127,6 @@ export class DiscoverGamesService {
       return `${name} +${index}`;
     }
     return Constants.DELETED_USER_PLACEHOLDER;
-  }
-
-  /**
-   * Filters the user bookings
-   * @param allSlots
-   * @param bookings
-   * @param currentUserID
-   * @returns
-   */
-  filterUserBookings(allSlots: DiscoverGameSlot[], bookings: Booking[], currentUserID: string) {
-    // Create a Set of slotIDs from array A where userID matches currentUserID
-    const slotIDsSet = new Set(bookings
-      .filter(item => item.uid === currentUserID)
-      .map(item => item.slotId)
-    );
-
-    // Filter array B based on slotIDs present in slotIDsSet
-    const filteredB = allSlots.filter(item => slotIDsSet.has(item.slotId));
-
-    return filteredB;
   }
 
   /**

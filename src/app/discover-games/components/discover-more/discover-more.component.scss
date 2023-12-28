@@ -3,7 +3,7 @@
 
 .main-container {
   @include mainPageContainer;
-  background: $grey-3 !important;
+  background: $white;
   min-height: calc(100vh - 56px);
 
   .heading {
