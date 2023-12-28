@@ -15,7 +15,7 @@
   },
   "main": "lib/index.js",
   "dependencies": {
-    "@ballzo-ui/core": "^1.0.26",
+    "@ballzo-ui/core": "^1.0.27",
     "crypto": "^1.0.1",
     "firebase-admin": "^11.10.1",
     "firebase-functions": "^4.4.1",
