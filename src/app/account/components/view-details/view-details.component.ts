@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountService } from '@app/account/services/account.service';
 import { AuthService } from '@app/authentication/auth.service';
-import { Constants } from '@ballzo-ui/core';
+import { Constants, Player } from '@ballzo-ui/core';
 import { AccountMessages } from '@app/utils/constant/common-messages';
 import { IUser } from '@app/utils/models/user.model';
 import { PlayerStats, Position } from '@ballzo-ui/core';
@@ -37,6 +37,7 @@ export class ViewDetailsComponent implements OnInit {
   role: Position = Position.striker;
   playerStats = new PlayerStats();
   disableManagerBtn = true;
+  player = new Player();
 
   constructor(
     private authService: AuthService,
@@ -58,7 +59,7 @@ export class ViewDetailsComponent implements OnInit {
         this.getUserDetails(user.uid);
         this.getUserStats(user.uid);
         this.setBtnDetails();
-        this.getUserRole();
+        // this.getUserRole();
       }
     })
   }
@@ -68,12 +69,15 @@ export class ViewDetailsComponent implements OnInit {
    * @param uid
   */
   getUserDetails(uid: string) {
+    this.isPageInitialized = false;
     this.userService.getUser(uid).subscribe(response => {
       if (response) {
+        this.player = response;
         this.personalDetailsData.detailData.push({ icon: 'cake', label: this.accountService.getDob(response.dob) });
         this.personalDetailsData.detailData.push({ icon: 'place', label: response._location });
         this.personalDetailsData.detailData.push({ icon: 'email', label: this.user?.email || Constants.NOT_AVAILABLE });
       }
+      this.isPageInitialized = true;
     })
   }
 
@@ -93,7 +97,6 @@ export class ViewDetailsComponent implements OnInit {
    * Get the user role
    */
   getUserRole() {
-    this.isPageInitialized = false;
     this.authService.getCustomClaims(this.user)
       .then(value => {
         const role = this.authService.parseRole(value);

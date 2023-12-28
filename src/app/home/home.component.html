@@ -8,7 +8,7 @@
   <div class="header-content-container" *ngIf="isPageInitialized">
     <div class="salutation-strip">
       <span class="page-sub-label" *ngIf="name">
-        Hi, {{ name | titlecase }}!
+        Hi, {{ name }}!
       </span>
       <ng-container *ngIf="isUserLogged">
         <button mat-icon-button (click)="navigateTo('/user/account')" *ngIf="!photoUrl">
