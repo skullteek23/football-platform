@@ -33,10 +33,13 @@ export async function updateAuthProfile(
       update.displayName = newName;
     }
 
-    if (update.displayName || update.photoURL) {
+    const uid = context?.params?.playerId;
+
+    if (uid && (update.displayName || update.photoURL)) {
       return admin.auth()
-        .updateUser(context.playerId, {...update});
+        .updateUser(uid, {...update});
     }
+    return false;
   } catch (error) {
     // Handle other errors
     console.log("Error updating name: ", error);
