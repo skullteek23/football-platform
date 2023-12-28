@@ -15,12 +15,12 @@ import {
   signInWithPhoneNumber,
   signOut,
   updatePhoneNumber,
-  updateProfile,
 } from '@angular/fire/auth';
-import { IUserProperties } from '@ballzo-ui/core';
 import {
   Constants,
   LocalStorageProperties,
+  Position,
+  isEnumKey
 } from '@ballzo-ui/core';
 import { SnackbarService } from '@app/utils/services/snackbar.service';
 import { AuthMessages } from '@app/utils/constant/common-messages';
@@ -29,8 +29,6 @@ import { SessionStorageService } from '@app/utils/services/session-storage.servi
 import { CoreApiService } from '@app/utils/services/core-api.service';
 import { HttpsCallableResult } from 'firebase/functions';
 import { cloudFunctionNames } from '@app/utils/constant/api-constants';
-import { isEnumKey } from '@ballzo-ui/core';
-import { Position } from '@ballzo-ui/core';
 
 @Injectable({
   providedIn: 'root',
