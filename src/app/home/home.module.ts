@@ -10,6 +10,7 @@ import { LoaderModule } from '@app/shared-modules/loader/loader.module';
 import { InteractiveCardModule } from '@app/shared-modules/interactive-card/interactive-card.module';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [HomeComponent],
@@ -24,6 +25,7 @@ import { MatChipsModule } from '@angular/material/chips';
     InteractiveCardModule,
     MatIconModule,
     MatChipsModule,
+    MatButtonModule
   ],
   exports: [HomeComponent],
   providers: [DatePipe]

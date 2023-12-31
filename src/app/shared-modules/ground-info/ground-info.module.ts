@@ -4,6 +4,7 @@ import { GroundInfoComponent } from './ground-info.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { LoaderModule } from '../loader/loader.module';
+import { MatButtonModule } from '@angular/material/button';
 
 
 
@@ -14,7 +15,9 @@ import { LoaderModule } from '../loader/loader.module';
   imports: [
     MatIconModule,
     MatChipsModule,
-    LoaderModule
+    LoaderModule,
+    MatButtonModule,
+    CommonModule
   ],
   exports: [
     GroundInfoComponent
