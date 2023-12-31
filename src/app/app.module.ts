@@ -30,6 +30,9 @@ import { NgxImageCompressService } from 'ngx-image-compress';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [AppComponent, TopNavComponent],
@@ -46,6 +49,9 @@ import { MatIconModule } from '@angular/material/icon';
     MatChipsModule,
     MatIconModule,
     MatToolbarModule,
+    MatBottomSheetModule,
+    MatSnackBarModule,
+    MatButtonModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),

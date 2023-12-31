@@ -4,21 +4,21 @@ export const FOOTER_SOCIAL_LIST = [
   {
     name: 'Facebook',
     link: environmentCommon.socials.facebook,
-    src: 'assets/icons/facebook.svg',
+    src: 'assets/images/icons/facebook.svg',
   },
   {
     name: 'Youtube',
     link: environmentCommon.socials.youtube,
-    src: 'assets/icons/youtube.svg',
+    src: 'assets/images/icons/youtube.svg',
   },
   {
     name: 'Instagram',
     link: environmentCommon.socials.instagram,
-    src: 'assets/icons/instagram.svg',
+    src: 'assets/images/icons/instagram.svg',
   },
   {
     name: 'LinkedIn',
     link: environmentCommon.socials.linkedin,
-    src: 'assets/icons/linkedin.svg',
+    src: 'assets/images/icons/linkedin.svg',
   },
 ];

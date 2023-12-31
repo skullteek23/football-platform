@@ -82,7 +82,7 @@ export class WalletComponent implements OnInit {
             } else if (txn.type === TransactionType.debit) {
               this.debitTxnList.push(txn);
             }
-          })
+          });
           this.isTransactionsInit = true;
         },
         error: (err) => {
