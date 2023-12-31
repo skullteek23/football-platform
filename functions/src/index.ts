@@ -2,19 +2,16 @@ import * as admin from "firebase-admin";
 import * as functions from "firebase-functions";
 admin.initializeApp();
 
-import {checkUserExist} from "./checkUserExist";
-import {updateUserRole} from "./updateUserRole";
-import {updateProfile} from "./updateProfile";
-import {profileCreation} from "./createProfile";
-import {refundOrder} from "./refundOrder";
-import {modifySlot} from "./modifySlot";
-import {groundCreation} from "./createGround";
-import {addSlot} from "./addSlot";
-import {bookingCreation} from "./bookingCreation";
-import {generateRzOrder} from "./generateRzOrder";
-import {paymentVerification} from "./paymentVerification";
-import {updateAuthProfile} from "./updateAuthProfile";
-import {deleteAuthProfile} from "./deleteAuthProfile";
+import { checkUserExist } from "./checkUserExist";
+import { updateProfile } from "./updateProfile";
+import { profileCreation } from "./createProfile";
+import { refundOrder } from "./refundOrder";
+import { modifySlot } from "./modifySlot";
+import { bookingCreation } from "./bookingCreation";
+import { generateRzOrder } from "./generateRzOrder";
+import { paymentVerification } from "./paymentVerification";
+import { updateAuthProfile } from "./updateAuthProfile";
+import { deleteAuthProfile } from "./deleteAuthProfile";
 
 // Start writing Firebase Functions
 // https://firebase.google.com/docs/functions/typescript
@@ -23,8 +20,6 @@ const REGION = "asia-south1";
 // Callable functions
 export const userExists = functions
   .region(REGION).https.onCall(checkUserExist);
-export const setRole = functions
-  .region(REGION).https.onCall(updateUserRole);
 export const returnOrder = functions
   .region(REGION).https.onCall(refundOrder);
 export const updateUserProfile = functions
@@ -48,11 +43,3 @@ export const updateName = functions
 export const deleteUser = functions
   .region(REGION).firestore.document("players/{playerId}")
   .onDelete(deleteAuthProfile);
-
-// Helper functions for Admin
-export const createGround = functions
-  .region(REGION).https.onCall(groundCreation);
-export const addNewSlot = functions
-  .region(REGION).https.onCall(addSlot);
-
-

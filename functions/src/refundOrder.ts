@@ -1,12 +1,11 @@
 import * as admin from "firebase-admin";
 import * as functions from "firebase-functions";
 const db = admin.firestore();
-import {checkKeysExist, isRequestAuthenticated} from "./functions-utils";
-import {OrderRz} from "@ballzo-ui/core";
+import { checkKeysExist, getCancellationBehavior, isRequestAuthenticated } from "./functions-utils";
+import { OrderRz } from "@ballzo-ui/core";
 
 import Razorpay = require("razorpay");
-import {RAZORPAY} from "./rz";
-import {getCancellationBehavior} from "./cancellationBehavior";
+import { RAZORPAY } from "./rz";
 
 /**
  * Refunds order and free associated slots
@@ -52,7 +51,7 @@ export async function refundOrder(data: any, context: any): Promise<any> {
 
   try {
     const instance = new Razorpay(
-      {key_id: KEY_ID, key_secret: KEY_SECRET}
+      { key_id: KEY_ID, key_secret: KEY_SECRET }
     );
 
     const payments = await instance.orders.fetchPayments(orderID);
@@ -60,7 +59,15 @@ export async function refundOrder(data: any, context: any): Promise<any> {
     if (payments && payments.count >= 1) {
       payments.items.forEach(async (payment) => {
         if (payment.status !== "refunded") {
-          await instance.payments.refund(payment.id, {amount: payment.amount});
+          try {
+            await instance.payments.refund(payment.id, { amount: payment.amount });
+          } catch (error) {
+            console.log("Razorpay Refund error: ", error);
+            throw new functions.https.HttpsError(
+              "unknown",
+              "Refund failed."
+            );
+          }
         }
       });
 
