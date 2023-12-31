@@ -2,16 +2,16 @@ import * as admin from "firebase-admin";
 import * as functions from "firebase-functions";
 admin.initializeApp();
 
-import { checkUserExist } from "./checkUserExist";
-import { updateProfile } from "./updateProfile";
-import { profileCreation } from "./createProfile";
-import { refundOrder } from "./refundOrder";
-import { modifySlot } from "./modifySlot";
-import { bookingCreation } from "./bookingCreation";
-import { generateRzOrder } from "./generateRzOrder";
-import { paymentVerification } from "./paymentVerification";
-import { updateAuthProfile } from "./updateAuthProfile";
-import { deleteAuthProfile } from "./deleteAuthProfile";
+import {checkUserExist} from "./checkUserExist";
+import {updateProfile} from "./updateProfile";
+import {profileCreation} from "./createProfile";
+import {refundOrder} from "./refundOrder";
+import {modifySlot} from "./modifySlot";
+import {bookingCreation} from "./bookingCreation";
+import {generateRzOrder} from "./generateRzOrder";
+import {paymentVerification} from "./paymentVerification";
+import {updateAuthProfile} from "./updateAuthProfile";
+import {deleteAuthProfile} from "./deleteAuthProfile";
 
 // Start writing Firebase Functions
 // https://firebase.google.com/docs/functions/typescript

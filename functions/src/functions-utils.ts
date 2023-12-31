@@ -1,10 +1,14 @@
 import * as admin from "firebase-admin";
 import * as functions from "firebase-functions";
 
+import {
+  GroundSlot,
+  SlotStatus,
+  CancellationBehavior,
+  Constants,
+} from "@ballzo-ui/core";
 const db = admin.firestore();
 
-import { GroundSlot, SlotStatus } from "@ballzo-ui/core";
-import { CancellationBehavior, Constants } from "@ballzo-ui/core";
 
 /**
  * Check if all the keys exist in the data object
