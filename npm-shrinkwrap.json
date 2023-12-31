@@ -19,7 +19,7 @@
         "@angular/platform-browser": "~13.0.0-next.0",
         "@angular/platform-browser-dynamic": "~13.0.0-next.0",
         "@angular/router": "~13.0.0-next.0",
-        "@ballzo-ui/core": "^1.0.10",
+        "@ballzo-ui/core": "^1.0.27",
         "firebase": "^10.4.0",
         "ngx-image-compress": "^13.1.16",
         "rxfire": "^6.0.4",
@@ -2679,9 +2679,9 @@
       }
     },
     "node_modules/@ballzo-ui/core": {
-      "version": "1.0.10",
-      "resolved": "https://registry.npmjs.org/@ballzo-ui/core/-/core-1.0.10.tgz",
-      "integrity": "sha512-Q/zAtEPYI9ZOMMl8fJqEL+yyAwG6v3urQQhng/L9Z63z7HNRI8pb/KdokEerBzcH+wJeqnHqwKWHH/lwciDaRQ=="
+      "version": "1.0.27",
+      "resolved": "https://registry.npmjs.org/@ballzo-ui/core/-/core-1.0.27.tgz",
+      "integrity": "sha512-if5+qCho+MWE4xYmKT495S8o9NlJvzPWg0SPkMM5A6qLWw9nhhR9l5jJUNXLVIH3AKKJQmvwvcln812ugpMZ3g=="
     },
     "node_modules/@colors/colors": {
       "version": "1.5.0",
@@ -17287,9 +17287,9 @@
       }
     },
     "@ballzo-ui/core": {
-      "version": "1.0.10",
-      "resolved": "https://registry.npmjs.org/@ballzo-ui/core/-/core-1.0.10.tgz",
-      "integrity": "sha512-Q/zAtEPYI9ZOMMl8fJqEL+yyAwG6v3urQQhng/L9Z63z7HNRI8pb/KdokEerBzcH+wJeqnHqwKWHH/lwciDaRQ=="
+      "version": "1.0.27",
+      "resolved": "https://registry.npmjs.org/@ballzo-ui/core/-/core-1.0.27.tgz",
+      "integrity": "sha512-if5+qCho+MWE4xYmKT495S8o9NlJvzPWg0SPkMM5A6qLWw9nhhR9l5jJUNXLVIH3AKKJQmvwvcln812ugpMZ3g=="
     },
     "@colors/colors": {
       "version": "1.5.0",

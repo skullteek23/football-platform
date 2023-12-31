@@ -50,3 +50,37 @@
 .mat-tab-group[mat-stretch-tabs]>.mat-tab-header .mat-tab-label {
   flex-basis: unset !important;
 }
+
+// .mat-tab-nav-bar {
+//   .mat-tab-link-container .mat-tab-list .mat-tab-links {
+//     .mat-tab-link {
+//       text-decoration: none !important;
+
+//       .custom-tab-label {
+//         @include flexCenter(column, 0px);
+
+//         .label {
+//           font-size: $font-size-s;
+//           font-weight: 400;
+//           color: $black;
+//           white-space: normal;
+//         }
+//       }
+//     }
+
+//     .mat-tab-link.mat-tab-label-active {
+//       opacity: 1 !important;
+
+//       .custom-tab-label {
+//         @include flexCenter(column, 0px);
+
+//         .label {
+//           font-size: $font-size-s;
+//           font-weight: 500;
+//           color: $primary-color;
+//           opacity: 1 !important;
+//         }
+//       }
+//     }
+//   }
+// }

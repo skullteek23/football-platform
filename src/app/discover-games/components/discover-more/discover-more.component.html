@@ -1,0 +1,21 @@
+<div class="main-container discover-games-container" *ngIf="data?.length">
+  <div class="heading">
+    <button mat-mini-fab (click)="prev()" [disabled]="selectedIndex <= 0" color="primary"
+      class="floating-buttons button-left">
+      <mat-icon fontSet="material-icons-round">chevron_left</mat-icon>
+    </button>
+    <span class="page-sub-label">Discover nearby games:</span>
+    <button mat-mini-fab color="primary" (click)="next()" [disabled]="selectedIndex >= (data.length - 1)"
+      class="floating-buttons button-right">
+      <mat-icon fontSet="material-icons-round">chevron_right</mat-icon>
+    </button>
+  </div>
+  <app-game-list-viewer [data]="data[selectedIndex]" (groundOpen)="openGround()" (playerJoinRequest)="joinGame()"
+    (teamJoinRequest)="joinGameAsTeam()"></app-game-list-viewer>
+</div>
+
+<div class="side-container" *ngIf="!data?.length">
+  <app-placeholder [message]="messages.error.noSlots"></app-placeholder>
+</div>
+
+<app-loader *ngIf="isLoaderShown"></app-loader>

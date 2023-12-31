@@ -1,9 +1,9 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable, firstValueFrom, of, switchMap, take } from 'rxjs';
-import { BottomSheetService } from '../services/bottom-sheet.service';
-import { LoginBottomSheetComponent } from '@app/authentication/login-bottom-sheet/login-bottom-sheet.component';
+import { BottomSheetService } from '../utils/services/bottom-sheet.service';
+import { LoginBottomSheetComponent } from '@app/authentication/login/login-bottom-sheet.component';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
-import { SignupBottomSheetComponent } from './signup-bottom-sheet/signup-bottom-sheet.component';
+import { SignupBottomSheetComponent } from './signup/signup-bottom-sheet.component';
 import {
   Auth,
   ConfirmationResult,
@@ -15,22 +15,20 @@ import {
   signInWithPhoneNumber,
   signOut,
   updatePhoneNumber,
-  updateProfile,
 } from '@angular/fire/auth';
-import { IUserProperties } from '@ballzo-ui/core';
 import {
   Constants,
   LocalStorageProperties,
+  Position,
+  isEnumKey
 } from '@ballzo-ui/core';
-import { SnackbarService } from '@app/services/snackbar.service';
-import { AuthMessages } from '@app/constant/common-messages';
-import { LocalStorageService } from '@app/services/local-storage.service';
-import { SessionStorageService } from '@app/services/session-storage.service';
-import { CoreApiService } from '@app/services/core-api.service';
+import { SnackbarService } from '@app/utils/services/snackbar.service';
+import { AuthMessages } from '@app/utils/constant/common-messages';
+import { LocalStorageService } from '@app/utils/services/local-storage.service';
+import { SessionStorageService } from '@app/utils/services/session-storage.service';
+import { CoreApiService } from '@app/utils/services/core-api.service';
 import { HttpsCallableResult } from 'firebase/functions';
-import { cloudFunctionNames } from '@app/constant/api-constants';
-import { isEnumKey } from '@ballzo-ui/core';
-import { Position } from '@ballzo-ui/core';
+import { cloudFunctionNames } from '@app/utils/constant/api-constants';
 
 @Injectable({
   providedIn: 'root',
@@ -86,6 +84,14 @@ export class AuthService {
     } else {
       return of(null);
     }
+  }
+
+  /**
+   * Returns user observable
+   * @returns
+   */
+  _authState(): Observable<User | null> {
+    return authState(this.auth);
   }
 
   /**
@@ -156,6 +162,14 @@ export class AuthService {
   }
 
   /**
+   * Create profile for the user
+   * @param displayName
+   */
+  createProfile(displayName: string): Promise<any> {
+    return this.coreApiService.callHttpFunction(cloudFunctionNames.createProfile, { displayName });
+  }
+
+  /**
    * Create user API call to backend
    */
   signup(phoneNumber: string) {
@@ -196,18 +210,6 @@ export class AuthService {
     this.localStorageService.clear();
     this.sessionStorageService.clear();
     this.router.navigate(['/']);
-  }
-
-  /**
-   * Updates user profile
-   * @param updates
-   * @returns
-   */
-  updateUserProfile(updates: Partial<IUserProperties>): Promise<any> {
-    if (this.user && (updates.displayName || updates.photoURL)) {
-      return updateProfile(this.user, updates);
-    }
-    return Promise.reject(null);
   }
 
   /**

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { WalletComponent } from './wallet.component';
 import { RouterModule } from '@angular/router';
 import { MatTabsModule } from '@angular/material/tabs';

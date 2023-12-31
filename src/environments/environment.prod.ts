@@ -10,10 +10,14 @@ export const environment = {
   },
   urls: {
     admin: 'https://admin.ballzo.in',
-    whatsAppGroup: 'https://chat.whatsapp.com/K0EJ1dZfG0d6n4PDhHdmRc',
+    player: 'https://ballzo.in'
   },
   locationApiKey: {
     countryStateCityApiKey: 'Rjc1ZmpjdGhCbWRrV2JnMHdnUGptaklVZjNhVWFpMlpnRUJFV1VpbQ==',
+  },
+  razorpay: {
+    keySecret: '6abn2JA4H40dd1mw601yvabL',
+    keyId: 'rzp_live_Kuy4zQmRYBu5VZ'
   },
   production: true,
 };

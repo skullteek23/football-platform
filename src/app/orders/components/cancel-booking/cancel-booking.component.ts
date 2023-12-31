@@ -1,13 +1,18 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
-import { OrderMessages } from '@app/constant/common-messages';
-import { BottomSheetService } from '@app/services/bottom-sheet.service';
-import { OrderService } from '@app/services/order.service';
-import { SnackbarService } from '@app/services/snackbar.service';
+import { OrderMessages } from '@app/utils/constant/common-messages';
+import { BottomSheetService } from '@app/utils/services/bottom-sheet.service';
+import { OrderService } from '@app/utils/services/order.service';
+import { SnackbarService } from '@app/utils/services/snackbar.service';
 import { ButtonConfig } from '@app/shared-modules/buttons/models/button.model';
-import { getCloudFnErrorMsg } from '@app/utils/api-error-handling-utility';;
 import { Router } from '@angular/router';
 import { Constants } from '@ballzo-ui/core';
+import { getCloudFnErrorMsg } from '@app/utils/main-utilities/api-error-handling-utility';
+
+export interface ICancellationData {
+  orderID: string;
+  bookingID: string;
+}
 
 @Component({
   selector: 'app-cancel-booking',
@@ -24,13 +29,12 @@ export class CancelBookingComponent implements OnInit {
   reason = '';
   btnDetails = new ButtonConfig();
 
-
   constructor(
     private sheetService: BottomSheetService,
     private orderService: OrderService,
     private snackbarService: SnackbarService,
     private router: Router,
-    @Inject(MAT_BOTTOM_SHEET_DATA) public orderID: string
+    @Inject(MAT_BOTTOM_SHEET_DATA) public data: ICancellationData
   ) { }
 
   ngOnInit(): void {
@@ -52,7 +56,7 @@ export class CancelBookingComponent implements OnInit {
   cancelBooking() {
     if (this.reason !== '' && this.reasonsList.includes(this.reason)) {
       this.showLoader();
-      this.orderService.cancelBooking(this.orderID, this.reason)
+      this.orderService.cancelBooking(this.data?.orderID, this.data?.bookingID, this.reason)
         .then(() => {
           this.reason = '';
           this.snackbarService.displayCustomMsg(OrderMessages.success.cancel);

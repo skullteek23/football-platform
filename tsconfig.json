@@ -1,4 +1,3 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
   "compilerOptions": {
@@ -21,10 +20,10 @@
     "lib": ["es2020", "dom"],
     "paths": {
       "@app/*": ["src/app/*"],
-      "@services/*": ["src/app/services/*"],
+      "@services/*": ["src/app/utils/services/*"],
       "@shared/*": ["src/app/shared-modules/*"],
       "@environments/*": ["src/environments/*"],
-      "@models/*": ["src/app/models/*"],
+      "@models/*": ["src/app/utils/models/*"],
       "@utils/*": ["src/app/utils/*"],
       "@auth/*": ["src/app/authentication/*"]
     }

@@ -4,16 +4,16 @@ import { Router } from '@angular/router';
 import { AccountConstants } from '@app/account/constants/account.constants';
 import { AccountService } from '@app/account/services/account.service';
 import { AuthService } from '@app/authentication/auth.service';
-import { IUser } from '@app/models/user.model';
+import { IUser } from '@app/utils/models/user.model';
 import { ILocationCity, ILocationState } from '@ballzo-ui/core';
 import { Player } from '@ballzo-ui/core';
-import { LocationService } from '@app/services/location.service';
-import { SnackbarService } from '@app/services/snackbar.service';
-import { UserService } from '@app/services/user.service';
+import { LocationService } from '@app/utils/services/location.service';
+import { SnackbarService } from '@app/utils/services/snackbar.service';
+import { UserService } from '@app/utils/services/user.service';
 import { ButtonConfig } from '@app/shared-modules/buttons/models/button.model';
 import { ArraySorting, compareFunction } from '@ballzo-ui/core';
-import { FULL_NAME_VALIDATORS } from '@app/utils/form-validators-utility';
-import { AccountMessages } from '@app/constant/common-messages';
+import { FULL_NAME_VALIDATORS } from '@app/utils/main-utilities/form-validators-utility';
+import { AccountMessages } from '@app/utils/constant/common-messages';
 
 @Component({
   selector: 'app-edit-details',
@@ -200,7 +200,7 @@ export class EditDetailsComponent implements OnInit {
           this.snackbarService.displayCustomMsg(this.messages.success.changesSaved);
         }
         this.hideLoader();
-        this.router.navigate(['/m', 'user', 'account']);
+        this.router.navigate(['user', 'account']);
       })
       .catch(err => {
         this.hideLoader();

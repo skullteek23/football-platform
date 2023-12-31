@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountService } from '@app/account/services/account.service';
 import { AuthService } from '@app/authentication/auth.service';
-import { Constants } from '@ballzo-ui/core';
-import { AccountMessages } from '@app/constant/common-messages';
-import { IUser } from '@app/models/user.model';
+import { Constants, Player } from '@ballzo-ui/core';
+import { AccountMessages } from '@app/utils/constant/common-messages';
+import { IUser } from '@app/utils/models/user.model';
 import { PlayerStats, Position } from '@ballzo-ui/core';
-import { BottomSheetService } from '@app/services/bottom-sheet.service';
-import { ShowConfirmationService } from '@app/services/show-confirmation.service';
-import { SnackbarService } from '@app/services/snackbar.service';
-import { UserService } from '@app/services/user.service';
+import { BottomSheetService } from '@app/utils/services/bottom-sheet.service';
+import { ShowConfirmationService } from '@app/utils/services/show-confirmation.service';
+import { SnackbarService } from '@app/utils/services/snackbar.service';
+import { UserService } from '@app/utils/services/user.service';
 import {
   ButtonConfig,
   ButtonTheme,
@@ -17,7 +17,7 @@ import {
 import { ChangeNumberComponent } from '@app/shared-modules/change-number/change-number.component';
 import { DetailsContainerData } from '@app/shared-modules/details-container/models/details-container.model';
 import { isEnumKey } from '@ballzo-ui/core';
-import { getCloudFnErrorMsg } from '@app/utils/api-error-handling-utility';
+import { getCloudFnErrorMsg } from '@app/utils/main-utilities/api-error-handling-utility';
 
 @Component({
   selector: 'app-view-details',
@@ -37,6 +37,7 @@ export class ViewDetailsComponent implements OnInit {
   role: Position = Position.striker;
   playerStats = new PlayerStats();
   disableManagerBtn = true;
+  player = new Player();
 
   constructor(
     private authService: AuthService,
@@ -58,7 +59,7 @@ export class ViewDetailsComponent implements OnInit {
         this.getUserDetails(user.uid);
         this.getUserStats(user.uid);
         this.setBtnDetails();
-        this.getUserRole();
+        // this.getUserRole();
       }
     })
   }
@@ -68,12 +69,15 @@ export class ViewDetailsComponent implements OnInit {
    * @param uid
   */
   getUserDetails(uid: string) {
+    this.isPageInitialized = false;
     this.userService.getUser(uid).subscribe(response => {
       if (response) {
+        this.player = response;
         this.personalDetailsData.detailData.push({ icon: 'cake', label: this.accountService.getDob(response.dob) });
         this.personalDetailsData.detailData.push({ icon: 'place', label: response._location });
         this.personalDetailsData.detailData.push({ icon: 'email', label: this.user?.email || Constants.NOT_AVAILABLE });
       }
+      this.isPageInitialized = true;
     })
   }
 
@@ -93,7 +97,6 @@ export class ViewDetailsComponent implements OnInit {
    * Get the user role
    */
   getUserRole() {
-    this.isPageInitialized = false;
     this.authService.getCustomClaims(this.user)
       .then(value => {
         const role = this.authService.parseRole(value);
@@ -157,7 +160,7 @@ export class ViewDetailsComponent implements OnInit {
    * Navigate to orders page
    */
   goToOrders() {
-    this.router.navigate(['/m', 'user', 'orders']);
+    this.router.navigate(['user', 'orders']);
   }
 
   /**
@@ -171,6 +174,6 @@ export class ViewDetailsComponent implements OnInit {
    * Edit the details
    */
   editDetails() {
-    this.router.navigate(['/m', 'user', 'account', 'edit'])
+    this.router.navigate(['user', 'account', 'edit'])
   }
 }

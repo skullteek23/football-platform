@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Constants } from '@ballzo-ui/core';
 import { FileType, dataURLtoFile } from '@ballzo-ui/core';
 import { NgxImageCompressService } from 'ngx-image-compress';
-import { PLAYER, maxImageSizeInMb } from '@app/constant/image-compression-constants';
+import { PLAYER, maxImageSizeInMb } from '@app/utils/constant/image-compression-constants';
 
 @Component({
   selector: 'app-profile-photo-uploader',

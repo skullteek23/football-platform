@@ -6,7 +6,7 @@ import { HomeConstants } from '../constants/home.constants';
 import { BackgroundCSS } from '@ballzo-ui/core';
 import { DatePipe } from '@angular/common';
 import { Constants } from '@ballzo-ui/core';
-import { ColorsUtility } from '@app/utils/colors-utility';
+import { ColorsUtility } from '@app/utils/main-utilities/colors-utility';
 
 @Injectable({
   providedIn: 'root'

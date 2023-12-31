@@ -16,32 +16,36 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideFunctions, getFunctions } from '@angular/fire/functions';
 import { providePerformance, getPerformance } from '@angular/fire/performance';
 import { provideStorage, getStorage } from '@angular/fire/storage';
-import { MaterialModule } from './material.module';
 import { TopNavComponent } from './top-nav/top-nav.component';
 import { LogoModule } from './shared-modules/logo/logo.module';
-import { LoginBottomSheetModule } from './authentication/login-bottom-sheet/login-bottom-sheet.module';
+import { LoginBottomSheetModule } from './authentication/login/login-bottom-sheet.module';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { LoaderModule } from './shared-modules/loader/loader.module';
 import { HomeModule } from './home/home.module';
-import { SignupBottomSheetModule } from './authentication/signup-bottom-sheet/signup-bottom-sheet.module';
-import { NavigationService } from './services/navigation.service';
-import { CoreApiService } from './services/core-api.service';
-import { DummyDataService } from './services/dummy-data.service';
-import { DatePipe } from '@angular/common';
+import { SignupBottomSheetModule } from './authentication/signup/signup-bottom-sheet.module';
+import { NavigationService } from './utils/services/navigation.service';
+import { CoreApiService } from './utils/services/core-api.service';
+import { CommonModule, DatePipe } from '@angular/common';
 import { NgxImageCompressService } from 'ngx-image-compress';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [AppComponent, TopNavComponent],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule,
     LogoModule,
     LoginBottomSheetModule,
     SignupBottomSheetModule,
     LoaderModule,
     HomeModule,
+    MatChipsModule,
+    MatIconModule,
+    MatToolbarModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
@@ -63,7 +67,7 @@ import { NgxImageCompressService } from 'ngx-image-compress';
     {
       provide: APP_INITIALIZER,
       useFactory: () => () => null,
-      deps: [NavigationService, CoreApiService, DummyDataService],
+      deps: [NavigationService, CoreApiService],
       multi: true,
     },
     DatePipe,

@@ -27,7 +27,7 @@ export class WalletService {
         const date = this.datePipe.transform(transaction.createdOn, Constants.DATE_TIME_FORMATS.format_4);
         data.id = transaction.orderId;
         data.label = transaction._description;
-        data.routeLink = '/m/user/orders/view/' + transaction.orderId;
+        data.routeLink = '/user/orders/view/' + transaction.orderId;
         data.viewValueClass = transaction._highlightClass;
         if (amount) {
           data.viewValue = amount;

@@ -1,18 +1,18 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from '@app/authentication/auth.service';
-import { AccountMessages, AuthMessages } from '@app/constant/common-messages';
-import { IUser } from '@app/models/user.model';
-import { BottomSheetService } from '@app/services/bottom-sheet.service';
-import { ShowConfirmationService } from '@app/services/show-confirmation.service';
+import { AccountMessages, AuthMessages } from '@app/utils/constant/common-messages';
+import { IUser } from '@app/utils/models/user.model';
+import { BottomSheetService } from '@app/utils/services/bottom-sheet.service';
+import { ShowConfirmationService } from '@app/utils/services/show-confirmation.service';
 import { ButtonConfig } from '../buttons/models/button.model';
-import { SnackbarService } from '@app/services/snackbar.service';
+import { SnackbarService } from '@app/utils/services/snackbar.service';
 import { Constants } from '@ballzo-ui/core';
 import { MatInput } from '@angular/material/input';
-import { AnimationsList } from '@app/services/animation.service';
+import { AnimationsList } from '@app/utils/services/animation.service';
 import { PhoneAuthProvider } from '@angular/fire/auth';
-import { MOBILE_VALIDATORS, valueNotSameValidator, OTP_VALIDATORS } from '@app/utils/form-validators-utility';
-import { getAuthErrorMsg, getCloudFnErrorMsg } from '@app/utils/api-error-handling-utility';
+import { MOBILE_VALIDATORS, valueNotSameValidator, OTP_VALIDATORS } from '@app/utils/main-utilities/form-validators-utility';
+import { getAuthErrorMsg, getCloudFnErrorMsg } from '@app/utils/main-utilities/api-error-handling-utility';
 
 @Component({
   selector: 'app-change-number',

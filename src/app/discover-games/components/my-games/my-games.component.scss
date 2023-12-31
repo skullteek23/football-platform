@@ -1,0 +1,19 @@
+@import "variables";
+@import "mixins";
+
+.main-container {
+  @include mainPageContainer;
+  background: $white;
+  min-height: calc(100vh - 56px);
+
+  .heading {
+    @include flexCenter(row);
+    text-align: center;
+    width: 100%;
+    height: $heading-height;
+  }
+}
+
+.side-container {
+  @include mainPageContainer;
+}

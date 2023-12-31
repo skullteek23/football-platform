@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '@app/authentication/auth.service';
-import { SnackbarService } from '@app/services/snackbar.service';
-import { UserService } from '@app/services/user.service';
+import { UserService } from '@app/utils/services/user.service';
+import { environmentCommon } from '@environments/environment.common';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./top-nav.component.scss'],
 })
 export class TopNavComponent implements OnInit, OnDestroy {
-  readonly groupLink = environment.urls.whatsAppGroup;
+  readonly groupLink = environmentCommon.whatsAppCommunityLink;
 
   isUserLogged = false;
   userBalance: number = 0;
@@ -24,7 +24,6 @@ export class TopNavComponent implements OnInit, OnDestroy {
   constructor(
     private authService: AuthService,
     private userService: UserService,
-    private snackbarService: SnackbarService
   ) { }
 
   /**
@@ -42,7 +41,7 @@ export class TopNavComponent implements OnInit, OnDestroy {
    * Returns whether user is logged in or not
    */
   checkUserLogin() {
-    this.authService._user().subscribe({
+    this.authService._authState().subscribe({
       next: (resp) => {
         if (resp?.uid) {
           this.getUserBalance(resp.uid);
@@ -76,7 +75,6 @@ export class TopNavComponent implements OnInit, OnDestroy {
         }
       }
     }))
-    // API call to get user balance in number format;
   }
 
   /**

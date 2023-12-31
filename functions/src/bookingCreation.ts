@@ -3,20 +3,20 @@ import * as functions from "firebase-functions";
 const db = admin.firestore();
 import {
   checkKeysExist,
-  generateOID,
   isRequestAuthenticated,
+  runSlotValidityCheck,
 } from "./functions-utils";
 import {
   Booking,
   GroundSlot,
-  Order,
-  Player,
-  Ground,
-  Position,
+  OrderRz,
   convertObjectToFirestoreData,
   getRandomString,
 } from "@ballzo-ui/core";
+import {RAZORPAY} from "./rz";
+import {refundOrder} from "./refundOrder";
 
+import Razorpay = require("razorpay");
 /**
  * Creates booking for a valid user and returns an order ID
  * @param {any} data
@@ -25,7 +25,7 @@ import {
  */
 export async function bookingCreation(data: any, context: any): Promise<any> {
   const missingParameter = checkKeysExist(data, [
-    "groundId", "facilityId", "slotId", "spots",
+    "groundId", "facilityId", "slotId", "spots", "orderID",
   ]);
   if (missingParameter) {
     // Throwing an HttpsError so that the client gets the error details.
@@ -48,132 +48,81 @@ export async function bookingCreation(data: any, context: any): Promise<any> {
   const userID = context?.auth?.uid;
   const slotID = data.slotId;
   const spotsCount = Number(data.spots);
-  let slotPrice = 0;
-  const slotInfo: GroundSlot = (await db
-    .collection("slots")
-    .doc(slotID)
-    .get()).data() as GroundSlot;
-  const userInfo: Player = (await db
-    .collection("players")
-    .doc(userID)
-    .get()).data() as Player;
-
-  // Check if slot exists or not
-  if (!slotInfo) {
-    throw new functions.https.HttpsError(
-      "failed-precondition",
-      "Slot doesn't exist! Please try another one."
-    );
-  }
-
-  if (
-    !userInfo ||
-    !Object.prototype.hasOwnProperty.call(userInfo, "position")
-  ) {
-    throw new functions.https.HttpsError(
-      "failed-precondition",
-      "Player account does not exist."
-    );
-  }
-
-  if (userInfo?.position === Position.manager) {
-    // Bulk price will be per player
-    const result = (await db
-      .collection("grounds")
-      .doc(groundID)
-      .get())?.data() as Ground;
-    slotPrice = result?.price?.bulk || slotInfo.price;
-  } else {
-    slotPrice = slotInfo.price;
-  }
-
-  // Check if slot is full or not
-  if (slotInfo?.allowedCount &&
-    slotInfo.allowedCount <= slotInfo.participantCount) {
-    throw new functions.https.HttpsError(
-      "failed-precondition",
-      "Slot is full! Please try another one."
-    );
-  }
 
   // Check is requested booking is valid or not
   if (spotsCount <= 0) {
     throw new functions.https.HttpsError(
       "failed-precondition",
-      "At least one slot needs to be booked."
+      "At least one spot needs to be booked."
     );
+  }
+
+  const slotInfo: GroundSlot = (await db
+    .collection("slots")
+    .doc(slotID)
+    .get()).data() as GroundSlot;
+
+  try {
+    await runSlotValidityCheck(slotInfo, context);
+  } catch (error: any) {
+    throw new functions.https.HttpsError("failed-precondition", error);
   }
 
   // create batch
   const batch = db.batch();
-  const oid = generateOID(getRandomString(10));
+  const oid = data.orderID;
+  const bookingID = "booking_" + getRandomString(15);
 
-  const queryResult = (await db
-    .collection("bookings")
-    .where("uid", "==", userID)
-    .where("slotTimestamp", "==", slotInfo.timestamp)
-    .get()).docs;
-  if (queryResult?.length > 0) {
-    const existingBooking = queryResult[0]?.data() as Booking;
+  // Add new booking
+  const booking = new Booking();
+  booking.uid = userID;
+  booking.orderId = oid;
+  booking.facilityId = facilityID;
+  booking.groundId = groundID;
+  booking.slotId = slotID;
+  booking.spots = spotsCount;
+  booking.slotTimestamp = slotInfo.timestamp;
 
-    // Check if user has already booked another slot for the same time
-    if (queryResult.length > 1 || existingBooking.slotId !== slotID) {
-      throw new functions.https.HttpsError(
-        "failed-precondition",
-        "You have already booked another slot for the same time."
-      );
-    }
+  batch.create(
+    db.collection("bookings").doc(bookingID),
+    convertObjectToFirestoreData(booking)
+  );
 
-    // Check if user has already booked the same slot
-    // update booking if so
-    existingBooking.orderIds.push(oid);
-    existingBooking.spots += spotsCount;
-    existingBooking.lastUpdated = new Date().getTime();
+  // create order
+  try {
+    const KEY_SECRET = RAZORPAY.test.keySecret; // confidential
+    const KEY_ID = RAZORPAY.test.keyId; // confidential
 
-    // ADD TO BATCH
-    batch.update(
-      queryResult[0].ref,
-      convertObjectToFirestoreData(existingBooking)
+    const instance = new Razorpay(
+      {key_id: KEY_ID, key_secret: KEY_SECRET}
     );
-  } else {
-    // Add new booking
-    const booking = new Booking();
-    booking.uid = userID;
-    booking.orderIds.push(oid);
-    booking.facilityId = facilityID;
-    booking.groundId = groundID;
-    booking.slotId = slotID;
-    booking.spots = spotsCount;
-    booking.slotTimestamp = slotInfo.timestamp;
-
-    // ADD TO BATCH
-    batch.create(
-      db.collection("bookings").doc(),
-      convertObjectToFirestoreData(booking)
+    const order: Partial<OrderRz> = await instance?.orders?.fetch(oid);
+    order.uid = userID;
+    order.bookingId = bookingID;
+    batch.set(
+      db.collection("orders").doc(oid),
+      convertObjectToFirestoreData(order)
+    );
+  } catch (error) {
+    console.log("Razorpay error: ", error);
+    throw new functions.https.HttpsError(
+      "unknown",
+      "Something went wrong! Try again later."
     );
   }
 
-  // create order
-  const order = new Order();
-  // order.amount = order.totalPrice(spotsCount, slotInfo.price);
-  order.amount = order.totalPrice(spotsCount, slotPrice);
-  order.ref = {
-    spots: spotsCount,
-  };
-  order.uid = userID;
-
-  // ADD TO BATCH
-  batch.create(
-    db.collection("orders").doc(oid),
-    convertObjectToFirestoreData(order)
-  );
+  // Executing main batch
   try {
     await batch.commit();
     return oid;
   } catch (error) {
+    console.log("Booking error: ", error);
+    await refundOrder(
+      {orderID: oid, bookingID, reason: "Admin: booking-failed"}, context
+    );
     throw new functions.https.HttpsError(
       "unknown",
-      "Something went wrong! Try again later."
+      "Booking Failed! Try again later."
     );
   }
 }

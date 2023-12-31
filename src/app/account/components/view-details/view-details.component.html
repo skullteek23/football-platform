@@ -16,7 +16,7 @@
   <div class="custom-heading">
     <div class="name-text">
       <div class="name">
-        {{ user?.displayName }}
+        {{ player?.name }}
       </div>
       <div class="phone-number">
         <span class='phone-number-text'>
@@ -27,9 +27,9 @@
         </a>
       </div>
     </div>
-    <mat-icon fontSet='material-icons-round' *ngIf="!user?.photoURL">account_circle</mat-icon>
-    <a class="account-photo" *ngIf="user?.photoURL" (click)="imageFullScreen.open()">
-      <img [src]="user?.photoURL" alt="User photo">
+    <mat-icon fontSet='material-icons-round' *ngIf="!player?.imgLink">account_circle</mat-icon>
+    <a class="account-photo" *ngIf="player?.imgLink" (click)="imageFullScreen.open()">
+      <img [src]="player?.imgLink" alt="User photo">
     </a>
   </div>
 
@@ -57,9 +57,9 @@
   </div>
   <app-wide-button [theme]="ButtonTheme.secondary" [displayDetails]="prevOrdersBtn"
     (clickEv)="goToOrders()"></app-wide-button>
-  <app-wide-button [disabled]="disableManagerBtn" [theme]="ButtonTheme.secondary" [displayDetails]="becomeManagerBtn"
-    (clickEv)="changeRole()"></app-wide-button>
+  <!-- <app-wide-button [disabled]="disableManagerBtn" [theme]="ButtonTheme.secondary" [displayDetails]="becomeManagerBtn"
+    (clickEv)="changeRole()"></app-wide-button> -->
   <app-wide-button [theme]="ButtonTheme.secondary" [displayDetails]="logoutBtn" (clickEv)="logout()"></app-wide-button>
 </div>
 
-<app-image-viewer #imageFullScreen [url]="user?.photoURL"></app-image-viewer>
+<app-full-screen-image-viewer #imageFullScreen [url]="user?.photoURL"></app-full-screen-image-viewer>

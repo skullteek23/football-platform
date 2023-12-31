@@ -8,7 +8,7 @@
     </button>
     <mat-chip-list *ngIf="isUserLogged && isHeaderInitialized">
       <mat-chip>
-        <span routerLink="/m/user/wallet">
+        <span routerLink="/user/wallet">
           {{ userBalance | currency : "INR" }}
         </span>
         <mat-icon fontSet="material-icons-round">keyboard_arrow_right</mat-icon>

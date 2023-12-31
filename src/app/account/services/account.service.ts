@@ -1,14 +1,12 @@
 import { DatePipe } from '@angular/common';
 import { Injectable } from '@angular/core';
-import { AuthService } from '@app/authentication/auth.service';
-import { CloudStorageFileScreens } from '@app/constant/api-constants';
+import { CloudStorageFileScreens } from '@app/utils/constant/api-constants';
 import { Constants } from '@ballzo-ui/core';
-import { IUserProperties } from '@ballzo-ui/core';
-import { CloudStorageService } from '@app/services/cloud-storage.service';
+import { CloudStorageService } from '@app/utils/services/cloud-storage.service';
 import { getRandomString } from '@ballzo-ui/core';
 import { AccountConstants } from '../constants/account.constants';
 import { Player } from '@ballzo-ui/core';
-import { UserService } from '@app/services/user.service';
+import { UserService } from '@app/utils/services/user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +17,6 @@ export class AccountService {
     private datePipe: DatePipe,
     private storageService: CloudStorageService,
     private userService: UserService,
-    private authService: AuthService
   ) { }
 
   /**
@@ -39,11 +36,9 @@ export class AccountService {
    * Saves the account details
    */
   async saveAccountDetails(value: any, existingDetails: Player, userId: string): Promise<any> {
-    const properties: Partial<IUserProperties> = {};
     const player: Partial<Player> = {};
 
     if (!existingDetails?.name || value?.name !== existingDetails?.name) {
-      properties.displayName = value.name;
       player.name = value.name;
     }
 
@@ -53,7 +48,6 @@ export class AccountService {
 
       try {
         const imgUrl = await this.storageService.getPublicUrl(value.imgUrl, filePath);
-        properties.photoURL = imgUrl;
         player.imgLink = imgUrl;
       } catch (error) {
         return Promise.reject(error);
@@ -75,9 +69,6 @@ export class AccountService {
     const allPromises = [];
     if (Object.keys(player).length) {
       allPromises.push(this.userService.updateUserDetails(player, userId));
-    }
-    if (Object.keys(properties).length) {
-      allPromises.push(this.authService.updateUserProfile(properties));
     }
 
     if (allPromises.length) {
