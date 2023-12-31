@@ -5,7 +5,6 @@ import {
   Router,
   RouterStateSnapshot,
 } from '@angular/router';
-import { AuthService } from '../auth.service';
 import {
   Constants,
   LocalStorageProperties,
@@ -13,6 +12,7 @@ import {
 import { SessionStorageService } from '@app/utils/services/session-storage.service';
 import { LocalStorageService } from '@app/utils/services/local-storage.service';
 import { SessionStorageProperties } from '@app/utils/constant/constants';
+import { AuthService } from '@app/authentication/auth.service';
 
 @Injectable({
   providedIn: 'root',

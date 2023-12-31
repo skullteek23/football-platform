@@ -1,8 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BottomSheetService } from '@app/utils/services/bottom-sheet.service';
-import { CancelBookingComponent, ICancellationData } from '../cancel-booking/cancel-booking.component';
-import { MatBottomSheetConfig } from '@angular/material/bottom-sheet';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -18,7 +15,6 @@ export class ViewOrderComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private bottomSheetService: BottomSheetService,
   ) { }
 
   ngOnInit(): void {

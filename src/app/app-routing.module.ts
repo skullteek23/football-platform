@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginBottomSheetComponent } from './authentication/login-bottom-sheet/login-bottom-sheet.component';
-import { SignupBottomSheetComponent } from './authentication/signup-bottom-sheet/signup-bottom-sheet.component';
+import { LoginBottomSheetComponent } from './authentication/login/login-bottom-sheet.component';
+import { SignupBottomSheetComponent } from './authentication/signup/signup-bottom-sheet.component';
 import { ConfirmFormClosureGuard } from './utils/guards/confirm-form-closure.guard';
-import { RedirectLoggedUserGuard } from './authentication/guards/redirect-logged-user.guard';
+import { RedirectLoggedUserGuard } from './utils/guards/redirect-logged-user.guard';
 import { Constants } from '@ballzo-ui/core';
 import { HomeComponent } from './home/home.component';
-import { UnauthorizedAccessGuard } from './authentication/guards/unauthorized-access.guard';
+import { UnauthorizedAccessGuard } from './utils/guards/unauthorized-access.guard';
 
 const routes: Routes = [
   {

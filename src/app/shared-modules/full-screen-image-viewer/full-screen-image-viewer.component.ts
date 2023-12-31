@@ -1,12 +1,12 @@
-import { Component, ElementRef, HostListener, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, Input } from '@angular/core';
 import { Constants } from '@ballzo-ui/core';
 
 @Component({
-  selector: 'app-image-viewer',
-  templateUrl: './image-viewer.component.html',
-  styleUrls: ['./image-viewer.component.scss']
+  selector: 'app-full-screen-image-viewer',
+  templateUrl: './full-screen-image-viewer.component.html',
+  styleUrls: ['./full-screen-image-viewer.component.scss']
 })
-export class ImageViewerComponent {
+export class FullScreenImageViewerComponent {
   @Input() set url(value: any) {
     if (value) {
       this.imageUrl = value;

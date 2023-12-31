@@ -10,8 +10,9 @@ import { LoaderModule } from '@app/shared-modules/loader/loader.module';
 import { GameListViewerComponent } from './components/game-list-viewer/game-list-viewer.component';
 import { DiscoverMoreComponent } from './components/discover-more/discover-more.component';
 import { MyGamesComponent } from './components/my-games/my-games.component';
-import { UnauthorizedAccessGuard } from '@app/authentication/guards/unauthorized-access.guard';
 import { PlaceholderModule } from '@app/shared-modules/placeholder/placeholder.module';
+import { GroundInfoModule } from '@app/shared-modules/ground-info/ground-info.module';
+import { UnauthorizedAccessGuard } from '@app/utils/guards/unauthorized-access.guard';
 
 const routes: Route[] = [
   {
@@ -34,6 +35,7 @@ const routes: Route[] = [
     MatCardModule,
     MatIconModule,
     MatButtonModule,
+    GroundInfoModule,
     LoaderModule,
     PlaceholderModule
   ]

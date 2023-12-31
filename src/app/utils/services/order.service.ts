@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CoreApiService } from './core-api.service';
-import { Booking, Constants, OrderRz, WalletTransaction, convertFirestoreData, convertFirestoreDataArray, convertObjectToFirestoreData } from '@ballzo-ui/core';
+import { Booking, OrderRz, WalletTransaction, convertFirestoreData, convertFirestoreDataArray, convertObjectToFirestoreData } from '@ballzo-ui/core';
 import { Observable, map, of } from 'rxjs';
 import { cloudFunctionNames } from '@app/utils/constant/api-constants';
 import { CancelBookingComponent, ICancellationData } from '@app/orders/components/cancel-booking/cancel-booking.component';

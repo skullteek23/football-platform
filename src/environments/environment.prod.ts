@@ -10,7 +10,6 @@ export const environment = {
   },
   urls: {
     admin: 'https://admin.ballzo.in',
-    whatsAppGroup: 'https://chat.whatsapp.com/K0EJ1dZfG0d6n4PDhHdmRc',
     player: 'https://ballzo.in'
   },
   locationApiKey: {

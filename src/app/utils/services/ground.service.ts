@@ -3,10 +3,10 @@ import { CoreApiService } from './core-api.service';
 import { Observable, map, tap } from 'rxjs';
 import { TabLabel, convertFirestoreData, convertFirestoreDataArray } from '@ballzo-ui/core';
 import { FacilityStatus, Ground, GroundAdditionalInfo, GroundFacility, GroundPrice, GroundSlot, GroundStatus, SlotStatus } from '@ballzo-ui/core';
-import { UserSlotSelectionInfo } from '@app/shared-modules/ground-selection/models/ground-selection.model';
 import { DateParseUtility } from '@ballzo-ui/core';
 import { Constants } from '@ballzo-ui/core';
 import { cloudFunctionNames } from '@app/utils/constant/api-constants';
+import { UserSlotSelectionInfo } from '@app/shared-modules/payment/models/payment.model';
 
 @Injectable({
   providedIn: 'root'

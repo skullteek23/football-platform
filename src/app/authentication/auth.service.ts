@@ -1,9 +1,9 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable, firstValueFrom, of, switchMap, take } from 'rxjs';
 import { BottomSheetService } from '../utils/services/bottom-sheet.service';
-import { LoginBottomSheetComponent } from '@app/authentication/login-bottom-sheet/login-bottom-sheet.component';
+import { LoginBottomSheetComponent } from '@app/authentication/login/login-bottom-sheet.component';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
-import { SignupBottomSheetComponent } from './signup-bottom-sheet/signup-bottom-sheet.component';
+import { SignupBottomSheetComponent } from './signup/signup-bottom-sheet.component';
 import {
   Auth,
   ConfirmationResult,

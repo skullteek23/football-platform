@@ -5,11 +5,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PaymentService } from '@app/utils/services/payment.service';
 import { SnackbarService } from '@app/utils/services/snackbar.service';
 import { CheckoutRz } from "@ballzo-ui/core";
-import { UserSlotSelectionInfo } from '../ground-selection/models/ground-selection.model';
 import { AuthService } from '@app/authentication/auth.service';
 import { IUser } from '@app/utils/models/user.model';
 import { getCloudFnErrorMsg } from '@app/utils/main-utilities/api-error-handling-utility';
-import { OrderMessages, PaymentMessages } from '@app/utils/constant/common-messages';
+import { PaymentMessages } from '@app/utils/constant/common-messages';
+import { UserSlotSelectionInfo } from './models/payment.model';
 
 @Component({
   selector: 'app-payment',

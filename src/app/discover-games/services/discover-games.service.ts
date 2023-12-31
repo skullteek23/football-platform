@@ -11,9 +11,9 @@ import {
 } from "@ballzo-ui/core";
 import { MatBottomSheetConfig } from '@angular/material/bottom-sheet';
 import { BottomSheetService } from '@app/utils/services/bottom-sheet.service';
-import { GroundInfoComponent } from '@app/grounds-near-me/components/ground-info/ground-info.component';
+import { GroundInfoComponent } from '@app/shared-modules/ground-info/ground-info.component';
 import { Router } from '@angular/router';
-import { UserSlotSelectionInfo } from '@app/shared-modules/ground-selection/models/ground-selection.model';
+import { UserSlotSelectionInfo } from '@app/shared-modules/payment/models/payment.model';
 
 @Injectable({
   providedIn: 'root'

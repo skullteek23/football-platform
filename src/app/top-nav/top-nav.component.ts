@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '@app/authentication/auth.service';
 import { UserService } from '@app/utils/services/user.service';
+import { environmentCommon } from '@environments/environment.common';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -10,7 +11,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./top-nav.component.scss'],
 })
 export class TopNavComponent implements OnInit, OnDestroy {
-  readonly groupLink = environment.urls.whatsAppGroup;
+  readonly groupLink = environmentCommon.whatsAppCommunityLink;
 
   isUserLogged = false;
   userBalance: number = 0;
@@ -74,7 +75,6 @@ export class TopNavComponent implements OnInit, OnDestroy {
         }
       }
     }))
-    // API call to get user balance in number format;
   }
 
   /**

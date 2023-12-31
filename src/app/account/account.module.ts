@@ -19,9 +19,9 @@ import { CUSTOM_DATE_FORMATS, CustomDateAdapter } from '@app/utils/main-utilitie
 import { DateAdapter, MAT_DATE_FORMATS, MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { LoaderModule } from '@app/shared-modules/loader/loader.module';
-import { ImageViewerModule } from '@app/shared-modules/image-viewer/image-viewer.module';
 import { HttpClientModule } from '@angular/common/http';
 import { LocationService } from '@app/utils/services/location.service';
+import { FullScreenImageViewerModule } from '@app/shared-modules/full-screen-image-viewer/full-screen-image-viewer.module';
 
 const routes: Routes = [
   {
@@ -53,7 +53,7 @@ const routes: Routes = [
     MatNativeDateModule,
     MatSelectModule,
     LoaderModule,
-    ImageViewerModule,
+    FullScreenImageViewerModule,
     HttpClientModule
   ],
   providers: [

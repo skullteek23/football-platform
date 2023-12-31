@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@app/authentication/auth.service';
-import { EmailService } from '@app/authentication/email.service';
+import { EmailService } from '@app/utils/services/email.service';
 import { OrderMessages, PlayerListMessages } from '@app/utils/constant/common-messages';
 import { GroundService } from '@app/utils/services/ground.service';
 import { OrderService } from '@app/utils/services/order.service';
