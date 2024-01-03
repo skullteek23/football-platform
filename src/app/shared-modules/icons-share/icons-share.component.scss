@@ -1,0 +1,21 @@
+@import "mixins";
+@import "variables";
+
+.salutation-strip {
+  width: 100%;
+  height: $heading-height;
+  @include flexSpaceBetween(0px);
+
+  .page-sub-label {
+    font-weight: 500;
+  }
+}
+.floating-button {
+  position: absolute;
+  right: 4px;
+}
+
+p {
+  padding: 20px;
+}
+

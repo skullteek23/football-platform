@@ -4,6 +4,7 @@ import { ButtonTheme, ButtonConfig } from '@app/shared-modules/buttons/models/bu
 import { common } from '@environments/environment.common';
 import { Constants } from '@ballzo-ui/core';
 import { Subject } from 'rxjs';
+import { DiscoverGamesService } from '@app/discover-games/services/discover-games.service';
 
 @Component({
   selector: 'app-game-list-viewer',
@@ -22,13 +23,17 @@ export class GameListViewerComponent implements OnInit {
   @Output() groundOpen = new Subject<void>();
   @Output() playerJoinRequest = new Subject<void>();
   @Output() teamJoinRequest = new Subject<void>();
+  @Output() shareButton = new Subject<void>();
 
   joinBtnDetails = new ButtonConfig();
   viewGroundBtnDetails = new ButtonConfig();
   joinAsTeamBtnDetails = new ButtonConfig();
+  shareBtnDetails = new ButtonConfig();
   formatter: any = common.attributeFormatter.tabDay;
 
-  constructor() { }
+  constructor(
+    private discoverGamesService: DiscoverGamesService
+  ) { }
 
   ngOnInit(): void {
     this.initBtnDetails();
@@ -46,6 +51,9 @@ export class GameListViewerComponent implements OnInit {
 
     this.viewGroundBtnDetails.label = 'View Ground';
     this.viewGroundBtnDetails.icon = 'grass';
+
+    this.shareBtnDetails.label = "Share";
+    this.shareBtnDetails.icon = "share";
   }
 
   /**
@@ -75,6 +83,10 @@ export class GameListViewerComponent implements OnInit {
       return;
     }
     this.teamJoinRequest.next();
+  }
+
+  shareBtn() {
+    this.discoverGamesService.shareBtn();
   }
 
   /**

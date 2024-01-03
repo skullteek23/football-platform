@@ -14,6 +14,7 @@ import { BottomSheetService } from '@app/utils/services/bottom-sheet.service';
 import { GroundInfoComponent } from '@app/shared-modules/ground-info/ground-info.component';
 import { Router } from '@angular/router';
 import { UserSlotSelectionInfo } from '@app/shared-modules/payment/models/payment.model';
+import { IconsShareComponent } from '@app/shared-modules/icons-share/icons-share.component';
 
 @Injectable({
   providedIn: 'root'
@@ -142,6 +143,11 @@ export class DiscoverGamesService {
       config.data = ground;
       this.sheetService.openSheet(GroundInfoComponent, config);
     }
+  }
+
+  shareBtn() {
+    const config = new MatBottomSheetConfig();
+    this.sheetService.openSheet(IconsShareComponent, config)
   }
 
   /**
