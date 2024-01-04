@@ -16,7 +16,7 @@
     "build-prod": "ng build --configuration production",
     "build-dev": "ng build --configuration development",
     "deploy-functions": "npm run lint-functions && firebase deploy --only functions",
-    "deploy-hosting-prod": "npm run build-prod && firebase use football-platform-production && firebase deploy --only hosting -P football-platform-production",
+    "deploy-hosting-prod": "firebase use football-platform-production && firebase deploy --only hosting -P football-platform-production",
     "deploy-hosting-dev": "firebase use football-platform-dev && firebase deploy --only hosting -P football-platform-dev"
   },
   "private": true,
