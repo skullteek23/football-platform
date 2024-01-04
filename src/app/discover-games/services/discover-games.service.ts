@@ -145,9 +145,12 @@ export class DiscoverGamesService {
     }
   }
 
+  /**
+   * Opens the share icons bottom sheet
+   */
   shareBtn() {
     const config = new MatBottomSheetConfig();
-    this.sheetService.openSheet(IconsShareComponent, config)
+    this.sheetService.openSheet(IconsShareComponent, config);
   }
 
   /**

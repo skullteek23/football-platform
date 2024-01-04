@@ -85,6 +85,9 @@ export class GameListViewerComponent implements OnInit {
     this.teamJoinRequest.next();
   }
 
+  /**
+   * Opens the share icons bottom sheet
+   */
   shareBtn() {
     this.discoverGamesService.shareBtn();
   }
