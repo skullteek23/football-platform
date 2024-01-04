@@ -1,0 +1,17 @@
+<div class="salutation-strip">
+  <span class="page-sub-label" >
+    Share with friends
+  </span>
+  <ng-container >
+    <button mat-icon-button (click)="canDeactivate()" class="floating-button">
+      <mat-icon fontSet="material-icons-round">close</mat-icon>
+    </button>
+  </ng-container>
+</div>
+
+<p>
+  <share-buttons
+    [theme]="'circles-light'"
+    [include]="shareButtonsInclude">
+  </share-buttons>
+</p>
