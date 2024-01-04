@@ -10,6 +10,7 @@ import { forkJoin } from 'rxjs';
 import { Booking, Constants, Ground, GroundFacility, Player } from '@ballzo-ui/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HomeMessages } from '@app/utils/constant/common-messages';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-discover-more',
@@ -37,7 +38,8 @@ export class DiscoverMoreComponent implements OnInit {
     private userService: UserService,
     private orderService: OrderService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) { }
 
   ngOnInit(): void {
@@ -100,8 +102,10 @@ export class DiscoverMoreComponent implements OnInit {
         this.router.navigate(['/error']);
       }
       return index;
+    } else {
+      this.location.go('/games/discover?slot=' + this.data[0].slotId);
+      return 0;
     }
-    return 0;
   }
 
   /**
