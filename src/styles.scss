@@ -80,6 +80,8 @@ $football-platform-theme: mat.define-light-theme((color: (primary: $football-pla
 
 @import "material";
 
+@import 'node_modules/ngx-sharebuttons/themes/circles.scss';
+
 /* default settings */
 html,
 body {

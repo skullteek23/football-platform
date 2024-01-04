@@ -55,33 +55,39 @@ export class GroundsNearMeComponent implements OnInit {
    */
   getGrounds() {
     this.showLoader();
-    this.authService._user().subscribe(user => {
-      if (user?.uid) {
-        this.userService.getUser(user.uid).subscribe({
-          next: async (player) => {
-            if (player?.locationCity) {
-              this.groundService.getGroundsByState(player.locationState).subscribe({
-                next: (response) => {
-                  this.setData(response);
-                },
-                error: this.handleError.bind(this)
-              })
-            } else {
-              this.groundService.getGrounds().subscribe({
-                next: (response) => {
-                  this.setData(response);
-                },
-                error: this.handleError.bind(this)
-              })
-            }
-          },
-          error: this.handleError.bind(this)
-        })
-      } else {
-        this.hideLoader();
-        this.router.navigate(['/error']);
-      }
+    this.groundService.getGrounds().subscribe({
+      next: (response) => {
+        this.setData(response);
+      },
+      error: this.handleError.bind(this)
     })
+    // this.authService._user().subscribe(user => {
+    //   if (user?.uid) {
+    //     this.userService.getUser(user.uid).subscribe({
+    //       next: async (player) => {
+    //         if (player?.locationCity) {
+    //           this.groundService.getGroundsByState(player.locationState).subscribe({
+    //             next: (response) => {
+    //               this.setData(response);
+    //             },
+    //             error: this.handleError.bind(this)
+    //           })
+    //         } else {
+    //           this.groundService.getGrounds().subscribe({
+    //             next: (response) => {
+    //               this.setData(response);
+    //             },
+    //             error: this.handleError.bind(this)
+    //           })
+    //         }
+    //       },
+    //       error: this.handleError.bind(this)
+    //     })
+    //   } else {
+    //     this.hideLoader();
+    //     this.router.navigate(['/error']);
+    //   }
+    // })
   }
 
   /**

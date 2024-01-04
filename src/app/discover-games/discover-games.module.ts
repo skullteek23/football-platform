@@ -13,6 +13,7 @@ import { MyGamesComponent } from './components/my-games/my-games.component';
 import { PlaceholderModule } from '@app/shared-modules/placeholder/placeholder.module';
 import { GroundInfoModule } from '@app/shared-modules/ground-info/ground-info.module';
 import { UnauthorizedAccessGuard } from '@app/utils/guards/unauthorized-access.guard';
+import { IconsShareModule } from '@app/shared-modules/icons-share/icons-share.module';
 
 const routes: Route[] = [
   {
@@ -37,7 +38,8 @@ const routes: Route[] = [
     MatButtonModule,
     GroundInfoModule,
     LoaderModule,
-    PlaceholderModule
+    PlaceholderModule,
+    IconsShareModule
   ]
 })
 export class DiscoverGamesModule { }

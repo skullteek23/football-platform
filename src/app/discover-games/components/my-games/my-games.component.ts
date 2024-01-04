@@ -22,8 +22,8 @@ export class MyGamesComponent implements OnInit {
 
   data = new DiscoverGameSlot();
   isLoaderShown = false;
-  groundsList: Ground[] = [];
-  facilitiesList: GroundFacility[] = [];
+  ground = new Ground();
+  facility = new GroundFacility();
   playersList: Player[] = [];
   bookingsList: Booking[] = [];
   user: any;
@@ -86,6 +86,13 @@ export class MyGamesComponent implements OnInit {
           if (!response[0] || !response[1] || !response[2] || !response[3]) {
             return;
           }
+
+          if (response[2]?.length !== 0 && response[2].findIndex((booking: Booking) => booking?.uid === this.user?.uid) === -1) {
+            this.router.navigate(['/games', 'discover'], { queryParams: { slot: this.selectedSlotId } });
+          }
+
+          this.ground = response[0];
+
           this.data = new DiscoverGameSlot();
           this.data.timestamp = this.selectedSlot.timestamp;
           this.data.slotId = this.selectedSlot.id;
@@ -114,7 +121,9 @@ export class MyGamesComponent implements OnInit {
  * Opens the ground info bottom sheet
  */
   openGround() {
-    const ground = this.groundsList.find(ground => ground.id === this.data?.groundId);
+    let ground = new Ground();
+    ground = this.ground;
+    ground.id = this.selectedSlot.groundId;
     this.discoverGamesService.openGround(ground);
   }
 
@@ -130,12 +139,5 @@ export class MyGamesComponent implements OnInit {
    */
   hideLoader() {
     this.isLoaderShown = false;
-  }
-
-  /**
-   * Navigates to bookings page
-   */
-  navigateToDiscover() {
-    this.router.navigate(['/games', 'bookings'], { queryParams: { slot: this.data?.slotId } });
   }
 }
