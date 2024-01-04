@@ -102,10 +102,10 @@ export class DiscoverMoreComponent implements OnInit {
         this.router.navigate(['/error']);
       }
       return index;
-    } else {
+    } else if (this.data?.length) {
       this.location.go('/games/discover?slot=' + this.data[0].slotId);
-      return 0;
     }
+    return 0;
   }
 
   /**
