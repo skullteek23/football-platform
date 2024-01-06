@@ -15,7 +15,7 @@
     <p>Game is ON!</p>
   </div>
 
-  <div class="team-container" [ngClass]="{'primary-bg': !data?.availableSpots}">
+  <div class="team-container" [ngClass]="{'primary-bg': !data?.availableSpots}" (click)="openPlayersList()">
     <div class="team team-one">
       <div class="sub-heading">
         Home

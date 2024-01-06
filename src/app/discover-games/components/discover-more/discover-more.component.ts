@@ -134,6 +134,14 @@ export class DiscoverMoreComponent implements OnInit {
   }
 
   /**
+   * Opens the players list info bottom sheet
+   */
+  openPlayersList() {
+    this.discoverGamesService.openPlayersList();
+  }
+
+
+  /**
    * Shows the loader
    */
   showLoader() {

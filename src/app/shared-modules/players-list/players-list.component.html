@@ -1,0 +1,32 @@
+<div class="players-list-container">
+  <div class="salutation-strip">
+    <span class="page-sub-label">
+      Players in this game
+    </span>
+    <ng-container>
+      <button mat-icon-button (click)="canDeactivate()" class="floating-button">
+        <mat-icon fontSet="material-icons-round">close</mat-icon>
+      </button>
+    </ng-container>
+  </div>
+
+
+  <div *ngFor="let playerName of bookedPlayersList" class="player-box">
+    <mat-list role="list">
+      <mat-list-item role="listitem">
+        <div class="player-item-container">
+          <div class="avatar-container">
+            <img [src]="playerName.imgLink" alt="Avatar" class="avatar" />
+          </div>
+          <div class="player-details">
+            <div class="player-name">{{ playerName.name }}</div>
+            <div class="player-subtitle">{{ playerName.position }}</div>
+          </div>
+          <div class="arrow-icon">
+            <mat-icon fontSet="material-icons-round">keyboard_arrow_right</mat-icon>
+          </div>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</div>
