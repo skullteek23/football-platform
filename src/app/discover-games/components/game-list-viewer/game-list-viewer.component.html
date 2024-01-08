@@ -52,18 +52,17 @@
   </ng-container>
   <app-wide-button [theme]="buttonTheme.secondary" (clickEv)="openGround()"
     [displayDetails]="viewGroundBtnDetails"></app-wide-button>
-    <app-wide-button [theme]="buttonTheme.secondary" (clickEv)="shareBtn()" [displayDetails]="shareBtnDetails" ></app-wide-button>
+  <app-wide-button [theme]="buttonTheme.secondary" (clickEv)="shareBtn()"
+    [displayDetails]="shareBtnDetails"></app-wide-button>
 
-  <div class="notes" *ngIf="showRules">
+  <div class="notes">
     <div class="sub-heading">
       Booking/Game Rules:
     </div>
     <ol>
-      <li>You can pay at the field with cash or online after you're done playing.</li>
-      <li>Cancelling within the last hour of the match will incur a 100% cancellation fee.</li>
+      <li>Cancelling within the last 6 hours of the match will incur a 100% cancellation fee.</li>
       <li>Any disruptions or fights during games will lead to a temporary ban for involved players. No refunds will be
-        issued, and
-        the ground partner's rules will apply.
+        issued, and the ground partner's rules will apply.
       </li>
       <li>For complete list of rules, visit <a [routerLink]="['/rules']">here.</a></li>
     </ol>
