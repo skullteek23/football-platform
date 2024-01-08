@@ -36,6 +36,12 @@
 
 .player-details {
   flex: 1;
+
+  .player-subtitle {
+    font-size: $font-size-s;
+    font-weight: 400;
+    color: $grey-1;
+  }
 }
 
 .arrow-icon {
