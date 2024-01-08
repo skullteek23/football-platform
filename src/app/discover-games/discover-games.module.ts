@@ -14,6 +14,7 @@ import { PlaceholderModule } from '@app/shared-modules/placeholder/placeholder.m
 import { GroundInfoModule } from '@app/shared-modules/ground-info/ground-info.module';
 import { UnauthorizedAccessGuard } from '@app/utils/guards/unauthorized-access.guard';
 import { IconsShareModule } from '@app/shared-modules/icons-share/icons-share.module';
+import { PlayersListModule } from '@app/shared-modules/players-list/players-list.module';
 
 const routes: Route[] = [
   {
@@ -39,7 +40,8 @@ const routes: Route[] = [
     GroundInfoModule,
     LoaderModule,
     PlaceholderModule,
-    IconsShareModule
+    IconsShareModule,
+    PlayersListModule
   ]
 })
 export class DiscoverGamesModule { }

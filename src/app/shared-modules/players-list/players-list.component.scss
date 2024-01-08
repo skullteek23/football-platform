@@ -1,0 +1,43 @@
+@import "mixins";
+@import "variables";
+
+.salutation-strip {
+  width: 100%;
+  height: $heading-height;
+  @include flexSpaceBetween(0px);
+
+  .page-sub-label {
+    font-weight: 600;
+  }
+}
+.floating-button {
+  position: absolute;
+  right: 4px;
+}
+
+.player-item-container {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border-bottom: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.avatar-container {
+  margin-right: 12px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.player-details {
+  flex: 1;
+}
+
+.arrow-icon {
+  margin-left: auto;
+}
