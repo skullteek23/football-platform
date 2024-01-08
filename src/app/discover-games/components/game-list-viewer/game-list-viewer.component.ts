@@ -43,7 +43,7 @@ export class GameListViewerComponent implements OnInit {
    * Initializes button details
    */
   initBtnDetails() {
-    this.joinBtnDetails.label = `Join as Player`;
+    this.joinBtnDetails.label = `Join Game`;
     this.joinBtnDetails.icon = 'sports_soccer';
 
     this.joinAsTeamBtnDetails.label = `Join as Team`;
@@ -52,7 +52,7 @@ export class GameListViewerComponent implements OnInit {
     this.viewGroundBtnDetails.label = 'View Ground';
     this.viewGroundBtnDetails.icon = 'grass';
 
-    this.shareBtnDetails.label = "Share";
+    this.shareBtnDetails.label = "Share with Friends";
     this.shareBtnDetails.icon = "share";
   }
 

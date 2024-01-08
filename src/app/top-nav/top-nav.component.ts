@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./top-nav.component.scss'],
 })
 export class TopNavComponent implements OnInit, OnDestroy {
-  readonly groupLink = environmentCommon.whatsAppCommunityLink;
+  readonly groupLink = environmentCommon.whatsapp.community;
 
   isUserLogged = false;
   userBalance: number = 0;

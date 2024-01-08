@@ -16,7 +16,10 @@ export const environmentCommon = {
     email: 'admin@ballzo.in',
     address: `2-A/3 S/F Front Side Asaf Ali Road Turkman Gate New Delhi 110002`,
   },
-  whatsAppCommunityLink: 'https://chat.whatsapp.com/H7HGv8f9LRz2xJsJbEQEDO',
+  whatsapp: {
+    community: 'https://chat.whatsapp.com/H7HGv8f9LRz2xJsJbEQEDO',
+    support: 'https://chat.whatsapp.com/K0EJ1dZfG0d6n4PDhHdmRc'
+  },
   checkoutOptions: {
     key: environment.razorpay.keyId,
     currency: 'INR',

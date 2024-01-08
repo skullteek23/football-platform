@@ -46,9 +46,9 @@
     <app-wide-button [displayDetails]="joinBtnDetails" (clickEv)="joinGame()"
       [theme]="!data?.availableSpots ? buttonTheme.secondary : buttonTheme.primary"
       [disabled]="!data?.availableSpots"></app-wide-button>
-    <app-wide-button [disabled]="data && data.availableSpots <= 0" [theme]="buttonTheme.secondary"
+    <!-- <app-wide-button [disabled]="data && data.availableSpots <= 0" [theme]="buttonTheme.secondary"
       (clickEv)="joinGameAsTeam()" [disabled]="data.availableSpots < data._totalSpots / 2"
-      [displayDetails]="joinAsTeamBtnDetails"></app-wide-button>
+      [displayDetails]="joinAsTeamBtnDetails"></app-wide-button> -->
   </ng-container>
   <app-wide-button [theme]="buttonTheme.secondary" (clickEv)="openGround()"
     [displayDetails]="viewGroundBtnDetails"></app-wide-button>

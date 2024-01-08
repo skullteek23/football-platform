@@ -55,12 +55,6 @@ const routes: Routes = [
       import('@app/rewards/rewards.module').then((m) => m.RewardsModule),
   },
   {
-    path: 'support',
-    canActivate: [UnauthorizedAccessGuard],
-    loadChildren: () =>
-      import('@app/support/support.module').then((m) => m.SupportModule),
-  },
-  {
     path: 'user',
     canActivate: [UnauthorizedAccessGuard],
     loadChildren: () =>
