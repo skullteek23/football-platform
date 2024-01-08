@@ -21,7 +21,6 @@ export class GameListViewerComponent implements OnInit {
   @Input() data = new DiscoverGameSlot();
   @Input() isSelfBookings = false;
   @Input() showRules = false;
-  @Input() playerList: Player[] = [];
   @Output() groundOpen = new Subject<void>();
   @Output() playerJoinRequest = new Subject<void>();
   @Output() teamJoinRequest = new Subject<void>();

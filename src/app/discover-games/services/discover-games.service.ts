@@ -92,8 +92,8 @@ export class DiscoverGamesService {
     const list: string[] = [];
     bookings.forEach(booking => {
       const user = users.find((user: Player) => user.id === booking?.uid);
-      if (user) {
-        this.bookedPlayersList.push(user)
+      if (user && !this.bookedPlayersList.some((bookedUser: Player) => bookedUser.id === user.id)) {
+        this.bookedPlayersList.push(user);
       }
       if (user) {
         const name = user?.name || Constants.DELETED_USER_PLACEHOLDER;
