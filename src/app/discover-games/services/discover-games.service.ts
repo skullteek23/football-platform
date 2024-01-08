@@ -15,11 +15,14 @@ import { GroundInfoComponent } from '@app/shared-modules/ground-info/ground-info
 import { Router } from '@angular/router';
 import { UserSlotSelectionInfo } from '@app/shared-modules/payment/models/payment.model';
 import { IconsShareComponent } from '@app/shared-modules/icons-share/icons-share.component';
+import { PlayersListComponent } from '@app/shared-modules/players-list/players-list.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DiscoverGamesService {
+
+  bookedPlayersList: Player[] = [];
 
   constructor(
     private sheetService: BottomSheetService,
@@ -90,6 +93,9 @@ export class DiscoverGamesService {
     bookings.forEach(booking => {
       const user = users.find((user: Player) => user.id === booking?.uid);
       if (user) {
+        this.bookedPlayersList.push(user)
+      }
+      if (user) {
         const name = user?.name || Constants.DELETED_USER_PLACEHOLDER;
         if (booking && booking.spots === 1) {
           list.push(name);
@@ -153,6 +159,19 @@ export class DiscoverGamesService {
     this.sheetService.openSheet(IconsShareComponent, config);
   }
 
+
+  openPlayersList() {
+    if (this.bookedPlayersList) {
+      const config = new MatBottomSheetConfig();
+      config.disableClose = false;
+      config.hasBackdrop = true;
+      config.backdropClass = 'sheet-backdrop';
+      config.panelClass = 'sheet-custom-ground-info';
+      config.data = this.bookedPlayersList;
+      this.sheetService.openSheet(PlayersListComponent, config);
+
+    }
+  }
   /**
    * Joins the game as a team
    * @param selectedData

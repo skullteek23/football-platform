@@ -4,6 +4,7 @@ import { ButtonTheme, ButtonConfig } from '@app/shared-modules/buttons/models/bu
 import { common } from '@environments/environment.common';
 import { Constants } from '@ballzo-ui/core';
 import { Subject } from 'rxjs';
+import { Player } from '@ballzo-ui/core';
 import { DiscoverGamesService } from '@app/discover-games/services/discover-games.service';
 
 @Component({
@@ -20,10 +21,11 @@ export class GameListViewerComponent implements OnInit {
   @Input() data = new DiscoverGameSlot();
   @Input() isSelfBookings = false;
   @Input() showRules = false;
+  @Input() playerList: Player[] = [];
   @Output() groundOpen = new Subject<void>();
   @Output() playerJoinRequest = new Subject<void>();
   @Output() teamJoinRequest = new Subject<void>();
-  @Output() shareButton = new Subject<void>();
+  @Output() playersList = new Subject<void>();
 
   joinBtnDetails = new ButtonConfig();
   viewGroundBtnDetails = new ButtonConfig();
@@ -92,6 +94,13 @@ export class GameListViewerComponent implements OnInit {
     this.discoverGamesService.shareBtn();
   }
 
+  /**
+   * Opens the players list info bottom sheet
+  */
+  openPlayersList() {
+    this.playersList.next();
+
+  }
   /**
    * Returns true if the game is finished
    */

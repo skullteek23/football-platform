@@ -10,7 +10,7 @@
       <mat-icon fontSet="material-icons-round">chevron_right</mat-icon>
     </button>
   </div>
-  <app-game-list-viewer [data]="data[selectedIndex]" (groundOpen)="openGround()" (playerJoinRequest)="joinGame()"
+  <app-game-list-viewer [data]="data[selectedIndex]" (playersList)="openPlayersList()" (groundOpen)="openGround()" (playerJoinRequest)="joinGame()"
     (teamJoinRequest)="joinGameAsTeam()"></app-game-list-viewer>
 </div>
 
