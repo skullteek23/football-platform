@@ -1,4 +1,5 @@
 import { IconSelectionDataItem } from '@app/shared-modules/icon-selection-menu/models/icon-selection.model';
+import { environmentCommon } from '@environments/environment.common';
 import { environment } from 'src/environments/environment';
 
 export class HomeConstants {
@@ -13,7 +14,7 @@ export class HomeConstants {
 export const ACTIONS_MENU_NEW_USER: IconSelectionDataItem[] = [
   { icon: 'sports_soccer', route: '/games/discover', label: 'Book Match' },
   { icon: 'place', route: '/grounds-near-me', label: 'Find Grounds' },
-  { icon: 'help_outline', route: '/support', label: 'Support' },
+  { icon: 'help_outline', route: '', externalLink: environmentCommon.whatsapp.support, label: 'Support' },
   { icon: 'settings', route: '/user', label: 'Profile' },
 ];
 export const ACTIONS_MENU_EXISTING_USER: IconSelectionDataItem[] = [

@@ -13,7 +13,6 @@ import { Router } from '@angular/router';
 import { SnackbarService } from '@app/utils/services/snackbar.service';
 import { GroundSelectionMessages } from '@app/utils/constant/common-messages';
 import { Constants } from '@ballzo-ui/core';
-import { SupportService } from '@app/support/services/support.service';
 
 @Component({
   selector: 'app-grounds-near-me',
@@ -39,7 +38,6 @@ export class GroundsNearMeComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private snackbarService: SnackbarService,
-    private supportService: SupportService
 
   ) { }
 
@@ -112,24 +110,24 @@ export class GroundsNearMeComponent implements OnInit {
    * Opens the admin app in a new tab
    */
   openAdminApp() {
-    const value = {
-      subject: 'Ground Request',
-      description: 'I would like to add my ground to Ballzo',
-    }
-    this.authService._user().subscribe(user => {
-      if (user?.uid) {
-        this.showLoader();
-        this.supportService.submitRequest(value, user.uid, this.supportService.getReferenceId())
-          .then(() => {
-            this.hideLoader();
-            this.snackbarService.displayCustomMsg('Your request has been submitted. We will get back to you soon.');
-          })
-          .catch((err) => {
-            this.hideLoader();
-            this.snackbarService.displayError(err);
-          });
-      }
-    })
+    // const value = {
+    //   subject: 'Ground Request',
+    //   description: 'I would like to add my ground to Ballzo',
+    // }
+    // this.authService._user().subscribe(user => {
+    //   if (user?.uid) {
+    //     this.showLoader();
+    //     this.supportService.submitRequest(value, user.uid, this.supportService.getReferenceId())
+    //       .then(() => {
+    //         this.hideLoader();
+    //         this.snackbarService.displayCustomMsg('Your request has been submitted. We will get back to you soon.');
+    //       })
+    //       .catch((err) => {
+    //         this.hideLoader();
+    //         this.snackbarService.displayError(err);
+    //       });
+    //   }
+    // })
     // window.open(environment.urls.admin, '_blank');
   }
 

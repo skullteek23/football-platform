@@ -55,12 +55,6 @@ const routes: Routes = [
       import('@app/rewards/rewards.module').then((m) => m.RewardsModule),
   },
   {
-    path: 'support',
-    canActivate: [UnauthorizedAccessGuard],
-    loadChildren: () =>
-      import('@app/support/support.module').then((m) => m.SupportModule),
-  },
-  {
     path: 'user',
     canActivate: [UnauthorizedAccessGuard],
     loadChildren: () =>
@@ -94,6 +88,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./legal-info/privacy-policy/privacy-policy.module').then(
         (m) => m.PrivacyPolicyModule
+      ),
+  },
+  {
+    path: 'rules',
+    loadChildren: () =>
+      import('./rules/rules.module').then(
+        (m) => m.RulesModule
       ),
   },
   {
