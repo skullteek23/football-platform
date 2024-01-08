@@ -1,6 +1,6 @@
-import { Component, Inject,OnInit , Input} from '@angular/core';
+import { Component, Inject, OnInit, Input } from '@angular/core';
 import { BottomSheetService } from '@app/utils/services/bottom-sheet.service';
-import { Player } from '@ballzo-ui/core';
+import { Constants, Player } from '@ballzo-ui/core';
 import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 
 @Component({
@@ -10,18 +10,19 @@ import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 })
 export class PlayersListComponent implements OnInit {
 
+  readonly defaultImg = Constants.DEFAULT_IMG;
 
-constructor(
-  private sheetService: BottomSheetService,
-  @Inject(MAT_BOTTOM_SHEET_DATA) public bookedPlayersList: Player[]
-) { }
+  constructor(
+    private sheetService: BottomSheetService,
+    @Inject(MAT_BOTTOM_SHEET_DATA) public bookedPlayersList: Player[]
+  ) { }
 
-ngOnInit(): void {
-  
-}
+  ngOnInit(): void {
 
-canDeactivate() {
-  this.sheetService.closeSheet();
-}
+  }
+
+  canDeactivate() {
+    this.sheetService.closeSheet();
+  }
 
 }
