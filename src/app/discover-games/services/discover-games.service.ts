@@ -113,7 +113,16 @@ export class DiscoverGamesService {
         list.push('');
       }
     });
-    list.sort();
+    list.sort((a, b) => {
+      const suffixA = /\+(\d+)$/.exec(a);
+      const suffixB = /\+(\d+)$/.exec(b);
+
+      if (suffixA && suffixB) {
+        return parseInt(suffixA[1], 10) - parseInt(suffixB[1], 10);
+      }
+
+      return a.localeCompare(b);
+    });
     if (list.length < maxPlayers) {
       for (let i = list.length; i < maxPlayers; i++) {
         list.push('');
