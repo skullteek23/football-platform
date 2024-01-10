@@ -102,7 +102,7 @@ export class MyGamesComponent implements OnInit {
           this.data.groundId = this.selectedSlot.groundId;
           this.data.facilityName = response[1].name;
           this.data.groundName = response[0].name;
-          const list = this.discoverGamesService.createPlayerList(response[2], response[3], this.selectedSlot.allowedCount);
+          const list = this.discoverGamesService.createPlayerList(response[2], response[3], this.selectedSlot.allowedCount, this.selectedSlotId);
           if (list.length > 1) {
             this.data.teamOneList = list.slice(0, list.length / 2);
             this.data.teamTwoList = list.slice(list.length / 2);

@@ -1,6 +1,9 @@
 @import "mixins";
 @import "variables";
 
+.icons-share-container {
+  @include flexCenter(column);
+}
 .salutation-strip {
   width: 100%;
   height: $heading-height;
@@ -16,6 +19,6 @@
 }
 
 p {
-  padding: 20px;
+  padding: 10px;
 }
 
