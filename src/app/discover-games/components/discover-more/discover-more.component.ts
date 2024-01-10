@@ -137,7 +137,8 @@ export class DiscoverMoreComponent implements OnInit {
    * Opens the players list info bottom sheet
    */
   openPlayersList() {
-    this.discoverGamesService.openPlayersList();
+    const selectedSlotId = this.data[this.selectedIndex]?.slotId;
+    this.discoverGamesService.openPlayersList(selectedSlotId);
   }
 
 

@@ -22,7 +22,7 @@ import { PlayersListComponent } from '@app/shared-modules/players-list/players-l
 })
 export class DiscoverGamesService {
 
-  bookedPlayersList: Player[] = [];
+  private bookedPlayersMap: Map<string, Player[]> = new Map();
 
   constructor(
     private sheetService: BottomSheetService,
@@ -66,7 +66,7 @@ export class DiscoverGamesService {
       }
 
       const slotBookings = bookings.filter((booking) => booking.slotId === slot.id);
-      const list = this.createPlayerList(slotBookings, players, slot.allowedCount);
+      const list = this.createPlayerList(slotBookings, players, slot.allowedCount, slot.id);
       if (list.length > 1) {
         gameSlot.teamOneList = list.slice(0, list.length / 2);
         gameSlot.teamTwoList = list.slice(list.length / 2);
@@ -84,16 +84,17 @@ export class DiscoverGamesService {
    * @param maxPlayers
    * @returns
    */
-  createPlayerList(bookings: Booking[], users: Player[], maxPlayers: number): string[] {
+  createPlayerList(bookings: Booking[], users: Player[], maxPlayers: number, slotId: string): string[] {
     if (!bookings?.length || !users?.length || maxPlayers <= 0) {
       return [];
     }
 
     const list: string[] = [];
+    const bookedPlayersList = this.bookedPlayersMap.get(slotId) || [];
     bookings.forEach(booking => {
       const user = users.find((user: Player) => user.id === booking?.uid);
-      if (user && !this.bookedPlayersList.some((bookedUser: Player) => bookedUser.id === user.id)) {
-        this.bookedPlayersList.push(user);
+      if (user && !bookedPlayersList.some((bookedUser: Player) => bookedUser.id === user.id)) {
+        bookedPlayersList.push(user);
       }
       if (user) {
         const name = user?.name || Constants.DELETED_USER_PLACEHOLDER;
@@ -119,6 +120,7 @@ export class DiscoverGamesService {
         list.push('');
       }
     }
+    this.bookedPlayersMap.set(slotId, bookedPlayersList);
     return list;
   }
 
@@ -156,22 +158,26 @@ export class DiscoverGamesService {
    */
   shareBtn() {
     const config = new MatBottomSheetConfig();
+    config.disableClose = false;
+    config.hasBackdrop = true;
+    config.backdropClass = 'sheet-backdrop';
+    config.panelClass = 'sheet-custom-ground-info';
     this.sheetService.openSheet(IconsShareComponent, config);
   }
 
 
-  openPlayersList() {
-    if (this.bookedPlayersList) {
-      const config = new MatBottomSheetConfig();
-      config.disableClose = false;
-      config.hasBackdrop = true;
-      config.backdropClass = 'sheet-backdrop';
-      config.panelClass = 'sheet-custom-ground-info';
-      config.data = this.bookedPlayersList;
-      this.sheetService.openSheet(PlayersListComponent, config);
+  openPlayersList(slotId: string) {
+    const bookedPlayersList = this.bookedPlayersMap.get(slotId) || [];
+    const config = new MatBottomSheetConfig();
+    config.disableClose = false;
+    config.hasBackdrop = true;
+    config.backdropClass = 'sheet-backdrop';
+    config.panelClass = 'sheet-custom-ground-info';
+    config.data = bookedPlayersList;
+    this.sheetService.openSheet(PlayersListComponent, config);
 
-    }
   }
+
   /**
    * Joins the game as a team
    * @param selectedData
