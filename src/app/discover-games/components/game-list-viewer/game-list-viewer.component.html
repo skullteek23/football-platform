@@ -1,8 +1,8 @@
 <div class="main-container" [ngClass]="{'grayscale': isGameFinished}">
   <div class="game-info">
     <div class="game-info-container game-info-container-right">
-      <div class="label">{{ data?.facilityName}}</div>
-      <div class="value">{{ data?.groundName}}</div>
+      <div class="label">{{ data?.groundName}}</div>
+      <div class="value">{{ data?.facilityName}}</div>
     </div>
     <div class="game-info-container game-info-container-left">
       <div class="label">{{ data?.timestamp | date: CUSTOM_DATE_FORMAT_3}}</div>
